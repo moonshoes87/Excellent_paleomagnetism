@@ -9,18 +9,49 @@ file_prefix = '/users/Nebula/Python/Random_distribution/'
 #class Random_stuff(Basic_input_output):
 
 def fisher_test():
-    obj = env.run('fisher.py', '-k', '30', '-n', '10')
+    print "-"
+    print "Testing fisher.py"
+    obj1 = env.run('fisher.py', '-k', '30', '-n', '10')
 #    obj.stdout = '175, 119'
-    output = obj.stdout
-    print output
-    length = len(output)
-    print("length of output: " + str(length))
-    if length == 170:
-        print "fisher.py appears to work"
+    output1 = obj1.stdout
+    length1 = len(output1)
+    print "output1: " + str(output1)
+    print "length1: " + str(length1)
+    obj2 = env.run('fisher.py', '-k', '30', '-n', '10')
+    output2 = obj2.stdout
+    length2 = len(output2)
+    print "output2: " + str(output2)
+    print "length2: " + str(length2)
+    if length1 == 170 and length1 == length2:
+        print "fisher.py produces the right amount of output"
     else:
         raise(NameError, "fisher.py is producing the wrong amount of output")
+    if output1 != output2:
+        print "fisher.py seems to be producing a random distribution"
+    else:
+        raise NameError("fisher.py produced identical output twice")
+    obj3 = env.run('fisher.py')
+    output3 = obj3.stdout
+    length3 = len(output3)
+    print "output3: " + str(output3)
+    print "length3: " + str(length3)
+    obj4 = env.run('fisher.py')
+    output4 = obj4.stdout
+    length4 = len(output4)
+    print "output4: " + str(output4)
+    print "length4: " + str(length4)
+    if length3 == length4:
+        print "Fisher.py is producing the correct amount of output"
+    else:
+        raise NameError("fisher.py is producing different amounts of output for the same command")
+    if output3 != output4:
+        print "Fisher.py appears to be producing a random distribution"
+    else:
+        raise NameError("fisher.py produced identical output twice")
 
 def fishrot_test():
+    print "_"
+    print "Testing fishrot.py"
     obj1 = env.run('fishrot.py', '-n', '5', '-D', '23', '-I', '41', '-k', '50')
     output1 = obj1.stdout
     obj2 = env.run('fishrot.py', '-n', '5', '-D', '23', '-I', '41', '-k', '50')
@@ -30,8 +61,10 @@ def fishrot_test():
     print output2
     print len(output2)
     # they should be random, thus different
-    if output1 == output2:
-        print "NOOOOOOOOO"
+    if output1 != output2:
+        print "Fishrot.py appears to be generating a random distribution"
+    else:
+        raise(NameError, "Fishrot.py produced identical output twice")
     # but they should be the same length, because of the -n 5 arguments
     if len(output1) == len(output2):
         print "Fishrot.py is producing the correct amount of output"
@@ -39,14 +72,20 @@ def fishrot_test():
         raise(NameError, "Fishrot.py is producing the wrong amount of output")
     obj3 = env.run('fishrot.py')
     output3 = obj3.stdout
+    length3 = len(output3)
+    print "output3: " + str(output3) + " length3: " + str(length3)
     obj4 = env.run('fishrot.py')
     output4 = obj4.stdout
-    print output3, "-----", output4
-    print len(output3), len(output4)
+    length4 = len(output4)
+    print "output4 :" + str(output4) + " length4: " + str(length4)
     if output3 != output4:
         print "Fishrot.py distributions appear to be random"
     else:
         raise(NameError, "Fishrot.py produced identical output twice in a row")
+    if length3 == length4:
+        print "Fishrot.py appears to be producing the right amount of output"
+    else:
+        raise(NameError, "Fishrot.py is not producing the right amount of output")
 
     # this looks like a decent set up for these random distribution ones....
     # add in an option to test the -h, and -i options.
@@ -57,6 +96,8 @@ def fishrot_test():
 
 
 def gaussian_test():
+    print "-"
+    print "Testing gaussian.py"
     obj1 = env.run('gaussian.py', '-s', '3', '-n', '100', '-m', '10.', '-F', 'guass.out')
     output1 = obj1.stdout
     o1 = len(output1.split())
@@ -100,12 +141,11 @@ def gaussian_test():
     # -n is how many lines of output it makes, so I can test that. len(o) should equal the number that follows -n
     
 
-
-
 def run_tests():
     gaussian_test()
     fishrot_test()
     fisher_test()
 
+run_tests()
 
-
+# unittests not really possible
