@@ -63,6 +63,12 @@ def file_parse(the_file):
     return clean_file # returns a list.  each line is a list item
 
 
+def new_file_parse(the_file):
+    data = open(the_file, 'rU').readlines()
+    clean_file = data.split()
+    return clean_file
+
+
 def output_parse(the_output):
     data = str(the_output)
     return data
@@ -74,6 +80,13 @@ def clean_house():
     print "-"
     print "-"
     subprocess.call(['rm', '-rf',  'new-test-output/'])
+
+def test_for_bad_file(output):
+    output = str(output)
+    if "bad file" in output:
+        raise NameError("Output said 'bad file'")
+
+
 
 universal_variable = "sup"
 #put iterate_through, parse_file, test_help, and so on, in here.

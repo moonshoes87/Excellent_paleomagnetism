@@ -114,6 +114,27 @@ class Bad_atrm(unittest.TestCase):
         atrm_magic.run_with_two_options()
         self.assertRaises(NameError, atrm_magic.check_attr)
 
+hysteresis_magic_infile = 'hysteresis_magic_example.dat'
+hysteresis_F, hysteresis_F_reference, hysteresis_F_wrong = file_prefix + 'hysteresis_magic_rmag.txt', file_prefix + 'hysteresis_magic_rmag_correct.txt', file_prefix + 'hysteresis_magic_rmag_incorrect.txt'
+hysteresis_remanence, hysteresis_remanence_reference, hysteresis_remanence_wrong = file_prefix + 'rmag_remanence.txt', file_prefix + 'hysteresis_magic_remanence_correct.txt', file_prefix + 'hysteresis_magic_remanence_incorrect.txt'
+hysteresis_magic_list = [(hysteresis_F, hysteresis_F_reference, hysteresis_F_wrong), (hysteresis_remanence, hysteresis_remanence_reference, hysteresis_remanence_wrong)]
+print hysteresis_magic_list
+
+def complete_hysteresis_magic_test():
+    # doesn't seem to produce useful stdout : (
+    # WD
+    print "Testing hysteresis_magic.py"
+    obj = env.run('hysteresis_magic.py', '-WD', directory, '-f', hysteresis_magic_infile, '-P', '-F', 'hysteresis_magic_rmag.txt')
+#    obj = env.run('hysteresis_magic.py', '-WD', directory, '-f', hysteresis_magic_infile, '-sav') # saves all the plots
+    output = obj.stdout
+    print "STDOUT: " + str(obj.stdout)
+    print obj.files_created
+    print obj.files_updated
+    iterate_through(hysteresis_magic_list)
+    subprocess.call(['mv', file_prefix + 'rmag_remanence.txt', file_prefix + 'hysteresis_magic_remanence.txt']) # renames file so it is easier to find
+
+
+complete_hysteresis_magic_test()
 
 #k15_magic.py test
 k15_in_file = 'k15_magic_example.dat'
@@ -176,10 +197,8 @@ def complete_pmag_results_extract_test():
     print obj.files_created
     iterate_through(pmag_results_extract_list)
     subprocess.call(['rm', file_prefix + 'Criteria.txt', file_prefix + 'Directions.txt', file_prefix + 'SiteNfo.txt'])
-    # needs unittests.  wait until you see what you end up with in this category
+    # needs unittests.  wait until you see what you end up with 
     
-
-complete_pmag_results_extract_test()
 
 def do_unittest():
     unittest.main(module='Extra_output') 
