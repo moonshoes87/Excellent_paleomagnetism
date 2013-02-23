@@ -63,14 +63,19 @@ def file_parse(the_file):
     return clean_file # returns a list.  each line is a list item
 
 
-def new_file_parse(the_file):
+def file_parse_by_word(the_file):
     data = open(the_file, 'rU').readlines()
-    clean_file = data.split()
-    return clean_file
+    clean_data = []
+    for line in data:
+        line = line.split()
+        clean_data += line
+#    clean_file = str(data)
+    return clean_data
 
 
 def output_parse(the_output):
     data = str(the_output)
+    data = data.split()
     return data
 
 
@@ -86,6 +91,16 @@ def test_for_bad_file(output):
     if "bad file" in output:
         raise NameError("Output said 'bad file'")
 
+
+
+def compare_two_lists(output, correct_output):
+    for num, i in enumerate(output):
+        if i == correct_output[num]:
+            print i, correct_output[num]
+        else:
+            print "Output contained: " + str(i) + " where it should have had " + str(correct_output[num])
+            print "Error raised"
+            raise ValueError("Wrong output")
 
 
 universal_variable = "sup"
