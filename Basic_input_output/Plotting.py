@@ -6,16 +6,20 @@ import unittest
 import subprocess
 import Basic_input_output
 import PmagPy_tests
+import Complex_test
 
 file_prefix = '/Users/nebula/Python/Basic_input_output/'
 directory =  '/Users/nebula/Python/Basic_input_output'
 
 
+#class Plot(Complex_test.complex_test_object):
 class Plot(object):
-
      def __init__(self, name, infile, ref_out, wrong_out, stdin, WD, *args):
          self.name = name
-         self.infile = file_prefix + infile
+         if infile != None:
+              self.infile = file_prefix + infile
+         else:
+              self.infile = None
          self.ref_out = ref_out
          self.wrong_out = wrong_out
          self.stdin = stdin
@@ -74,10 +78,6 @@ class Plot(object):
              print obj.stdout
              return obj.stdout
 
-     
-     def check_plots_created(self):
-         pass # is this reasonable??
-
      def check_output(self, actual_out, reference_out):
          actual_out, reference_out = str(actual_out), str(reference_out)
          if reference_out in actual_out:
@@ -98,6 +98,7 @@ class Bad_test(unittest.TestCase):
         print "Running unittest(s) for:  " + str(self.plotting_obj.name)
         self.assertRaises(NameError, self.plotting_obj.check_output, self.plotting_obj.wrong_out, self.plotting_obj.ref_out)
         print "Error expected"
+
 
 def complete_zeq_test():
     # DONE
@@ -151,96 +152,93 @@ def complete_ani_depthplot_test():
     ani_depthplot.check_output(ani_depthplot_plot, ani_depthplot.ref_out)
     ani_depthplot_unittest = Bad_test(ani_depthplot)
     ani_depthplot_unittest.test_for_error()
-    
-trying_to_move_this = """
-ten_thousand_1 = ['0.34040287', '29.6', '14.5', '34.5', '171.3', '67.2', '6.7', '296.0', '13.5', '0.33536589', '166.3', '70.5', '24.5', '26.7', '13.3', '10.8', '293.8', '12.1', '0.32423124', '296.2', '12.8', '10.9', '178.7', '63.8', '4.9', '31.5', '22.4']
-ten_thousand_2 = ['0.34040287', '29.6', '14.5', '33.7', '171.2', '67.4', '6.6', '296.0', '13.4', '0.33536589', '166.3', '70.5', '24.2', '27.3', '13.2', '10.6', '294.4', '12.2', '0.32423124', '296.2', '12.8', '10.7', '179.2', '63.5', '4.9', '31.6', '22.8']
-thirty_thousand_1 = ['0.34040287', '29.6', '14.5', '33.8', '171.3', '67.3', '6.7', '296.0', '13.4', '0.33536589', '166.3', '70.5', '24.2', '26.9', '13.3', '10.8', '294.0', '12.2', '0.32423124', '296.2', '12.8', '10.9', '179.5', '63.1', '5.0', '31.7', '23.2']
-thirty_thousand_2 = ['0.34040287', '29.6', '14.5', '33.9', '171.2', '67.3', '6.7', '296.0', '13.4', '0.33536589', '166.3', '70.5', '24.2', '27.3', '13.2', '10.8', '294.4', '12.3', '0.32423124', '296.2', '12.8', '10.8', '179.4', '63.3', '5.0', '31.6', '23.1']
-ninety_thousand = ['0.34040287', '29.6', '14.5', '33.5', '171.0', '67.3', '6.6', '296.0', '13.5', '0.33536589', '166.3', '70.5', '24.1', '27.0', '13.3', '10.7', '294.1', '12.2', '0.32423124', '296.2', '12.8', '10.8', '179.2', '63.5', '4.9', '31.6', '22.9']
 
-aniso_magic_reference_list = [(.3403, .3402), (29.5, 29.7), (14.4, 14.6), (33., 35.), (170.9, 171.4), (67., 67.4), (6.5, 6.8), (295.9,296.1), (13.3, 13.6), (0.33535, .33537), (166.2, 166.4), (70.4, 70.6), (23.9, 24.7), (26., 28.), (13.1, 13.4), (10.5, 10.9), (293., 295.), (12., 12.5), (0.324231, .324232), (296.1, 296.3), (12.7, 12.9), (10.6, 11), (178, 180), (63., 64.), (4.8, 5.1), (31.3, 31.9), (21., 24.)]
-def complete_aniso_magic_test():
-    print "Testing aniso_magic.py"
-    # WD
-    obj = env.run('aniso_magic.py', '-WD', directory, '-f', 'aniso_magic_dike_anisotropy.txt', '-F', 'aniso_magic_rmag_anisotropy.txt', '-nb', '2000','-gtc', '110', '2', '-par', '-v', '-crd', 'g', '-P') #stdin='q')
-    print obj.stdout
-   # obj2 = env.run('aniso_magic.py', '-WD', directory, '-f', 'aniso_magic_sed_anisotropy.txt', '-F', 'aniso_magic_rmag_results.txt', '-d', '3', '0', '90', '-v', '-crd', 'g', stdin='a')
-    #print obj2.stdout
-    PmagPy_tests.test_for_bad_file(obj.stdout)
-    a_list = str(obj.stdout).split()
-    print a_list
-    new_list = []
-    for i in a_list:
-        try:
-            f = float(i)
-            new_list.append(i)
-        except ValueError:
-            print i
-    print new_list
-    print obj.files_created
-    print obj.files_updated
-    # JUST FIGURE OUT HOW TO TEST THESE VALUES
-    # can use stdin = 'q', or 'a' (to save).  Then can optionally test for files_created/files_updated.  currently using -P, which means no plots, hooray.
-    # should I make this a Plot object???  It has too many extra args to run tidily.  
+def complete_basemap_magic_test():
+     basemap_magic_infile = 'basemap_example.txt'
+     basemap_magic_reference = "{'Site_map.pdf': <FoundFile ./new-test-output:Site_map.pdf>}"
+     basemap_magic_wrong = "wrong"
+     basemap_magic = Plot('basemap_magic.py', basemap_magic_infile, basemap_magic_reference, basemap_magic_wrong, 'a', True)
+     basemap_plot = basemap_magic.run_program(plot=True)
+     basemap_magic.check_output(basemap_plot, basemap_magic_reference)
+     basemap_magic_unittest = Bad_test(basemap_magic)
+     basemap_magic_unittest.test_for_error()
 
-complete_aniso_magic_test()
+def complete_biplot_magic_test():
+     # not WD
+     biplot_magic_infile = 'biplot_magic_example.dat'
+     biplot_magic_reference = """LP-X  selected for X axis
+LT-AF-I  selected for Y axis
+All
+measurement_magn_mass  being used for plotting Y
+measurement_chi_mass  being used for plotting X.
+S[a]ve plots, [q]uit,  Return for next plot Good-bye"""
+     biplot_magic_wrong = 1235.
+     biplot_magic = Plot('biplot_magic.py', biplot_magic_infile, biplot_magic_reference, biplot_magic_wrong, 'q', False, '-x', 'LP-X', '-y', 'LT-AF-I') 
+     biplot_magic_output = biplot_magic.run_program()
+     biplot_magic.check_output(biplot_magic_output, biplot_magic.ref_out)
+     biplot_magic_unittest = Bad_test(biplot_magic)
+     biplot_magic_unittest.test_for_error()
+
+def complete_chartmaker_test():
+     chartmaker_infile = None
+     chartmaker_reference = "{'chart.txt': <FoundFile ./new-test-output:chart.txt>}"
+     chartmaker_wrong = "wrong"
+     chartmaker = Plot('chartmaker.py', chartmaker_infile, chartmaker_reference, chartmaker_wrong, 'q', False)
+     plot = chartmaker.run_program(plot=True)
+     chartmaker.check_output(plot, chartmaker.ref_out)
+     clean_output = PmagPy_tests.file_parse(file_prefix + 'new-test-output/chart.txt')
+     reference_output = PmagPy_tests.file_parse(file_prefix + 'chartmaker_reference_correct.txt')
+     PmagPy_tests.compare_two_lists(clean_output, reference_output) # compares a clean version of the prototype file with what we just created
+     chartmaker_unittest = Bad_test(chartmaker)
+     chartmaker_unittest.test_for_error()
+     
+
+def complete_chi_magic_test():
+     chi_magic_infile = 'chi_magic_example.dat'
+     chi_magic_reference = "{'IRM-OldBlue-1892_2.svg': <FoundFile ./new-test-output:IRM-OldBlue-1892_2.svg>, 'IRM-OldBlue-1892_3.svg': <FoundFile ./new-test-output:IRM-OldBlue-1892_3.svg>, 'IRM-OldBlue-1892_1.svg': <FoundFile ./new-test-output:IRM-OldBlue-1892_1.svg>}"
+     chi_magic_wrong = "wrong"
+     chi_magic = Plot('chi_magic.py', chi_magic_infile, chi_magic_reference, chi_magic_wrong, 'a', False)
+     plot = chi_magic.run_program(plot=True)
+     chi_magic.check_output(plot, chi_magic.ref_out)
+     chi_magic_unittest = Bad_test(chi_magic)
+     chi_magic_unittest.test_for_error()
+
+def complete_common_mean_test():
+     common_mean_infile = 'common_mean_ex_file1.dat'
+     common_mean_reference = "{'CD_X.svg': <FoundFile ./new-test-output:CD_X.svg>, 'CD_Y.svg': <FoundFile ./new-test-output:CD_Y.svg>, 'CD_Z.svg': <FoundFile ./new-test-output:CD_Z.svg>}"
+     common_mean_wrong = "wrong"
+     common_mean_f2 = file_prefix + 'common_mean_ex_file2.dat'
+     common_mean = Plot('common_mean.py', common_mean_infile, common_mean_reference, common_mean_wrong, 'a', False, '-f2', common_mean_f2)
+     plot = common_mean.run_program(plot=True)
+     common_mean.check_output(plot, common_mean.ref_out)
+     common_mean_unittest = Bad_test(common_mean)
+     common_mean_unittest.test_for_error()
+     # testing with -dir instead of -f2
+     obj = env.run('common_mean.py', '-f', file_prefix + common_mean_infile, '-dir', '0', '9.9', stdin='a')
+     output2 = str(obj.files_updated)
+     output_with_dir_option = "{'CD_X.svg': <FoundFile ./new-test-output:CD_X.svg>, 'CD_Y.svg': <FoundFile ./new-test-output:CD_Y.svg>, 'CD_Z.svg': <FoundFile ./new-test-output:CD_Z.svg>}"
+     if output2 == output_with_dir_option:
+          print "OK"
+     else:
+          raise NameError("running common_mean.py with -dir 0 9.9 did not produce expected plots")
+
+def complete_core_depthplot_test():
+#core_depthplot.py -f core_depthplot_example.dat -LP AF 15
+     core_depthplot_infile = 'core_depthplot_example.dat'
+     core_depthplot_reference = "{'DSDP Site 522_m:_LT-AF-Z_core-depthplot.svg': <FoundFile ./new-test-output:DSDP Site 522_m:_LT-AF-Z_core-depthplot.svg>}"
+     core_depthplot_wrong = "wrong"
+     core_depthplot_fsa = 'core_depthplot_er_samples.txt'
+     core_depthplot = Plot('core_depthplot.py', core_depthplot_infile, core_depthplot_reference, core_depthplot_wrong, 'a', True, '-fsa', core_depthplot_fsa, '-LP', 'AF', '15')
+#     obj = env.run('core_depthplot.py', '-WD', directory, '-LP',  'AF', '15', '-log', '-d', '50', '150', '-ts', 'gts04', '23', '34', '-D', '-f', core_depthplot_infile, '-fsa', core_depthplot_fsa, stdin='a')
+#     print obj.files_created
+ #    print obj.stdout
+     plot = core_depthplot.run_program(plot=True)
+     core_depthplot.check_output(plot, core_depthplot.ref_out)
+     core_depthplot_unittest = Bad_test(core_depthplot)
+     core_depthplot_unittest.test_for_error()
 
 
-#FIND EI TEST
-reference = [(38.8, 39.0), False, (58.7, 58.9), False, (45., 50.), False, (65., 69.), (1.4, 1.5), False, (1.2, 1.35), False, (1.7, 2.2)]
-def run_EI(num):
-    obj = env.run('find_EI.py', '-f', file_prefix + 'find_EI_example.dat', '-nb', num, stdin='a')
-    print obj.files_created
-    output = str(obj.stdout[-210:-143]).split()
-    print "Finish run_EI()"
-    return output
-def do_bootstrap(times):
-        #obj = env.run('find_EI.py', '-f', file_prefix + 'find_EI_example.dat', '-nb', '500', stdin='a')
-        #print "stdout: " + str(obj.stdout)
-#        print obj.files_created
-#        output = str(obj.stdout[-210:-143]).split()
-               #['38.9', '=>', '58.8', '_', '47.9', '^', '67.8:', '1.4679', '_', '1.2849', '^', '1.9088']
-# might be able to do this more nicely.  i.e., maybe use a try except, and if the list item can't be turned into an integer, then lose it from the list. 
-    result = run_EI(times)
-    z = 0
-    print "result" + str(result)
-    print "reference: " + str(reference)
-    for i in reference:
-        print "i = " + str(i)
-        if i != False:
-            if result[z][-1] == ":":
-#                output[z][-1] = str(output[z][-1])
-                result[z] = result[z].strip(":")
-                print ":"
-                print result[z]
-            lower_bound = reference[z][0]
-            upper_bound = reference[z][1]
-            print lower_bound, upper_bound
-            out = float(result[z])
-            print "out = " + str(out)
-            if out > lower_bound and out < upper_bound:
-                print "OK"
-            else:
-                print "Error raised"
-                raise NameError("Value: "+ str(out) +", lower-bound: " + str(lower_bound) + ", upper-bound: " + str(upper_bound))
-        else:
-            pass
-        z += 1
-    print "End of do_bootstrap"
-
-def complete_find_EI_test():
-    print "Testing find_EI.py"
-    do_bootstrap(400)
- #   do_bootstrap(800)
-#    do_bootstrap(900)
-    print "Ran find_EI bootstrap test three times"
-
-class Bad_find_EI(unittest.TestCase):
-    def test_for_error(self):
-        print "TESTING FOR ERROR"
-        self.assertRaises(NameError, do_bootstrap, 25)
-"""
+          
 
 def complete_foldtest_test():
     # doesn't produce stdout :(
@@ -358,6 +356,7 @@ def complete_plotdi_a_test():
     plotdi_a.check_output(plotdi_a_plot, plotdi_a.ref_out)
     plotdi_a_unittest = Bad_test(plotdi_a)
     plotdi_a_unittest.test_for_error()
+
 
 def complete_qqplot_test():
     # DONE
@@ -565,15 +564,19 @@ def do_unittest():
 
 def complete_working_test():
     complete_ani_depthplot_test()
+    complete_biplot_magic_test()
+    complete_chartmaker_test()
+    complete_chi_magic_test()
+    complete_common_mean_test()
+    complete_core_depthplot_test()
     complete_foldtest_test()
     complete_histplot_test()
-#    complete_hysteresis_magic_test()  # looks like I moved this, not sure where
     complete_irmaq_magic_test()
     complete_lnp_magic_test()
     complete_lowrie_test()
     complete_lowrie_magic_test()
     complete_plot_cdf_test()
-    complete_plotdi_a_test()
+    complete_plotdi_a_test() # had a weird error, but not when run alone.
     complete_qqplot_test()
     complete_quick_hyst_test()
     complete_revtest_test()
@@ -584,32 +587,8 @@ def complete_working_test():
     complete_zeq_magic_test()  
 
 if __name__ == '__main__':
-#    pass
-    complete_working_test()
-
-
-"""
-z = 0
-for i in a_list:
-    lower_bound = reference[z][0]
-    upper_bound = reference[z][1]
-    print lower_bound, upper_bound
-    i = str(i)
-    if i > lower_bound and i < upper_bound:
-        print "OK"
-    z += 1
-"""   
-
-"""
-obj.stdout[-115:-46]
-u'\n   38.9  =>     58.8 _    48.1 ^    66.7:  1.4679 _ 1.3231 ^ 1.9259\n'
->>> obj.stdout[-113:-47]
-u'  38.9  =>     58.8 _    49.0 ^    67.6:  1.4679 _ 1.3117 ^ 1.9791'
->>> obj.stdout[-113:-47]
-u'  38.9  =>     58.8 _    47.9 ^    67.8:  1.4679 _ 1.2849 ^ 1.9088'
-"""
-
-
+    pass
+#    complete_working_test()
 
 
 

@@ -94,9 +94,11 @@ def test_for_bad_file(output):
 
 
 def compare_two_lists(output, correct_output):
+    print "Comparing two lists"
     for num, i in enumerate(output):
         if i == correct_output[num]:
             print i, correct_output[num]
+            print "Lists were the same"
         else:
             print "Output contained: " + str(i) + " where it should have had " + str(correct_output[num])
             print "Error raised"

@@ -8,19 +8,9 @@ import Basic_input_output
 import PmagPy_tests
 
 file_prefix = '/Users/nebula/Python/Basic_input_output/'
+directory = '/Users/nebula/Python/Basic_input_output'
 # also, the fishrot.out is randomly created using fishrot.py, but since I'm using the same fishrot.out every time in the test, it shold be fine                                                                                                                            
 
-"""
-def test_help(program):
-    obj = env.run(program, '-h')
-    message = str(obj.stdout)
-    print(len(message))
-    if len(message) > 150:
-        print "Help message successfully called"
-        print "-"
-    else:
-        raise(NameError, "Help message failed...")
-"""
 """
 def sundec_test():
     in_file = file_prefix + 'sundec_example.dat'
@@ -110,6 +100,7 @@ class Bad_stdout_test(unittest.TestCase):
         self.assertRaises(NameError, self.uc_obj.stdout_test, reference_data)
         print "-"
 
+
 grab_magic_key = UC('grab_magic_key.py', 'grab_magic_key_er_sites.txt', WD = True)
 nrm_specimens_magic = UC('nrm_specimens_magic.py', 'nrm_specimens_magic_measurements.txt', 'nrm_specimens_results_new.out', 'nrm_specimens_results_correct.out', 'nrm_specimens_results_incorrect.out')
 pca = UC('pca.py', 'pca_example.dat')
@@ -118,6 +109,32 @@ vgp_di = UC('vgp_di.py', 'vgp_di_example.dat')
 
 
 grab_magic_key_reference_list = """['42.60264', '42.60264', '42.60352', '42.60104', '42.73656', '42.8418', '42.8657', '42.92031', '42.56857', '42.49964', '42.49962', '42.50001', '42.52872', '42.45559', '42.48923', '42.46186', '42.69156', '42.65289', '43.30504', '43.36817', '43.42133', '43.8859', '43.84273', '43.53289', '43.57494', '44.15663', '44.18629']"""
+
+
+def complete_combine_magic_test():
+    output_file = 'combine_magic_output_new.out'
+    reference_file =  'combine_magic_output_correct.out'
+    input_1 = 'combine_magic_input_1.dat'
+    input_2 = 'combine_magic_input_2.dat'
+    obj = env.run('combine_magic.py', '-WD', directory, '-F', output_file, '-f', input_1, input_2)
+    print obj.stdout
+    clean_output = PmagPy_tests.file_parse(output_file)
+    clean_reference = PmagPy_tests.file_parse(reference_file)
+    PmagPy_tests.compare_two_lists(clean_output, clean_reference)
+    print "Successfully finished combine_magic_test"
+    # no unittest
+
+
+def complete_cont_rot_test():
+    obj = env.run('cont_rot.py', '-con', 'af:sam', '-prj', 'ortho', '-eye', '-20', '0', '-sym', 'k-', '1', '-age', '180', '-res', 'l', stdin='a')
+    output = str(obj.files_created)
+    reference_output = "{'Cont_rot.pdf': <FoundFile ./new-test-output:Cont_rot.pdf>}"
+    if output == reference_output:
+        print "Cont_rot produced expected plot"
+
+complete_cont_rot_test()
+    
+#cont_rot.py -con af:sam -prj ortho -eye -20 0 -sym k- 1 -age 180 -res l
 
 def complete_grab_magic_key_test():
     print "Testing grab magic"
@@ -131,7 +148,7 @@ def complete_grab_magic_key_test():
     print "Sucessfully finished complete_grab_magic_key_test"
 
 
-def complete_nrm_specimens_magic_test():
+def complete_nrm_specimens_magic_test(): # maybe move to complex_programs
     fsa = file_prefix + 'nrm_specimens_magic_er_samples.txt'
     print "Testing nrm_specimens_magic.py"
     obj= env.run('nrm_specimens_magic.py', '-f', nrm_specimens_magic.input_file, '-fsa', fsa, '-crd,', 'g', '-fsa', fsa, '-F', nrm_specimens_magic.output_file)
@@ -221,6 +238,7 @@ vgp_di_correct_out = """
 """
 
 def complete_working_test():
+    complete_combine_magic_test()
     complete_grab_magic_key_test()
     complete_nrm_specimens_magic_test()
     complete_sundec_test()
@@ -230,5 +248,6 @@ def complete_working_test():
 
 
 if __name__ == "__main__":
-    complete_working_test()
+    pass
+#    complete_working_test()
 
