@@ -71,7 +71,7 @@ class UC(Basic_input_output.in_out):
             print "Output should have been " + expected_out + " but was " + output
 
 # this does the same as above, but it uses a list instead of a simple float (longer output)
-    def long_stdout_test(self, expected_out):
+    def long_stdout_test(self, expected_out, arg1=None, arg2=None):
         # right now this is customized to grab_magic_key.py. Will have to be fixed for any other stuff
         # possibly could have extra args, for the -crd type options
         name = self.name
@@ -81,6 +81,7 @@ class UC(Basic_input_output.in_out):
         else:
             obj = env.run(self.name, '-f', self.input_file)
         output = str(obj.stdout).split()
+        print output
         if str(output) == str(expected_out):
             print str(self.name) + " is producing correct output"
         else:
@@ -90,20 +91,26 @@ class UC(Basic_input_output.in_out):
             raise NameError(str(self.name) + " produced incorrect output")
 
 
-class Bad_stdout_test(unittest.TestCase):
+
+
+class Bad_test(unittest.TestCase):
     def __init__(self, uc_obj):
         self.uc_obj = uc_obj
 
-    def test_for_error(self, reference_data):
+    def test_for_stdout_error(self, reference_data):
         #            self.assertRaises(NameError, angle.test_file, angle.incorrect_output_file)
         print "Testing: " + str(self.uc_obj.name) + " with incorrect reference data -- " + str(reference_data) + " -- expecting error"
         self.assertRaises(NameError, self.uc_obj.stdout_test, reference_data)
         print "-"
 
+    def test_for_long_stdout_error(self, reference_data):
+        print "Testing: " + str(self.uc_obj.name) + " with incorrect reference data -- " + str(reference_data) + " -- expecting error"
+        self.assertRaises(NameError, self.uc_obj.long_stdout_test, reference_data)
 
-grab_magic_key = UC('grab_magic_key.py', 'grab_magic_key_er_sites.txt', WD = True)
+
+
 nrm_specimens_magic = UC('nrm_specimens_magic.py', 'nrm_specimens_magic_measurements.txt', 'nrm_specimens_results_new.out', 'nrm_specimens_results_correct.out', 'nrm_specimens_results_incorrect.out')
-pca = UC('pca.py', 'pca_example.dat')
+
 sundec = UC('sundec.py', 'sundec_example.dat')
 vgp_di = UC('vgp_di.py', 'vgp_di_example.dat')
 
@@ -132,17 +139,32 @@ def complete_cont_rot_test():
     if output == reference_output:
         print "Cont_rot produced expected plot"
 
-complete_cont_rot_test()
-    
-#cont_rot.py -con af:sam -prj ortho -eye -20 0 -sym k- 1 -age 180 -res l
+def complete_customize_criteria_test():
+    customize_criteria_infile = 'customize_criteria_example.dat'
+    customize_criteria_output = 'customize_criteria_outfile.out'
+    customize_criteria_reference = "customize_criteria_output_correct.out"
+    customize_criteria = UC('customize_criteria.py', customize_criteria_infile, customize_criteria_output, customize_criteria_reference, None, False, '1')
+    customize_criteria.test_help()
+    customize_criteria.test_file(customize_criteria_reference)
+    # unittest, I'm thinking no
+
+def complete_di_eq_test():
+    print "Testing di_eq.py"
+    di_eq_infile = 'di_eq_example.dat'
+    di_eq_reference = ['-0.239410', '-0.893491', '0.436413', '0.712161', '0.063844', '0.760300', '0.321447', '0.686216', '0.322720', '0.670562', '0.407412', '0.540654', '0.580156', '0.340376', '0.105351', '0.657728', '0.247173', '0.599687', '0.182349', '0.615600', '0.174815', '0.601717', '0.282746', '0.545472', '0.264863', '0.538273', '0.235758', '0.534536', '0.290665', '0.505482', '0.260629', '0.511513', '0.232090', '0.516423', '0.244448', '0.505666', '0.277927', '0.464381', '0.250510', '0.477152', '0.291770', '0.440816', '0.108769', '0.516148', '0.196706', '0.482014', '0.349390', '0.381292', '0.168407', '0.475566', '0.206286', '0.446444', '0.175701', '0.450649', '0.301104', '0.378539', '0.204955', '0.423970', '0.199755', '0.422584', '0.346920', '0.308010', '0.119030', '0.441144', '0.239848', '0.376486', '0.269528', '0.342510', '0.085451', '0.423789', '0.192224', '0.387233', '0.172608', '0.395084', '0.272008', '0.320741', '0.393981', '0.117451', '-0.017726', '0.406002', '0.154273', '0.367000', '0.213903', '0.335760', '0.103221', '0.372202', '0.231833', '0.283245', '0.072160', '0.351538', '0.007802', '0.319236', '0.152583', '0.265350', '0.248133', '0.136412']
+    di_eq_wrong = "wrong"
+    di_eq = UC('di_eq.py', di_eq_infile)
+    di_eq.long_stdout_test(di_eq_reference)
+    di_eq_unittest = Bad_test(di_eq)
+    di_eq_unittest.test_for_long_stdout_error(di_eq_wrong)
+
+
 
 def complete_grab_magic_key_test():
     print "Testing grab magic"
-    grab_magic_key.WD = True
-    print grab_magic_key.WD
-    print grab_magic_key.input_file
+    grab_magic_key = UC('grab_magic_key.py', 'grab_magic_key_er_sites.txt', WD = True)
     grab_magic_key.test_help()
-    grab_magic_key.long_stdout_test(grab_magic_key_reference_list)
+    grab_magic_key.long_stdout_test(grab_magic_key_reference_list, '-key','site_lat')
     # no interactive
         # NEEDS UNITTESTS TOO
     print "Sucessfully finished complete_grab_magic_key_test"
@@ -168,14 +190,15 @@ def complete_sundec_test():
     sundec.test_interactive()
  #   sundec.parse_file(sundec.input_file)
     sundec.stdout_test(154.2)
-    sundec_unittest = Bad_stdout_test(sundec)
-    sundec_unittest.test_for_error(100.)
-    sundec_unittest.test_for_error(0.)
-    sundec_unittest.test_for_error(-230.)
+    sundec_unittest = Bad_test(sundec)
+    sundec_unittest.test_for_stdout_error(100.)
+    sundec_unittest.test_for_stdout_error(0.)
+    sundec_unittest.test_for_stdout_error(-230.)
     print "Successfully finished sundec.py tests"
 
+
 def complete_pca_test():
- #   pca = UC('pca.py', 'pca_example.dat')
+    pca = UC('pca.py', 'pca_example.dat')
     pca.test_help()
 #    pca.stdout_test(pca_correct_out)
     obj = env.run('pca.py', '-dir', 'L', '1', '10', '-f', '/Users/nebula/Python/Basic_input_output/pca_example.dat')
@@ -239,6 +262,8 @@ vgp_di_correct_out = """
 
 def complete_working_test():
     complete_combine_magic_test()
+    complete_customize_criteria_test()
+    complete_di_eq_test()
     complete_grab_magic_key_test()
     complete_nrm_specimens_magic_test()
     complete_sundec_test()

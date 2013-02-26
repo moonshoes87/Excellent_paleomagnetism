@@ -11,7 +11,7 @@ file_prefix = '/Users/nebula/Python/Basic_input_output/'
 
 class in_out(object):
 
-    def __init__(self, name, input_file, output_file = None, correct_output_file = None, incorrect_output_file = None, WD = False, expected_output_interactive = 'output'):
+    def __init__(self, name, input_file, output_file = None, correct_output_file = None, incorrect_output_file = None, WD = False, stdin= None):
         self.name = name
         self.input_file = file_prefix + input_file
         if output_file != None:
@@ -21,59 +21,37 @@ class in_out(object):
         if incorrect_output_file != None:
             self.incorrect_output_file = file_prefix + incorrect_output_file
         self.WD = WD
-        self.expected_output_interactive = expected_output_interactive
         if self.WD == True:
             self.input_file, self.output_file, self.correct_output_file, self.incorrect_output_file = input_file, output_file,correct_output_file,incorrect_output_file
+        self.stdin = stdin
 
     def test_interactive(self):
         obj = env.run(self.name, '-i')#, stdin='3')
         print("stdout: "+ str(obj.stdout))
-        print("expected out: " + str(self.expected_output_interactive))
         if len(obj.stdout) > 10:
             print "Interactive mode works"
             print "-"
         else:
             raise NameError("Interactive mode for " + str(self.name) + " came up empty")
-       # if obj.stdout == self.expected_output_interactive:
-        #    print "Interactive mode successfully instantiated"
-      #  else:
-       #     raise(NameError, "There was a problem entering interactive mode")
 
     def test_help(self):
         help_message = "help"
-        for i in help_messages.keys():
-            if i == self.name:
-                help_message = help_messages[i]
-                help_present = True
-            else:
-                help_present = False
-        # help_message = help_messages[self.name]
-        print help_message
         obj = env.run(self.name, '-h')
         message = str(obj.stdout)
-        # print("output help message: ", message)
-       # print("proper help message: ", help_message)
         print(len(message))
         if len(message) > 150:
             print "Help message successfully called"
             print "-"
         else:
             raise NameError("Help message for " + str(self.name)+ " failed...")
-        if help_present == True:
-            if message == angle_help_message:
-                print "AWESOME help message"
-            else:
-                raise(NameError, "Help message failed...")
-        else:
-            pass
-
+        
     def test_file(self, reference_output):
         name = self.name
         print("Running: " + str(name) + " using " + str(reference_output) + " as our reference output")
         if self.WD:
-            obj = env.run(self.name, '-WD', '/Users/nebula/Python/Basic_input_output/', '-f', self.input_file, '-F', self.output_file)
+            obj = env.run(self.name, '-WD', '/Users/nebula/Python/Basic_input_output/', '-f', self.input_file, '-F', self.output_file, stdin=self.stdin)
         else:
-            obj = env.run(self.name, '-f', self.input_file, '-F', self.output_file)
+            obj = env.run(self.name, '-f', self.input_file, '-F', self.output_file, stdin=self.stdin)
         print("Standard output: " + str(obj.stdout))
         print("Input file: " + str(self.input_file) +  " output file: " + str(self.output_file))
         parsed_file_out = self.parse_file(self.output_file)
@@ -130,7 +108,9 @@ def complete_working_test():
     complete_convert_samples_test()
     complete_di_geo_test()
     complete_dir_cart_test()
+    complete_di_rot_test()
     complete_di_tilt_test()
+    complete_di_vgp_test()
     complete_eigs_s_test()
     complete_eq_di_test()
     complete_gobing_test()
@@ -211,6 +191,7 @@ def complete_di_tilt_test():
     di_tilt_unittest = Bad_test(di_tilt)
     di_tilt_unittest.test_for_error()
 
+
 def complete_dir_cart_test():
     dir_cart = in_out('dir_cart.py', 'dir_cart_example.dat', 'dir_cart_results_new.out', 'dir_cart_results_correct.out', 'dir_cart_results_incorrect.out')
     dir_cart.test_help()
@@ -218,6 +199,27 @@ def complete_dir_cart_test():
     dir_cart.test_file(dir_cart.correct_output_file)
     dir_cart_unittest = Bad_test(dir_cart)
     dir_cart_unittest.test_for_error()
+
+
+
+def complete_di_rot_test():
+    di_rot = in_out('di_rot.py', 'di_rot_example.dat', 'di_rot_results_new.out', 'di_rot_results_correct.out', 'di_rot_results_incorrect.out')
+    di_rot.test_help()
+# no interactive
+    di_rot.test_file(di_rot.correct_output_file)
+    di_rot_unittest = Bad_test(di_rot)
+    di_rot_unittest.test_for_error()
+# should this be checked with its additional command line arguments?  I'm thinking no....
+
+def complete_di_vgp_test():
+    di_vgp = in_out('di_vgp.py', 'di_vgp_example.dat', 'di_vgp_results_new.out', 'di_vgp_results_correct.out', 'di_vgp_results_incorrect.out')
+    di_vgp.test_help()
+    di_vgp.test_interactive()
+    di_vgp.test_file(di_vgp.correct_output_file)
+    di_vgp_unittest = Bad_test(di_vgp)
+    di_vgp_unittest.test_for_error()
+
+
 
 def complete_eigs_s_test():
     eigs_s = in_out('eigs_s.py', 'eigs_s_example.dat', 'eigs_s_results_new.out', 'eigs_s_results_correct.out', 'eigs_s_results_incorrect.out')
@@ -381,7 +383,8 @@ angle_help_message = """
 help_messages = {'angle.py': angle_help_message}
 
 if __name__ == '__main__':
-    complete_working_test()
+
+#    complete_working_test()
     print "Full test suite completed"
 
 

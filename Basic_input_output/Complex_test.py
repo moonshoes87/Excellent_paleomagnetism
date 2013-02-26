@@ -13,13 +13,14 @@ directory =  '/Users/nebula/Python/Basic_input_output'
 
 class complex_test_object(object):
 
-     def __init__(self, name, infile, ref_out, wrong_out, WD, *args): # removed stdin
+     def __init__(self, name, infile, ref_out, wrong_out, WD, stdin, *args): # removed stdin
          self.name = name
          self.infile = file_prefix + infile
          self.ref_out = ref_out
          self.wrong_out = wrong_out
 #         self.stdin = stdin
          self.WD = WD
+         self.stdin = stdin
 #         self.how_many_args = how_many_args
          self.arg_0, self.arg_1, self.arg_2, self.arg_3, self.arg_4, self.arg_5 = None, None, None, None, None, None
          self.args = args
@@ -127,7 +128,7 @@ def complete_azdip_magic_test():
      azdip_magic_reference = file_prefix + 'azdip_magic_output_correct.out'
      azdip_magic_wrong = "wrong"
      azdip_magic_outfile = file_prefix + 'azdip_magic_output.out' # file_prefix + 
-     azdip_magic = complex_test_object('azdip_magic.py', azdip_magic_infile, azdip_magic_reference, azdip_magic_wrong, False,  '-Fsa', azdip_magic_outfile, '-mcd', 'FS-FD:SO-POM', '-loc', "Northern Iceland")
+     azdip_magic = complex_test_object('azdip_magic.py', azdip_magic_infile, azdip_magic_reference, azdip_magic_wrong, False, None, '-Fsa', azdip_magic_outfile, '-mcd', 'FS-FD:SO-POM', '-loc', "Northern Iceland")
      azdip_magic.run_program()
      azdip_magic.compare_two_files(azdip_magic_outfile, azdip_magic.ref_out)
      azdip_magic_unittest = Bad_test(azdip_magic)
@@ -135,3 +136,12 @@ def complete_azdip_magic_test():
 
 #complete_azdip_magic_test()
      
+def complete_download_magic_test():
+     subprocess.call(['rm', '/Users/nebula/Basic_input_output/new-test-output/'])
+     download_magic_infile = 'download_magic_example.dat'
+     download_magic_reference = None
+     download_magic_wrong = "wrong"
+     download_magic = complex_test_object('download_magic.py', download_magic_infile, download_magic_reference, download_magic_wrong, True, 'y')
+     output = download_magic.run_program()
+
+complete_download_magic_test()

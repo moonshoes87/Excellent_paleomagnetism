@@ -237,8 +237,28 @@ def complete_core_depthplot_test():
      core_depthplot_unittest = Bad_test(core_depthplot)
      core_depthplot_unittest.test_for_error()
 
+def complete_dayplot_magic_test():
+     dayplot_magic_infile = 'dayplot_magic_example.dat'
+     dayplot_magic_reference = "{'LO:_unknown_SI:__SA:__SP:__TY:_day_.svg': <FoundFile ./new-test-output:LO:_unknown_SI:__SA:__SP:__TY:_day_.svg>, 'LO:_unknown_SI:__SA:__SP:__TY:_S-Bc_.svg': <FoundFile ./new-test-output:LO:_unknown_SI:__SA:__SP:__TY:_S-Bc_.svg>, 'LO:_unknown_SI:__SA:__SP:__TY:_S-Bcr_.svg': <FoundFile ./new-test-output:LO:_unknown_SI:__SA:__SP:__TY:_S-Bcr_.svg>}"
+     dayplot_magic_wrong = "wrong"
+     dayplot_magic = Plot('dayplot_magic.py', dayplot_magic_infile, dayplot_magic_reference, dayplot_magic_wrong, 'a', True)
+     plot = dayplot_magic.run_program(plot=True)
+     dayplot_magic.check_output(plot, dayplot_magic.ref_out)
+     dayplot_magic_unittest = Bad_test(dayplot_magic)
+     dayplot_magic_unittest.test_for_error()
 
-          
+
+def complete_dmag_magic_test():
+     dmag_magic_infile = 'dmag_magic_example.dat'
+     dmag_magic_reference = "{'McMurdo_LT-AF-Z.svg': <FoundFile ./new-test-output:McMurdo_LT-AF-Z.svg>}"
+     dmag_magic_wrong = "wrong"
+     dmag_magic = Plot('dmag_magic.py', dmag_magic_infile, dmag_magic_reference, dmag_magic_wrong, 'a', False)
+     plot = dmag_magic.run_program(plot=True)
+     dmag_magic.check_output(plot, dmag_magic.ref_out)
+     dmag_magic_unittest = Bad_test(dmag_magic)
+     dmag_magic_unittest.test_for_error()
+
+
 
 def complete_foldtest_test():
     # doesn't produce stdout :(
@@ -569,6 +589,8 @@ def complete_working_test():
     complete_chi_magic_test()
     complete_common_mean_test()
     complete_core_depthplot_test()
+    complete_dayplot_magic_test()
+    complete_dmag_magic_test()
     complete_foldtest_test()
     complete_histplot_test()
     complete_irmaq_magic_test()
