@@ -72,12 +72,10 @@ class UC(Basic_input_output.in_out):
 
 # this does the same as above, but it uses a list instead of a simple float (longer output)
     def long_stdout_test(self, expected_out, arg1=None, arg2=None):
-        # right now this is customized to grab_magic_key.py. Will have to be fixed for any other stuff
-        # possibly could have extra args, for the -crd type options
         name = self.name
         print "Running: " + str(name)
         if self.WD:
-            obj = env.run(self.name, '-WD', file_prefix, '-f', self.input_file, '-key', 'site_lat')
+            obj = env.run(self.name, '-WD', file_prefix, '-f', self.input_file, arg1, arg2)
         else:
             obj = env.run(self.name, '-f', self.input_file)
         output = str(obj.stdout).split()
@@ -87,7 +85,7 @@ class UC(Basic_input_output.in_out):
         else:
             print "Error raised"
             print "Expected out: " + str(expected_out)
-            print "Actual out: " + str(output)
+            print "Actual out:   " + str(output)
             raise NameError(str(self.name) + " produced incorrect output")
 
 
@@ -111,7 +109,7 @@ class Bad_test(unittest.TestCase):
 
 nrm_specimens_magic = UC('nrm_specimens_magic.py', 'nrm_specimens_magic_measurements.txt', 'nrm_specimens_results_new.out', 'nrm_specimens_results_correct.out', 'nrm_specimens_results_incorrect.out')
 
-sundec = UC('sundec.py', 'sundec_example.dat')
+
 vgp_di = UC('vgp_di.py', 'vgp_di_example.dat')
 
 
@@ -169,6 +167,20 @@ def complete_grab_magic_key_test():
         # NEEDS UNITTESTS TOO
     print "Sucessfully finished complete_grab_magic_key_test"
 
+incfish_reference_list = """['57.1', '61.0', '100', '92.9', '13.9', '1.0']"""
+
+def complete_incfish_test():
+    incfish_infile = 'incfish_example_inc.dat'
+    incfish = UC('incfish.py', incfish_infile)
+    incfish.test_help()
+    # no interactive
+    incfish.long_stdout_test(incfish_reference_list)
+
+def complete_magic_select_test():
+    magic_select_infile = 'magic_select_example.txt'
+    magic_select_outfile = 'magic_select_results_new.out'
+    magic_select = UC('magic_select.py', magic_select_infile, 
+
 
 def complete_nrm_specimens_magic_test(): # maybe move to complex_programs
     fsa = file_prefix + 'nrm_specimens_magic_er_samples.txt'
@@ -186,6 +198,7 @@ def complete_nrm_specimens_magic_test(): # maybe move to complex_programs
  
 def complete_sundec_test():
 #    sundec = UC('sundec.py', 'sundec_example.dat')
+    sundec = UC('sundec.py', 'sundec_example.dat')
     sundec.test_help()
     sundec.test_interactive()
  #   sundec.parse_file(sundec.input_file)
@@ -265,6 +278,7 @@ def complete_working_test():
     complete_customize_criteria_test()
     complete_di_eq_test()
     complete_grab_magic_key_test()
+    complete_incfish_test()
     complete_nrm_specimens_magic_test()
     complete_sundec_test()
     complete_pca_test()

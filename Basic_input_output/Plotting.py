@@ -32,63 +32,63 @@ class Plot(object):
              self.infile = infile
      
      def parse_args(self):
-         if len(self.args) == 1:
-             self.arg_0 = self.args[0]
-         if len(self.args) == 2:
-             self.arg_0 = self.args[0]
-             self.arg_1 = self.args[1]
-         if len(self.args) == 3:
-             self.arg_0 = self.args[0]
-             self.arg_1 = self.args[1]
-             self.arg_2 = self.args[2]
-         if len(self.args) == 4:
-             self.arg_0 = self.args[0]
-             self.arg_1 = self.args[1]
-             self.arg_2 = self.args[2]
-             self.arg_3 = self.args[3]
-         if len(self.args) == 5:
-             self.arg_0 = self.args[0]
-             self.arg_1 = self.args[1]
-             self.arg_2 = self.args[2]
-             self.arg_3 = self.args[3]
-             self.arg_4 = self.args[4]
-         if len(self.args) == 6:
-             self.arg_0 = self.args[0]
-             self.arg_1 = self.args[1]
-             self.arg_2 = self.args[2]
-             self.arg_3 = self.args[3]
-             self.arg_4 = self.args[4]
-             self.arg_5 = self.args[5]
-         for num, arg in enumerate(self.args):
-             pass
+          if len(self.args) == 1:
+               self.arg_0 = self.args[0]
+          if len(self.args) == 2:
+               self.arg_0 = self.args[0]
+               self.arg_1 = self.args[1]
+          if len(self.args) == 3:
+               self.arg_0 = self.args[0]
+               self.arg_1 = self.args[1]
+               self.arg_2 = self.args[2]
+          if len(self.args) == 4:
+               self.arg_0 = self.args[0]
+               self.arg_1 = self.args[1]
+               self.arg_2 = self.args[2]
+               self.arg_3 = self.args[3]
+          if len(self.args) == 5:
+               self.arg_0 = self.args[0]
+               self.arg_1 = self.args[1]
+               self.arg_2 = self.args[2]
+               self.arg_3 = self.args[3]
+               self.arg_4 = self.args[4]
+          if len(self.args) == 6:
+               self.arg_0 = self.args[0]
+               self.arg_1 = self.args[1]
+               self.arg_2 = self.args[2]
+               self.arg_3 = self.args[3]
+               self.arg_4 = self.args[4]
+               self.arg_5 = self.args[5]
+          for num, arg in enumerate(self.args):
+               pass
          
      def run_program(self, plot=False): # if plot is true, this function will return files_created.  by default, the function returns stdout
-         if self.WD:
-             print "WD program about to run:"
-             print(self.name, '-WD', directory, '-f', self.infile, self.arg_0, self.arg_1, self.arg_2, self.arg_3, self.arg_4, self.arg_5, 'stdin='+str(self.stdin))
-             obj = env.run(self.name, '-WD', directory, '-f', self.infile, self.arg_0, self.arg_1, self.arg_2, self.arg_3, self.arg_4, self.arg_5, stdin=self.stdin)
-         else:
-             print "Non-WD program about to run:"
-             print self.name, '-f', self.infile, self.arg_0, self.arg_1, self.arg_2, self.arg_3, self.arg_4, self.arg_5,  'stdin=' + str(self.stdin)
-             obj = env.run(self.name, '-f', self.infile, self.arg_0, self.arg_1, self.arg_2, self.arg_3, self.arg_4, self.arg_5, stdin=self.stdin)
-         if plot:
-             print obj.files_created
-             return obj.files_created
-         else:
-             print obj.stdout
-             return obj.stdout
+          if self.WD:
+               print "WD program about to run:"
+               print(self.name, '-WD', directory, '-f', self.infile, self.arg_0, self.arg_1, self.arg_2, self.arg_3, self.arg_4, self.arg_5, 'stdin='+str(self.stdin))
+               obj = env.run(self.name, '-WD', directory, '-f', self.infile, self.arg_0, self.arg_1, self.arg_2, self.arg_3, self.arg_4, self.arg_5, stdin=self.stdin)
+          else:
+               print "Non-WD program about to run:"
+               print self.name, '-f', self.infile, self.arg_0, self.arg_1, self.arg_2, self.arg_3, self.arg_4, self.arg_5,  'stdin=' + str(self.stdin)
+               obj = env.run(self.name, '-f', self.infile, self.arg_0, self.arg_1, self.arg_2, self.arg_3, self.arg_4, self.arg_5, stdin=self.stdin)
+          if plot:
+               print obj.files_created
+               return obj.files_created
+          else:
+               print obj.stdout
+               return obj.stdout
 
      def check_output(self, actual_out, reference_out):
-         actual_out, reference_out = str(actual_out), str(reference_out)
-         if reference_out in actual_out:
-             print str(self.name) + " output as expected"
-         else:
-             print "Output was: "
-             print str(actual_out)
-             print "Output should have been: " 
-             print str(reference_out)
-             print "Error raised"
-             raise NameError(str(self.name) + " produced incorrect output")
+          actual_out, reference_out = str(actual_out), str(reference_out)
+          if reference_out in actual_out:
+               print str(self.name) + " output as expected"
+          else:
+               print "Output was: "
+               print str(actual_out)
+               print "Output should have been: " 
+               print str(reference_out)
+               print "Error raised"
+               raise NameError(str(self.name) + " produced incorrect output")
 
 class Bad_test(unittest.TestCase):
     def __init__(self, plotting_obj):
@@ -257,6 +257,72 @@ def complete_dmag_magic_test():
      dmag_magic.check_output(plot, dmag_magic.ref_out)
      dmag_magic_unittest = Bad_test(dmag_magic)
      dmag_magic_unittest.test_for_error()
+
+def complete_eqarea_test():
+     eqarea_infile = 'eqarea_example.dat'
+     eqarea_reference = "{'eq.svg': <FoundFile ./new-test-output:eq.svg>}"
+     eqarea_wrong = "wrong"
+     eqarea = Plot('eqarea.py', eqarea_infile, eqarea_reference, eqarea_wrong, 'a', False)
+     plot = eqarea.run_program(plot=True)
+     eqarea.check_output(plot, eqarea.ref_out)
+     eqarea_unittest = Bad_test(eqarea)
+     eqarea_unittest.test_for_error()
+
+def complete_eqarea_ell_test():
+     eqarea_ell_infile = 'eqarea_ell_example.dat'
+     eqarea_ell_reference ="""Zdec   137.8
+     Edec   235.4
+     Eta     2.9
+     n        100
+     Einc    17.7
+     Zinc    22.6
+     Zeta     2.1
+     dec     0.0
+     inc    60.7
+ S[a]ve to save plot, [q]uit, Return to continue:"""
+     eqarea_ell_wrong = "wrong"
+     eqarea_ell = Plot('eqarea_ell.py', eqarea_ell_infile, eqarea_ell_reference, eqarea_ell_wrong, 'q', False, '-ell', 'B')
+     output = eqarea_ell.run_program()
+     print output
+     eqarea_ell.check_output(output, eqarea_ell.ref_out)
+     eqarea_ell_unittest = Bad_test(eqarea_ell)
+     eqarea_ell_unittest.test_for_error()
+
+
+def complete_eqarea_magic_test():
+     print "Testing eqarea_magic.py"
+     eqarea_magic_infile = 'eqarea_magic_example.dat'
+     eqarea_magic_reference = "{'LO:_Snake River_SI:__SA:__SP:__CO:_gu_TY:_eqarea_.svg': <FoundFile ./new-test-output:LO:_Snake River_SI:__SA:__SP:__CO:_gu_TY:_eqarea_.svg>}"
+#['24', 'records', 'read', 'from', '/Users/nebula/Python/Basic_input_output/eqarea_magic_example.dat', 'All', 'sr01', 'GM-ARAR-AP:LP-DC5:LP-DIR-AF:LP-DIR-T:LP-PI-ALT-PTRM:LP-PI-TRM-ZI', '330.1', '64.9', 'sr03', 'GM-ARAR-AP:LP-DC5:LP-DIR-AF:LP-DIR-T', '151.8', '-57.5', 'sr04', 'GM-ARAR-AP:LP-DC5:LP-DIR-AF:LP-DIR-T', '16.5', '54.6', 'sr09', 'GM-ARAR-AP:LP-DC5:LP-DIR-AF:LP-DIR-T', '14.6', '77.9', 'sr11', 'GM-ARAR-AP:LP-DC5:LP-DIR-AF:LP-DIR-T', '346.3', '73.8', 'sr12', 'GM-ARAR-AP:LP-DC5:LP-DIR-AF:LP-DIR-T', '15.3', '44.8', 'sr16', 'GM-ARAR-AP:LP-DC5:LP-DIR-AF:LP-DIR-T', '347.4', '65.6', 'sr21', 'GM-ARAR-AP:LP-DC5:LP-DIR-AF:LP-DIR-T', '172.5', '-66.9', 'sr22', 'GM-ARAR-AP:LP-DC5:LP-DIR-AF:LP-DIR-T', '6.3', '29.7', 'sr23', 'GM-ARAR-AP:LP-DC5:LP-DIR-AF:LP-DIR-T', '14.5', '45.5', 'sr24', 'GM-ARAR-AP:LP-DC5:LP-DIR-AF:LP-DIR-T', '163.3', '-62.2', 'sr25', 'GM-ARAR-AP:LP-DC5:LP-DIR-AF:LP-DIR-T', '2.9', '61.9', 'sr26', 'GM-ARAR-AP:LP-DC5:LP-DIR-AF:LP-DIR-T', '358.6', '62.5', 'sr28', 'GM-ARAR-AP:LP-DC5:LP-DIR-AF:LP-DIR-T', '197.4', '-51.2', 'sr29', 'GM-ARAR-AP:LP-DC5:LP-DIR-AF:LP-DIR-T', '9.5', '62.8', 'sr30', 'GM-ARAR-AP:LP-DC5:LP-DIR-AF:LP-DIR-T:LP-PI-ALT-PTRM:LP-PI-TRM-ZI', '7.5', '66.7', 'sr31', 'GM-ARAR-AP:LP-DC5:LP-DIR-AF:LP-DIR-T', '23.2', '54.0', 'sr34', 'GM-ARAR-AP:LP-DC5:LP-DIR-AF:LP-DIR-T:LP-PI-ALT-PTRM:LP-PI-TRM-ZI', '205.8', '-49.4', 'sr36', 'GM-ARAR-AP:LP-DC5:LP-DIR-AF:LP-DIR-T', '197.6', '-65.5', 'sr39', 'GM-ARAR-AP:LP-DC5:LP-DIR-AF:LP-DIR-T:LP-PI-ALT-PTRM:LP-PI-TRM-ZI', '188.1', '-47.2', 'sr40', 'GM-ARAR-AP:LP-DC5:LP-DIR-AF:LP-DIR-T', '192.9', '-60.7', 'Normal', 'Pole', 'GM-ARAR-AP:LP-DC5:LP-DIR-AF:LP-DIR-T', '6.1', '59.6', 'Reverse', 'pole', 'GM-ARAR-AP:LP-DC5:LP-DIR-AF:LP-DIR-T', '185.1', '-58.8', 'Grand', 'Mean', 'pole', 'GM-ARAR-AP:LP-DC5:LP-DIR-AF:LP-DIR-T', '5.7', '59.3', 'mode', '1', 'Zdec', '111.3', 'Edec', '206.2', 'Eta', '7.7', 'n', '1', 'Einc', '28.9', 'Zinc', '8.8', 'Zeta', '3.3', 'dec', '6.1', 'inc', '59.5', 'mode', '2', 'Zdec', '248.2', 'Edec', '150.4', 'Eta', '4.2', 'n', '1', 'Einc', '26.4', 'Zinc', '15.3', 'Zeta', '8.1', 'dec', '185.1', 'inc', '-58.9', 'S[a]ve', 'to', 'save', 'plot,', '[q]uit,', 'Return', 'to', 'continue:']
+     eqarea_magic_wrong = "wrong"
+     eqarea_magic = Plot('eqarea_magic.py', eqarea_magic_infile, eqarea_magic_reference, eqarea_magic_wrong, 'a', True, '-obj', 'loc', '-crd', 'g', '-ell', 'Be')
+     output = eqarea_magic.run_program(plot=True)
+     eqarea_magic.check_output(output, eqarea_magic.ref_out)
+     # this seems to be bootstrap-y
+     # SHOULD I TEST THIS IN BOOTSTRAP PLOTTING??????????
+
+
+def complete_fishqq_test():
+     fishqq_infile = 'fishqq_example.dat'
+     fishqq_reference = "{'exp1.svg': <FoundFile ./new-test-output:exp1.svg>, 'unf1.svg': <FoundFile ./new-test-output:unf1.svg>}"
+     print fishqq_reference
+     fishqq_wrong = "wrong"
+     fishqq = Plot('fishqq.py', fishqq_infile, fishqq_reference, fishqq_wrong, 'a', False)
+     plot = fishqq.run_program(plot=True)
+     fishqq.check_output(plot, fishqq.ref_out)
+     fishqq_unittest = Bad_test(fishqq)
+     fishqq_unittest.test_for_error()
+     
+def complete_foldtest_magic_test():
+     foldtest_magic_infile = 'foldtest_magic_example.txt'
+     foldtest_magic_reference = None
+     foldtest_magic_wrong = [1, 2, 3]
+     foldtest_magic_fsa = 'foldtest_magic_er_samples.txt'
+     foldtest_magic = Plot('foldtest_magic.py', foldtest_magic_infile, foldtest_magic_reference, foldtest_magic_wrong, 'a', True,  '-fsa', foldtest_magic_fsa, '-n', '100')
+     foldtest_magic.run_program()
+     # this works, in this folder: foldtest_magic.py -f foldtest_magic_example.txt -fsa foldtest_magic_er_samples.txt
+complete_foldtest_magic_test()
+     
 
 
 
@@ -591,6 +657,10 @@ def complete_working_test():
     complete_core_depthplot_test()
     complete_dayplot_magic_test()
     complete_dmag_magic_test()
+    complete_eqarea_test()
+    complete_eqarea_ell_test() # has stdout : )
+    complete_eqarea_magic_test() # bootstrap-y... may wish to update this
+    complete_fishqq_test()
     complete_foldtest_test()
     complete_histplot_test()
     complete_irmaq_magic_test()

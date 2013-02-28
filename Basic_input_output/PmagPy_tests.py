@@ -59,6 +59,7 @@ def file_parse(the_file):
     clean_file = []
     for l in data:
         new_line = l.strip('\n')
+        new_line = new_line.strip(" ")
         clean_file.append(new_line)
     return clean_file # returns a list.  each line is a list item
 
@@ -70,13 +71,13 @@ def file_parse_by_word(the_file):
         line = line.split()
         clean_data += line
 #    clean_file = str(data)
-    return clean_data
+    return clean_data # returns a list.  each word is an item
 
 
 def output_parse(the_output):
     data = str(the_output)
     data = data.split()
-    return data
+    return data # returns a list.  each word is an item.  
 
 
 def clean_house():
@@ -84,7 +85,7 @@ def clean_house():
     print "-"
     print "-"
     print "-"
-    subprocess.call(['rm', '-rf',  'new-test-output/'])
+    subprocess.call(['rm', '-rf',  'new-test-output/']) # add long path name???
 
 def test_for_bad_file(output):
     output = str(output)

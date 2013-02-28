@@ -63,12 +63,12 @@ class complex_test_object(object):
          if self.WD:
              print "WD program about to run:"
              print(self.name, '-WD', directory, '-f', self.infile, self.arg_0, self.arg_1, self.arg_2, self.arg_3, self.arg_4, self.arg_5)# 'stdin='+str(self.stdin))
-             obj = env.run(self.name, '-WD', directory, '-f', self.infile, self.arg_0, self.arg_1, self.arg_2, self.arg_3, self.arg_4, self.arg_5) 
+             obj = env.run(self.name, '-WD', directory, '-f', self.infile, self.arg_0, self.arg_1, self.arg_2, self.arg_3, self.arg_4, self.arg_5, stdin=self.stdin) 
 # stdin=self.stdin)
          else:
              print "Non-WD program about to run:"
              print self.name, '-f', self.infile, self.arg_0, self.arg_1, self.arg_2, self.arg_3, self.arg_4, self.arg_5#  'stdin=' + str(self.stdin)
-             obj = env.run(self.name, '-f', self.infile, self.arg_0, self.arg_1, self.arg_2, self.arg_3, self.arg_4, self.arg_5)# stdin=self.stdin)
+             obj = env.run(self.name, '-f', self.infile, self.arg_0, self.arg_1, self.arg_2, self.arg_3, self.arg_4, self.arg_5, stdin=self.stdin)# stdin=self.stdin)
          if plot:
              print obj.files_created
              return obj.files_created
@@ -137,11 +137,18 @@ def complete_azdip_magic_test():
 #complete_azdip_magic_test()
      
 def complete_download_magic_test():
-     subprocess.call(['rm', '/Users/nebula/Basic_input_output/new-test-output/'])
      download_magic_infile = 'download_magic_example.dat'
-     download_magic_reference = None
+     download_magic_reference = PmagPy_tests.file_parse(file_prefix + 'download_magic_correct_output.out')
      download_magic_wrong = "wrong"
      download_magic = complex_test_object('download_magic.py', download_magic_infile, download_magic_reference, download_magic_wrong, True, 'y')
      output = download_magic.run_program()
+     subprocess.call(['rm', '-rf', 'Location_1/'])
+     subprocess.call(['rm', 'er_locations.txt', 'magic_measurements.txt', 'pmag_samples.txt', 'er_samples.txt', 'magic_methods.txt', 'pmag_sites.txt', 'er_ages.txt', 'er_sites.txt', 'pmag_criteria.txt', 'pmag_specimens.txt', 'er_citations.txt', 'er_specimens.txt', 'pmag_results.txt'])
+     # this test just runs the program and verifies that it makes no errors.  that's really all it reasonably can do.  
 
-complete_download_magic_test()
+def complete_working_test():
+     complete_azdip_magic_test()
+     complete_download_magic_test()
+
+if __name__ == "__main__":
+     complete_working_test()

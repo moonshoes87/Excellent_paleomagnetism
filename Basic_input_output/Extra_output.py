@@ -207,6 +207,7 @@ def do_unittest():
 def complete_working_test():
     complete_aarm_magic_test()
     complete_atrm_magic_test()
+    complete_hysteresis_magic_test()
     complete_k15_magic_test()
     complete_kly4s_magic_test()
     complete_pmag_results_extract_test()

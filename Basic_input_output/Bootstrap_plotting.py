@@ -86,12 +86,14 @@ def complete_bootams_test():
 
 #EI
 
-find_EI_reference = [(38.85, 39.0), (58.75, 58.9), (45., 50.), (65.5, 69.), (1.45, 1.5), (1.23, 1.35), (1.72, 2.2)]
+find_EI_reference = [(38.85, 39.0), (58.75, 58.9), (45., 50.), (65.5, 69.), (1.45, 1.5), (1.23, 1.35), (1.71, 2.2)]
 
 def run_EI(num):
     print ('find_EI.py', '-f', file_prefix + 'find_EI_example.dat', '-nb', num, "stdin='a'")
-    obj = env.run('find_EI.py', '-f', file_prefix + 'find_EI_example.dat', '-nb', num, stdin='a')
-    print obj.files_created
+    obj = env.run('find_EI.py', '-f', file_prefix + 'find_EI_example.dat', '-nb', num, stdin='a')# '-fmt pdf/png/eps/svg , default is svg, but I seem to be getting a format error
+    print "full output = " +str(obj.stdout)
+    print "files created: " + str(obj.files_created)
+    print "files updated: " + str(obj.files_updated)
     output = str(obj.stdout[-210:-143]).split()
     print "raw output = " + str(output)
     clean_out = remove_non_integers_from_output(output)
@@ -101,15 +103,30 @@ def run_EI(num):
 
 def complete_find_EI_test():
     print "Testing find_EI.py"
-    output1 = run_EI(1000)
+    output1 = run_EI(2000)
     print output1
     check_bootstrap(output1, find_EI_reference)
+ #   subprocess.call(['rm', 'findEI_ei.svg', 'findEI_cdf.svg', 'findEI_eq.svg', 'findEI_v2.svg'])
+#    subprocess.call(['rm', 'findEI_ei.pdf', 'findEI_cdf.pdf', 'findEI_eq.pdf', 'findEI_v2.pdf'])
+#2  saved in  findEI_ei.svg
+#3  saved in  findEI_cdf.svg
+#1  saved in  findEI_eq.svg
+#4  saved in  findEI_v2.svg
     output2 = run_EI(1000)
     check_bootstrap(output2, find_EI_reference)
+ #   subprocess.call(['rm', 'findEI_ei.svg', 'findEI_cdf.svg', 'findEI_eq.svg', 'findEI_v2.svg'])
     output3 = run_EI(1000)
     check_bootstrap(output3, find_EI_reference)
     print "Ran find_EI bootstrap test three times"
 
+ignore_me = """class Bad_bootstrap(unittest.TestCase):
+    def __init__(self, bootstrap_plotting_obj):
+        self.plotting_obj = bootstrap_plotting_obj
+
+    def test_for_error(self, bad_out):
+        print "TESTING FOR ERROR"
+        self.assertRaises(ValueError, check_bootstrap, bad_out, self.plotting_obj) # the problem here is specifying which function to run.  since in this
+"""
 class Bad_find_EI(unittest.TestCase):
     def test_for_error(self):
         print "TESTING FOR ERROR"
@@ -128,10 +145,17 @@ class Bad_bootams(unittest.TestCase):
         bad_out = do_bootams(100)
         self.assertRaises(ValueError, check_bootstrap, bad_out, bootams_reference)
 
-#complete_aniso_magic_test()        
-complete_find_EI_test()
-#complete_bootams_test()
+
+def complete_working_test():
+    complete_aniso_magic_test()        
+    complete_find_EI_test()
+    complete_bootams_test()
 
 if __name__ == "__main__":
-    pass
-#    unittest.main(module="Bootstrap_plotting")
+#    pass
+    complete_working_test()
+    unittest.main(module="Bootstrap_plotting")
+
+
+
+# You can't run the bootstrap, plot things at the same time as other python programs.  Or else it gets all kinds of wacky
