@@ -115,7 +115,9 @@ vgp_di = UC('vgp_di.py', 'vgp_di_example.dat')
 
 grab_magic_key_reference_list = """['42.60264', '42.60264', '42.60352', '42.60104', '42.73656', '42.8418', '42.8657', '42.92031', '42.56857', '42.49964', '42.49962', '42.50001', '42.52872', '42.45559', '42.48923', '42.46186', '42.69156', '42.65289', '43.30504', '43.36817', '43.42133', '43.8859', '43.84273', '43.53289', '43.57494', '44.15663', '44.18629']"""
 
+# 
 
+#MOVED 
 def complete_combine_magic_test():
     output_file = 'combine_magic_output_new.out'
     reference_file =  'combine_magic_output_correct.out'
@@ -130,14 +132,14 @@ def complete_combine_magic_test():
     # no unittest
 
 
-def complete_cont_rot_test():
+def complete_cont_rot_test(): # MOVED
     obj = env.run('cont_rot.py', '-con', 'af:sam', '-prj', 'ortho', '-eye', '-20', '0', '-sym', 'k-', '1', '-age', '180', '-res', 'l', stdin='a')
     output = str(obj.files_created)
     reference_output = "{'Cont_rot.pdf': <FoundFile ./new-test-output:Cont_rot.pdf>}"
     if output == reference_output:
         print "Cont_rot produced expected plot"
 
-def complete_customize_criteria_test():
+def complete_customize_criteria_test(): #MOVED
     customize_criteria_infile = 'customize_criteria_example.dat'
     customize_criteria_output = 'customize_criteria_outfile.out'
     customize_criteria_reference = "customize_criteria_output_correct.out"
@@ -146,7 +148,7 @@ def complete_customize_criteria_test():
     customize_criteria.test_file(customize_criteria_reference)
     # unittest, I'm thinking no
 
-def complete_di_eq_test():
+def complete_di_eq_test(): # MOVED
     print "Testing di_eq.py"
     di_eq_infile = 'di_eq_example.dat'
     di_eq_reference = ['-0.239410', '-0.893491', '0.436413', '0.712161', '0.063844', '0.760300', '0.321447', '0.686216', '0.322720', '0.670562', '0.407412', '0.540654', '0.580156', '0.340376', '0.105351', '0.657728', '0.247173', '0.599687', '0.182349', '0.615600', '0.174815', '0.601717', '0.282746', '0.545472', '0.264863', '0.538273', '0.235758', '0.534536', '0.290665', '0.505482', '0.260629', '0.511513', '0.232090', '0.516423', '0.244448', '0.505666', '0.277927', '0.464381', '0.250510', '0.477152', '0.291770', '0.440816', '0.108769', '0.516148', '0.196706', '0.482014', '0.349390', '0.381292', '0.168407', '0.475566', '0.206286', '0.446444', '0.175701', '0.450649', '0.301104', '0.378539', '0.204955', '0.423970', '0.199755', '0.422584', '0.346920', '0.308010', '0.119030', '0.441144', '0.239848', '0.376486', '0.269528', '0.342510', '0.085451', '0.423789', '0.192224', '0.387233', '0.172608', '0.395084', '0.272008', '0.320741', '0.393981', '0.117451', '-0.017726', '0.406002', '0.154273', '0.367000', '0.213903', '0.335760', '0.103221', '0.372202', '0.231833', '0.283245', '0.072160', '0.351538', '0.007802', '0.319236', '0.152583', '0.265350', '0.248133', '0.136412']
@@ -158,7 +160,7 @@ def complete_di_eq_test():
 
 
 
-def complete_grab_magic_key_test():
+def complete_grab_magic_key_test(): # MOVED
     print "Testing grab magic"
     grab_magic_key = UC('grab_magic_key.py', 'grab_magic_key_er_sites.txt', WD = True)
     grab_magic_key.test_help()
@@ -169,17 +171,12 @@ def complete_grab_magic_key_test():
 
 incfish_reference_list = """['57.1', '61.0', '100', '92.9', '13.9', '1.0']"""
 
-def complete_incfish_test():
+def complete_incfish_test(): # MOVED
     incfish_infile = 'incfish_example_inc.dat'
     incfish = UC('incfish.py', incfish_infile)
     incfish.test_help()
     # no interactive
     incfish.long_stdout_test(incfish_reference_list)
-
-def complete_magic_select_test():
-    magic_select_infile = 'magic_select_example.txt'
-    magic_select_outfile = 'magic_select_results_new.out'
-    magic_select = UC('magic_select.py', magic_select_infile, 
 
 
 def complete_nrm_specimens_magic_test(): # maybe move to complex_programs

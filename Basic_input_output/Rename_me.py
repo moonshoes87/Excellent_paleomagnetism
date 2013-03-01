@@ -68,7 +68,7 @@ class Test_instance(object):
               pass
          
          # this function simply runs the command line program with whatever its options
-     def run_program(self, output_type=False): # if plot is true, this function will return files_created.  by default, the function returns stdout
+     def run_program(self, output_type="stdout"): # 
           if self.WD:
                print "WD program about to run:"
                print(self.name, '-WD', directory, '-f', self.infile, '-F', self.outfile, self.arg_0, self.arg_1, self.arg_2, self.arg_3, self.arg_4, self.arg_5, 'stdin='+str(self.stdin))
@@ -85,9 +85,12 @@ class Test_instance(object):
                print "file out"
                print self.outfile
                return self.outfile
-          else:
+          elif output_type == "stdout":
+               print "stdout out"
                print obj.stdout
                return obj.stdout
+          else:
+               raise NameError("invalid output type was selected for run_program()")
 
 
      # this function will get files ready to be compared.  can return a tuple of whatever data types.  
@@ -95,16 +98,17 @@ class Test_instance(object):
 
          # this function compares real against expected output.  it can take any form of output, as long as the reference output is formatted the same as the expected output.  it will be most useful for short output, otherwise it is nicer to use the check_
      def check_output(self, actual_out, reference_out):
-         actual_out, reference_out = str(actual_out), str(reference_out)
-         if reference_out in actual_out:#the in syntax is because of weird extra spaces and characters at the end/start of stdout
-             print str(self.name) + " output as expected"
-         else:
-             print "Output was: "
-             print str(actual_out)
-             print "Output should have been: " 
-             print str(reference_out)
-             print "Error raised"
-             raise NameError(str(self.name) + " produced incorrect output")
+          print "Checking output (can be any output type)"
+          actual_out, reference_out = str(actual_out), str(reference_out)
+          if reference_out in actual_out:#the in syntax is because of weird extra spaces and characters at the end/start of stdout
+               print str(self.name) + " output as expected"
+          else:
+               print "Output was: "
+               print str(actual_out)
+               print "Output should have been: " 
+               print str(reference_out)
+               print "Error raised"
+               raise NameError(str(self.name) + " produced incorrect output")
 
      # this function will iterate through a reference list and see if each item of output is correct 
      def check_list_output(self, output_list, correct_output_list):
@@ -126,6 +130,7 @@ class Test_instance(object):
                     raise NameError("Wrong output")
           if list_empty:
                print "ONE OR BOTH LISTS DID NOT HAVE CONTENT"
+               raise NameError("Output list empty")
           print "Lists were the same"
           print str(self.name) + " produced correct output"
                
@@ -140,7 +145,7 @@ class Test_instance(object):
 
                # this function just runs the help option, and makes sure the help message is of a reasonable length
      def test_help(self):
-          print "testing help"
+          print "testing help for " + str(self.name)
           obj = env.run(self.name, '-h')
           message = str(obj.stdout)
           print(len(message))
@@ -152,24 +157,25 @@ class Test_instance(object):
 
      # this function will call the interactive option
      def test_interactive(self):
-          obj = env.run(self.name, '-i')#, stdin='3')                                                                                  
-          print("stdout: "+ str(obj.stdout))
+          print "testing interactive for " + str(self.name)
+          obj = env.run(self.name, '-i', stdin=self.stdin)#, stdin='3')                                                                                           print("stdout: "+ str(obj.stdout))
           if len(obj.stdout) > 10:
                print "Interactive mode works"
                print "-"
           else:
                raise NameError("Interactive mode for " + str(self.name) + " came up empty")
 
-        # this will do all that the typical BIO sequence used to do.
+        # this will do all that the typical BIO sequence
          # it assumes output as a file, and it also assumes an interactive mode
-     def file_in_file_out_sequence(self):
+     def file_in_file_out_sequence(self, interactive=False):
           self.test_help()
           result = self.run_program(output_type = "file")
           self.check_file_output(result, self.ref_out)
-          self.test_interactive()
+          if interactive:
+               self.test_interactive()  
          
-
-     def plot_program_test(self, stdout=True):
+# this one tests plotting programs, either that give stdout or that just make a plot
+     def plot_program_sequence(self, stdout=True):
           self.test_help()
           if stdout:
                result = self.run_program()
@@ -177,13 +183,31 @@ class Test_instance(object):
                result = self.run_program(output_type = "plot")
           self.check_output(result, self.ref_out)
 
-
+# this one is for programs that produce stdout, usually long 
      def list_sequence(self):
-          result = self.run_program()
+          result = self.run_program(output_type = "stdout")
+          print result
           new_list = str(result).split()
           self.check_list_output(new_list, self.ref_out)
- #    self.unittest = Bad_test(self)
-#     self.unittest.test_list_output_for_error()
+
+# necessary???
+     def stdout_sequence(self):
+          result = self.run_program(output_type = "stdout")
+          result = float(result)
+          self.check_output(result, self.ref_out)
+
+
+     def unittest_file(self):
+          unittest = Bad_test(self)
+          unittest.test_file_for_error()
+          
+     def unittest_short_output(self):
+          unittest = Bad_test(self)
+          unittest.test_short_output_for_error()
+
+     def unittest_list(test_obj):
+          unittest = Bad_test(self)
+          unittest.test_list_output_for_error()
 
 
 class Bad_test(unittest.TestCase):
@@ -196,13 +220,14 @@ class Bad_test(unittest.TestCase):
         print "Error expected"
         print "-"
 
-
     def test_short_output_for_error(self):
+         print "Testing: " + str(self.test_obj.name) + " with incorrect short output, expecting error"
          self.assertRaises(NameError, self.test_obj.check_output, self.test_obj.wrong_out, self.test_obj.ref_out)
          print "Error expected"
          print "-"
 
     def test_list_output_for_error(self):
+         print "Testing: " + str(self.test_obj.name) + " with incorrect list output, expecting error"
          self.assertRaises(NameError, self.test_obj.check_list_output, self.test_obj.wrong_out, self.test_obj.ref_out)
          print "Error expected"
          print "-"
@@ -217,16 +242,18 @@ class Other_Bad_test(unittest.TestCase):
         self.assertRaises(NameError, self.test_obj.check_output, self.test_obj.wrong_out, self.test_obj.ref_out)
         print "Error expected"
 
+
+
 # BIO example
-#     def __init__(self, name, infile, ref_out, wrong_out, stdin, WD, *args):
-def complete_angle_test():
+def complete_angle_test(): # BIO type
     angle = Test_instance('angle.py', 'angle.dat', 'angle_results_new.txt', 'angle_results_correct.txt', 'angle_results_incorrect.txt', None, False)
-    angle.file_in_file_out_sequence()
-    angle_unittest = Bad_test(angle)
-    angle_unittest.test_file_for_error()
+    angle.file_in_file_out_sequence(interactive=True)
+    angle.unittest_file()
+#    angle_unittest = Bad_test(angle)
+ #   angle_unittest.test_file_for_error()
 
 # plotting.py example, with stdout
-def complete_zeq_test():
+def complete_zeq_test(): # Plotting w/stdout
     # DONE                                                                                                                                                 
     zeq_infile = 'zeq_example.dat'
     zeq_reference_output = """0      0.0 9.283e-08   339.9    57.9 
@@ -246,23 +273,23 @@ def complete_zeq_test():
     zeq_wrong_output = "Hi there"
     zeq_outfile = None
     zeq = Test_instance('zeq.py', zeq_infile, zeq_outfile, zeq_reference_output, zeq_wrong_output, 'q', False, '-u', 'C')
-    zeq.plot_program_test(stdout=True)
+    zeq.plot_program_sequence(stdout=True)
     zeq_unittest = Bad_test(zeq)
     zeq_unittest.test_short_output_for_error()
 
 # plotting.py example, no stdout
-def complete_chartmaker_test():
+def complete_chartmaker_test():  # Plotting w/out stdout
      chartmaker_infile = None
      chartmaker_outfile = None
      chartmaker_reference = "{'chart.txt': <FoundFile ./new-test-output:chart.txt>}"
      chartmaker_wrong = "wrong"
      chartmaker = Test_instance('chartmaker.py', chartmaker_infile, chartmaker_outfile, chartmaker_reference, chartmaker_wrong, 'q', False)
-     chartmaker.plot_program_test(stdout=False)
+     chartmaker.plot_program_sequence(stdout=False)
      chartmaker_unittest = Bad_test(chartmaker)
      chartmaker_unittest.test_short_output_for_error()
 
-# UC example
-def complete_di_eq_test():
+# UC example.  creates a list, tests that list
+def complete_di_eq_test(): # basic list type
      print "Testing di_eq.py"
      di_eq_infile = 'di_eq_example.dat'
      di_eq_outfile = None
@@ -277,22 +304,157 @@ def complete_di_eq_test():
 , '0.231833', '0.283245', '0.072160', '0.351538', '0.007802', '0.319236', '0.152583', '0.265350', '0.248133', '0.136412']
      di_eq_wrong = "wrong"
      di_eq = Test_instance('di_eq.py', di_eq_infile, di_eq_outfile, di_eq_reference, di_eq_wrong, None, False)
-     #result = di_eq.run_program()
-     #new_list = str(result).split()
-     #di_eq.check_list_output(new_list, di_eq.ref_out)
+     di_eq.list_sequence()
      di_eq_unittest = Bad_test(di_eq)
      di_eq_unittest.test_list_output_for_error()
 
 
+
+# the rest of the UCs
+#     def __init__(self, name, infile, outfile, ref_out, wrong_out, stdin, WD, *args):
+# this one is a weird amalgam, because of two -f inputs.  but it works.  
+def complete_combine_magic_test(): # irregular type
+    output_file = 'combine_magic_output_new.out'
+    reference_file =  'combine_magic_output_correct.out'
+    incorrect_output = 'combine_magic_output_incorrect.out'
+    input_1 = 'combine_magic_input_1.dat'
+    input_2 = 'combine_magic_input_2.dat'
+    # have to run it specially, because -f takes two arguments.  it doesn't fit with its class in this regard. 
+    obj = env.run('combine_magic.py', '-WD', directory, '-F', output_file, '-f', input_1, input_2)
+    combine_magic = Test_instance('combine_magic.py', None, output_file, reference_file, incorrect_output, None, True, '-f', input_1, input_2)
+    combine_magic.check_file_output(combine_magic.outfile, combine_magic.ref_out)
+    combine_magic.test_help()
+    combine_magic_unittest = Bad_test(combine_magic)
+    combine_magic_unittest.test_file_for_error()
+    print "Successfully finished combine_magic_test"
+
+
+def complete_cont_rot_test(): # Irregular type -- running specially because it has so many command line options
+    obj = env.run('cont_rot.py', '-con', 'af:sam', '-prj', 'ortho', '-eye', '-20', '0', '-sym', 'k-', '1', '-age', '180', '-res', 'l\
+', stdin='a')
+    output = str(obj.files_created) # output is the name of the plot that has been saved
+    reference_output = "{'Cont_rot.pdf': <FoundFile ./new-test-output:Cont_rot.pdf>}"
+    incorrect_output = "wrong"
+    cont_rot = Test_instance('cont_rot.py', None, output, reference_output, incorrect_output, 'a', False)
+    cont_rot.check_output(cont_rot.outfile, cont_rot.ref_out)
+    cont_rot.test_help()
+    cont_rot_unittest = Bad_test(cont_rot)
+    cont_rot_unittest.test_short_output_for_error()
+
+def complete_customize_criteria_test():  # BIO type
+    customize_criteria_infile = 'customize_criteria_example.dat'
+    customize_criteria_output = 'customize_criteria_outfile.out'
+    customize_criteria_reference = "customize_criteria_output_correct.out"
+    customize_criteria_wrong = "customize_criteria_output_incorrect.out"
+    customize_criteria = Test_instance('customize_criteria.py', customize_criteria_infile, customize_criteria_output, customize_criteria_reference, customize_criteria_wrong, '1', False)
+    customize_criteria.file_in_file_out_sequence(interactive=True)
+    customize_criteria_unittest = Bad_test(customize_criteria)
+    customize_criteria_unittest.test_file_for_error()
+
+
+
+
+grab_magic_key_reference_list = ['42.60264', '42.60264', '42.60352', '42.60104', '42.73656', '42.8418', '42.8657', '42.92031', '42.56857', '42.49964', '42.49962', '42.50001', '42.52872', '42.45559', '42.48923', '42.46186', '42.69156', '42.65289', '43.30504', '43.36817', '43.42133', '43.8859', '43.84273', '43.53289', '43.57494', '44.15663', '44.18629']
+
+def complete_grab_magic_key_test(): # Basic list type
+    print "Testing grab magic"
+    grab_magic_key_infile = 'grab_magic_key_er_sites.txt'
+    grab_magic_key_outfile = None
+    grab_magic_key_wrong = "wrong"
+    grab_magic_key_reference = grab_magic_key_reference_list
+    grab_magic_key = Test_instance('grab_magic_key.py', grab_magic_key_infile, grab_magic_key_outfile, grab_magic_key_reference, grab_magic_key_wrong, None, True, '-key', 'site_lat')
+    grab_magic_key.list_sequence()
+    grab_magic_unittest = Bad_test(grab_magic_key)
+    grab_magic_unittest.test_list_output_for_error()
+    print "Sucessfully finished complete_grab_magic_key_test"
+
+
+def complete_incfish_test(): # BIO type
+    incfish_infile = 'incfish_example_inc.dat'
+    incfish_outfile = 'incfish_results_new.out'
+    incfish_reference = 'incfish_results_correct.out'
+    incfish_wrong = 'incfish_results_incorrect.out'
+    incfish = Test_instance('incfish.py', incfish_infile, incfish_outfile, incfish_reference, incfish_wrong, None, False)
+    incfish.file_in_file_out_sequence()
+    incfish_unittest = Bad_test(incfish)
+    incfish_unittest.test_file_for_error()
+    # no interactive                                                                                                                 
+
+
+
+
+def complete_magic_select_test(): # BIO type.. but it doesn't work yet!  Lisa must add in a WD option.  
+    magic_select_infile = 'magic_select_example.txt'
+    magic_select_outfile = 'magic_select_results_new.out'
+    magic_select_reference = 'magic_select_results_correct.out'
+    magic_select_wrong = 'magic_select_results_incorrect.out'
+    magic_select = Test_instance('magic_select.py', magic_select_infile, magic_select_outfile, magic_select_reference, magic_select_wrong, None, True, '-key', 'magic_method_codes', 'LP-DIR-AF', 'has')
+    magic_select.file_in_file_out_sequence()
+    # add unittest when you get it together
+
+def complete_nrm_specimens_magic_test(): # BIO type
+     print "Testing nrm_specimens_magic.py"
+     fsa = file_prefix + 'nrm_specimens_magic_er_samples.txt'
+     nrm_specimens_magic_infile = 'nrm_specimens_magic_measurements.txt'
+     nrm_specimens_magic_outfile = 'nrm_specimens_results_new.out'
+     nrm_specimens_magic_reference = 'nrm_specimens_results_correct.out'
+     nrm_specimens_magic_wrong = 'nrm_specimens_results_incorrect.out'
+     nrm_specimens_magic = Test_instance('nrm_specimens_magic.py', nrm_specimens_magic_infile, nrm_specimens_magic_outfile, nrm_specimens_magic_reference, nrm_specimens_magic_wrong, None, False, '-fsa', fsa, '-crd', 'g')
+     nrm_specimens_magic.file_in_file_out_sequence()
+     nrm_specimens_unittest = Bad_test(nrm_specimens_magic)
+     nrm_specimens_unittest.test_file_for_error()
+     print "Successfully completed nrm_specimens_magic.py tests"
+
+def complete_sundec_test(): # list type
+     sundec_infile = 'sundec_example.dat'
+     sundec_outfile = None
+     sundec_reference = ['154.2']
+     sundec_wrong = ['154.3']
+     sundec = Test_instance('sundec.py', sundec_infile, sundec_outfile, sundec_reference, sundec_wrong, None, False)
+     sundec.run_program()
+     sundec.list_sequence()
+     sundec_unittest = Bad_test(sundec)
+     sundec_unittest.test_list_output_for_error()
+     print "Successfully finished sundec.py tests"
+
+def complete_pca_test(): # list type
+     pca_infile = 'pca_example.dat'
+     pca_outfile = None
+     pca_reference = pca_correct_out
+     pca_wrong = ['eba24a', 'wrong']
+     pca = Test_instance('pca.py', pca_infile, pca_outfile, pca_reference, pca_wrong, None, False, '-dir', 'L', '1', '10')
+#     pca.run_program(output_type="list")
+     pca.list_sequence()
+     pca_unittest = Bad_test(pca)
+     pca_unittest.test_list_output_for_error()
      
 
-    # maybe work on better unittests
+
+pca_correct_out = ['eba24a', 'DE-BFL', '0', '0.00', '339.9', '57.9', '9.2830e-05', '1', '2.50', '325.7', '49.1', '7.5820e-05', '2', '5.00', '321.3', '45.9', '6.2920e-05', '3', '10.00', '314.8', '41.7', '5.2090e-05', '4', '15.00', '310.3', '38.7', '4.4550e-05', '5', '20.00', '305.0', '37.0', '3.9540e-05', '6', '30.00', '303.9', '34.7', '3.2570e-05', '7', '40.00', '303.0', '32.3', '2.5670e-05', '8', '50.00', '303.6', '32.4', '2.2520e-05', '9', '60.00', '299.8', '30.8', '1.9820e-05', '10', '70.00', '292.5', '31.0', '1.3890e-05', '11', '80.00', '297.0', '25.6', '1.2570e-05', '12', '90.00', '299.3', '11.3', '0.5030e-05', 'eba24a', 'DE-BFL', '10', '2.50', '70.00', '8.8', '334.9', '51.5']
+
+def complete_vgp_di_test():
+     vgp_di_infile = 'vgp_di_example.dat'
+     vgp_di_oufile = None
+     vgp_di_
+  #  vgp_di = UC('vgp_di.py', 'vgp_di_example.dat')
+     vgp_di.test_help()
+     vgp_di.test_interactive()
+     file_name = file_prefix + 'vgp_di_example.dat'
 
 def complete_working_test():
-#     complete_angle_test()
+     complete_angle_test()
  #    complete_zeq_test()
   #   complete_chartmaker_test()
-     complete_di_eq_test()
+#     complete_di_eq_test()
+#     complete_combine_magic_test()
+#     complete_cont_rot_test()
+ #    complete_customize_criteria_test()
+  #   complete_grab_magic_key_test()
+#     complete_incfish_test()
+#     complete_magic_select_test() NEEDS -WD!!!!!
+     #     complete_nrm_specimens_magic_test()
+#     complete_sundec_test()
+#     complete_pca_test()
 
 if __name__ == '__main__':
 #    pass
