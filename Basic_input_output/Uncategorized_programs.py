@@ -106,10 +106,6 @@ class Bad_test(unittest.TestCase):
         self.assertRaises(NameError, self.uc_obj.long_stdout_test, reference_data)
 
 
-
-nrm_specimens_magic = UC('nrm_specimens_magic.py', 'nrm_specimens_magic_measurements.txt', 'nrm_specimens_results_new.out', 'nrm_specimens_results_correct.out', 'nrm_specimens_results_incorrect.out')
-
-
 vgp_di = UC('vgp_di.py', 'vgp_di_example.dat')
 
 
@@ -179,7 +175,7 @@ def complete_incfish_test(): # MOVED
     incfish.long_stdout_test(incfish_reference_list)
 
 
-def complete_nrm_specimens_magic_test(): # maybe move to complex_programs
+def complete_nrm_specimens_magic_test(): # MOVED
     fsa = file_prefix + 'nrm_specimens_magic_er_samples.txt'
     print "Testing nrm_specimens_magic.py"
     obj= env.run('nrm_specimens_magic.py', '-f', nrm_specimens_magic.input_file, '-fsa', fsa, '-crd,', 'g', '-fsa', fsa, '-F', nrm_specimens_magic.output_file)
@@ -193,7 +189,7 @@ def complete_nrm_specimens_magic_test(): # maybe move to complex_programs
     print "Successfully completed nrm_specimens_magic.py tests"
     # needs unittests
  
-def complete_sundec_test():
+def complete_sundec_test(): # MOVED
 #    sundec = UC('sundec.py', 'sundec_example.dat')
     sundec = UC('sundec.py', 'sundec_example.dat')
     sundec.test_help()
@@ -207,7 +203,7 @@ def complete_sundec_test():
     print "Successfully finished sundec.py tests"
 
 
-def complete_pca_test():
+def complete_pca_test(): # MOVED
     pca = UC('pca.py', 'pca_example.dat')
     pca.test_help()
 #    pca.stdout_test(pca_correct_out)
@@ -222,7 +218,7 @@ def complete_pca_test():
     # need unittests
     print "Successfully completed pca.py tests"
 
-def complete_vgp_di_test():
+def complete_vgp_di_test(): #MOVED
   #  vgp_di = UC('vgp_di.py', 'vgp_di_example.dat')
     vgp_di.test_help()
     vgp_di.test_interactive()

@@ -63,6 +63,7 @@ class Plot(object):
                pass
          
      def run_program(self, plot=False): # if plot is true, this function will return files_created.  by default, the function returns stdout
+          print "running program"
           if self.WD:
                print "WD program about to run:"
                print(self.name, '-WD', directory, '-f', self.infile, self.arg_0, self.arg_1, self.arg_2, self.arg_3, self.arg_4, self.arg_5, 'stdin='+str(self.stdin))
@@ -79,6 +80,7 @@ class Plot(object):
                return obj.stdout
 
      def check_output(self, actual_out, reference_out):
+          print "checking output"
           actual_out, reference_out = str(actual_out), str(reference_out)
           if reference_out in actual_out:
                print str(self.name) + " output as expected"
@@ -100,7 +102,7 @@ class Bad_test(unittest.TestCase):
         print "Error expected"
 
 
-def complete_zeq_test():
+def complete_zeq_test(): # MOVED
     # DONE
     zeq_infile = 'zeq_example.dat'
     zeq_reference_output = """0      0.0 9.283e-08   339.9    57.9 
@@ -139,7 +141,7 @@ def complete_zeq_test():
     zeq_test.test_for_error()
 
 
-def complete_ani_depthplot_test():
+def complete_ani_depthplot_test(): # MOVED
     # done
     # WD
     print "Testing ani_depthplot.py"
@@ -153,7 +155,7 @@ def complete_ani_depthplot_test():
     ani_depthplot_unittest = Bad_test(ani_depthplot)
     ani_depthplot_unittest.test_for_error()
 
-def complete_basemap_magic_test():
+def complete_basemap_magic_test(): # MOVED
      basemap_magic_infile = 'basemap_example.txt'
      basemap_magic_reference = "{'Site_map.pdf': <FoundFile ./new-test-output:Site_map.pdf>}"
      basemap_magic_wrong = "wrong"
@@ -163,7 +165,7 @@ def complete_basemap_magic_test():
      basemap_magic_unittest = Bad_test(basemap_magic)
      basemap_magic_unittest.test_for_error()
 
-def complete_biplot_magic_test():
+def complete_biplot_magic_test():#MOVED
      # not WD
      biplot_magic_infile = 'biplot_magic_example.dat'
      biplot_magic_reference = """LP-X  selected for X axis
@@ -179,7 +181,7 @@ S[a]ve plots, [q]uit,  Return for next plot Good-bye"""
      biplot_magic_unittest = Bad_test(biplot_magic)
      biplot_magic_unittest.test_for_error()
 
-def complete_chartmaker_test():
+def complete_chartmaker_test(): #MOVED
      chartmaker_infile = None
      chartmaker_reference = "{'chart.txt': <FoundFile ./new-test-output:chart.txt>}"
      chartmaker_wrong = "wrong"
@@ -193,7 +195,7 @@ def complete_chartmaker_test():
      chartmaker_unittest.test_for_error()
      
 
-def complete_chi_magic_test():
+def complete_chi_magic_test(): # MOVED
      chi_magic_infile = 'chi_magic_example.dat'
      chi_magic_reference = "{'IRM-OldBlue-1892_2.svg': <FoundFile ./new-test-output:IRM-OldBlue-1892_2.svg>, 'IRM-OldBlue-1892_3.svg': <FoundFile ./new-test-output:IRM-OldBlue-1892_3.svg>, 'IRM-OldBlue-1892_1.svg': <FoundFile ./new-test-output:IRM-OldBlue-1892_1.svg>}"
      chi_magic_wrong = "wrong"
@@ -203,7 +205,7 @@ def complete_chi_magic_test():
      chi_magic_unittest = Bad_test(chi_magic)
      chi_magic_unittest.test_for_error()
 
-def complete_common_mean_test():
+def complete_common_mean_test(): # MOVED
      common_mean_infile = 'common_mean_ex_file1.dat'
      common_mean_reference = "{'CD_X.svg': <FoundFile ./new-test-output:CD_X.svg>, 'CD_Y.svg': <FoundFile ./new-test-output:CD_Y.svg>, 'CD_Z.svg': <FoundFile ./new-test-output:CD_Z.svg>}"
      common_mean_wrong = "wrong"
@@ -222,7 +224,7 @@ def complete_common_mean_test():
      else:
           raise NameError("running common_mean.py with -dir 0 9.9 did not produce expected plots")
 
-def complete_core_depthplot_test():
+def complete_core_depthplot_test(): # MOVED
 #core_depthplot.py -f core_depthplot_example.dat -LP AF 15
      core_depthplot_infile = 'core_depthplot_example.dat'
      core_depthplot_reference = "{'DSDP Site 522_m:_LT-AF-Z_core-depthplot.svg': <FoundFile ./new-test-output:DSDP Site 522_m:_LT-AF-Z_core-depthplot.svg>}"
@@ -237,7 +239,7 @@ def complete_core_depthplot_test():
      core_depthplot_unittest = Bad_test(core_depthplot)
      core_depthplot_unittest.test_for_error()
 
-def complete_dayplot_magic_test():
+def complete_dayplot_magic_test(): # MOVED
      dayplot_magic_infile = 'dayplot_magic_example.dat'
      dayplot_magic_reference = "{'LO:_unknown_SI:__SA:__SP:__TY:_day_.svg': <FoundFile ./new-test-output:LO:_unknown_SI:__SA:__SP:__TY:_day_.svg>, 'LO:_unknown_SI:__SA:__SP:__TY:_S-Bc_.svg': <FoundFile ./new-test-output:LO:_unknown_SI:__SA:__SP:__TY:_S-Bc_.svg>, 'LO:_unknown_SI:__SA:__SP:__TY:_S-Bcr_.svg': <FoundFile ./new-test-output:LO:_unknown_SI:__SA:__SP:__TY:_S-Bcr_.svg>}"
      dayplot_magic_wrong = "wrong"
@@ -248,7 +250,7 @@ def complete_dayplot_magic_test():
      dayplot_magic_unittest.test_for_error()
 
 
-def complete_dmag_magic_test():
+def complete_dmag_magic_test(): # MOVED
      dmag_magic_infile = 'dmag_magic_example.dat'
      dmag_magic_reference = "{'McMurdo_LT-AF-Z.svg': <FoundFile ./new-test-output:McMurdo_LT-AF-Z.svg>}"
      dmag_magic_wrong = "wrong"

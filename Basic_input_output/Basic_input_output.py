@@ -135,7 +135,7 @@ def complete_working_test():
 
 # List of complete individual tests
 
-def complete_angle_test():
+def complete_angle_test(): #MOVED
     angle = in_out('angle.py', 'angle.dat', 'angle_results_new.txt', 'angle_results_correct.txt', 'angle_results_incorrect.txt')
     angle.test_interactive()
     angle.test_help()
@@ -143,7 +143,7 @@ def complete_angle_test():
     angle_unittest = Bad_test(angle)
     angle_unittest.test_for_error()
     
-def complete_apwp_test():
+def complete_apwp_test(): # MOVED
     apwp = in_out('apwp.py', 'apwp_example.dat', 'apwp_results_new.out', 'apwp_results_correct.out', 'apwp_results_incorrect.out')
     apwp.test_help()
     apwp.test_interactive()
@@ -151,7 +151,7 @@ def complete_apwp_test():
     apwp_unittest = Bad_test(apwp)
     apwp_unittest.test_for_error()
 
-def complete_b_vdm_test():
+def complete_b_vdm_test(): # MOVED
     b_vdm = in_out('b_vdm.py', 'b_vdm_example.dat', 'b_vdm_results_new.out', 'b_vdm_results_correct.out', 'b_vdm_results_incorrect.out')
     b_vdm.test_help()
     b_vdm.test_interactive()
@@ -159,7 +159,7 @@ def complete_b_vdm_test():
     b_vdm_unittest = Bad_test(b_vdm)
     b_vdm_unittest.test_for_error()
 
-def complete_cart_dir_test():
+def complete_cart_dir_test(): # MOVED
     cart_dir = in_out('cart_dir.py', 'cart_dir_example.dat', 'cart_dir_results_new.out', 'cart_dir_results_correct.out', 'cart_dir_results_incorrect.out')
     cart_dir.test_help()
     cart_dir.test_interactive()
@@ -167,7 +167,7 @@ def complete_cart_dir_test():
     cart_dir_unittest = Bad_test(cart_dir)
     cart_dir_unittest.test_for_error()
 
-def complete_convert_samples_test():
+def complete_convert_samples_test(): # MOVED
     convert_samples = in_out('convert_samples.py', 'convert_samples_example.dat', 'convert_samples_Northern_Iceland.txt', 'convert_samples_results_correct.out', 'convert_samples_results_incorrect.out')
     convert_samples.test_help()
     # no interactive mode
@@ -175,7 +175,7 @@ def complete_convert_samples_test():
     convert_samples_unittest = Bad_test(convert_samples)
     convert_samples_unittest.test_for_error()
 
-def complete_di_geo_test():
+def complete_di_geo_test(): #MOVED
     di_geo = in_out('di_geo.py', 'di_geo_example.dat', 'di_geo_results_new.out', 'di_geo_results_correct.out', 'di_geo_results_incorrect.out')
     di_geo.test_help()
     di_geo.test_file(di_geo.correct_output_file)
@@ -183,7 +183,7 @@ def complete_di_geo_test():
     di_geo_unittest = Bad_test(di_geo)
     di_geo_unittest.test_for_error()
 
-def complete_di_tilt_test():
+def complete_di_tilt_test(): #MOVED
     di_tilt = in_out('di_tilt.py', 'di_tilt_example.dat', 'di_tilt_results_new.out', 'di_tilt_results_correct.out', 'di_tilt_results_incorrect.out')
     di_tilt.test_help()
     di_tilt.test_interactive()
@@ -192,7 +192,7 @@ def complete_di_tilt_test():
     di_tilt_unittest.test_for_error()
 
 
-def complete_dir_cart_test():
+def complete_dir_cart_test(): # MOVED
     dir_cart = in_out('dir_cart.py', 'dir_cart_example.dat', 'dir_cart_results_new.out', 'dir_cart_results_correct.out', 'dir_cart_results_incorrect.out')
     dir_cart.test_help()
     dir_cart.test_interactive()
@@ -200,9 +200,7 @@ def complete_dir_cart_test():
     dir_cart_unittest = Bad_test(dir_cart)
     dir_cart_unittest.test_for_error()
 
-
-
-def complete_di_rot_test():
+def complete_di_rot_test(): # MOVED
     di_rot = in_out('di_rot.py', 'di_rot_example.dat', 'di_rot_results_new.out', 'di_rot_results_correct.out', 'di_rot_results_incorrect.out')
     di_rot.test_help()
 # no interactive
@@ -211,7 +209,7 @@ def complete_di_rot_test():
     di_rot_unittest.test_for_error()
 # should this be checked with its additional command line arguments?  I'm thinking no....
 
-def complete_di_vgp_test():
+def complete_di_vgp_test(): # MOVED
     di_vgp = in_out('di_vgp.py', 'di_vgp_example.dat', 'di_vgp_results_new.out', 'di_vgp_results_correct.out', 'di_vgp_results_incorrect.out')
     di_vgp.test_help()
     di_vgp.test_interactive()
@@ -219,9 +217,7 @@ def complete_di_vgp_test():
     di_vgp_unittest = Bad_test(di_vgp)
     di_vgp_unittest.test_for_error()
 
-
-
-def complete_eigs_s_test():
+def complete_eigs_s_test(): # MOVED
     eigs_s = in_out('eigs_s.py', 'eigs_s_example.dat', 'eigs_s_results_new.out', 'eigs_s_results_correct.out', 'eigs_s_results_incorrect.out')
     eigs_s.test_help()
     # no interactive
@@ -229,7 +225,7 @@ def complete_eigs_s_test():
     eigs_s_unittest = Bad_test(eigs_s)
     eigs_s_unittest.test_for_error()
 
-def complete_eq_di_test():
+def complete_eq_di_test(): # MOVED
     eq_di = in_out('eq_di.py', 'eq_di_example.dat', 'eq_di_results_new.out', 'eq_di_results_correct.out', 'eq_di_results_incorrect.out')
     # no interactive
     eq_di.test_help()
@@ -237,7 +233,7 @@ def complete_eq_di_test():
     eq_di_unittest = Bad_test(eq_di)
     eq_di_unittest.test_for_error()
 
-def complete_gobing_test():
+def complete_gobing_test(): # MOVED
     gobing = in_out('gobing.py', 'gobing_example.out', 'gobing_results_new.out', 'gobing_results_correct.out', 'gobing_results_incorrect.out')
     gobing.test_help()
     # no interactive
@@ -245,7 +241,7 @@ def complete_gobing_test():
     gobing_unittest = Bad_test(gobing)
     gobing_unittest.test_for_error()
 
-def complete_gofish_test():
+def complete_gofish_test(): #MOVED
     gofish = in_out('gofish.py', 'gofish_example.out', 'gofish_results_new.out', 'gofish_results_correct.out', 'gofish_results_incorrect.out')
     gofish.test_help()
     # no interactive
@@ -253,7 +249,7 @@ def complete_gofish_test():
     gofish_unittest = Bad_test(gofish)
     gofish_unittest.test_for_error()
     
-def complete_gokent_test():
+def complete_gokent_test(): #MOVED
     gokent = in_out('gokent.py', 'gokent_example.out', 'gokent_results_new.out', 'gokent_results_correct.out', 'gokent_results_incorrect.out')
     gokent.test_help()
     # no interactive
@@ -261,7 +257,7 @@ def complete_gokent_test():
     gokent_unittest = Bad_test(gokent)
     gokent_unittest.test_for_error()
 
-def complete_goprinc_test():
+def complete_goprinc_test(): #MOVED
     goprinc = in_out('goprinc.py', 'goprinc_example.dat', 'goprinc_results_new.out', 'goprinc_results_correct.out', 'goprinc_results_incorrect.out')
     goprinc.test_help()
     #no interactive
@@ -269,7 +265,7 @@ def complete_goprinc_test():
     goprinc_unittest = Bad_test(goprinc)
     goprinc_unittest.test_for_error()
 
-def complete_igrf_test():
+def complete_igrf_test(): #MOVED
 # this guy also has command line options, including a plotting one.  possibly it should get some more/different stuff.
     igrf = in_out('igrf.py', 'igrf_example.dat', 'igrf_results_new.out', 'igrf_results_correct.out', 'igrf_results_incorrect.out')
     igrf.test_help()
@@ -278,7 +274,7 @@ def complete_igrf_test():
     igrf_unittest = Bad_test(igrf)
     igrf_unittest.test_for_error()
 
-def complete_k15_s_test():
+def complete_k15_s_test():#MOVED
     # this guy has one additional command line option.  i wonder if it needs to be tested??
     k15_s = in_out('k15_s.py', 'k15_s_example.dat', 'k15_s_results_new.out', 'k15_s_results_correct.out', 'k15_s_results_incorrect.out')
     k15_s.test_help()
@@ -287,7 +283,7 @@ def complete_k15_s_test():
     k15_s_unittest = Bad_test(k15_s)
     k15_s_unittest.test_for_error()
 
-def complete_mk_redo_test():
+def complete_mk_redo_test():#MOVED
     mk_redo = in_out('mk_redo.py', 'pmag_specimens.txt', 'mk_redo_results_new.out', 'mk_redo_results_correct.out', 'mk_redo_results_incorrect.out', True)
     mk_redo.test_help()
     # no interactive
@@ -297,8 +293,7 @@ def complete_mk_redo_test():
 
 #def complete_nrm_specimens_magic_test():
  #   nrm_specimens_magic = in_out('nrm_specimens_magic.py', 'nrm_specimens_magic_measurements.txt', 'nrm_specimens_results_new.out', 'nrm_specimens_results_correct.out', 'nrm_specimens_results_incorrect.out')
-
-def complete_pt_rot_test():
+def complete_pt_rot_test(): #MOVED
     pt_rot = in_out('pt_rot.py', 'pt_rot_example.dat', 'pt_rot_results_new.out', 'pt_rot_results_correct.out', 'pt_rot_results_incorrect.out', True)
     pt_rot.test_help()
     # no interactive mode
@@ -314,7 +309,7 @@ def complete_pt_rot_test():
     pt_rot_unittest = Bad_test(pt_rot)
     pt_rot_unittest.test_for_error()
 
-def complete_s_eigs_test():
+def complete_s_eigs_test(): #MOVED
     s_eigs = in_out('s_eigs.py', 's_eigs_example.dat', 's_eigs_results_new.out', 's_eigs_results_correct.out', 's_eigs_results_incorrect.out')
     s_eigs.test_help()
     # no interactive
@@ -322,7 +317,7 @@ def complete_s_eigs_test():
     s_eigs_unittest = Bad_test(s_eigs)
     s_eigs_unittest.test_for_error()
 
-def complete_s_geo_test():
+def complete_s_geo_test(): # MOVED
     s_geo = in_out('s_geo.py', 's_geo_example.dat', 's_geo_results_new.out', 's_geo_results_correct.out', 's_geo_results_incorrect.out')
     s_geo.test_help()
     # no interactive
@@ -330,7 +325,7 @@ def complete_s_geo_test():
     s_geo_unittest = Bad_test(s_geo)
     s_geo_unittest.test_for_error()
     
-def complete_s_tilt_test():
+def complete_s_tilt_test(): # MOVED
     s_tilt = in_out('s_tilt.py', 's_tilt_example.dat', 's_tilt_results_new.out', 's_tilt_results_correct.out', 's_tilt_results_incorrect.out')
     s_tilt.test_help()
     # no interactive
@@ -338,7 +333,7 @@ def complete_s_tilt_test():
     s_tilt_unittest = Bad_test(s_tilt)
     s_tilt_unittest.test_for_error()
 
-def complete_stats_test():
+def complete_stats_test(): # MOVED
     stats = in_out('stats.py', 'stats_example.dat', 'stats_results_new.out', 'stats_results_correct.out', 'stats_results_incorrect.out')
     stats.test_help()
     # no interactive
@@ -346,7 +341,7 @@ def complete_stats_test():
     stats_unittest = Bad_test(stats)
     stats_unittest.test_for_error()
 
-def complete_vdm_b_test():
+def complete_vdm_b_test(): #MOVED
     vdm_b = in_out('vdm_b.py', 'vdm_b_example.dat', 'vdm_b_results_new.out', 'vdm_b_results_correct.out', 'vdm_b_results_incorrect.out')
     vdm_b.test_help()
     vdm_b.test_interactive()
