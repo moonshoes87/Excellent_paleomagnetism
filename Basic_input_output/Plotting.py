@@ -260,7 +260,7 @@ def complete_dmag_magic_test(): # MOVED
      dmag_magic_unittest = Bad_test(dmag_magic)
      dmag_magic_unittest.test_for_error()
 
-def complete_eqarea_test():
+def complete_eqarea_test(): #MOVED
      eqarea_infile = 'eqarea_example.dat'
      eqarea_reference = "{'eq.svg': <FoundFile ./new-test-output:eq.svg>}"
      eqarea_wrong = "wrong"
@@ -270,7 +270,7 @@ def complete_eqarea_test():
      eqarea_unittest = Bad_test(eqarea)
      eqarea_unittest.test_for_error()
 
-def complete_eqarea_ell_test():
+def complete_eqarea_ell_test(): #MOVED
      eqarea_ell_infile = 'eqarea_ell_example.dat'
      eqarea_ell_reference ="""Zdec   137.8
      Edec   235.4
@@ -291,7 +291,7 @@ def complete_eqarea_ell_test():
      eqarea_ell_unittest.test_for_error()
 
 
-def complete_eqarea_magic_test():
+def complete_eqarea_magic_test(): # MOVED TO BOOTSTRAP
      print "Testing eqarea_magic.py"
      eqarea_magic_infile = 'eqarea_magic_example.dat'
      eqarea_magic_reference = "{'LO:_Snake River_SI:__SA:__SP:__CO:_gu_TY:_eqarea_.svg': <FoundFile ./new-test-output:LO:_Snake River_SI:__SA:__SP:__CO:_gu_TY:_eqarea_.svg>}"
@@ -304,7 +304,7 @@ def complete_eqarea_magic_test():
      # SHOULD I TEST THIS IN BOOTSTRAP PLOTTING??????????
 
 
-def complete_fishqq_test():
+def complete_fishqq_test(): # MOVED
      fishqq_infile = 'fishqq_example.dat'
      fishqq_reference = "{'exp1.svg': <FoundFile ./new-test-output:exp1.svg>, 'unf1.svg': <FoundFile ./new-test-output:unf1.svg>}"
      print fishqq_reference
@@ -315,7 +315,7 @@ def complete_fishqq_test():
      fishqq_unittest = Bad_test(fishqq)
      fishqq_unittest.test_for_error()
      
-def complete_foldtest_magic_test():
+def complete_foldtest_magic_test(): #MOVED
      foldtest_magic_infile = 'foldtest_magic_example.txt'
      foldtest_magic_reference = None
      foldtest_magic_wrong = [1, 2, 3]
@@ -328,7 +328,7 @@ complete_foldtest_magic_test()
 
 
 
-def complete_foldtest_test():
+def complete_foldtest_test(): # MOVED
     # doesn't produce stdout :(
     # Lisa is editing
     print "Testing foldtest.py"
@@ -339,7 +339,7 @@ def complete_foldtest_test():
     print obj.files_updated
 #    PmagPy_tests.clean_house()
 
-def complete_histplot_test():
+def complete_histplot_test(): #MOVED
     # no useful stdout : (
     # done
     print "Testing histplot.py"
@@ -352,7 +352,7 @@ def complete_histplot_test():
     histplot_unittest = Bad_test(histplot)
     histplot_unittest.test_for_error()
 
-def complete_irmaq_magic_test():
+def complete_irmaq_magic_test(): #MOVED
     # NO STDOUT
     # WD
     # DONE
@@ -369,9 +369,7 @@ def complete_irmaq_magic_test():
 
 
 def complete_lnp_magic_test():
-    #WD
     # long output, so tests output against a file instead of a string or list
-    # DONE
     print "Testing lnp_magic.py"
     lnp_magic_infile = 'lnp_magic_pmag_specimens.txt'
     lnp_magic_reference = PmagPy_tests.file_parse_by_word(file_prefix + 'lnp_magic_output_correct.txt')
@@ -385,6 +383,8 @@ def complete_lnp_magic_test():
     lnp_magic_unittest = Bad_test(lnp_magic)
     lnp_magic_unittest.test_for_error()
 # this works but the problem is if even a few words change..... then Lisa has to re enter the correct output
+
+complete_lnp_magic_test()
 
 def complete_lowrie_test():
     # doesn't produce stdout : (

@@ -79,8 +79,12 @@ class Test_instance(object):
                obj = env.run(self.name, '-f', self.infile, '-F', self.outfile, self.arg_0, self.arg_1, self.arg_2, self.arg_3, self.arg_4, self.arg_5, stdin=self.stdin)
           if output_type == "plot":
                print "output is plot"
-               print obj.files_created
-               return obj.files_created
+               if obj.files_created == {}:
+                    print "files updated: ", obj.files_updated
+                    return obj.files_updated
+               else:
+                    print "new files created: ", obj.files_created
+                    return obj.files_created
           elif output_type == "file":
                print "output is file"
                print self.outfile
@@ -98,7 +102,7 @@ class Test_instance(object):
 
          # this function compares real against expected output.  it can take any form of output, as long as the reference output is formatted the same as the expected output.  it will be most useful for short output, otherwise it is nicer to use the check_
      def check_output(self, actual_out, reference_out):
-          print "Checking output (can be any output type)"
+          print "Checking stdout output"
           actual_out, reference_out = str(actual_out), str(reference_out)
           if reference_out in actual_out:#the in syntax is because of weird extra spaces and characters at the end/start of stdout
                print str(self.name) + " output as expected"
@@ -119,11 +123,10 @@ class Test_instance(object):
           print "Comparing two lists"
           list_empty = True
           for num, i in enumerate(output_list):
-               print "i"
                list_empty = False
                if i == correct_output_list[num]:
-                    print i, correct_output_list[num]
-                    print "correct"
+                    print i, "   ",  correct_output_list[num]
+                   # print "correct"
                else:
                     print "Output contained:    " + str(i)  
                     print "but should have had: " + str(correct_output_list[num])
@@ -638,6 +641,121 @@ def complete_dmag_magic_test():
      dmag_magic = Test_instance('dmag_magic.py', dmag_magic_infile, dmag_magic_outfile, dmag_magic_reference, dmag_magic_wrong, 'a', False)
      dmag_magic.plot_program_sequence(stdout=False)
 
+def complete_eqarea_test():
+     eqarea_infile = 'eqarea_example.dat'
+     eqarea_outfile = None
+     eqarea_reference = "{'eq.svg': <FoundFile ./new-test-output:eq.svg>}"
+     eqarea_wrong = "wrong"
+     eqarea = Test_instance('eqarea.py', eqarea_infile, eqarea_outfile, eqarea_reference, eqarea_wrong, 'a', False)
+     eqarea.plot_program_sequence(stdout=False)
+
+def complete_eqarea_ell_test():
+     eqarea_ell_infile = 'eqarea_ell_example.dat'
+     eqarea_ell_outfile = None
+     eqarea_ell_reference = """Zdec   137.8
+     Edec   235.4
+     Eta     2.9
+     n        100
+     Einc    17.7
+     Zinc    22.6
+     Zeta     2.1
+     dec     0.0
+     inc    60.7
+ S[a]ve to save plot, [q]uit, Return to continue:"""
+     eqarea_ell_wrong = "wrong"
+     eqarea_ell = Test_instance('eqarea_ell.py', eqarea_ell_infile, eqarea_ell_outfile, eqarea_ell_reference, eqarea_ell_wrong, 'q', False, '-ell', 'B')
+     eqarea_ell.plot_program_sequence(stdout=True)
+
+
+
+def complete_fishqq_test(): # irregular type, because it produces a useful outfile as well as a plot
+     fishqq_infile = 'fishqq_example.dat'
+     fishqq_outfile = 'fishqq_results_new.out'
+     fishqq_reference = "{'exp1.svg': <FoundFile ./new-test-output:exp1.svg>, 'unf1.svg': <FoundFile ./new-test-output:unf1.svg>}"
+     fishqq_file_reference = 'fishqq_results_correct.out'
+     fishqq_wrong = "wrong"
+     fishqq = Test_instance('fishqq.py', fishqq_infile, fishqq_outfile, fishqq_reference, fishqq_wrong, 'a', False)
+     fishqq.plot_program_sequence(stdout=False)
+     fishqq.check_file_output(fishqq.outfile, fishqq_file_reference)
+
+
+def complete_foldtest_magic_test(): # Irregular: has potential for bootstrapping.  I'm just not sure if I should simply test the file out instead
+     foldtest_magic_infile = 'foldtest_magic_example.txt'
+     foldtest_magic_outfile = 'foldtest_magic_results_new.out'
+     foldtest_magic_reference = "{'foldtest_ge.svg': <FoundFile ./new-test-output:foldtest_ge.svg>, 'foldtest_st.svg': <FoundFile ./new-test-output:foldtest_st.svg>, 'foldtest_ta.svg': <FoundFile ./new-test-output:foldtest_ta.svg>}"
+     foldtest_magic_wrong = [1, 2, 3]
+     foldtest_magic_fsa = 'foldtest_magic_er_samples.txt'
+     foldtest_magic = Test_instance('foldtest_magic.py', foldtest_magic_infile, foldtest_magic_outfile, foldtest_magic_reference, foldtest_magic_wrong, 'a', True,  '-fsa', foldtest_magic_fsa, '-n', '100')
+     foldtest_magic.plot_program_sequence(stdout=False)
+
+
+def complete_foldtest_test(): # irregular?  may be boostrap-y
+    # doesn't produce stdout :(                                                                                 
+     print"Testing foldtest.py"
+     foldtest_infile = 'foldtest_example.dat'
+     foldtest_outfile = 'foldtest_results_new.out'
+     foldtest_reference = """{'foldtest_ge.svg': <FoundFile ./new-test-output:foldtest_ge.svg>, 'foldtest_st.svg': <FoundFile ./new-test-output:foldtest_st.svg>, 'foldtest_ta.svg': <FoundFile ./new-test-output:foldtest_ta.svg>}"""
+     foldtest_wrong = "wrong"
+     foldtest = Test_instance('foldtest.py', foldtest_infile, foldtest_outfile, foldtest_reference, foldtest_wrong, 'a', False, '-n', 50)
+     foldtest.plot_program_sequence(stdout=False)
+
+def complete_histplot_test():
+     print"Testing histplot.py"
+     histplot_infile = 'extra_histplot_sample.out'
+     histplot_outfile = None
+     histplot_reference = "{'hist.svg': <FoundFile ./new-test-output:hist.svg>}"
+     histplot_wrong = "wrong"
+     histplot = Test_instance('histplot.py', histplot_infile, histplot_outfile, histplot_reference, histplot_wrong, 'a', False)
+     histplot.plot_program_sequence(stdout=False)
+
+
+def complete_irmaq_magic_test():
+     print"Testing irmaq_magic.py"
+     irmaq_magic_infile = 'irmaq_magic_measurements.txt'
+     irmaq_magic_outfile = None
+     irmaq_magic_reference = "{'U1359A_LP-IRM.svg': <FoundFile ./new-test-output:U1359A_LP-IRM.svg>}"
+     irmaq_magic_wrong = 8
+     irmaq_magic = Test_instance('irmaq_magic.py', irmaq_magic_infile, irmaq_magic_outfile, irmaq_magic_reference, irmaq_magic_wrong, 'a', True)
+     irmaq_magic.plot_program_sequence(stdout=False)
+
+
+def complete_lnp_magic_test(): # irregular type.  it had to be written the long way, because it won't run with -F.  
+     print"Testing lnp_magic.py"
+     lnp_magic_infile = 'lnp_magic_pmag_specimens.txt'
+     lnp_magic_outfile = None
+     lnp_magic_reference = PmagPy_tests.file_parse_by_word(file_prefix + 'lnp_magic_output_correct.txt')
+     lnp_magic_wrong = ['sv01', 'Site', 'lines', 'planes', 'kappa', 'a95', 'dec', 'I am not right']
+     lnp_magic = Test_instance('lnp_magic.py', lnp_magic_infile, lnp_magic_outfile, lnp_magic_reference, lnp_magic_wrong, None, True, '-crd', 'g', '-P')
+     obj = env.run('lnp_magic.py', '-WD', '/Users/nebula/Python/Basic_input_output', '-f', 'lnp_magic_pmag_specimens.txt', '-crd', 'g', '-P')
+     result = str(obj.stdout).split()
+     lnp_magic.test_help()
+     lnp_magic.check_list_output(result, lnp_magic.ref_out)
+     lnp_magic.unittest_list()
+
+
+
+def complete_lowrie_test():
+    # doesn't produce stdout : (
+     print "Testing lowrie.py"
+     lowrie_infile = 'lowrie_example.dat'
+     lowrie_outfile = None
+     lowrie_reference = """318-U1359A-002H-1-W-109
+S[a]ve figure? [q]uit, <return> to continue"""
+     lowrie_wrong = "wrong"
+     lowrie = Test_instance('lowrie.py', lowrie_infile, lowrie_outfile, lowrie_reference, lowrie_wrong, 'q', False)
+     lowrie.plot_program_sequence(stdout=True)
+
+def complete_lowrie_magic_test():
+     print "testing lowrie_magic.py"
+     infile = 'lowrie_magic_example.dat'
+     outfile = None
+     reference = """318-U1359A-002H-1-W-109
+S[a]ve figure? [q]uit, <return> to continue"""
+     wrong = "1, 2, 3, 4"
+     lowrie_magic = Test_instance('lowrie_magic.py', infile, outfile, reference, wrong, 'q', True)
+     lowrie_magic.plot_program_sequence(stdout=True)
+
+
 def complete_working_test():
      # the examples
 #     complete_angle_test()
@@ -688,11 +806,20 @@ def complete_working_test():
 #     complete_common_mean_test()
 #     complete_core_depthplot_test()
 #     complete_dayplot_magic_test()
-     complete_dmag_magic_test()
-
+#     complete_dmag_magic_test()
+ #    complete_eqarea_test()
+  #   complete_eqarea_ell_test()
+     #complete_fishqq_test()
+#     complete_foldtest_magic_test()
+#     complete_foldtest_test()
+#     complete_histplot_test()
+ #    complete_irmaq_magic_test()
+#     complete_lnp_magic_test()
+ #    complete_lowrie_test()
+     complete_lowrie_magic_test()
 
 if __name__ == '__main__':
-#    pass
+#     pass
      complete_working_test()
 
 

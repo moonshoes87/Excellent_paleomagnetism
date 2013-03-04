@@ -146,15 +146,54 @@ class Bad_bootams(unittest.TestCase):
         self.assertRaises(ValueError, check_bootstrap, bad_out, bootams_reference)
 
 
+
+def complete_eqarea_magic_test():
+#     print "Testing eqarea_magic.py"
+     eqarea_magic_infile = 'eqarea_magic_example.dat'
+     eqarea_reference = [(1.0, 1.0), (109., 112.), (204., 207.), (7.6, 7.9), (.9, 1.1), (28.5, 29.5), (7.5, 9.5), (3., 3.5), (5.5, 6.5), (59., 60.), (1.9, 2.1), (247., 250.), (149., 152.), (4., 4.6), (.9, 1.1), (26., 27.), (14.5, 16.5), (7.5, 8.5), (184.5, 186.5), (-59.5, -58.)]
+     obj = env.run('eqarea_magic.py', '-WD', directory, '-f', eqarea_magic_infile, '-obj', 'loc', '-crd', 'g', '-ell', 'Be', stdin='q')
+     result = obj.stdout
+     result_list = str(result).split()
+     a_list = []
+     add_me = False
+     for i in result_list: # this goes through the output and isolates the relevant numbers for testing
+  #       print i
+         if str(i) == 'mode':
+             add_me = True
+         if str(i) == 'S[a]ve':
+             add_me = False
+         if add_me == True:
+             a_list.append(i)
+     stripped_list = remove_non_integers_from_output(a_list)
+     print stripped_list
+     print len(stripped_list)
+     print eqarea_reference
+     print len(eqarea_reference)
+     check_bootstrap(stripped_list, eqarea_reference)
+
+
 def complete_working_test():
-    complete_aniso_magic_test()        
-    complete_find_EI_test()
-    complete_bootams_test()
+#    complete_aniso_magic_test()        
+#    complete_find_EI_test()
+#    complete_bootams_test()
+    complete_eqarea_magic_test()
+    complete_eqarea_magic_test()
+    complete_eqarea_magic_test()
+    complete_eqarea_magic_test()
+    complete_eqarea_magic_test()
+    complete_eqarea_magic_test()
+    complete_eqarea_magic_test()
+    complete_eqarea_magic_test()
+    complete_eqarea_magic_test()
+    complete_eqarea_magic_test()
+    complete_eqarea_magic_test()
+    complete_eqarea_magic_test()
+    complete_eqarea_magic_test()
 
 if __name__ == "__main__":
 #    pass
     complete_working_test()
-    unittest.main(module="Bootstrap_plotting")
+#    unittest.main(module="Bootstrap_plotting")
 
 
 
