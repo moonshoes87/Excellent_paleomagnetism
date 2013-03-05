@@ -793,6 +793,145 @@ def complete_qqplot_test():# irregular type.  produces a lot of output, which is
     qqplot.unittest_list()
 
 
+def complete_quick_hyst_test():
+    quick_hyst_infile = 'quick_hyst_example.dat'
+    quick_hyst_outfile = None
+    quick_hyst_reference = """IS06a-1 1 out of  8
+working on t:  273
+S[a]ve plots, [s]pecimen name, [q]uit, <return> to continue
+ Good bye"""
+    quick_hyst_wrong = "wrong"
+    quick_hyst = Test_instance('quick_hyst.py', quick_hyst_infile, quick_hyst_outfile, quick_hyst_reference, quick_hyst_wrong, 'q', True)
+    quick_hyst.plot_program_sequence(stdout=True)
+
+
+def complete_site_edit_magic_test():
+    site_edit_magic_reference = """sr01
+specimen, dec, inc, n_meas/MAD,| method codes 
+sr01a1:   331.0    64.5 9 / 1.8 | LP-DIR-T:DE-BFL
+sr01a2:   325.9    62.1 10 / 0.9 | LP-DIR-T:DE-BFL
+sr01c2:   345.0    64.3 9 / 3.0 | LP-DIR-T:DE-BFL
+sr01d1:   327.0    65.2 10 / 1.9 | LP-DIR-T:DE-BFL
+sr01e2:   332.9    67.0 10 / 1.9 | LP-DIR-AF:DE-BFL
+sr01f2:   325.9    66.1 15 / 1.6 | LP-DIR-T:DE-BFL
+sr01g2:   324.3    66.7 10 / 2.6 | LP-DIR-AF:DE-BFL
+sr01i1:   328.5    62.5 9 / 2.8 | LP-DIR-T:DE-BFL
+
+ Site lines planes  kappa   a95   dec   inc
+sr01 8  0     574      2.3    330.1     64.9  7.9878 
+s[a]ve plot, [q]uit, [e]dit specimens, <return> to continue:"""
+    site_edit_magic_wrong = "wrong"
+    site_edit_magic_infile = 'site_edit_example.dat'
+    site_edit_fsa = 'site_edit_er_samples.txt'
+    site_edit_magic_outfile = None
+    site_edit = Test_instance('site_edit_magic.py', site_edit_magic_infile, site_edit_magic_outfile, site_edit_magic_reference, site_edit_magic_wrong, 'q', True, '-fsa', site_edit_fsa)
+    site_edit.plot_program_sequence(stdout=True)
+
+def complete_strip_magic_test():
+     strip_magic_infile = 'strip_magic_example.txt'
+     strip_magic_outfile = None
+     strip_magic_reference = "{'strat.svg': <FoundFile ./new-test-output:strat.svg>}"
+     strip_magic_wrong = "hello there"
+     strip_magic = Test_instance('strip_magic.py', strip_magic_infile, strip_magic_outfile, strip_magic_reference, strip_magic_wrong, 'a', True, '-x', 'age', '-y', 'lat')
+     strip_magic.plot_program_sequence(stdout=False)
+     
+
+thellier_ref = """starting new specimen interpretation file:  thellier_specimens.txt
+s1p1-01 1 of  269
+index step Dec   Inc  Int       Gamma
+0     0   320.7     2.2 6.280e-07 
+1     100   323.0     2.3 6.380e-07    22.2
+2     200   322.9     1.4 5.850e-07     6.2
+3     300   322.7     2.0 4.690e-07     3.7
+4     325   321.4     1.0 3.950e-07     8.5
+5     350   322.8     1.6 3.690e-07     5.2
+6     375   322.9     0.7 3.420e-07     5.5
+7     400   323.1     1.2 3.250e-07     8.3
+8     425   323.6    -0.1 2.890e-07     4.3
+9     450   323.6     1.2 2.580e-07     4.6
+10     475   323.7    -0.8 2.200e-07     6.8
+11     500   322.7     1.0 1.720e-07     6.9
+12     510   322.2    -1.1 1.480e-07     4.4
+13     520   322.3    -0.1 1.230e-07     3.2
+14     530   322.2    -4.8 8.580e-08     5.8
+15     540   323.8    -0.9 6.250e-08     5.9
+16     550   323.6    -4.9 4.370e-08     4.2
+17     560   322.1    -2.5 3.240e-08     4.9
+Looking up saved interpretation....
+    None found :(  
+
+               s[a]ve plot, set [b]ounds for calculation, [d]elete current interpretation, [p]revious, [s]ample, [q]uit:
+               
+Return for next specimen """
+
+
+def complete_thellier_magic_test(): # Irregular, and imperfect.  fix??
+    thellier_magic_infile = 'thellier_magic_measurements.txt'
+    thellier_magic_reference = PmagPy_tests.file_parse_by_word('thellier_magic_output_correct.out')# this is in a file because it is irritatingly long to keep in the document.  I've left it above, for now.  
+    print thellier_magic_reference
+    thellier_magic_outfile = None
+    thellier_magic_wrong = "wrong"
+    thellier_magic = Test_instance('thellier_magic.py', thellier_magic_infile, thellier_magic_outfile, thellier_magic_reference, thellier_magic_wrong,  'q', False)
+    thellier_magic.list_sequence()
+
+
+def complete_vgpmap_magic_test():
+    vgpmap_magic_infile = 'vgpmap_magic_pmag_results.txt'
+    vgpmap_magic_outfile = None
+    vgpmap_magic_reference = "{'VGP_map.pdf': <FoundFile ./new-test-output:VGP_map.pdf>}"
+    vgpmap_magic_wrong = "wrong"
+    vgpmap_magic = Test_instance('vgpmap_magic.py', vgpmap_magic_infile, vgpmap_magic_outfile, vgpmap_magic_reference, vgpmap_magic_wrong, 'a', True, '-prj', 'ortho', '-eye', '60', '0')
+    vgpmap_magic.plot_program_sequence(stdout=False)
+#    obj = env.run('vgpmap_magic.py', '-WD', directory, '-f', vgpmap_magic_infile, '-crd', 'g', '-prj', 'ortho', '-eye', '60', '0', '-sym', 'ko', '10', '-fmt', 'png', stdin='a') 
+
+zeq_magic_reference = """sr01a1 0 out of  177
+    looking up previous interpretations...
+g: 0      0.0  C  4.065e-05   324.1    66.0 
+g: 1    100.0  C  3.943e-05   330.5    64.6 
+g: 2    150.0  C  3.908e-05   324.9    65.5 
+g: 3    200.0  C  3.867e-05   329.4    64.6 
+g: 4    250.0  C  3.797e-05   330.3    64.5 
+g: 5    300.0  C  3.627e-05   330.1    64.0 
+g: 6    350.0  C  3.398e-05   327.0    64.4 
+g: 7    400.0  C  2.876e-05   328.2    64.0 
+g: 8    450.0  C  2.148e-05   323.8    65.2 
+g: 9    500.0  C  1.704e-05   326.0    63.9 
+g: 10    525.0  C  1.200e-05   326.5    63.7 
+g: 11    550.0  C  5.619e-06   325.5    64.4 
+
+                g/b: indicates  good/bad measurement.  "bad" measurements excluded from calculation
+
+                 set s[a]ve plot, [b]ounds for pca and calculate, [p]revious, [s]pecimen, 
+                 change [h]orizontal projection angle,   change [c]oordinate systems, 
+                 [d]elete current interpretation(s), [e]dit data,   [q]uit: 
+                
+<Return>  for  next specimen 
+Good bye"""
+
+def complete_zeq_magic_test(): # NOT SURE THIS IS ACTUALLY USEFUL.  Consider
+    zeq_magic_infile = 'zeq_magic_measurements.txt'
+    zeq_magic_outfile = None
+#    zeq_magic_reference = See above                                       
+    zeq_magic_wrong = "wrong"
+    fsa = 'zeq_magic_er_samples.txt'
+    fsp = 'zeq_magic_specimens.txt'
+    zeq_magic = Test_instance('zeq_magic.py', zeq_magic_infile, zeq_magic_outfile, zeq_magic_reference, zeq_magic_wrong, 'q', True, '-fsa', fsa, '-fsp', fsp, '-crd', 'g')
+    zeq_magic.plot_program_sequence(stdout=True)
+# could do the below, but it takes forever and creates a TON of files                                                          
+#    extra_zeq_magic = Plot('zeq_magic.py', zeq_magic_infile, zeq_magic_reference, zeq_magic_wrong, None, True, '-fsa', fsa, '-fsp', fsp, '-sav')                                                          
+
+                                                   
+
+# UNFINISHED
+
+def complete_revtest_test():
+     revtest_infile = file_prefix + 'revtest_example.dat'
+     obj = env.run('revtest.py', '-f', revtest_infile, stdin='q')
+     print obj.stdout
+
+def complete_revtest_magic_test():
+     pass
+
 def complete_working_test():
      # the examples
 #     complete_angle_test()
@@ -856,7 +995,15 @@ def complete_working_test():
 #     complete_lowrie_magic_test()
 #     complete_plot_cdf_test()
  #    complete_plotdi_a_test()
-     complete_qqplot_test()
+  #   complete_qqplot_test()
+   #  complete_quick_hyst_test()
+#     complete_revtest_test() # NOT DONE
+ #    complete_revtest_magic_test() # NOT DONE
+#     complete_site_edit_magic_test()
+ #    complete_strip_magic_test()
+#     complete_thellier_magic_test()
+#     complete_vgpmap_magic_test()
+     complete_zeq_magic_test()
 
 if __name__ == '__main__':
 #     pass

@@ -368,7 +368,7 @@ def complete_irmaq_magic_test(): #MOVED
 
 
 
-def complete_lnp_magic_test():
+def complete_lnp_magic_test(): #MOVED
     # long output, so tests output against a file instead of a string or list
     print "Testing lnp_magic.py"
     lnp_magic_infile = 'lnp_magic_pmag_specimens.txt'
@@ -384,9 +384,8 @@ def complete_lnp_magic_test():
     lnp_magic_unittest.test_for_error()
 # this works but the problem is if even a few words change..... then Lisa has to re enter the correct output
 
-complete_lnp_magic_test()
 
-def complete_lowrie_test():
+def complete_lowrie_test(): #MOVED
     # doesn't produce stdout : (
     # can't actually save anything
     # DONE
@@ -401,7 +400,7 @@ S[a]ve figure? [q]uit, <return> to continue"""
     lowrie_unittest = Bad_test(lowrie)
     lowrie_unittest.test_for_error()
 
-def complete_lowrie_magic_test():
+def complete_lowrie_magic_test(): #MOVED
     # WD
     # doesn't produce stdout : (
     # also, I can't save a plot because then it asks for raw input.  so stdin must equal q : (
@@ -416,8 +415,9 @@ S[a]ve figure? [q]uit, <return> to continue"""
     lowrie_magic.check_output(result, lowrie_magic.ref_out)
     unittest = Bad_test(lowrie_magic)
     unittest.test_for_error()
+    
 
-def complete_plot_cdf_test():
+def complete_plot_cdf_test(): #MOVED
     # doesn't produce STDOUT
     # THIS ONE HAS CLEANER SYNTAX
     # DONE
@@ -432,7 +432,7 @@ def complete_plot_cdf_test():
     plot_cdf_unittest.test_for_error()
 
 
-def complete_plotdi_a_test():
+def complete_plotdi_a_test():# MOVED
     # no useful STDOUT
     # DONE
     print "Testing plotdi_a.py"
@@ -445,9 +445,7 @@ def complete_plotdi_a_test():
     plotdi_a_unittest = Bad_test(plotdi_a)
     plotdi_a_unittest.test_for_error()
 
-
-def complete_qqplot_test():
-    # DONE
+def complete_qqplot_test(): # MOVED
     qqplot_infile = "qqplot_example.dat"
     qqplot_reference_output = [10.12243251, 2.79670530387, 0.0558584072909, 0.0886]
     qqplot_wrong_output = "wrong"
@@ -471,7 +469,7 @@ def complete_qqplot_test():
     qqplot_test = Bad_test(qqplot)
     qqplot_test.test_for_error()
 
-def complete_quick_hyst_test():
+def complete_quick_hyst_test(): #MOVED
     # no useful stdout
     # WD
     #DONE
@@ -487,19 +485,19 @@ S[a]ve plots, [s]pecimen name, [q]uit, <return> to continue
     quick_hyst_unittest = Bad_test(quick_hyst)
     quick_hyst_unittest.test_for_error()
 
-def complete_revtest_test():
+def complete_revtest_test(): #MOVED
     # no useful stdout
     # LISA IS ADDING -- NOT DONE
     revtest_infile = file_prefix + 'revtest_example.dat'
     obj = env.run('revtest.py', '-f', revtest_infile, stdin='q')
     print obj.stdout
 
-def complete_revtest_magic_test():
+def complete_revtest_magic_test(): #MOVED
     # no useful stdout
     # Lisa is adding  NOT DONE
     pass
 
-def complete_site_edit_magic_test():
+def complete_site_edit_magic_test(): #MOVED
     site_edit_magic_reference = """sr01
 specimen, dec, inc, n_meas/MAD,| method codes 
 sr01a1:   331.0    64.5 9 / 1.8 | LP-DIR-T:DE-BFL
@@ -525,7 +523,7 @@ s[a]ve plot, [q]uit, [e]dit specimens, <return> to continue:"""
 #    subprocess.call(['site_edit_magic.py', '-WD', directory, '-f', site_edit_magic_infile, '-fsa', site_edit_fsa])  # the cool thing here is that the raw_input thing doesn't kill it.  The uncool thing is that it won't take a letter as standard input
 # what would really be ideal is if I could run it, edit, and then run it again to see that it had removed the bad data.  But.... can't.  humph
 
-def complete_strip_magic_test():
+def complete_strip_magic_test():#MOVED
     #WD
     # no useful stdout
     # DONE
@@ -570,7 +568,7 @@ Return for next specimen
 Good bye
 """
 
-def complete_thellier_magic_test():
+def complete_thellier_magic_test():#MOVED
     # DONE
     thellier_magic_infile = 'thellier_magic_measurements.txt'
 #    thellier_magic_reference = See above
@@ -582,7 +580,7 @@ def complete_thellier_magic_test():
     thellier_magic_unittest.test_for_error()
     # can be run with '-sav' option, but it takes FOREVER
 
-def complete_vgpmap_magic_test():
+def complete_vgpmap_magic_test(): #MOVED
     #WD
     # DONE
     vgpmap_magic_infile = 'vgpmap_magic_pmag_results.txt'
@@ -623,7 +621,7 @@ g: 11    550.0  C  5.619e-06   325.5    64.4
 <Return>  for  next specimen 
 Good bye"""
 
-def complete_zeq_magic_test():
+def complete_zeq_magic_test(): #MOVED
     # done
     zeq_magic_infile = 'zeq_magic_measurements.txt'
 #    zeq_magic_reference = See above
