@@ -36,7 +36,7 @@ class Test_instance(object):
               self.infile = infile
               self.outfile = outfile
      
-     def parse_args(self):
+     def parse_args(self): # turns up to 6 args into command line options
          if len(self.args) == 1:
              self.arg_0 = self.args[0]
          if len(self.args) == 2:
@@ -68,6 +68,7 @@ class Test_instance(object):
               pass
          
          # this function simply runs the command line program with whatever its options
+         # it takes the arguments "stdout", "plot", or  "file", and respectively returns the standard output for the program, the plots created, or the file created/updated
      def run_program(self, output_type="stdout"): # 
           if self.WD:
                print "WD program about to run:"
@@ -97,10 +98,7 @@ class Test_instance(object):
                raise NameError("invalid output type was selected for run_program()")
 
 
-     # this function will get files ready to be compared.  can return a tuple of whatever data types.  
-     # or, it may be best just to use file_parse()
-
-         # this function compares real against expected output.  it can take any form of output, as long as the reference output is formatted the same as the expected output.  it will be most useful for short output, otherwise it is nicer to use the check_
+         # this function compares real against expected output.  it can take any form of output, as long as the reference output is formatted the same as the expected output.  
      def check_output(self, actual_out, reference_out):
           print "Checking stdout output"
           actual_out, reference_out = str(actual_out), str(reference_out)
@@ -138,7 +136,7 @@ class Test_instance(object):
           print "Lists were the same"
           print str(self.name) + " produced correct output"
                
-     def check_file_output(self, output_file, correct_file):
+     def check_file_output(self, output_file, correct_file): # takes in two file names as arguments, parses their contents into list format, and then compares the first against the second
           print "checking file output, using: " + str(output_file) + " AND " + str(correct_file)
           parsed_output = PmagPy_tests.file_parse(output_file)
           print parsed_output
@@ -169,8 +167,8 @@ class Test_instance(object):
           else:
                raise NameError("Interactive mode for " + str(self.name) + " came up empty")
 
-        # this will do all that the typical BIO sequence
-         # it assumes output as a file, and it also assumes an interactive mode
+        # This sequence fully tests a standard program that takes in a file and outputs another file
+         # it assumes output as a file. it assumes no interactive mode, but can be given the argument interactive=True, in which case it will test it.  
      def file_in_file_out_sequence(self, interactive=False):
           self.test_help()
           result = self.run_program(output_type = "file")
@@ -178,7 +176,7 @@ class Test_instance(object):
           if interactive:
                self.test_interactive()  
           self.unittest_file()         
-# this one tests plotting programs, either that give stdout or that just make a plot
+# this sequence fully tests plotting programs, either that give stdout or that just make a plot
      def plot_program_sequence(self, stdout=True):
           self.test_help()
           if stdout:
@@ -188,7 +186,7 @@ class Test_instance(object):
           self.check_output(result, self.ref_out)
           self.unittest_short_output() # possibly this is not the best way to do this.  possibly some should get listified.  but, fuck it. 
 
-# this one is for programs that produce stdout, usually long 
+# this sequence fully tests programs that produce stdout
      def list_sequence(self):
           result = self.run_program(output_type = "stdout")
           print result
@@ -196,22 +194,15 @@ class Test_instance(object):
           self.check_list_output(new_list, self.ref_out)
           self.unittest_list()
 
-# necessary???
-     def stdout_sequence(self):
-          result = self.run_program(output_type = "stdout")
-          result = float(result)
-          self.check_output(result, self.ref_out)
-
-
-     def unittest_file(self):
+     def unittest_file(self): # creates a unittest for a simple file in file out program
           unittest = Bad_test(self)
           unittest.test_file_for_error()
           
-     def unittest_short_output(self):
+     def unittest_short_output(self): # creates a unittest for a plot program 
           unittest = Bad_test(self)
           unittest.test_short_output_for_error()
 
-     def unittest_list(self):
+     def unittest_list(self): # creates a unittest for a stdout-producing program
           unittest = Bad_test(self)
           unittest.test_list_output_for_error()
 
@@ -756,6 +747,52 @@ S[a]ve figure? [q]uit, <return> to continue"""
      lowrie_magic.plot_program_sequence(stdout=True)
 
 
+def complete_plot_cdf_test():
+     print"Testing plot_cdf.py"
+     infile =  "plot_cdf_example.dat"
+     outfile = None
+     reference = "{'CDF_.svg': <FoundFile ./new-test-output:CDF_.svg>}"
+     wrong = "Not right"
+     plot_cdf = Test_instance('plot_cdf.py', infile, outfile, reference, wrong, 'a', False)
+     plot_cdf.plot_program_sequence(stdout=False)
+
+
+
+def complete_plotdi_a_test():
+    print "Testing plotdi_a.py"
+    plotdi_a_infile = "plotdi_a_example.dat"
+    plotdi_a_outfile = None
+    plotdi_a_reference = "{'eq.svg': <FoundFile ./new-test-output:eq.svg>}"
+    plotdi_a_wrong = ['1', 'one']
+    plotdi_a = Test_instance('plotdi_a.py', plotdi_a_infile, plotdi_a_outfile, plotdi_a_reference, plotdi_a_wrong, 'a', False)
+    plotdi_a.plot_program_sequence(stdout=False)
+
+
+def complete_qqplot_test():# irregular type.  produces a lot of output, which is then parsed out.  
+    qqplot_infile = "qqplot_example.dat"
+    qqplot_outfile = None
+    qqplot_reference_output = [10.12243251, 2.79670530387, 0.0558584072909, 0.0886]
+    qqplot_wrong_output = [10.12243251, 2., 0., 0.]
+    qqplot = Test_instance('qqplot.py', qqplot_infile, qqplot_outfile, qqplot_reference_output, qqplot_wrong_output, 'a', False)
+    qqplot_output = qqplot.run_program(output_type='stdout')
+    qqplot_list_out = str(qqplot_output).split()
+    qqplot_clean_out = []
+    for num, i in enumerate(qqplot_list_out): # isolates the relevant numbers for testing
+        print num
+        print i
+        if str(i) == '1':  # this prevents the 1 from "1 plot saved" being put into the array of answers
+             pass
+        else:
+            try:
+                qqplot_clean_out.append(float(i))
+                print qqplot_clean_out
+            except ValueError:
+                pass
+    qqplot.check_output(qqplot_clean_out, qqplot.ref_out)
+    qqplot.test_help()
+    qqplot.unittest_list()
+
+
 def complete_working_test():
      # the examples
 #     complete_angle_test()
@@ -816,7 +853,10 @@ def complete_working_test():
  #    complete_irmaq_magic_test()
 #     complete_lnp_magic_test()
  #    complete_lowrie_test()
-     complete_lowrie_magic_test()
+#     complete_lowrie_magic_test()
+#     complete_plot_cdf_test()
+ #    complete_plotdi_a_test()
+     complete_qqplot_test()
 
 if __name__ == '__main__':
 #     pass
