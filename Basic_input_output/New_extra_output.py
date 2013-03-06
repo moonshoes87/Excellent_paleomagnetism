@@ -10,68 +10,6 @@ import subprocess
 file_prefix = '/Users/nebula/Python/Basic_input_output/'
 directory =  '/Users/nebula/Python/Basic_input_output'
 
-# iterates through a list of tuples with files, and compares them.  Order is: (output, correct_reference, incorrect_reference)
-def iterate_through(some_list):  # make it so it only iterates through one list at a time.  really, you just need to compare files separately.  maybe steal the rename_me file comparer.  jesus h.
-    print "iterate through part 1"
-    print "Iterating through: " + str(some_list)
-    z = 0
-    print "list is this long: " + str(len(some_list))
-    for i in some_list:
-        print "testing:" + str(i)
-        thing = PmagPy_tests.file_parse(some_list[z][0])
-        correct_thing = PmagPy_tests.file_parse(some_list[z][1])
-        incorrect_thing = PmagPy_tests.file_parse(some_list[z][2])
-        print "length!", len(thing), len(correct_thing)
-        print "Output from  was: " + str(thing)[:100] + " ..."
-        print "-"
-        print "According to correct reference file, output should have been: " + str(correct_thing)[:100] + " ..."
-        print "-"
-        z +=1
-        if thing == correct_thing:
-            print "Success, output is as expected!"
-            print "-"
-        elif thing != correct_thing:# if output is off, this splits it out a little to see where the two files are not equal. unfortunately, the file only gets split into 9 chunks, so it is still fairly coarse.  
-            print "Output not as expected, breaking it down: "
-            print thing
-            print correct_thing
-            for num, x in enumerate(thing):
-                if x != correct_thing[num]:
-                    print "actual is    " + str(x)
-                    print "-"
-                    print "reference is " +str(thing[num])
-                    print "-"
-                    print "WRONG!!!!!!"
-                    print "Error raised"
-                    errors_raised += 1 
-                    raise NameError("No good")
-                else:
-                    print "-"
-        else:
-            print "HUH?"
-    print "Done with iterate through part 1"
-
-
-def iterate_through_for_incorrect(some_list):
-    "iterate part 2 (the incorrect stuff):"
-    for z, i in enumerate(some_list):
-        print "testing" + str(i)
-        thing = PmagPy_tests.file_parse(some_list[z][0])
-        correct_thing = PmagPy_tests.file_parse(some_list[z][1])
-        incorrect_thing = PmagPy_tests.file_parse(some_list[z][2])
-        if thing != incorrect_thing:
-            print "thing (correctly) does not equal incorrect thing"
-            for num, w in enumerate(thing):
-                if w != incorrect_thing[num]:
-                    print "---"
-                    print "actual    " + str(w)
-                    print "reference " +str(incorrect_thing[num])
-            print "Output does not equal incorrect reference"
-        else:
-            print "output does equal incorrect reference"
-            print "Error raised"
-            raise NameError("You suck")
-
-
 class Ex_out(Rename_me.Test_instance):
 # can add in some, if file != None, then add the file_prefix
     def __init__(self, name, infile, tag1, outfile1, tag2, outfile2, correctfile1, correctfile2, wrongfile1, wrongfile2, stdin, WD, *args):
@@ -101,9 +39,6 @@ class Ex_out(Rename_me.Test_instance):
         if len(self.args) > 0:
             self.arg1 = self.args[0]
 
-#for i in the_list():
- #   if i != None
-
     def run_program(self):
         if self.WD:
             print "about to run WD program"
@@ -117,34 +52,66 @@ class Ex_out(Rename_me.Test_instance):
         print "created: " + str(obj.files_created)
         print "updated: " + str(obj.files_updated)
 
-# iterates through a list of tuples with files, and compares them.  Order is: (output, correct_reference, incorrect_reference)
-#def iterate_through(some_list):
-    def check_outputs(self, the_list="good"): # either a list with the correct order, the incorrect order, or a totally different list
-        print "Checking output"
-        if the_list == "good":
-            new_list = [(self.outfile1, self.correctfile1, self.wrongfile1), (self.outfile2, self.correctfile2, self.wrongfile2)]
-            print "'good' list (should not raise error)" , new_list
-        elif the_list == "bad":
-            new_list = [(self.outfile1, self.wrongfile1, self.correctfile1), (self.outfile2, self.wrongfile2, self.correctfile2)]
-            print "'bad' list (will raise error)", new_list
-        else:
-            new_list = the_list
-            print "using custom list", new_list
-        print "iterating through"
-        iterate_through(new_list)
-        iterate_through_for_incorrect(new_list)
 
-    def extra_output_sequence(self):
+    def check_list_output(self, output_list, correct_output_list):
+        print "checking list output"
+        print "output_list:         " + str(output_list)[:100] +  " ...]"
+        print "correct_output_list: " + str(correct_output_list)[:100]  + " ...]"
+        print "Comparing two lists"
+        list_empty = True
+        for num, i in enumerate(output_list):
+            list_empty = False
+            if i == correct_output_list[num]:
+               # print i, "   ",  correct_output_list[num]
+                print "correct"
+            else:
+                print "Output contained:    " + str(i)
+                print "but should have had: " + str(correct_output_list[num])
+                print "Error raised"
+                raise NameError("Wrong output")
+        if list_empty:
+            print "ONE OR BOTH LISTS DID NOT HAVE CONTENT"
+            raise NameError("Output list empty")
+        print "Lists were the same"
+        print str(self.name) + " produced correct output"
+
+    def check_list_output_expect_error(self, output_list, incorrect_output_list):
+        diff_found = False
+        for n, i in enumerate(output_list):
+            if i != incorrect_output_list[n]:
+                diff_found = True
+                print "output was:          " +str(i)
+                print "wrong reference was: " + str(incorrect_output_list[n])
+        if diff_found:
+            print "Difference found"
+        else:
+            print "error raised"
+            raise NameError("Difference should have been found, but was not")
+
+    def check_file_output(self, outfile, reference_file, reference="correct"):
+        out = PmagPy_tests.file_parse(outfile)
+        ref = PmagPy_tests.file_parse(reference_file)
+#        print out
+        if reference == "incorrect":
+            self.check_list_output_expect_error(out, ref)
+        else:
+            self.check_list_output(out, ref)
+
+    def ex_out_sequence(self):
         self.run_program()
-        self.check_outputs()
-        print str(self.name) + " unittest"
+        self.check_file_output(self.outfile1, self.correctfile1, reference="correct")
+        self.check_file_output(self.outfile2, self.correctfile2, reference="correct")
+        self.check_file_output(self.outfile1, self.wrongfile1, reference="incorrect")
+        self.check_file_output(self.outfile2, self.wrongfile2, reference="incorrect")
         self.extra_output_unittest()
-        
+
     def extra_output_unittest(self):
         print "STARTING UNITTEST"
         unittest = Bad_test(self)
-        unittest.test_ex_out_for_error()
-        
+        unittest.test_outfile1_with_wrongfile1()
+        unittest.test_outfile1_with_correctfile1()
+        unittest.test_outfile2_with_wrongfile2()
+        unittest.test_outfile2_with_correctfile2()
 
 class Bad_test(unittest.TestCase):
     def __init__(self, ex_out_obj):
@@ -155,7 +122,50 @@ class Bad_test(unittest.TestCase):
         print "Error expected"
         print "-"
 
+    def test_outfile1_with_wrongfile1(self):
+        print "monkey"
+        print "Comparing " + str(self.ex_out.outfile1)+ "  with " + str(self.ex_out.wrongfile1) +  " should raise error"
+        self.assertRaises(NameError, self.ex_out.check_file_output, self.ex_out.outfile1, self.ex_out.wrongfile1, reference="correct")
+        print "error expected"
 
+    def test_outfile1_with_correctfile1(self):
+        print "with reference = incorrect"
+        self.assertRaises(NameError, self.ex_out.check_file_output, self.ex_out.outfile1, self.ex_out.correctfile1, reference="incorrect")
+        print "error expected"
+
+    def test_outfile2_with_wrongfile2(self):
+        print "running: test_outfile2_with_wrongfile2()"
+        self.assertRaises(NameError, self.ex_out.check_file_output, self.ex_out.outfile2, self.ex_out.wrongfile2, reference="correct")
+        print "error expected"
+
+    def test_outfile2_with_correctfile2(self):
+        print "running: test_outfile2_with_correctfile2()"
+        self.assertRaises(NameError, self.ex_out.check_file_output, self.ex_out.outfile2, self.ex_out.correctfile2, reference="incorrect")
+        print "error expected"
+
+    def test_file1_with_file2(self, file1, file2, ref):
+        self.assertRaises(NameError, self.ex_out.check_file_output, file1, file2, reference=ref)
+#    def __init__(self, name, infile, tag1, outfile1, tag2, outfile2, correctfile1, correctfile2, wrongfile1, wrongfile2, stdin=None, WD=False):
+
+def more_different_aarm_magic_test():
+    print "Testing aarm_magic"
+    infile = "aarm_measurements.txt"
+    aarm_Fa, aarm_Fr = 'aarm_magic_anisotropy.out', 'aarm_magic_results.out'
+    tag1, tag2 = "-Fa", "-Fr"
+    aarm_Fa_reference, aarm_Fr_reference = 'aarm_magic_anisotropy_correct.out', 'aarm_magic_results_correct.out'
+    aarm_Fa_wrong, aarm_Fr_wrong = 'aarm_magic_anisotropy_incorrect.out', 'aarm_magic_results_incorrect.out'
+    aarm_magic = Ex_out('aarm_magic.py', infile, tag1, aarm_Fa, tag2, aarm_Fr, aarm_Fa_reference, aarm_Fr_reference, aarm_Fa_wrong, aarm_Fr_wrong, None, True)
+    aarm_magic.ex_out_sequence()
+#    aarm_magic.run_program()
+ #   aarm_magic.check_file_output(aarm_magic.outfile1, aarm_magic.correctfile1, reference="correct")
+  #  aarm_magic.check_file_output(aarm_magic.outfile2, aarm_magic.correctfile2, reference="correct")
+   # aarm_magic.check_file_output(aarm_magic.outfile1, aarm_magic.wrongfile1, reference="incorrect")
+#    aarm_magic.check_file_output(aarm_magic.outfile2, aarm_magic.wrongfile2, reference="incorrect")
+ #   aarm_magic.extra_output_unittest()
+    
+
+
+more_different_aarm_magic_test()
 
 
 def complete_aarm_magic_test():
@@ -213,7 +223,7 @@ def complete_hysteresis_magic_test(): # irregular.  a file has to be renamed bec
 #    iterate_through(hysteresis_magic_list)
 
 
-complete_hysteresis_magic_test()
+
 
 
 #k15_magic.py test
@@ -299,3 +309,23 @@ if __name__ == "__main__":
     pass
 #    complete_working_test()
 # fails to do this because it quits after unittest : (
+
+
+# iterates through a list of tuples with files, and compares them.  Order is: (output, correct_reference, incorrect_reference)
+#def iterate_through(some_list):
+"""
+    def check_outputs(self, the_list="good"): # either a list with the correct order, the incorrect order, or a totally different list
+        print "Checking output"
+        if the_list == "good":
+            new_list = [(self.outfile1, self.correctfile1, self.wrongfile1), (self.outfile2, self.correctfile2, self.wrongfile2)]
+            print "'good' list (should not raise error)" , new_list
+        elif the_list == "bad":
+            new_list = [(self.outfile1, self.wrongfile1, self.correctfile1), (self.outfile2, self.wrongfile2, self.correctfile2)]
+            print "'bad' list (will raise error)", new_list
+        else:
+            new_list = the_list
+            print "using custom list", new_list
+        print "iterating through"
+        iterate_through(new_list)
+        iterate_through_for_incorrect(new_list)
+"""
