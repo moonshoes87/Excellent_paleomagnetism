@@ -5,6 +5,6 @@ This study	unknown	tr245g	tr245	tr245g		pmagpy-2.188	52.00	25	(  294.0)	-23.0
 This study	unknown	tr245h	tr245	tr245h		pmagpy-2.188	123.00	25	(  294.0)	-29.0
 This study	unknown	tr245i1	tr245i	tr245i1		pmagpy-2.188	68.00	25	(  294.0)	-26.0
 This study	unknown	tr245i2	tr245i	tr245i2		pmagpy-2.188	68.00	25	(  294.0)	-26.0
-This study	unknown	tr245j	tr245	tr245j		pmagpy-2.188	86.00	25	(  294.0)	-34.0
+That study	unknown	tr245j	tr245	tr245j		pmagpy-2.188	86.00	25	(  294.0)	-34.0
 This study	unknown	tr245k	tr245	tr245k		pmagpy-2.188	108.00	25	(  294.0)	-31.0
-This study	unknown	tr245l	tr345	tr245l		pmagpy-2.188	115.00	25	(  294.0)	-25.0
+This study	unknown	tr245l	tr245	tr245l		pmagpy-2.188	115.00	25	(  294.0)	-25.0

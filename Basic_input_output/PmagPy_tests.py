@@ -80,6 +80,17 @@ def output_parse(the_output):
     return data # returns a list.  each word is an item.  
 
 
+def pmagpy_strip(a_file):
+    data = file_parse_by_word(a_file)
+  #  print data
+    end_data = []
+    for d in data:
+        if "pmagpy" in d:
+            pass
+        else:
+            end_data.append(d)
+    return end_data
+
 def clean_house():
     print "CLEANING HOUSE"
     print "-"

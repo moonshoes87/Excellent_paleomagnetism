@@ -920,7 +920,27 @@ def complete_zeq_magic_test(): # NOT SURE THIS IS ACTUALLY USEFUL.  Consider
 # could do the below, but it takes forever and creates a TON of files                                                          
 #    extra_zeq_magic = Plot('zeq_magic.py', zeq_magic_infile, zeq_magic_reference, zeq_magic_wrong, None, True, '-fsa', fsa, '-fsp', fsp, '-sav')                                                          
 
-                                                   
+# Measurement import stuff
+#AGM_magic.py -f agm_magic_example.agm -spn myspec --usr "Lima Tango" -u cgs
+ 
+def complete_agm_magic_test():
+     agm_magic_infile = 'agm_magic_example.agm'
+     agm_magic_outfile = 'agm_magic_output.out'
+     agm_magic_reference = 'agm_magic_output_correct.out'
+     agm_magic_wrong = 'agm_magic_output_incorrect.out'
+     agm = Test_instance('agm_magic.py', agm_magic_infile, agm_magic_outfile, agm_magic_reference, agm_magic_wrong, None, True, '-spn', 'myspec', '--usr', "Lima Tango", '-u', 'cgs')
+     agm.file_in_file_out_sequence()
+
+complete_agm_magic_test()
+     
+ignore= """def file_in_file_out_sequence(self, interactive=False):
+          self.test_help()
+          result = self.run_program(output_type = "file")
+          self.check_file_output(result, self.ref_out)
+          if interactive:
+               self.test_interactive()  
+          self.unittest_file()         
+           """                                   
 
 # UNFINISHED
 
@@ -1003,11 +1023,12 @@ def complete_working_test():
  #    complete_strip_magic_test()
 #     complete_thellier_magic_test()
 #     complete_vgpmap_magic_test()
-     complete_zeq_magic_test()
+#     complete_zeq_magic_test()
+     pass
 
 if __name__ == '__main__':
-#     pass
-     complete_working_test()
+     pass
+ #    complete_working_test()
 
 
 

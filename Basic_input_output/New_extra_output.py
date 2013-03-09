@@ -7,11 +7,11 @@ import Rename_me
 import PmagPy_tests
 import subprocess
 
+
 file_prefix = '/Users/nebula/Python/Basic_input_output/'
 directory =  '/Users/nebula/Python/Basic_input_output'
 
 class Ex_out(Rename_me.Test_instance):
-# can add in some, if file != None, then add the file_prefix
     def __init__(self, name, infile, tag1, outfile1, tag2, outfile2, correctfile1, correctfile2, wrongfile1, wrongfile2, stdin, WD, *args):
         self.name = name
         self.infile = file_prefix + infile
@@ -35,7 +35,6 @@ class Ex_out(Rename_me.Test_instance):
         self.parse_args()
 
     def parse_args(self):
-        print "parsing args"
         if len(self.args) > 0:
             self.arg1 = self.args[0]
 
@@ -52,7 +51,6 @@ class Ex_out(Rename_me.Test_instance):
         print "created: " + str(obj.files_created)
         print "updated: " + str(obj.files_updated)
 
-
     def check_list_output(self, output_list, correct_output_list):
         print "checking list output"
         print "output_list:         " + str(output_list)[:100] +  " ...]"
@@ -62,8 +60,9 @@ class Ex_out(Rename_me.Test_instance):
         for num, i in enumerate(output_list):
             list_empty = False
             if i == correct_output_list[num]:
+                pass
                # print i, "   ",  correct_output_list[num]
-                print "correct"
+               # print "correct"
             else:
                 print "Output contained:    " + str(i)
                 print "but should have had: " + str(correct_output_list[num])
@@ -76,22 +75,31 @@ class Ex_out(Rename_me.Test_instance):
         print str(self.name) + " produced correct output"
 
     def check_list_output_expect_error(self, output_list, incorrect_output_list):
+        print "Testing list output (for error)"
         diff_found = False
         for n, i in enumerate(output_list):
             if i != incorrect_output_list[n]:
                 diff_found = True
                 print "output was:          " +str(i)
                 print "wrong reference was: " + str(incorrect_output_list[n])
+            else: 
+                pass
+#                print i, "   ", incorrect_output_list[n]
         if diff_found:
             print "Difference found"
         else:
+            print "No difference found"
             print "error raised"
             raise NameError("Difference should have been found, but was not")
 
     def check_file_output(self, outfile, reference_file, reference="correct"):
-        out = PmagPy_tests.file_parse(outfile)
-        ref = PmagPy_tests.file_parse(reference_file)
-#        print out
+        print "testing: " + str(outfile) + " against reference file: " + str(reference_file)
+        if reference == "incorrect":
+            print "expecting an error"
+        out = PmagPy_tests.pmagpy_strip(outfile)
+        print "file length = " + str(len(out))
+        ref = PmagPy_tests.pmagpy_strip(reference_file)
+        print "file length = " + str(len(ref))
         if reference == "incorrect":
             self.check_list_output_expect_error(out, ref)
         else:
@@ -99,18 +107,28 @@ class Ex_out(Rename_me.Test_instance):
 
     def ex_out_sequence(self):
         self.run_program()
-        self.check_file_output(self.outfile1, self.correctfile1, reference="correct")
-        self.check_file_output(self.outfile2, self.correctfile2, reference="correct")
-        self.check_file_output(self.outfile1, self.wrongfile1, reference="incorrect")
-        self.check_file_output(self.outfile2, self.wrongfile2, reference="incorrect")
+        self.standard_check_file_sequence()
         self.extra_output_unittest()
 
+    def standard_check_file_sequence(self):
+        self.check_file_output(self.outfile1, self.correctfile1, reference="correct")
+        print "-"
+        self.check_file_output(self.outfile2, self.correctfile2, reference="correct")
+        print "-"
+        self.check_file_output(self.outfile1, self.wrongfile1, reference="incorrect")
+        print "-"
+        self.check_file_output(self.outfile2, self.wrongfile2, reference="incorrect")
+        print "-"
+   
     def extra_output_unittest(self):
         print "STARTING UNITTEST"
         unittest = Bad_test(self)
         unittest.test_outfile1_with_wrongfile1()
+        print "-"
         unittest.test_outfile1_with_correctfile1()
+        print "-"
         unittest.test_outfile2_with_wrongfile2()
+        print "-"
         unittest.test_outfile2_with_correctfile2()
 
 class Bad_test(unittest.TestCase):
@@ -123,13 +141,12 @@ class Bad_test(unittest.TestCase):
         print "-"
 
     def test_outfile1_with_wrongfile1(self):
-        print "monkey"
-        print "Comparing " + str(self.ex_out.outfile1)+ "  with " + str(self.ex_out.wrongfile1) +  " should raise error"
+        print "running: test_outfile1_with_wrongfile1"
         self.assertRaises(NameError, self.ex_out.check_file_output, self.ex_out.outfile1, self.ex_out.wrongfile1, reference="correct")
         print "error expected"
 
     def test_outfile1_with_correctfile1(self):
-        print "with reference = incorrect"
+        print "running: test_outfile1_with_correctfile2"
         self.assertRaises(NameError, self.ex_out.check_file_output, self.ex_out.outfile1, self.ex_out.correctfile1, reference="incorrect")
         print "error expected"
 
@@ -145,9 +162,9 @@ class Bad_test(unittest.TestCase):
 
     def test_file1_with_file2(self, file1, file2, ref):
         self.assertRaises(NameError, self.ex_out.check_file_output, file1, file2, reference=ref)
-#    def __init__(self, name, infile, tag1, outfile1, tag2, outfile2, correctfile1, correctfile2, wrongfile1, wrongfile2, stdin=None, WD=False):
+        print "error expected"
 
-def more_different_aarm_magic_test():
+def aarm_magic_test():
     print "Testing aarm_magic"
     infile = "aarm_measurements.txt"
     aarm_Fa, aarm_Fr = 'aarm_magic_anisotropy.out', 'aarm_magic_results.out'
@@ -156,31 +173,7 @@ def more_different_aarm_magic_test():
     aarm_Fa_wrong, aarm_Fr_wrong = 'aarm_magic_anisotropy_incorrect.out', 'aarm_magic_results_incorrect.out'
     aarm_magic = Ex_out('aarm_magic.py', infile, tag1, aarm_Fa, tag2, aarm_Fr, aarm_Fa_reference, aarm_Fr_reference, aarm_Fa_wrong, aarm_Fr_wrong, None, True)
     aarm_magic.ex_out_sequence()
-#    aarm_magic.run_program()
- #   aarm_magic.check_file_output(aarm_magic.outfile1, aarm_magic.correctfile1, reference="correct")
-  #  aarm_magic.check_file_output(aarm_magic.outfile2, aarm_magic.correctfile2, reference="correct")
-   # aarm_magic.check_file_output(aarm_magic.outfile1, aarm_magic.wrongfile1, reference="incorrect")
-#    aarm_magic.check_file_output(aarm_magic.outfile2, aarm_magic.wrongfile2, reference="incorrect")
- #   aarm_magic.extra_output_unittest()
-    
-
-
-more_different_aarm_magic_test()
-
-
-def complete_aarm_magic_test():
-    print "Testing aarm_magic"
-    infile = "aarm_measurements.txt"
-    aarm_Fa, aarm_Fr = 'aarm_magic_anisotropy.out', 'aarm_magic_results.out'
-    tag1, tag2 = "-Fa", "-Fr"
-    aarm_Fa_reference, aarm_Fr_reference = 'aarm_magic_anisotropy_correct.out', 'aarm_magic_results_correct.out'
-    aarm_Fa_wrong, aarm_Fr_wrong = 'aarm_magic_anisotropy_incorrect.out', 'aarm_magic_results_incorrect.out'
-    aarm_magic = Ex_out('aarm_magic.py', infile, tag1, aarm_Fa, tag2, aarm_Fr, aarm_Fa_reference, aarm_Fr_reference, aarm_Fa_wrong, aarm_Fr_wrong, None, True)
-    aarm_magic.extra_output_sequence()
-
-
-
-
+#aarm_magic_test()
 
 def complete_atrm_magic_test():
     atrm_infile = 'atrm_magic_example.dat'
@@ -190,11 +183,9 @@ def complete_atrm_magic_test():
     atrm_Fa_wrong, atrm_Fr_wrong = "atrm_anisotropy_incorrect.txt", "atrm_results_incorrect.txt"
     atrm = Ex_out('atrm_magic.py', atrm_infile, tag1, atrm_Fa, tag2, atrm_Fr, atrm_Fa_reference, atrm_Fr_reference, atrm_Fa_wrong, atrm_Fr_wrong, None, True)
     print "Testing atrm_magic.py:"
-    atrm.extra_output_sequence()
+    atrm.ex_out_sequence()
+#complete_atrm_magic_test()
 
-
-
-#    def __init__(self, name, infile, tag1, outfile1, tag2, outfile2, correctfile1, correctfile2, wrongfile1, wrongfile2, stdin=None, WD=False):
 def complete_hysteresis_magic_test(): # irregular.  a file has to be renamed because it just comes out a default way, it is not specifiable on the command line
     tag1, tag2 = '-F', None
     outfile2 = None
@@ -209,90 +200,99 @@ def complete_hysteresis_magic_test(): # irregular.  a file has to be renamed bec
     print hysteresis_magic.outfile2
     hysteresis_magic.outfile2 = "hysteresis_magic_remanence.txt"
     print hysteresis_magic.outfile2
-    hysteresis_magic.check_outputs(the_list="good")
-    hysteresis_magic.extra_output_unittest()
+    hysteresis_magic.ex_out_sequence() # this re runs hysteresis magic, but that is not a problem
+    print hysteresis_magic.outfile2
+    subprocess.call(['rm', file_prefix + 'rmag_remanence.txt']) # remove extra rmag_remanence that doesn't get renamed
 
-#    hysteresis_magic.check_outputs(the_list="good")
-
-#    obj = env.run('hysteresis_magic.py', '-WD', directory, '-f', hysteresis_magic_infile, '-P', '-F', 'hysteresis_magic_rmag.txt')
-#    obj = env.run('hysteresis_magic.py', '-WD', directory, '-f', hysteresis_magic_infile, '-sav') # saves all the plots
-#    output = obj.stdout
- #   print "STDOUT: " + str(obj.stdout)
-  #  print obj.files_created
-   # print obj.files_updated
-#    iterate_through(hysteresis_magic_list)
-
-
-
-
-
-#k15_magic.py test
-k15_in_file = 'k15_magic_example.dat'
-k15_Fsa, k15_Fsa_reference, k15_Fsa_wrong = 'k15_magic_er_samples.txt', 'k15_magic_er_samples_correct.txt', 'k15_magic_er_samples_incorrect.txt'
-k15_Fa, k15_Fa_reference, k15_Fa_wrong = 'k15_magic_rmag_anisotropy.txt','k15_magic_rmag_anisotropy_correct.txt', 'k15_magic_rmag_anisotropy_incorrect.txt'
-k15_F, k15_F_reference, k15_F_wrong = 'k15_magic_measurements.txt','k15_magic_measurements_correct.txt', 'k15_magic_measurements_incorrect.txt'
-# this one is not specifiable on command line, so I rename it later
-k15_rmag, k15_rmag_reference, k15_rmag_wrong = 'k15_magic_rmag_results.txt', 'k15_magic_rmag_results_correct.txt', 'k15_magic_rmag_results_incorrect.txt'
-k15_list = [(k15_Fsa, k15_Fsa_reference, k15_Fsa_wrong), (k15_Fa, k15_Fa_reference, k15_Fa_wrong), (k15_F, k15_F_reference, k15_F_wrong), (k15_rmag, k15_rmag_reference, k15_rmag_wrong)]
-k15_bad_list = [(k15_Fsa, k15_Fsa_reference, k15_Fsa_reference), (k15_Fa, k15_Fa_wrong, k15_Fa_wrong), (k15_F, k15_F_wrong, k15_F_reference), (k15_rmag, k15_rmag_reference, k15_rmag_reference)]
-
-def complete_k15_magic_test():
-    obj = env.run('k15_magic.py', '-WD', directory, '-f', k15_in_file, '-Fsa', k15_Fsa, '-Fa', k15_Fa, '-F', k15_F)
+def complete_k15_magic_test(): # irregular -- has 4 output files!!!!
+    print "Testing k15_magic.py"
+    k15_infile = 'k15_magic_example.dat'
+    tag1 = "-Fsa"
+    tag2 = "-Fa"
+    k15_Fsa, k15_Fsa_reference, k15_Fsa_wrong = 'k15_magic_er_samples.txt', 'k15_magic_er_samples_correct.txt', 'k15_magic_er_samples_incorrect.txt'
+    k15_Fa, k15_Fa_reference, k15_Fa_wrong = 'k15_magic_rmag_anisotropy.txt','k15_magic_rmag_anisotropy_correct.txt', 'k15_magic_rmag_anisotropy_incorrect.txt'
+    k15_F, k15_F_reference, k15_F_wrong = 'k15_magic_measurements.txt','k15_magic_measurements_correct.txt', 'k15_magic_measurements_incorrect.txt'
+# this one is not specifiable on command line, so I rename it later.  the output is named rmag_results.txt no matter what.
+    k15_rmag, k15_rmag_reference, k15_rmag_wrong = 'k15_magic_rmag_results.txt', 'k15_magic_rmag_results_correct.txt', 'k15_magic_rmag_results_incorrect.txt'
+    k15_magic = Ex_out('k15_magic.py', k15_infile, tag1, k15_Fsa, tag2, k15_Fa, k15_Fsa_reference, k15_Fa_reference, k15_Fsa_wrong, k15_Fa_wrong, None, True)
+    obj = env.run('k15_magic.py', '-WD', directory, '-f', k15_infile, '-Fsa', k15_Fsa, '-Fa', k15_Fa, '-F', k15_F)
     print obj.stdout
     # renames rmag_results.txt to k15_rmag_results.txt (for consistency)
     obj = env.run('mv', file_prefix + 'rmag_results.txt', file_prefix + 'k15_magic_rmag_results.txt')
-    # iterate through:
-    iterate_through(k15_list)
-        
-class Bad_k15_magic(unittest.TestCase):
-    def test_for_error(self):
-        self.assertRaises(NameError, iterate_through, k15_bad_list)
-        print "Error expected"
+    k15_magic.standard_check_file_sequence()
+    # extra, because of additional options
+    k15_magic.check_file_output(k15_F, k15_F_reference, reference="correct")
+    print "6..."
+    k15_magic.check_file_output(k15_F, k15_F_wrong, reference="incorrect")
+    print "7..."
+    k15_magic.check_file_output(k15_rmag, k15_rmag_reference, reference="correct")
+    print "8..."
+    k15_magic.check_file_output(k15_rmag, k15_rmag_wrong, reference="incorrect")
+    # unittests
+    k15_magic.extra_output_unittest()
+    k15_unittest = Bad_test(k15_magic)
+    k15_unittest.test_file1_with_file2(k15_F, k15_F_reference, "incorrect")
+    k15_unittest.test_file1_with_file2(k15_F, k15_F_wrong, "correct")
+    k15_unittest.test_file1_with_file2(k15_rmag, k15_rmag_reference, "incorrect")
+    k15_unittest.test_file1_with_file2(k15_rmag, k15_rmag_wrong, "correct")
 
+#complete_k15_magic_test()
 
-#kly4s_magic.py test
-kly4s_infile = "kly4s_magic_example.dat"
-kly4s_F, kly4s_F_reference, kly4s_F_wrong = "kly4s_magic_measurements.txt", "kly4s_magic_measurements_correct.txt", "kly4s_magic_measurements_incorrect.txt"
-kly4s_Fa, kly4s_Fa_reference, kly4s_Fa_wrong = "kly4s_rmag_anisotropy.txt", "kly4s_rmag_anisotropy_correct.txt", "kly4s_rmag_anisotropy_incorrect.txt"
-kly4s_er, kly4s_er_reference, kly4s_er_wrong = "kly4s_er_specimens.txt", "kly4s_er_specimens_correct.txt", "kly4s_er_specimens_incorrect.txt"
-kly4s_list = [(kly4s_F, kly4s_F_reference, kly4s_F_wrong), (kly4s_Fa, kly4s_Fa_reference, kly4s_Fa_wrong), (kly4s_er, kly4s_er_reference, kly4s_er_wrong)]
-kly4s_bad_list = [(kly4s_F, kly4s_F_reference, kly4s_F_reference), (kly4s_Fa, kly4s_Fa_wrong, kly4s_Fa_wrong), (kly4s_er, kly4s_er_wrong, kly4s_er_reference)]
-
-def complete_kly4s_magic_test():
+#    def test_file1_with_file2(self, file1, file2, ref):
+ #       self.assertRaises(NameError, self.ex_out.check_file_output, file1, file2, reference=ref)
+def complete_kly4s_magic_test(): # irregular, with 3 output files
+    print "Testing kly4s_magic.py"
+    kly4s_infile = "kly4s_magic_example.dat"
+    tag1, tag2 = '-F', '-Fa'
+    kly4s_F, kly4s_F_reference, kly4s_F_wrong = "kly4s_magic_measurements.txt", "kly4s_magic_measurements_correct.txt", "kly4s_magic_measurements_incorrect.txt"
+    kly4s_Fa, kly4s_Fa_reference, kly4s_Fa_wrong = "kly4s_rmag_anisotropy.txt", "kly4s_rmag_anisotropy_correct.txt", "kly4s_rmag_anisotropy_incorrect.txt"
+    kly4s_er, kly4s_er_reference, kly4s_er_wrong = "kly4s_er_specimens.txt", "kly4s_er_specimens_correct.txt", "kly4s_er_specimens_incorrect.txt"
+    kly4s = Ex_out('kly4s_magic.py', kly4s_infile, tag1, kly4s_F, tag2, kly4s_Fa, kly4s_F_reference, kly4s_Fa_reference, kly4s_F_wrong, kly4s_Fa_wrong, None, True)
     obj = env.run('kly4s_magic.py', '-WD', directory, '-f', kly4s_infile, '-F', kly4s_F, '-Fa', kly4s_Fa)
     print obj.stdout
-    obj = env.run('mv', file_prefix + "er_specimens.txt", file_prefix + "kly4s_er_specimens.txt")
-    iterate_through(kly4s_list)
+    obj = env.run('mv', file_prefix + "er_specimens.txt", file_prefix + "kly4s_er_specimens.txt") # renames
+    print "Renamed er_specimens.txt to kly4s_er_specimens.txt"
+    ignore="""kly4s.check_file_output(kly4s.outfile1, kly4s.correctfile1, reference="correct")
+    kly4s.check_file_output(kly4s.outfile1, kly4s.wrongfile1, reference="incorrect")
+    kly4s.check_file_output(kly4s.outfile2, kly4s.correctfile2, reference="correct")
+    kly4s.check_file_output(kly4s.outfile2, kly4s.wrongfile2, reference="incorrect")
+"""
+    kly4s.standard_check_file_sequence()
+    # extra checks
+    kly4s.check_file_output(kly4s_er, kly4s_er_reference, reference="correct")
+    kly4s.check_file_output(kly4s_er, kly4s_er_wrong, reference="incorrect")
 
-class Bad_kly4s_magic(unittest.TestCase):
+
+#complete_kly4s_magic_test()
+
+class Bad_kly4s_magic(unittest.TestCase):# this won't work, but I'm not sure what I want to put in.....
     def test_for_error(self):
         self.assertRaises(NameError, iterate_through, kly4s_bad_list)
         print "Error expected"
 
-
-    # do I need to then delete the test files???
-#kly4s_magic.py -f KLY4S_magic_example.dat -F kly4s_magic_measurements.txt -Fa kly4s_rmag_anisotropy.txt
-
-
-pmag_criteria, pmag_criteria_reference, pmag_criteria_wrong = file_prefix + 'Criteria.txt', file_prefix + 'pmag_results_extract_Criteria_correct.txt', file_prefix + 'pmag_results_extract_Criteria_incorrect.txt'
-pmag_directions, pmag_directions_reference, pmag_directions_wrong = file_prefix + 'Directions.txt', file_prefix + 'pmag_results_extract_Directions_correct.txt', file_prefix + 'pmag_results_extract_Directions_incorrect.txt'
-pmag_sitenfo, pmag_sitenfo_reference, pmag_sitenfo_wrong = file_prefix + 'SiteNfo.txt', file_prefix + 'pmag_results_extract_SiteNfo_correct.txt', file_prefix + 'pmag_results_extract_SiteNfo_incorrect.txt'
-pmag_results_extract_list = [(pmag_criteria, pmag_criteria_reference, pmag_criteria_wrong), (pmag_directions, pmag_directions_reference, pmag_directions_wrong), (pmag_sitenfo, pmag_sitenfo_reference, pmag_sitenfo_wrong)]
-
 def complete_pmag_results_extract_test():
-    # WD
-    pmag_results_extract_in_file = 'pmag_results_extract.dat'
+    print "Testing pmag_results_extract.py"
+    pmag_intensities, pmag_intensities_reference, pmag_intensities_wrong = file_prefix + 'Intensities.txt', file_prefix + 'pmag_results_extract_Intensities_correct.txt', file_prefix + 'pmag_results_extract_Intensities_incorrect.txt'
+    pmag_directions, pmag_directions_reference, pmag_directions_wrong = file_prefix + 'Directions.txt', file_prefix + 'pmag_results_extract_Directions_correct.txt', file_prefix + 'pmag_results_extract_Directions_incorrect.txt'
+    pmag_sitenfo, pmag_sitenfo_reference, pmag_sitenfo_wrong = file_prefix + 'SiteNfo.txt', file_prefix + 'pmag_results_extract_SiteNfo_correct.txt', file_prefix + 'pmag_results_extract_SiteNfo_incorrect.txt'
+    pmag_results_extract_list = [(pmag_intensities, pmag_intensities_reference, pmag_intensities_wrong), (pmag_directions, pmag_directions_reference, pmag_directions_wrong), (pmag_sitenfo, pmag_sitenfo_reference, pmag_sitenfo_wrong)]
+    pmag_results_extract_infile = 'pmag_results_extract.dat'
+#        def __init__(self, name, infile, tag1, outfile1, tag2, outfile2, correctfile1, correctfile2, wrongfile1, wrongfile2, stdin, WD, *args):
+    pmag_results = Ex_out('pmag_results_extract.py', pmag_results_extract_infile, None, pmag_intensities, None, pmag_directions, pmag_intensities_reference, pmag_directions_reference, pmag_intensities_wrong, pmag_directions_wrong, None, True)
     obj = env.run('pmag_results_extract.py', '-WD', directory, '-f', 'pmag_results_extract.dat')
     print obj.stdout
     print obj.files_created
-    iterate_through(pmag_results_extract_list)
-    subprocess.call(['rm', file_prefix + 'Criteria.txt', file_prefix + 'Directions.txt', file_prefix + 'SiteNfo.txt'])
+    print obj.files_updated
+    pmag_results.check_file_output(pmag_results.outfile1, pmag_results.correctfile1, reference="correct")
+    pmag_results.standard_check_file_sequence()
+    # extra options below
+    pmag_results.check_file_output(pmag_sitenfo, pmag_sitenfo_reference, reference="correct")
+    pmag_results.check_file_output(pmag_sitenfo, pmag_sitenfo_wrong, reference="incorrect")
+    subprocess.call(['rm', file_prefix + 'Intensities.txt', file_prefix + 'Directions.txt', file_prefix + 'SiteNfo.txt'])
     # needs unittests.  wait until you see what you end up with 
-    
 
 def do_unittest():
     unittest.main(module='Extra_output') 
-
 
 def complete_working_test():
     complete_aarm_magic_test()
@@ -305,27 +305,64 @@ def complete_working_test():
     do_unittest()
 
 
+#complete_working_test()
+
 if __name__ == "__main__":
     pass
 #    complete_working_test()
-# fails to do this because it quits after unittest : (
 
 
-# iterates through a list of tuples with files, and compares them.  Order is: (output, correct_reference, incorrect_reference)
-#def iterate_through(some_list):
+
+
+#an interesting experiment that didn't quite work:
 """
-    def check_outputs(self, the_list="good"): # either a list with the correct order, the incorrect order, or a totally different list
-        print "Checking output"
-        if the_list == "good":
-            new_list = [(self.outfile1, self.correctfile1, self.wrongfile1), (self.outfile2, self.correctfile2, self.wrongfile2)]
-            print "'good' list (should not raise error)" , new_list
-        elif the_list == "bad":
-            new_list = [(self.outfile1, self.wrongfile1, self.correctfile1), (self.outfile2, self.wrongfile2, self.correctfile2)]
-            print "'bad' list (will raise error)", new_list
+# or, I could have it so that for each extra command line thing, it gets a dictionary: {tag: '-F', outfile: 'thing.out', correctfile: 'correct.txt', wrongfile: 'wrong.txt'}
+class Other_out():
+    def __init__(self, name, infile, stdin, WD, *args):
+        self.name = name
+        self.infile = infile
+        self.stdin = stdin
+        self.WD = WD
+        self.arg0, self.arg1, self.arg2, self.arg3, self.arg4, self.arg5, self.arg6, self.arg7, self.arg8, self.arg9 = None, None, None, None, None, None, None, None, None, None
+        self.arguments = [self.arg0, self.arg1, self.arg2, self.arg3, self.arg4, self.arg5, self.arg6, self.arg7, self.arg8, self.arg9]
+        self.args = args
+        
+#    arguments = [self.arg1, self.arg2, self.arg3, self.arg4, self.arg5, self.arg6, self.arg7, self.arg8, self.arg9, self.arg10]
+# probably useless...
+    def parse_args(self):
+        print "parsing args"
+        for num, arg in enumerate(self.args):
+            self.arguments[num] = arg
+        print self.arguments
+
+    def run_program(self):
+        tag0, tag1, tag2, tag3 = self.args[0]["tag"], self.args[1]["tag"], self.args[2]["tag"], self.args3["tag"]
+        outfile0, outfile1, outfile2, outfile3 = self.args[0]["outfile"], self.args[1]["outfile"], self.args[2]["outfile"], self.args[3]["outfile"]
+        if self.WD:
+            print (self.name, '-f', self.infile, tag0, outfile0, tag1, outfile1, tag2, outfile2, tag3, outfile3, 'stdin =' + str(self.stdin))
         else:
-            new_list = the_list
-            print "using custom list", new_list
-        print "iterating through"
-        iterate_through(new_list)
-        iterate_through_for_incorrect(new_list)
+            print (self.name, '-f', self.infile, tag0, outfile0, tag1, outfile1, tag2, outfile2, tag3, outfile3, 'stdin =' + str(self.stdin))
+ #            obj = env.run(self.name, '-f', self.infile, tag0, outfile0, tag1, outfile1, tag2, outfile2, tag3, outfile3, 'stdin' = self.stdin)
+
+def other_aarm_magic_test():
+    print " other testing aarm_magic"
+    infile = "aarm_measurements.txt"
+    aarm_Fa = {"tag": "-Fa", "outfile": 'aarm_magic_anisotropy.out', "correctfile": 'aarm_magic_anisotropy_correct.out', "wrongfile": 'aarm_magic_anisotropy_incorrect.out'}
+    aarm_Fr = {"tag": "-Fr", "outfile": 'aarm_magic_results.out', "correctfile": 'aarm_magic_results_correct.out', "wrongfile": 'aarm_magic_results_incorrect.out'}
+    aarm_magic = Other_out('aarm_magic.py', infile, None, True, aarm_Fa, aarm_Fr)
+    print aarm_magic.args[0]["tag"]
+    aarm_magic.run_program()
+    
+#other_aarm_magic_test()
+
+#    aarm_Fa, aarm_Fr = 'aarm_magic_anisotropy.out', 'aarm_magic_results.out'
+ #   tag1, tag2 = "-Fa", "-Fr"
+  #  aarm_Fa_reference, aarm_Fr_reference = 'aarm_magic_anisotropy_correct.out', 'aarm_magic_results_correct.out'
+   # aarm_Fa_wrong, aarm_Fr_wrong = 'aarm_magic_anisotropy_incorrect.out', 'aarm_magic_results_incorrect.out'
+
+
+
+#>>> dict = {"one": 1, "two": 2}
+#>>> dict["one"]
+#1
 """
