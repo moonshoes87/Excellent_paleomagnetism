@@ -6,8 +6,10 @@ env = TestFileEnvironment('./new-test-output')
 import unittest
 import subprocess
 
-#class Basic_test():
-# iterates through a list of tuples with files, and compares them.  Order is: (output, correct_reference, incorrect_reference)
+file_prefix = '/Users/nebula/Python/Basic_input_output/'
+directory =  '/Users/nebula/Python/Basic_input_output'
+
+
 def iterate_through(some_list):
     print "Iterating through: " + str(some_list)
     z = 0
@@ -79,8 +81,18 @@ def output_parse(the_output):
     data = data.split()
     return data # returns a list.  each word is an item.  
 
+# this function is used to deal with the changing versions of pmagpy
+def pmagpy_strip(a_list):
+    new_list = []
+    for i in a_list:
+        if "pmagpy" in i:
+            pass
+        else:
+            new_list.append(i)
+    return new_list
 
-def pmagpy_strip(a_file):
+def file_parse_by_word_and_pmagpy_strip(a_file): # both parses file, AND strips pmagpy
+    print "parsing file: " + str(a_file)
     data = file_parse_by_word(a_file)
   #  print data
     end_data = []
@@ -104,7 +116,6 @@ def test_for_bad_file(output):
         raise NameError("Output said 'bad file'")
 
 
-
 def compare_two_lists(output, correct_output):
     print "Comparing two lists"
     for num, i in enumerate(output):
@@ -118,4 +129,30 @@ def compare_two_lists(output, correct_output):
 
 
 universal_variable = "sup"
-#put iterate_through, parse_file, test_help, and so on, in here.
+
+def find_a_program(name):
+    name = name.lower()
+    name = name.strip(".py")
+    full_name = "complete_" + name + "_test()"
+    Rename = file_parse_by_word(file_prefix + "Rename_me.py")
+    print name
+    if full_name in Rename:
+        print name + " occurs in Rename_me.py"
+    Extra_output = file_parse_by_word(file_prefix + "Extra_output.py")
+    if full_name in Extra_output:
+        print name + " occurs in Extra_output.py"
+    Plotting = file_parse_by_word(file_prefix + "Plotting.py")
+    if full_name in Plotting:
+        print name + " occurs in Plotting.py"
+    Bootstrap_plotting = file_parse_by_word(file_prefix + "Bootstrap_plotting.py")
+    if full_name in Bootstrap_plotting:
+        print name + " occurs in Bootstrap_plotting.py"
+    print "end"
+
+
+
+if __name__ == "__main__":
+    print "Please type the name of the program test you wish to find"
+    print "You may enter either: program.py, or: program. No quotation marks"
+    search_item = str(raw_input("what program are you looking for?   "))
+    find_a_program(search_item)

@@ -36,4 +36,8 @@ nosetests.xml
 
 
 # test output
-*/new-test-output
+*new-test-output/*
+
+# random files
+*~
+*#

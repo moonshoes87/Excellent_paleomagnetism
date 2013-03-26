@@ -93,12 +93,15 @@ class Ex_out(Rename_me.Test_instance):
             raise NameError("Difference should have been found, but was not")
 
     def check_file_output(self, outfile, reference_file, reference="correct"):
+        """
+        parses each file word by word, then checks to see if the outfile matches the reference file.
+        """
         print "testing: " + str(outfile) + " against reference file: " + str(reference_file)
         if reference == "incorrect":
             print "expecting an error"
-        out = PmagPy_tests.pmagpy_strip(outfile)
+        out = PmagPy_tests.file_parse_by_word_and_pmagpy_strip(outfile)
         print "file length = " + str(len(out))
-        ref = PmagPy_tests.pmagpy_strip(reference_file)
+        ref = PmagPy_tests.file_parse_by_word_and_pmagpy_strip(reference_file)
         print "file length = " + str(len(ref))
         if reference == "incorrect":
             self.check_list_output_expect_error(out, ref)
@@ -161,6 +164,7 @@ class Bad_test(unittest.TestCase):
         print "error expected"
 
     def test_file1_with_file2(self, file1, file2, ref):
+        print "running: test_file1_with_file2 using " + str(file1) + " and " + str(file2)
         self.assertRaises(NameError, self.ex_out.check_file_output, file1, file2, reference=ref)
         print "error expected"
 
@@ -185,6 +189,17 @@ def complete_atrm_magic_test():
     print "Testing atrm_magic.py:"
     atrm.ex_out_sequence()
 #complete_atrm_magic_test()
+
+
+def complete_CIT_magic_test():
+    CIT_magic_infile = 'CIT_magic_example.sam'
+    CIT_magic_outfile1 = None
+    CIT_magic_outfile2 = None
+
+# er_sites.txt is supposed to be designatable on the command-line with -Fsp, but is not.  fix this....
+
+
+
 
 def complete_hysteresis_magic_test(): # irregular.  a file has to be renamed because it just comes out a default way, it is not specifiable on the command line
     tag1, tag2 = '-F', None
@@ -288,6 +303,31 @@ def complete_pmag_results_extract_test():
     subprocess.call(['rm', file_prefix + 'Intensities.txt', file_prefix + 'Directions.txt', file_prefix + 'SiteNfo.txt'])
 
 
+#    def __init__(self, name, infile, tag1, outfile1, tag2, outfile2, correctfile1, correctfile2, wrongfile1, wrongfile2, stdin, WD, *args):
+def complete_aarm_magic_test():
+    print "Testing aarm_magic"
+    infile = "aarm_measurements.txt"
+    aarm_Fa, aarm_Fr = 'aarm_magic_anisotropy.out', 'aarm_magic_results.out'
+    tag1, tag2 = "-Fa", "-Fr"
+    aarm_Fa_reference, aarm_Fr_reference = 'aarm_magic_anisotropy_correct.out', 'aarm_magic_results_correct.out'
+    aarm_Fa_wrong, aarm_Fr_wrong = 'aarm_magic_anisotropy_incorrect.out', 'aarm_magic_results_incorrect.out'
+    aarm_magic = Ex_out('aarm_magic.py', infile, tag1, aarm_Fa, tag2, aarm_Fr, aarm_Fa_reference, aarm_Fr_reference, aarm_Fa_wrong, aarm_Fr_wrong, None, True)
+    aarm_magic.ex_out_sequence()
+
+def complete_orientation_magic_test():
+    print "Testing orientation_magic.py"
+    infile = "orientation_magic_example.txt"
+    tag1, tag2 = "-Fsi", "-Fsa"
+    orient_Fsi, orient_Fsa = "orientation_magic_er_sites.out", "orientation_magic_er_samples.out"
+    orient_Fsi_reference, orient_Fsa_reference = "orientation_magic_er_sites_correct.out", "orientation_magic_er_samples_correct.out"
+    orient_Fsi_wrong, orient_Fsa_wrong = "orientation_magic_er_sites_incorrect.out", "orientation_magic_er_samples_incorrect.out"
+    orientation_magic = Ex_out('orientation_magic.py', infile, tag1, orient_Fsi, tag2, orient_Fsa, orient_Fsi_reference, orient_Fsa_reference, orient_Fsi_wrong, orient_Fsa_wrong, None, True)
+    orientation_magic.ex_out_sequence()
+                    
+complete_orientation_magic_test()    
+
+
+
 
 
 def complete_working_test():
@@ -297,11 +337,12 @@ def complete_working_test():
     complete_k15_magic_test()
     complete_kly4s_magic_test()
     complete_pmag_results_extract_test()
+    complete_orientation_magic_test()
     PmagPy_tests.clean_house()
 
 
 
-complete_working_test()
+
 
 if __name__ == "__main__":
     pass

@@ -138,9 +138,11 @@ class Test_instance(object):
                
      def check_file_output(self, output_file, correct_file): # takes in two file names as arguments, parses their contents into list format, and then compares the first against the second
           print "checking file output, using: " + str(output_file) + " AND " + str(correct_file)
-          parsed_output = PmagPy_tests.file_parse(output_file)
+#          parsed_output = PmagPy_tests.file_parse(output_file)
+          parsed_output = PmagPy_tests.file_parse_by_word_and_pmagpy_strip(output_file)
           print parsed_output
-          parsed_correct = PmagPy_tests.file_parse(correct_file)
+#          parsed_correct = PmagPy_tests.file_parse(correct_file)
+          parsed_correct = PmagPy_tests.file_parse_by_word_and_pmagpy_strip(correct_file)
           print parsed_correct
           self.check_list_output(parsed_output, parsed_correct)
 
@@ -768,6 +770,17 @@ def complete_plotdi_a_test():
     plotdi_a.plot_program_sequence(stdout=False)
 
 
+def complete_plotxy_test():
+     plotxy_infile = 'plotxy_example.dat'
+     plotxy_outfile = None
+     plotxy_reference = "{'plotXY.svg': <FoundFile ./new-test-output:plotXY.svg>}"
+     plotxy_wrong = ["something", 2]
+     plotxy = Test_instance('plotxy.py', plotxy_infile, plotxy_outfile, plotxy_reference, plotxy_wrong, 'a', False, '-l')
+     plotxy.plot_program_sequence(stdout=False)
+
+
+
+
 def complete_qqplot_test():# irregular type.  produces a lot of output, which is then parsed out.  
     qqplot_infile = "qqplot_example.dat"
     qqplot_outfile = None
@@ -803,6 +816,17 @@ S[a]ve plots, [s]pecimen name, [q]uit, <return> to continue
     quick_hyst_wrong = "wrong"
     quick_hyst = Test_instance('quick_hyst.py', quick_hyst_infile, quick_hyst_outfile, quick_hyst_reference, quick_hyst_wrong, 'q', True)
     quick_hyst.plot_program_sequence(stdout=True)
+
+
+def complete_revtest_test():
+     revtest_infile = 'revtest_example.dat'
+     revtest_outfile = None
+     revtest_reference = "{'REV_Z.svg': <FoundFile ./new-test-output:REV_Z.svg>, 'REV_Y.svg': <FoundFile ./new-test-output:REV_Y.svg>, 'REV_X.svg': <FoundFile ./new-test-output:REV_X.svg>}"
+     revtest_wrong = "not right"
+     revtest = Test_instance('revtest.py', revtest_infile, revtest_outfile, revtest_reference, revtest_wrong, 'a', False)
+     revtest.plot_program_sequence(stdout=False)
+
+complete_revtest_test()
 
 
 def complete_site_edit_magic_test():
@@ -921,7 +945,6 @@ def complete_zeq_magic_test(): # NOT SURE THIS IS ACTUALLY USEFUL.  Consider
 #    extra_zeq_magic = Plot('zeq_magic.py', zeq_magic_infile, zeq_magic_reference, zeq_magic_wrong, None, True, '-fsa', fsa, '-fsp', fsp, '-sav')                                                          
 
 # Measurement import stuff
-#AGM_magic.py -f agm_magic_example.agm -spn myspec --usr "Lima Tango" -u cgs
  
 def complete_agm_magic_test():
      agm_magic_infile = 'agm_magic_example.agm'
@@ -930,17 +953,14 @@ def complete_agm_magic_test():
      agm_magic_wrong = 'agm_magic_output_incorrect.out'
      agm = Test_instance('agm_magic.py', agm_magic_infile, agm_magic_outfile, agm_magic_reference, agm_magic_wrong, None, True, '-spn', 'myspec', '--usr', "Lima Tango", '-u', 'cgs')
      agm.file_in_file_out_sequence()
+     extra_infile = 'agm_magic_example.irm'
+     extra_outfile = 'agm_magic_irm_output.out'
+     extra_reference = 'agm_magic_extra_output_correct.out'
+     extra_wrong = 'agm_magic_extra_output_incorrect.out'
+     extra_agm = Test_instance('agm_magic.py', extra_infile, extra_outfile, extra_reference, extra_wrong, None, True, '-spn', 'myspec', '--usr', "Lima Tango", '-bak')
+     extra_agm.file_in_file_out_sequence()
 
-complete_agm_magic_test()
-     
-ignore= """def file_in_file_out_sequence(self, interactive=False):
-          self.test_help()
-          result = self.run_program(output_type = "file")
-          self.check_file_output(result, self.ref_out)
-          if interactive:
-               self.test_interactive()  
-          self.unittest_file()         
-           """                                   
+
 
 # UNFINISHED
 
@@ -954,21 +974,21 @@ def complete_revtest_magic_test():
 
 def complete_working_test():
      # the examples
-#     complete_angle_test()
- #    complete_zeq_test()
-  #   complete_chartmaker_test()
-#     complete_di_eq_test()
+     complete_angle_test()
+     complete_zeq_test()
+     complete_chartmaker_test()
+     complete_di_eq_test()
      # the UCs
- #    complete_combine_magic_test()
-  #   complete_cont_rot_test()
-   #  complete_customize_criteria_test()
-#     complete_grab_magic_key_test()
- #    complete_incfish_test()
+     complete_combine_magic_test()
+     complete_cont_rot_test()
+     complete_customize_criteria_test()
+     complete_grab_magic_key_test()
+     complete_incfish_test()
 #     complete_magic_select_test() NEEDS -WD!!!!!
-  #   complete_nrm_specimens_magic_test()
-   #  complete_sundec_test()
-    # complete_pca_test()
-#     complete_vgp_di_test()
+     complete_nrm_specimens_magic_test()
+     complete_sundec_test()
+     complete_pca_test()
+     complete_vgp_di_test()
      # the BIOs
 #     complete_apwp_test()
  #    complete_b_vdm_test()
@@ -1015,6 +1035,7 @@ def complete_working_test():
 #     complete_lowrie_magic_test()
 #     complete_plot_cdf_test()
  #    complete_plotdi_a_test()
+#     complete_plotxy_test()
   #   complete_qqplot_test()
    #  complete_quick_hyst_test()
 #     complete_revtest_test() # NOT DONE
@@ -1024,11 +1045,12 @@ def complete_working_test():
 #     complete_thellier_magic_test()
 #     complete_vgpmap_magic_test()
 #     complete_zeq_magic_test()
-     pass
+#     complete_agm_magic_test()
+  #   pass
 
 if __name__ == '__main__':
      pass
- #    complete_working_test()
+#     complete_working_test()
 
 
 
