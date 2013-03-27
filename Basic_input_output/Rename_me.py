@@ -357,6 +357,9 @@ def complete_pt_rot_test(): # Irregular type.  has both an -ff and an -f option.
      pt_rot_extra_unittest.test_file_for_error()
 
 
+     
+
+
 def complete_customize_criteria_test():  # BIO type
     customize_criteria_infile = 'customize_criteria_example.dat'
     customize_criteria_output = 'customize_criteria_outfile.out'
@@ -438,7 +441,66 @@ def complete_pca_test(): # list type
 
 pca_correct_out = ['eba24a', 'DE-BFL', '0', '0.00', '339.9', '57.9', '9.2830e-05', '1', '2.50', '325.7', '49.1', '7.5820e-05', '2', '5.00', '321.3', '45.9', '6.2920e-05', '3', '10.00', '314.8', '41.7', '5.2090e-05', '4', '15.00', '310.3', '38.7', '4.4550e-05', '5', '20.00', '305.0', '37.0', '3.9540e-05', '6', '30.00', '303.9', '34.7', '3.2570e-05', '7', '40.00', '303.0', '32.3', '2.5670e-05', '8', '50.00', '303.6', '32.4', '2.2520e-05', '9', '60.00', '299.8', '30.8', '1.9820e-05', '10', '70.00', '292.5', '31.0', '1.3890e-05', '11', '80.00', '297.0', '25.6', '1.2570e-05', '12', '90.00', '299.3', '11.3', '0.5030e-05', 'eba24a', 'DE-BFL', '10', '2.50', '70.00', '8.8', '334.9', '51.5']
 
-def complete_vgp_di_test():
+
+def complete_scalc_test(): # irregular, & list type
+     scalc_infile = 'scalc_example.txt'
+     scalc_outfile = None
+     scalc_reference = ['99', '19.5', '90.0']
+     scalc_wrong = ['99', '19.5', '90.1']
+     scalc = Test_instance('scalc.py', scalc_infile, scalc_outfile, scalc_reference, scalc_wrong, None, False)
+     scalc.list_sequence()
+     # testing addition command line options
+     scalc_reference2 = ["89", "15.2", "32.3"]
+     scalc2 = Test_instance('scalc.py', scalc_infile, scalc_outfile, scalc_reference2, scalc_wrong, None, False, '-v')
+     scalc2.list_sequence()
+     #
+     scalc_reference3 = ["100" ,"21.1", "90.0"]
+     scalc3 = Test_instance('scalc.py', scalc_infile, scalc_outfile, scalc_reference3, scalc_wrong, None, False, '-a')
+     scalc3.list_sequence()
+     #
+     scalc_reference4 = ["99", "19.8", "90.0"]
+     scalc4 = Test_instance('scalc.py', scalc_infile, scalc_outfile, scalc_reference4, scalc_wrong, None, False, '-p')
+     scalc4.list_sequence()
+     # 
+     scalc_reference5 = ["100", "21.1", "180.0"] 
+     scalc5 = Test_instance('scalc.py', scalc_infile, scalc_outfile, scalc_reference5, scalc_wrong, None, False, '-C')
+     scalc5.list_sequence()
+     #
+     scalc_reference6 = ["71", "10.9", "20.0"]
+     scalc6 = Test_instance('scalc.py', scalc_infile, scalc_outfile, scalc_reference6, scalc_wrong, None, False, '-c', '20')
+     scalc6.list_sequence()
+     #
+     scalc_reference7 = ["90", "15.9", "33.6"]
+     scalc7 = Test_instance('scalc.py', scalc_infile, scalc_outfile, scalc_reference7, scalc_wrong, None, False, '-p', '-C', '-v', '-a', '-c', '20')
+     scalc7.list_sequence()
+
+def complete_scalc_magic_test():
+     scalc_magic_infile = 'scalc_magic_example.txt'
+     scalc_magic_outfile = None
+     scalc_magic_reference = ['13', '17.8', '90.0']
+     scalc_magic_wrong = [1, 2, 3, 4]
+     scalc_magic = Test_instance('scalc_magic.py', scalc_magic_infile, scalc_magic_outfile, scalc_magic_reference, scalc_magic_wrong, None, False)
+     scalc_magic.list_sequence()
+     # not testing every single option because they are essentially the same as scalc.py above
+     scalc_magic_reference2 = ['21','16.8','35.3']
+     scalc_magic2 = Test_instance('scalc_magic.py', scalc_magic_infile, scalc_magic_outfile, scalc_magic_reference2, scalc_magic_wrong, None, False, '-p', '-C', '-v', '-a', '-c', '20')
+     scalc_magic2.list_sequence()
+
+
+
+def complete_s_hext_test(): # list type
+     s_hext_infile = "s_hext_example.dat"
+     s_hext_outfile = None
+     s_hext_reference = s_hext_correct
+     s_hext_wrong = ["wrong", "wronger"]
+     s_hext = Test_instance('s_hext.py', s_hext_infile, s_hext_outfile, s_hext_reference, s_hext_wrong, None, False)
+     s_hext.list_sequence()
+
+
+s_hext_correct = ['F', '=', '2.56', 'F12', '=', '1.12', 'F23', '=', '2.16', 'N', '=', '8', 'sigma', '=', '0.000815076759', '0.33471', '265.8', '17.6', '40.3', '93.0', '72.2', '19.6', '356.5', '2.1', '0.33349', '93.0', '72.2', '31.4', '356.5', '2.1', '40.3', '265.8', '17.6', '0.33180', '356.5', '2.1', '19.6', '265.8', '17.6', '31.4', '93.0', '72.2']
+
+
+def complete_vgp_di_test(): # list type
      vgp_di_infile = 'vgp_di_example.dat'
      vgp_di_outfile = None
      vgp_di_reference = ['335.6', '62.9']
@@ -779,8 +841,6 @@ def complete_plotxy_test():
      plotxy.plot_program_sequence(stdout=False)
 
 
-
-
 def complete_qqplot_test():# irregular type.  produces a lot of output, which is then parsed out.  
     qqplot_infile = "qqplot_example.dat"
     qqplot_outfile = None
@@ -826,7 +886,6 @@ def complete_revtest_test():
      revtest = Test_instance('revtest.py', revtest_infile, revtest_outfile, revtest_reference, revtest_wrong, 'a', False)
      revtest.plot_program_sequence(stdout=False)
 
-complete_revtest_test()
 
 
 def complete_site_edit_magic_test():
@@ -964,10 +1023,6 @@ def complete_agm_magic_test():
 
 # UNFINISHED
 
-def complete_revtest_test():
-     revtest_infile = file_prefix + 'revtest_example.dat'
-     obj = env.run('revtest.py', '-f', revtest_infile, stdin='q')
-     print obj.stdout
 
 def complete_revtest_magic_test():
      pass
@@ -988,6 +1043,8 @@ def complete_working_test():
      complete_nrm_specimens_magic_test()
      complete_sundec_test()
      complete_pca_test()
+     complete_scalc_test()  # will probably also go in bootstrap-plotting
+     complete_scalc_magic_test() # also in bootstrap_plotting
      complete_vgp_di_test()
      # the BIOs
 #     complete_apwp_test()
@@ -1042,6 +1099,7 @@ def complete_working_test():
  #    complete_revtest_magic_test() # NOT DONE
 #     complete_site_edit_magic_test()
  #    complete_strip_magic_test()
+#     complete_s_hext_test()
 #     complete_thellier_magic_test()
 #     complete_vgpmap_magic_test()
 #     complete_zeq_magic_test()

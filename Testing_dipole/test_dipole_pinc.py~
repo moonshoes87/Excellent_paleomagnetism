@@ -1,6 +1,0 @@
-#! /usr/bin/env python
-
-from scripttest import TestFileEnvironment
-env = TestFileEnvironment('./test-output')
-
-print(env.run('dipole_pinc.py', '-i', stdin='3'))

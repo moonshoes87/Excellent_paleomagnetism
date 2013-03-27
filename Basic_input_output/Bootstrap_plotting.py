@@ -61,6 +61,37 @@ def complete_aniso_magic_test():
     output3 = do_aniso_magic(10000)
     check_bootstrap(output3, aniso_magic_reference)
 
+scalc_reference = [(88.5, 89.5), (14.8, 15.8), (13.0, 14.0), (16.5, 17.5), (31.6, 32.6)] 
+
+def do_scalc():
+    obj = env.run('scalc.py', '-f', file_prefix + 'scalc_example.txt', '-v', '-b')
+    a_list = str(obj.stdout).split()
+    print a_list
+    clean_list = remove_non_integers_from_output(a_list)
+    return clean_list
+
+def complete_scalc_test():
+    output = do_scalc()
+    print "output: " + str(output)
+    check_bootstrap(output, scalc_reference)
+
+
+scalc_magic_reference = [(12.5, 13.5), (17.2, 18.2), (13., 14.), (21., 22.), (36.5, 37.5)]
+
+
+def do_scalc_magic():
+    obj = env.run('scalc_magic.py', '-f', file_prefix + 'scalc_magic_example.txt', '-v', '-b')
+    a_list = str(obj.stdout).split()
+    clean_list = remove_non_integers_from_output(a_list)
+    print clean_list
+    final_list = clean_list[-5:] # removes the extraneous output, i.e. 100 out of 100, 200 out of 1000, etc.
+    print final_list
+    return final_list
+
+def complete_scalc_magic_test():
+    output = do_scalc_magic()
+    check_bootstrap(output, scalc_magic_reference)
+
 
 test_50000=[0.33505, 0.00021, 5.3, 14.7, 10.3, 260.7, 38.8, 13.5, 111.8, 46.8, 0.33334, 0.0002, 124.5, 61.7, 6.0, 225.3, 5.9, 17.2, 318.6, 28.6, 0.33161, 0.00014, 268.8, 23.6, 10.7, 358.0, 3.9, 12.5, 96.7, 65.8]
 test_100000=[0.33505, 0.00021, 5.3, 14.7, 10.3, 260.7, 38.9, 13.6, 111.7, 46.8, 0.33334, 0.00021, 124.5, 61.7, 6.1, 225.3, 5.9, 17.2, 318.5, 28.6, 0.33161, 0.00014, 268.8, 23.6, 10.7, 358.2, 4.2, 12.5, 97.5, 65.8]
@@ -189,10 +220,12 @@ def complete_working_test():
     complete_eqarea_magic_test()
     complete_eqarea_magic_test()
     complete_eqarea_magic_test()
+    complete_scalc_test()
+    complete_scalc_magic_test()
 
 if __name__ == "__main__":
-#    pass
-    complete_working_test()
+    pass
+#    complete_working_test()
 #    unittest.main(module="Bootstrap_plotting")
 
 
