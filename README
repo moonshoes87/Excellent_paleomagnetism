@@ -1,0 +1,16 @@
+
+Setup:
+
+The directory/file_prefix is set in PmagPy_tests.py.  This must be re-set to correctly represent the directory you are using for the testing.  
+
+Run the programs with the command:   
+
+Troubleshooting:
+
+If something is not working, often the WD option is set incorrectly.  If a program has the -WD option, it will run incorrectly with long file names (scripttest does not recognize relative path names). Likewise, if a program does not have the -WD option, it will run incorrectly with short file names.  
+
+Some of the tests malfunction when other python programs are run simultaneously (notably the ones in Bootstrap_plotting.py).  It is ideal to run the tests when the computer is not otherwise in use.  (The error message that conflicting Python programs causes is usually something like: "Files not saved, file format unsupported".  The file format actually is supported, the computer just has its wires crossed.
+
+
+
+It is possible to have problems because there are two versions of a saved document in new-test-output/.  There are some safeguards set in place to try to prevent this, but clearing that directory may be necessary at some point.  By default, the directory should self-clear when you begin a new session of testing. 

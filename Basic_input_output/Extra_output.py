@@ -4,12 +4,12 @@ from scripttest import TestFileEnvironment
 env = TestFileEnvironment('./new-test-output')
 import unittest
 import Rename_me
-import PmagPy_tests
+import PmagPy_tests as PT
 import subprocess
 
 
-file_prefix = '/Users/nebula/Python/Basic_input_output/'
-directory =  '/Users/nebula/Python/Basic_input_output'
+file_prefix = PT.file_prefix
+directory =  PT.directory
 
 class Ex_out(Rename_me.Test_instance):
     def __init__(self, name, infile, tag1, outfile1, tag2, outfile2, correctfile1, correctfile2, wrongfile1, wrongfile2, stdin, WD, *args):
@@ -99,9 +99,9 @@ class Ex_out(Rename_me.Test_instance):
         print "testing: " + str(outfile) + " against reference file: " + str(reference_file)
         if reference == "incorrect":
             print "expecting an error"
-        out = PmagPy_tests.file_parse_by_word_and_pmagpy_strip(outfile)
+        out = PT.file_parse_by_word_and_pmagpy_strip(outfile)
         print "file length = " + str(len(out))
-        ref = PmagPy_tests.file_parse_by_word_and_pmagpy_strip(reference_file)
+        ref = PT.file_parse_by_word_and_pmagpy_strip(reference_file)
         print "file length = " + str(len(ref))
         if reference == "incorrect":
             self.check_list_output_expect_error(out, ref)
@@ -367,15 +367,15 @@ def complete_working_test():
     complete_pmag_results_extract_test()
     complete_orientation_magic_test()
     complete_thellier_magic_redo_test()
-    PmagPy_tests.clean_house()
+    PT.clean_house()
 
 
 
 
 
 if __name__ == "__main__":
-    pass
-#    complete_working_test()
+#    pass
+    complete_working_test()
 
 
 

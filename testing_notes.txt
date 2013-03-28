@@ -203,6 +203,8 @@ complete list of tested programs:
     curie.py -- LISA MUST FIX
     customize_criteria.py
     dayplot_magic.py
+    dipole_pinc.py
+    dipole_plat.py
     complete_di_geo_test()
     di_eq.py
     complete_dir_cart_test()
@@ -238,7 +240,7 @@ complete list of tested programs:
     complete_lowrie_test()
     complete_lowrie_magic_test()
     MagIC.py -- PROBABLY NOT PLANNING TO TEST THIS ONE...
-    magic_select.py -- no WD option, Lisa must fix, NOT DONE
+    magic_select.py -- no WD option, Lisa must fix, NOT DONE.  program contains: dir_path=".", which doesn't work with scripttest
     make_magic_plots.py --NOT SURE, NOT DONE
     complete_mk_redo_test()
     complete_nrm_specimens_magic_test()
@@ -288,16 +290,16 @@ other, to do:
        make a script that will replace all the inaccurate path names, so it can be run on a different machine.  this includes that some stdout includes -- some_file was saved in this_directory
        make output nicer, easier, put it into a file
        possible: make is so that only freshly generated output files are labeled *.out, so that you can tidily wipe them all at the end. possibly this is not necessary, as the program ought to overwrite each time.  
-       somewhere there is a test that is outputting to None... you should figure out what this is!  Ha ha ha.  Jesus H.  Looks like it is incfish.py.  fix this, Lori!!
-       integrate the dipole tests
-       figure out the "random" tests (mostly in random_stuff.py)
-       work Extra_output
+       somewhere there is a test that is outputting to None... you should figure out what this is!  Ha ha ha.  Jesus H.  Looks like it is incfish.py.  fix this, Lori!! -- DONE
+       integrate the dipole tests -- DONE
+       figure out the "random" tests (mostly in random_stuff.py) -- DONE
        consider taking some of the functions out of the class Test_instance.  You can still leave them in the program, and still import that module into other places.... does this make more sense??  Not sure
        add to file_parse a way to tell if you have tried to parse a file that, say, doesn't exist, or other failure
-       fix the weirdness with multiple errors being raised in Extra_out... and just the general confusing weirdness
+       fix the weirdness with multiple errors being raised in Extra_out... and just the general confusing weirdness DONE
        check chi_magic.py.  it is producing slightly different output
-       fix revtest_magic.py -- it is glitching
-       change over so that file_prefix and directory are set only in PmagPy_tests.py.  also, alias it as PT
+       fix revtest_magic.py -- it is glitching -- DONE
+       change over so that file_prefix and directory are set only in PmagPy_tests.py.  also, alias it as PT.  DONE
+       consider try/except in the run everything so that the tests keep running even if you get an error 
 
        maybe make a script for generating new, correct, and reference files (say if Lisa "knows" a program is working but she has changed some details of the output)
 

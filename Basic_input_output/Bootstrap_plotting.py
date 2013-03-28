@@ -6,10 +6,10 @@ env = TestFileEnvironment('./new-test-output')
 import unittest
 import subprocess
 import Basic_input_output
-import PmagPy_tests
+import PmagPy_tests as PT
 
-file_prefix = '/Users/nebula/Python/Basic_input_output/'
-directory =  '/Users/nebula/Python/Basic_input_output'
+file_prefix = PT.file_prefix
+directory =  PT.directory
 
 
 def remove_non_integers_from_output(raw_output):
@@ -47,7 +47,7 @@ def do_aniso_magic(times):
     # WD
     obj = env.run('aniso_magic.py', '-WD', directory, '-f', 'aniso_magic_dike_anisotropy.txt', '-F', 'aniso_magic_rmag_anisotropy.txt', '-nb', times, '-gtc', '110', '2', '-par', '-v', '-crd', 'g', '-P') #stdin='q')
     print obj.stdout
-    PmagPy_tests.test_for_bad_file(obj.stdout)
+    PT.test_for_bad_file(obj.stdout)
     a_list = str(obj.stdout).split()
     print a_list
     clean_list = remove_non_integers_from_output(a_list)
@@ -109,8 +109,9 @@ def do_bootams(num):
 def complete_bootams_test():
     output1 = do_bootams(500000)
     check_bootstrap(output1, bootams_reference)
-    output2 = do_bootams(500000)
-    check_bootstrap(output2, bootams_reference)
+# add in extras for real testing
+#    output2 = do_bootams(500000)
+ #   check_bootstrap(output2, bootams_reference)
 
 
 def do_watsonsV():
@@ -159,18 +160,12 @@ def complete_find_EI_test():
     output1 = run_EI(2000)
     print output1
     check_bootstrap(output1, find_EI_reference)
- #   subprocess.call(['rm', 'findEI_ei.svg', 'findEI_cdf.svg', 'findEI_eq.svg', 'findEI_v2.svg'])
-#    subprocess.call(['rm', 'findEI_ei.pdf', 'findEI_cdf.pdf', 'findEI_eq.pdf', 'findEI_v2.pdf'])
-#2  saved in  findEI_ei.svg
-#3  saved in  findEI_cdf.svg
-#1  saved in  findEI_eq.svg
-#4  saved in  findEI_v2.svg
-    output2 = run_EI(1000)
-    check_bootstrap(output2, find_EI_reference)
- #   subprocess.call(['rm', 'findEI_ei.svg', 'findEI_cdf.svg', 'findEI_eq.svg', 'findEI_v2.svg'])
-    output3 = run_EI(1000)
-    check_bootstrap(output3, find_EI_reference)
-    print "Ran find_EI bootstrap test three times"
+# extras, add in for real testing
+#    output2 = run_EI(1000)
+ #   check_bootstrap(output2, find_EI_reference)
+#    output3 = run_EI(1000)
+ #   check_bootstrap(output3, find_EI_reference)
+    print "Finished find_EI test"
 
 ignore_me = """class Bad_bootstrap(unittest.TestCase):
     def __init__(self, bootstrap_plotting_obj):
@@ -226,29 +221,17 @@ def complete_eqarea_magic_test():
 
 
 def complete_working_test():
-#    complete_aniso_magic_test()        
+    complete_aniso_magic_test()        
 #    complete_find_EI_test()
-#    complete_bootams_test()
-    complete_eqarea_magic_test()
-    complete_eqarea_magic_test()
-    complete_eqarea_magic_test()
-    complete_eqarea_magic_test()
-    complete_eqarea_magic_test()
-    complete_eqarea_magic_test()
-    complete_eqarea_magic_test()
-    complete_eqarea_magic_test()
-    complete_eqarea_magic_test()
-    complete_eqarea_magic_test()
-    complete_eqarea_magic_test()
-    complete_eqarea_magic_test()
+    complete_bootams_test()
     complete_eqarea_magic_test()
     complete_scalc_test()
     complete_scalc_magic_test()
     complete_watsonsV_test()
 
 if __name__ == "__main__":
-    pass
-#    complete_working_test()
+#    pass
+    complete_working_test()
 #    unittest.main(module="Bootstrap_plotting")
 
 

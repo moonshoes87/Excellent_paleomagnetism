@@ -3,8 +3,10 @@
 from scripttest import TestFileEnvironment
 env = TestFileEnvironment('./new-test-output')
 import unittest
+import PmagPy_tests as PT
 
-file_prefix = '/users/Nebula/Python/Random_distribution/'
+file_prefix = PT.file_prefix
+directory = PT.directory
 
 #class Random_stuff(Basic_input_output):
 

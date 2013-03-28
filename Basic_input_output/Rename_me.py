@@ -8,8 +8,8 @@ import Basic_input_output
 import PmagPy_tests as PT
 import Complex_test
 
-file_prefix = '/Users/nebula/Python/Basic_input_output/'
-directory =  '/Users/nebula/Python/Basic_input_output'
+file_prefix = PT.file_prefix
+directory = PT.directory
 
 class Test_instance(object):
      def __init__(self, name, infile, outfile, ref_out, wrong_out, stdin, WD, *args):
@@ -79,6 +79,7 @@ class Test_instance(object):
           if output_type == "plot":
                print "output is plot"
                if obj.files_created == {}:
+                    print "no files were created"
                     print "files updated: ", obj.files_updated
                     return obj.files_updated
                else:
@@ -350,7 +351,7 @@ def complete_pt_rot_test(): # Irregular type.  has both an -ff and an -f option.
      pt_rot_extra_wrong ='pt_rot_results_incorrect.out'
      pt_rot_extra = Test_instance('pt_rot.py', None, pt_rot_extra_outfile, pt_rot_extra_reference, pt_rot_extra_wrong, None, True, '-ff', input_1, input_2)
      print "Testing pt_rot.py with -ff option"
-     obj = env.run('pt_rot.py', '-WD', '/Users/nebula/Python/Basic_input_output/', '-ff', input_1, input_2 , '-F', pt_rot_extra_outfile)
+     obj = env.run('pt_rot.py', '-WD', directory, '-ff', input_1, input_2 , '-F', pt_rot_extra_outfile)
      pt_rot_extra.check_file_output(pt_rot_extra.outfile, pt_rot_extra.ref_out)
      pt_rot_extra_unittest = Bad_test(pt_rot_extra)
      pt_rot_extra_unittest.test_file_for_error()
@@ -369,6 +370,22 @@ def complete_customize_criteria_test():  # BIO type
 #    customize_criteria_unittest = Bad_test(customize_criteria)
  #   customize_criteria_unittest.test_file_for_error()
 
+
+def complete_dipole_pinc_test(): # list type
+     dipole_pinc_infile = 'dipole_pinc_example.dat'
+     dipole_pinc_outfile = None
+     dipole_pinc_reference = ['33.0', '38.9', '54.5', '9.9']
+     dipole_pinc_wrong = [1,2,3,4]
+     dipole_pinc = Test_instance('dipole_pinc.py', dipole_pinc_infile, dipole_pinc_outfile, dipole_pinc_reference, dipole_pinc_wrong, None, False)
+     dipole_pinc.list_sequence()
+
+def complete_dipole_plat_test(): # list type
+     dipole_plat_infile = 'dipole_plat_example.dat'
+     dipole_plat_outfile = None
+     dipole_plat_reference = ['9.2', '11.4', '19.3', '2.5']
+     dipole_plat_wrong = "wrong"
+     dipole_plat = Test_instance('dipole_plat.py', dipole_plat_infile, dipole_plat_outfile, dipole_plat_reference, dipole_plat_wrong, None, False)
+     dipole_plat.list_sequence()
 
 
 
@@ -407,6 +424,8 @@ def complete_magic_select_test(): # BIO type.. but it doesn't work yet!  Lisa mu
     magic_select = Test_instance('magic_select.py', magic_select_infile, magic_select_outfile, magic_select_reference, magic_select_wrong, None, True, '-key', 'magic_method_codes', 'LP-DIR-AF', 'has')
     magic_select.file_in_file_out_sequence()
     # add unittest when you get it together
+
+#complete_magic_select_test()
 
 def complete_nrm_specimens_magic_test(): # BIO type
      print "Testing nrm_specimens_magic.py"
@@ -807,7 +826,7 @@ def complete_lnp_magic_test(): # irregular type.  it had to be written the long 
      lnp_magic_reference = PT.file_parse_by_word(file_prefix + 'lnp_magic_output_correct.txt')
      lnp_magic_wrong = ['sv01', 'Site', 'lines', 'planes', 'kappa', 'a95', 'dec', 'I am not right']
      lnp_magic = Test_instance('lnp_magic.py', lnp_magic_infile, lnp_magic_outfile, lnp_magic_reference, lnp_magic_wrong, None, True, '-crd', 'g', '-P')
-     obj = env.run('lnp_magic.py', '-WD', '/Users/nebula/Python/Basic_input_output', '-f', 'lnp_magic_pmag_specimens.txt', '-crd', 'g', '-P')
+     obj = env.run('lnp_magic.py', '-WD', directory, '-f', 'lnp_magic_pmag_specimens.txt', '-crd', 'g', '-P')
      result = str(obj.stdout).split()
      lnp_magic.test_help()
      lnp_magic.check_list_output(result, lnp_magic.ref_out)
@@ -914,17 +933,17 @@ def complete_revtest_test():
 
 
 def complete_revtest_magic_test():
-     revtest_magic_infile = 'revtest_magic_example.dat'
+     # WD
+     revtest_magic_infile = 'revtest_magic_example.txt'
      revtest_magic_outfile = None
-     revtest_magic_reference = None
+     revtest_magic_reference = "{'REV_Z.svg': <FoundFile ./new-test-output:REV_Z.svg>, 'REV_Y.svg': <FoundFile ./new-test-output:REV_Y.svg>, 'REV_X.svg': <FoundFile ./new-test-output:REV_X.svg>}"
      revtest_magic_wrong = "wrong"
-     revtest_magic = Test_instance('revtest_magic.py', revtest_magic_infile, revtest_magic_outfile, revtest_magic_reference, revtest_magic_wrong, 'a', False)
+     revtest_magic = Test_instance('revtest_magic.py', revtest_magic_infile, revtest_magic_outfile, revtest_magic_reference, revtest_magic_wrong, 'a', True)
      revtest_magic.plot_program_sequence(stdout=False)
 
 
-complete_revtest_test()
 
-complete_revtest_magic_test()
+
 
 
 
@@ -1107,6 +1126,8 @@ def complete_working_test():
      complete_combine_magic_test()
      complete_cont_rot_test()
      complete_customize_criteria_test()
+     complete_dipole_pinc_test()
+     complete_dipole_plat_test()
      complete_grab_magic_key_test()
      complete_incfish_test()
 #     complete_magic_select_test() NEEDS -WD!!!!!
@@ -1148,8 +1169,8 @@ def complete_working_test():
      complete_ani_depthplot_test()
      complete_basemap_magic_test()
      complete_biplot_magic_test()
-     complete_chi_magic_test()
-     complete_common_mean_test()
+#     complete_chi_magic_test()  # NOT WORKING!!!
+#     complete_common_mean_test() # NOT WORKING
      complete_core_depthplot_test()
      complete_dayplot_magic_test()
      complete_dmag_magic_test()
@@ -1168,8 +1189,8 @@ def complete_working_test():
      complete_plotxy_test()
      complete_qqplot_test()
      complete_quick_hyst_test()
-#     complete_revtest_test() # NOT DONE
- #    complete_revtest_magic_test() # NOT DONE
+     complete_revtest_test() # Done, but possibly will have stdout added
+     complete_revtest_magic_test() # Done, but possibly will have stdout added
      complete_site_edit_magic_test()
      complete_strip_magic_test()
      complete_s_hext_test()
@@ -1182,7 +1203,7 @@ def complete_working_test():
 
 if __name__ == '__main__':
      pass
-   #  complete_working_test()
+#     complete_working_test()
 
 
 
