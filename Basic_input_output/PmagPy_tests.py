@@ -166,6 +166,10 @@ def find_a_program(name):
     new_bootstrap_plotting = lowercase_all(Bootstrap_plotting)
     if full_name in new_bootstrap_plotting:
         print name + " occurs in Bootstrap_plotting.py"
+    Random_stuff = file_parse_by_word(file_prefix + "random_stuff.py")
+    new_random_stuff = lowercase_all(Random_stuff)
+    if full_name in new_random_stuff:
+        print name + " occurs in random_stuff.py"
     print "end"
 
 

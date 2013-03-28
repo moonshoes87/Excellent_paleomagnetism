@@ -11,8 +11,6 @@ import Complex_test
 file_prefix = '/Users/nebula/Python/Basic_input_output/'
 directory =  '/Users/nebula/Python/Basic_input_output'
 
-
-#class Plot(Complex_test.complex_test_object):
 class Test_instance(object):
      def __init__(self, name, infile, outfile, ref_out, wrong_out, stdin, WD, *args):
          self.name = name
@@ -1021,6 +1019,20 @@ def complete_agm_magic_test():
 
 
 
+def complete_upload_magic_test(): # irregular.  must be tested in a different directory. 
+     obj = env.run("upload_magic.py", cwd=directory + "/upload_magic") # cwd allows specifying a directory other than the one you are in
+     reference = "upload_magic/correct_upload.txt"
+     wrong = "upload_magic/incorrect_upload.txt"
+     upload_magic = Test_instance("upload_magic.py", None, None, reference, wrong, None, False) #, "cwd=" +str(directory))
+     print obj.stdout
+     upload_magic.test_help()
+     upload_magic.check_file_output(file_prefix + "upload_magic/upload.txt", upload_magic.ref_out)
+     subprocess.call(['rm', 'upload_magic/upload.txt'])
+
+
+
+     
+
 # UNFINISHED
 
 
@@ -1104,6 +1116,7 @@ def complete_working_test():
 #     complete_vgpmap_magic_test()
 #     complete_zeq_magic_test()
 #     complete_agm_magic_test()
+#complete_upload_magic_test()
   #   pass
 
 if __name__ == '__main__':

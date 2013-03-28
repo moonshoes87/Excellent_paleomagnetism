@@ -324,10 +324,36 @@ def complete_orientation_magic_test():
     orientation_magic = Ex_out('orientation_magic.py', infile, tag1, orient_Fsi, tag2, orient_Fsa, orient_Fsi_reference, orient_Fsa_reference, orient_Fsi_wrong, orient_Fsa_wrong, None, True)
     orientation_magic.ex_out_sequence()
                     
-complete_orientation_magic_test()    
+#complete_orientation_magic_test()    
+
+def complete_thellier_magic_redo_test(): # quite irregular
+    # WD
+    print "Testing thellier_magic_redo.py"
+    infile = 'thellier_magic_redo_example.dat'
+    outfile = "thellier_magi_redo_specimens.txt"
+    in_tag1, in_tag2, in_tag3 = '-fnl', '-fre', '-fan'
+    in1, in2, in3 = "thellier_magic_redo_measurements.txt", "thellier_magic_redo2.txt", "thellier_magic_redo_rmag_anisotropy.txt"
+    out_tag1, out_tag2 = "-Fnl", "Fac"
+    out1, out2 = "thellier_magic_redo_NLT_specimens.txt", "thellier_magic_redo_AC_specimens.txt"
+    correct_out1, correct_out2 = "thellier_magic_redo_NLT_specimens_correct.txt", "thellier_magic_redo_AC_specimens_correct.txt"
+    wrong_out1, wrong_out2 = "thellier_magic_redo_NLT_specimens_incorrect.txt", "thellier_magic_redo_AC_specimens_incorrect.txt"
+    arg1, arg2 = "-NLT", "-ANI"
+    thellier_magic_redo_reference = None
+    thellier_magic_redo = Ex_out('thellier_magic_redo.py', infile, out_tag1, out1, out_tag2, out2, correct_out1, correct_out2, wrong_out1, wrong_out2, None, True)
+    obj = env.run("thellier_magic_redo.py", "-WD", directory, "-f", infile, in_tag1, in1, in_tag2, in2, in_tag3, in3, "-F", outfile, out_tag1, out1, out_tag2, out2, arg1, arg2)
+    print obj.stdout
+    print obj.files_updated
+    print obj.files_created
+    thellier_magic_redo.standard_check_file_sequence()
+    thellier_magic_redo.extra_output_unittest()
 
 
 
+
+
+ignore = """
+thellier_magic_redo.py -f thellier_magic_redo_example.dat  -fnl thellier_magic_redo_measurements.txt -fre thellier_magic_redo2.txt -fan thellier_magic_redo_rmag_anisotropy.txt  -F thellier_magic_redo_specimens.txt -Fnl thellier_magic_redo_NLT_specimens.txt  -Fac thellier_magic_redo_AC_specimens.txt -NLT -ANI
+"""
 
 
 def complete_working_test():
@@ -338,6 +364,7 @@ def complete_working_test():
     complete_kly4s_magic_test()
     complete_pmag_results_extract_test()
     complete_orientation_magic_test()
+    complete_thellier_magic_redo_test()
     PmagPy_tests.clean_house()
 
 
