@@ -351,6 +351,8 @@ def complete_thellier_magic_redo_test(): # quite irregular
 
 
 
+
+
 ignore = """
 thellier_magic_redo.py -f thellier_magic_redo_example.dat  -fnl thellier_magic_redo_measurements.txt -fre thellier_magic_redo2.txt -fan thellier_magic_redo_rmag_anisotropy.txt  -F thellier_magic_redo_specimens.txt -Fnl thellier_magic_redo_NLT_specimens.txt  -Fac thellier_magic_redo_AC_specimens.txt -NLT -ANI
 """

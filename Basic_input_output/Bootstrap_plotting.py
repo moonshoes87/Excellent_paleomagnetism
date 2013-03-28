@@ -113,6 +113,28 @@ def complete_bootams_test():
     check_bootstrap(output2, bootams_reference)
 
 
+def do_watsonsV():
+    watsonsV_infile = file_prefix + "watsonsF_example_file1.dat"
+    watsonsV_infile2 = file_prefix + "watsonsF_example_file2.dat"
+    obj = env.run("watsonsV.py", "-f", watsonsV_infile, "-f2", watsonsV_infile2, stdin='q')
+    print obj.stdout
+    a_list = str(obj.stdout).split()
+    clean_list = remove_non_integers_from_output(a_list)
+    final_list = clean_list[-2:]
+    print final_list
+    return final_list
+
+watsonsV_reference = [(10., 11.),(6., 7.)]
+
+def complete_watsonsV_test():
+    output1 = do_watsonsV()
+    check_bootstrap(output1, watsonsV_reference)
+    output2 = do_watsonsV()
+    check_bootstrap(output2, watsonsV_reference)
+
+
+
+
 
 
 #EI
@@ -222,6 +244,7 @@ def complete_working_test():
     complete_eqarea_magic_test()
     complete_scalc_test()
     complete_scalc_magic_test()
+    complete_watsonsV_test()
 
 if __name__ == "__main__":
     pass

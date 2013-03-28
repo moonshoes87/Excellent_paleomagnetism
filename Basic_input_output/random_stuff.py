@@ -148,4 +148,9 @@ def run_tests():
 
 run_tests()
 
+
+
+# add in:
+# tk03.py
+# uniform.py
 # unittests not really possible

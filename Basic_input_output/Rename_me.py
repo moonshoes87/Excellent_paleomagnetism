@@ -506,6 +506,20 @@ def complete_vgp_di_test(): # list type
      vgp_di = Test_instance('vgp_di.py', vgp_di_infile, vgp_di_outfile, vgp_di_reference, vgp_di_wrong, None, False)
      vgp_di.list_sequence()
 
+
+def complete_watsonsF_test(): # list/stdout type
+     watsonsF_infile = "watsonsF_example_file1.dat"
+     watsonsF_infile2 = file_prefix + "watsonsF_example_file2.dat"
+     watsonsF_outfile = None
+     watsonsF_reference = ["5.23074427567", "3.2594"]
+     watsonsF_wrong = ["5.23074427567", "3.2394"]
+     watsonsF = Test_instance('watsonsF.py', watsonsF_infile, watsonsF_outfile, watsonsF_reference, watsonsF_wrong, None, False, '-f2', watsonsF_infile2)
+     watsonsF.list_sequence()
+
+
+
+
+
 # BIO ones
 
 def complete_apwp_test():
@@ -604,6 +618,19 @@ def complete_stats_test():
 def complete_vdm_b_test():
     vdm_b = Test_instance('vdm_b.py', 'vdm_b_example.dat', 'vdm_b_results_new.out', 'vdm_b_results_correct.out', 'vdm_b_results_incorrect.out', None, False)
     vdm_b.file_in_file_out_sequence(interactive=True)
+
+
+def complete_vector_mean_test():
+     infile = "vector_mean_example.dat"
+     outfile = "vector_mean_results_new.out"
+     reference = "vector_mean_results_correct.out"
+     wrong = "vector_mean_results_incorrect.out"
+     vector_mean = Test_instance('vector_mean.py', infile, outfile, reference, wrong, None, False)
+     vector_mean.file_in_file_out_sequence()
+     obj = env.run('vector_mean.py', '-f', file_prefix + infile)
+     print obj.stdout
+
+
 
 # end of BIO section : ) 
 
@@ -1001,6 +1028,23 @@ def complete_zeq_magic_test(): # NOT SURE THIS IS ACTUALLY USEFUL.  Consider
 # could do the below, but it takes forever and creates a TON of files                                                          
 #    extra_zeq_magic = Plot('zeq_magic.py', zeq_magic_infile, zeq_magic_reference, zeq_magic_wrong, None, True, '-fsa', fsa, '-fsp', fsp, '-sav')                                                          
 
+
+def complete_zeq_magic_redo_test(): # BIO type
+     zeq_redo_infile = 'zeq_magic_redo_measurements.txt'
+     zeq_redo_outfile = 'zeq_magic_redo_results_new.out'
+     zeq_redo_reference = 'zeq_magic_redo_results_correct.out'
+     zeq_redo_wrong = 'zeq_magic_redo_results_incorrect.out'
+     fre =  'zeq_magic_redo'
+     fsa =  'zeq_magic_redo_er_samples.txt'
+     zeq_magic_redo = Test_instance('zeq_magic_redo.py', zeq_redo_infile, zeq_redo_outfile, zeq_redo_reference, zeq_redo_wrong, None, True, '-fre', fre, '-fsa', fsa)
+     zeq_magic_redo.file_in_file_out_sequence()
+
+
+
+
+#"zeq_magic_redo.py -f zeq_magic_redo_measurements.txt -fre zeq_magic_redo -fsa zeq_magic_er_samples.txt -F zeq_magic_redo_results_new.out"
+
+
 # Measurement import stuff
  
 def complete_agm_magic_test():
@@ -1058,6 +1102,7 @@ def complete_working_test():
      complete_scalc_test()  # will probably also go in bootstrap-plotting
      complete_scalc_magic_test() # also in bootstrap_plotting
      complete_vgp_di_test()
+     complete_watsonsF_test()
      # the BIOs
 #     complete_apwp_test()
  #    complete_b_vdm_test()
@@ -1083,6 +1128,8 @@ def complete_working_test():
 #     complete_s_tilt_test()
  #    complete_stats_test()
   #   complete_vdm_b_test()
+#complete_vector_mean_test()
+     complete_zeq_magic_redo_test()
      #PLOTTING
 #     complete_ani_depthplot_test()
  #    complete_basemap_magic_test()

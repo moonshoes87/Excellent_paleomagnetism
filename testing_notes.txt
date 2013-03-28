@@ -1,0 +1,308 @@
+Testing maybe can be simple.  Obviously the thorough thing would be to really test every possible case, but it might be easier to just test that it returns the expected output
+
+
+Easy install for easy installing.  Won't fuck up your path.  (Python stuff)
+
+>>> from scripttest import TestFileEnvironment
+>>> env = TestFileEnvironment('./test-output')
+>>> print(env.run('cat', stdin="hi"))
+Script result: cat
+-- stdout: --------------------
+hi
+>>> 
+>>> print(env.run('cat', stdin="test_dipole_pinc.txt"))
+Script result: cat
+-- stdout: --------------------
+test_dipole_pinc.txt
+
+Keyword arguments must follow positional arguments.  I.e. parrot(1000, type="spry") works, and parrot(1000, "spry") works, but parrot(volts=1000, "spry") doesn't
+
+>>> print(env.run('dipole_pinc.py', '-i', stdin="3"))
+Script result: dipole_pinc.py -i
+-- stdout: --------------------
+Paleolat for converting to inclination: <cntl-D> to quit     6.0
+Paleolat for converting to inclination: <cntl-D> to quit 
+ Good-bye 
+
+
+>>> object = env.run('dipole_pinc.py', '-i', stdin="70")
+>>> object.stdout
+u'Paleolat for converting to inclination: <cntl-D> to quit    79.7\nPaleolat for converting to inclination: <cntl-D> to quit \n Good-bye \n\n'
+>>> object.returncode
+0
+>>> 
+
+
+
+options for Lisa:
+	test individual functions in pmag.py
+	bash script all of the top level stuff
+
+
+
+steps today:
+      email Lisa regarding some options
+      figure out how try except thing works, so as to see if it's possible to test the interactive stuff
+      work on angle.py
+      work on biplot.py
+      conside re-writing angle.py interactive section so it can take multiple arguments at once
+
+
+
+
+
+
+All of the path names need to be long, i.e.: /Users/nebula/Python/Testing_dipole/thing
+
+
+
+You can't import a module when you aren't in the directory where it lives.  (Not even a parent directory)
+
+    di_vgp.py needs to be fixed (by Lisa).  Then it can be a bio instance
+    files that essentially work as BIO instances, but don't have a proper -F option filename option.  It could easily be re-written. Or, possibly I should just read stdout and not file-a-fy it at all
+    	  eigs_s.py  DONE
+    	  eq_di.py  DONE
+	  fishqq.py  THIS ONE EITHER
+	  gobing.py  DONE
+	  gofish.py  DONE
+	  gokent.py  DONE
+	  goprinc.py  DONE
+	  incfish.py CHANGED  # PROBLEM THAT LISA NEEDS TO FIX
+	  s_eigs.py DONE
+	  s_geo.py DONE
+	  s_hext.py -- NOT sure if I want to fuck with it....
+	  s_tilt.py DONE
+	  stats.py DONE
+	  vector_mean.py CHANGED
+	  
+
+Dipole:
+	dipole_pinc.py
+	dipole_plat.py
+
+Weird problem.  do_unittest makes the Plotting stuff all run over again.  Maybe it's something about if __name__ == '__main__' ?  or just unittest.  maybe it doesn't know how to deal with the word test.
+BIO only runs once... but doesn't have a dounittest() method
+It doesn't happen in Uncategorized_programs either, which also doesn't have a do_unittest method.  This is weird.
+It looks like running do_unittest() does NOT create the ./new-test-output directory.  
+Ok.  It appears that do_unittest() goes back through the whole file again and run any loose commands it comes across.  So, if I don't have the complete_working_test() wrapped in this -- if __name__ == '__main__' -- then it runs complete_working_test again.  This is possibly because it has the word test in it, but probably not, since it also picked up on if statements that weren't wrapped in functions.
+Maybe there is a loose clean_house in there somewhere??
+Ok, removed one.
+It does seem that I have a problem, if I want to run all the programs in a row.  do_unittest kind of kills them.  huh.
+
+graph producing files that quit with a weird error:
+      ani_depthplot.py -- NO USEFUL STDOUT
+      aniso_magic.py ( also bootstrap-y)
+      find_EI.py  (bootstrap-y) IN PLOTTING
+      fishqq.py  -- NO USEFUL STDOUT
+      foldtest.py -- NO USEFUL STDOUT
+      histplot.py -- NO USEFUL STDOUT
+      irmaq_magic.py -- NO USEFUL STDOUT
+      lnp_magic.py -- IN PLOTTING
+      lowrie.py -- NO USEFUL STDOUT
+      lowrie_magic.py -- NO USEFUL STDOUT
+      plot_CDF.py -- NO USEFUL STDOUT
+      plot_magic_keys.py NOT SURE HOW TO DO THIS
+      plot_map_PTS.py -- CAN'T DO THIS ON ACCOUNT OF HAVING THE FREE VERSION
+      plotdi_a.py -- NO USEFUL STDOUT
+      qqplot.py __ WORKS JUST GREAT
+      quick_hyst.py -- NO USEFUL STDOUT
+      revtest.py  -- NO USEFUL STDOUT
+      revtest_magic.py -- basically same as above
+      site_edit_magic.py -- basically works
+      strip_magic.py -- NO USEFUL STDOUT 
+      thellier_magic.py -- BASICALLY WORKS
+      vgp_magic.py -- NO USEFUL STDOUT
+      zeq.py -- BASICALLY WORKS
+      zeq_magic.py -- BASICALLY WORKS
+      
+
+producing files that quit with a weird error:
+      ani_depthplot.py -- NO USEFUL STDOUT
+      fishqq.py  -- NO USEFUL STDOUT
+      foldtest.py -- NO USEFUL STDOUT
+      histplot.py -- NO USEFUL STDOUT
+      irmaq_magic.py -- NO USEFUL STDOUT
+      lowrie.py -- NO USEFUL STDOUT
+      lowrie_magic.py -- NO USEFUL STDOUT
+      plot_CDF.py -- NO USEFUL STDOUT
+      plotdi_a.py -- NO USEFUL STDOUT
+      quick_hyst.py -- NO USEFUL STDOUT
+      revtest.py  -- NO USEFUL STDOUT
+      revtest_magic.py -- basically same as above
+      strip_magic.py -- NO USEFUL STDOUT 
+      vgp_magic.py -- NO USEFUL STDOUT
+      
+      
+      
+
+complex:
+	MagIC tutorial
+	magic_select.py
+	make_magic_plots.py
+	measurement import scripts
+	orientation_magic.py
+	parse_measurements.py
+	plotXY.py
+	s_magic.py
+	specimens_results.py
+	thellier_GUI.py
+	thellier_magic_redo.py
+	update_measurements.py
+	upload_magic.py
+	zeq_magic_redo.py
+	
+Random (these ones are written up):
+	 fisher    fishrot_test()
+.py
+	 fishrot.py
+	 gaussian.py
+
+random stuff( these ones aren't yet):
+      tk03.py
+      uniform.py
+      
+
+ones that output into a bunch of files
+        -fsa  FILE: specify er_samples.txt file, default is er_samples.txt
+        -Fa FILE: specify anisotropy output file, default is arm_anisotropy.txt
+        -Fr FILE: specify results output file, default is aarm_results.txt
+	    aarm_magic.py
+
+programs that have the basic bio setup -- file in, file out -- but also have additional options
+	 igrf.py  # I did this one as a bio, but this is not strictly correct.  not sure.....
+	 pca.py # this one is a uc, now, and I'm fairly satisfied with it
+
+think I need to use args for the random extra command line options?
+
+Consider where to have the unittest.... the output is a little bit less nice, but the code is much more efficient, the way I've changed it to be. 
+
+For some reason, when I use this option: env.run(program, -f, file, >, other_file) I get no output, even though the command : program.py -f file > other_file works.  
+
+
+Lisa will want the output to be in a file, also you need to delete the extra test files. 
+
+
+complete list of tested programs:
+
+    complete_aarm_magic_test()
+    complete_angle_test()
+    complete_ani_depthplot_test()
+    complete_aniso_magic_test()	
+    complete_apwp_test()
+    complete_atrm_magic_test()
+    complete_b_vdm_test()
+    bootams.py
+    complete_cart_dir_test()
+    chartmaker.py --  only has an interactive mode
+    combine_magic.py
+    common_mean.py
+    cont_rot.py -- in Uncategorized_programs
+    convert_to_unix.py -- NOT TESTING
+    core_depthplot.py
+    complete_convert_samples_test()
+    curie.py -- LISA MUST FIX
+    customize_criteria.py
+    dayplot_magic.py
+    complete_di_geo_test()
+    di_eq.py
+    complete_dir_cart_test()
+    di_rot.py
+    di_vgp.py
+    dmag_magic.py
+    download_magic.py -- but it's not an awesome test, or anything.  
+    complete_di_tilt_test()
+    complete_eigs_s_test()
+    complete_eq_di_test()
+    eqarea.py
+    eqarea_ell.py -- Plotting.py
+    fishqq.py -- Plotting.py
+    complete_find_EI_test()
+    complete_foldtest_test()
+    gaussian_test()  -- in random stuff...? 
+    fishrot_test() -- ""
+    fisher_test() -- ""
+    complete_gobing_test()
+    complete_gofish_test()
+    complete_gokent_test()
+    complete_goprinc_test()
+    complete_grab_magic_key_test()
+    complete_histplot_test()
+    hysteresis_magic.py -- Extra_output.py
+    incfish.py -- Uncategorized_programs.py -- still needs fixing by Lisa
+    complete_igrf_test()
+    complete_irmaq_magic_test()
+    complete_k15_magic_test()
+    complete_k15_s_test()
+    complete_kly4s_magic_test()
+    complete_lnp_magic_test()
+    complete_lowrie_test()
+    complete_lowrie_magic_test()
+    MagIC.py -- PROBABLY NOT PLANNING TO TEST THIS ONE...
+    magic_select.py -- no WD option, Lisa must fix, NOT DONE
+    make_magic_plots.py --NOT SURE, NOT DONE
+    complete_mk_redo_test()
+    complete_nrm_specimens_magic_test()
+    orientation_magic.py
+    parse_measuremnts.py -- NOT DONE
+    plotxy.py -- DONE        
+    complete_pca_test()
+    complete_plot_cdf_test()
+    plot_magic_keys.py -- NOT DONE -- does not respond to taking raw-input, so you can't save a file and stuff
+    plot_mapPTS.py -- NOT DONE -- I only have the free version, so it doesn't work
+    complete_plotdi_a_test()    
+    pmag_results_extract.py()
+    complete_pt_rot_test()
+    complete_qqplot_test()
+    complete_quick_hyst_test()
+#    complete_revtest_test()  # DONE, but Lisa had planned on adding testable standard output, and has not..... so I'm testing it as a no output program
+    complete_s_eigs_test()
+    complete_s_geo_test()
+    s_hext.py
+    complete_s_tilt_test()
+    scalc.py -- putting in both Rename_me and bootstrap....
+    site_edit_magic.py 
+    specimens_results_magic.py -- Lisa may need to fix, because I can't get the correct file for this
+    complete_stats_test()
+    complete_strip_magic_test() # error when run with the lot, but works fine alone???  update: now fine.  huh               complete_sundec_test()
+    complete_thellier_magic_test()
+    thellier_magic_redo.py    
+    thellier_GUI.py -- not sure about testing this.  NOT DONE
+    tk03.py -- RANDOM-ish. in random_stuff.py NOT DONE
+    uniform.py -- AS ABOVE, NOT DONE
+    update_measurements.py -- NO CLEAR WAY TO TEST
+    upload_magic.py    
+    complete_vdm_b_test()
+    vector_mean.py
+    complete_vgp_di_test()
+    complete_vgpmap_magic_test()
+    WatsonsF.py
+    WatsonsV.py
+    complete_zeq_test()
+    complete_zeq_magic_test()
+    zeq_magic_redo.py
+
+
+    agm_magic.py # partially done, partially needs Lisa fixing
+
+other, to do:
+       make a script that will replace all the inaccurate path names, so it can be run on a different machine.  this includes that some stdout includes -- some_file was saved in this_directory
+       make output nicer, easier, put it into a file
+       possible: make is so that only freshly generated output files are labeled *.out, so that you can tidily wipe them all at the end. possibly this is not necessary, as the program ought to overwrite each time.  
+       somewhere there is a test that is outputting to None... you should figure out what this is!  Ha ha ha.  Jesus H.  Looks like it is incfish.py.  fix this, Lori!!
+       integrate the dipole tests
+       figure out the "random" tests (mostly in random_stuff.py)
+       work Extra_output
+       consider taking some of the functions out of the class Test_instance.  You can still leave them in the program, and still import that module into other places.... does this make more sense??  Not sure
+       add to file_parse a way to tell if you have tried to parse a file that, say, doesn't exist, or other failure
+       fix the weirdness with multiple errors being raised in Extra_out... and just the general confusing weirdness
+
+       maybe make a script for generating new, correct, and reference files (say if Lisa "knows" a program is working but she has changed some details of the output)
+
+       I will have to put the remove pmagpy thing into Rename_me.py. urgh. 
+
+       CIT_magic.py
+       # er_sites.txt is supposed to be designatable on the command-line with -Fsp, but is not.  fix this.... 
+
+
+       problem programs to return to:
+       parse_measurements.py
