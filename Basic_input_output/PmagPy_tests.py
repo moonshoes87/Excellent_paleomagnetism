@@ -141,8 +141,17 @@ def lowercase_all(a_list):
         new_list.append(n)
     return new_list
         
-li = ["he", "SHe", "It"]
-lowercase_all(li)
+
+def remove_new_outfile(): # this will not work as is.  see stackoverflow on subprocess and wildcards
+    subprocess.call(['rm', '*ello.out'], shell=True)
+
+def other_remove_outfile(): # nope
+    obj = env.run('rm', '*ello.out')
+
+remove_new_outfile()
+other_remove_outfile()
+
+
 
 def find_a_program(name):
     name = name.lower()

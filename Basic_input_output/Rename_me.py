@@ -1082,7 +1082,7 @@ def complete_zeq_magic_redo_test(): # BIO type
 
 # Measurement import stuff
  
-def complete_agm_magic_test():
+def complete_agm_magic_test(): # a little irregular
      agm_magic_infile = 'agm_magic_example.agm'
      agm_magic_outfile = 'agm_magic_output.out'
      agm_magic_reference = 'agm_magic_output_correct.out'
