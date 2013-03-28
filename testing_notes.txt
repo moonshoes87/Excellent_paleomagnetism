@@ -295,6 +295,9 @@ other, to do:
        consider taking some of the functions out of the class Test_instance.  You can still leave them in the program, and still import that module into other places.... does this make more sense??  Not sure
        add to file_parse a way to tell if you have tried to parse a file that, say, doesn't exist, or other failure
        fix the weirdness with multiple errors being raised in Extra_out... and just the general confusing weirdness
+       check chi_magic.py.  it is producing slightly different output
+       fix revtest_magic.py -- it is glitching
+       change over so that file_prefix and directory are set only in PmagPy_tests.py.  also, alias it as PT
 
        maybe make a script for generating new, correct, and reference files (say if Lisa "knows" a program is working but she has changed some details of the output)
 

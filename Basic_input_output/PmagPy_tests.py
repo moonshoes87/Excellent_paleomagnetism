@@ -9,6 +9,7 @@ import subprocess
 file_prefix = '/Users/nebula/Python/Basic_input_output/'
 directory =  '/Users/nebula/Python/Basic_input_output'
 
+the_variable = "hello"
 
 def iterate_through(some_list):
     print "Iterating through: " + str(some_list)

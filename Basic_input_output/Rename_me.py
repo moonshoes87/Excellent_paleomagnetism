@@ -5,7 +5,7 @@ env = TestFileEnvironment('./new-test-output')
 import unittest
 import subprocess
 import Basic_input_output
-import PmagPy_tests
+import PmagPy_tests as PT
 import Complex_test
 
 file_prefix = '/Users/nebula/Python/Basic_input_output/'
@@ -136,11 +136,11 @@ class Test_instance(object):
                
      def check_file_output(self, output_file, correct_file): # takes in two file names as arguments, parses their contents into list format, and then compares the first against the second
           print "checking file output, using: " + str(output_file) + " AND " + str(correct_file)
-#          parsed_output = PmagPy_tests.file_parse(output_file)
-          parsed_output = PmagPy_tests.file_parse_by_word_and_pmagpy_strip(output_file)
+#          parsed_output = PT.file_parse(output_file)
+          parsed_output = PT.file_parse_by_word_and_pmagpy_strip(output_file)
           print parsed_output
-#          parsed_correct = PmagPy_tests.file_parse(correct_file)
-          parsed_correct = PmagPy_tests.file_parse_by_word_and_pmagpy_strip(correct_file)
+#          parsed_correct = PT.file_parse(correct_file)
+          parsed_correct = PT.file_parse_by_word_and_pmagpy_strip(correct_file)
           print parsed_correct
           self.check_list_output(parsed_output, parsed_correct)
 
@@ -282,6 +282,7 @@ def complete_chartmaker_test():  # Plotting w/out stdout
      chartmaker = Test_instance('chartmaker.py', chartmaker_infile, chartmaker_outfile, chartmaker_reference, chartmaker_wrong, 'q', False)
      chartmaker.plot_program_sequence(stdout=False)
 #     chartmaker.unittest_short_output()
+
 
 
 # UC example.  creates a list, tests that list
@@ -803,7 +804,7 @@ def complete_lnp_magic_test(): # irregular type.  it had to be written the long 
      print"Testing lnp_magic.py"
      lnp_magic_infile = 'lnp_magic_pmag_specimens.txt'
      lnp_magic_outfile = None
-     lnp_magic_reference = PmagPy_tests.file_parse_by_word(file_prefix + 'lnp_magic_output_correct.txt')
+     lnp_magic_reference = PT.file_parse_by_word(file_prefix + 'lnp_magic_output_correct.txt')
      lnp_magic_wrong = ['sv01', 'Site', 'lines', 'planes', 'kappa', 'a95', 'dec', 'I am not right']
      lnp_magic = Test_instance('lnp_magic.py', lnp_magic_infile, lnp_magic_outfile, lnp_magic_reference, lnp_magic_wrong, None, True, '-crd', 'g', '-P')
      obj = env.run('lnp_magic.py', '-WD', '/Users/nebula/Python/Basic_input_output', '-f', 'lnp_magic_pmag_specimens.txt', '-crd', 'g', '-P')
@@ -912,6 +913,20 @@ def complete_revtest_test():
      revtest.plot_program_sequence(stdout=False)
 
 
+def complete_revtest_magic_test():
+     revtest_magic_infile = 'revtest_magic_example.dat'
+     revtest_magic_outfile = None
+     revtest_magic_reference = None
+     revtest_magic_wrong = "wrong"
+     revtest_magic = Test_instance('revtest_magic.py', revtest_magic_infile, revtest_magic_outfile, revtest_magic_reference, revtest_magic_wrong, 'a', False)
+     revtest_magic.plot_program_sequence(stdout=False)
+
+
+complete_revtest_test()
+
+complete_revtest_magic_test()
+
+
 
 def complete_site_edit_magic_test():
     site_edit_magic_reference = """sr01
@@ -975,12 +990,13 @@ Return for next specimen """
 
 def complete_thellier_magic_test(): # Irregular, and imperfect.  fix??
     thellier_magic_infile = 'thellier_magic_measurements.txt'
-    thellier_magic_reference = PmagPy_tests.file_parse_by_word('thellier_magic_output_correct.out')# this is in a file because it is irritatingly long to keep in the document.  I've left it above, for now.  
+    thellier_magic_reference = PT.file_parse_by_word('thellier_magic_output_correct.out')# this is in a file because it is irritatingly long to keep in the document.  I've left it above, for now.  
     print thellier_magic_reference
     thellier_magic_outfile = None
     thellier_magic_wrong = "wrong"
     thellier_magic = Test_instance('thellier_magic.py', thellier_magic_infile, thellier_magic_outfile, thellier_magic_reference, thellier_magic_wrong,  'q', False)
     thellier_magic.list_sequence()
+
 
 
 def complete_vgpmap_magic_test():
@@ -1080,8 +1096,6 @@ def complete_upload_magic_test(): # irregular.  must be tested in a different di
 # UNFINISHED
 
 
-def complete_revtest_magic_test():
-     pass
 
 def complete_working_test():
      # the examples
@@ -1099,76 +1113,76 @@ def complete_working_test():
      complete_nrm_specimens_magic_test()
      complete_sundec_test()
      complete_pca_test()
-     complete_scalc_test()  # will probably also go in bootstrap-plotting
+     complete_scalc_test()  #  also in bootstrap-plotting
      complete_scalc_magic_test() # also in bootstrap_plotting
      complete_vgp_di_test()
      complete_watsonsF_test()
      # the BIOs
-#     complete_apwp_test()
- #    complete_b_vdm_test()
-#     complete_cart_dir_test()
-#     complete_convert_samples_test()
- #    complete_di_geo_test()
-#     complete_di_tilt_test()
-#     complete_dir_cart_test()
-#     complete_di_rot_test()
-#     complete_di_vgp_test()
- #    complete_eigs_s_test()
-#     complete_eq_di_test()
- #    complete_gobing_test()
-#     complete_gofish_test()
- #    complete_gokent_test()
-#     complete_goprinc_test()
- #    complete_igrf_test()
-#     complete_k15_s_test()
- #    complete_mk_redo_test()
-#     complete_pt_rot_test()
-#     complete_s_eigs_test()
- #    complete_s_geo_test()
-#     complete_s_tilt_test()
- #    complete_stats_test()
-  #   complete_vdm_b_test()
-#complete_vector_mean_test()
+     complete_apwp_test()
+     complete_b_vdm_test()
+     complete_cart_dir_test()
+     complete_convert_samples_test()
+     complete_di_geo_test()
+     complete_di_tilt_test()
+     complete_dir_cart_test()
+     complete_di_rot_test()
+     complete_di_vgp_test()
+     complete_eigs_s_test()
+     complete_eq_di_test()
+     complete_gobing_test()
+     complete_gofish_test()
+     complete_gokent_test()
+     complete_goprinc_test()
+     complete_igrf_test()
+     complete_k15_s_test()
+     complete_mk_redo_test()
+     complete_pt_rot_test()
+     complete_s_eigs_test()
+     complete_s_geo_test()
+     complete_s_tilt_test()
+     complete_stats_test()
+     complete_vdm_b_test()
+     complete_vector_mean_test()
      complete_zeq_magic_redo_test()
      #PLOTTING
-#     complete_ani_depthplot_test()
- #    complete_basemap_magic_test()
-#     complete_biplot_magic_test()
-#     complete_chi_magic_test()
-#     complete_common_mean_test()
-#     complete_core_depthplot_test()
-#     complete_dayplot_magic_test()
-#     complete_dmag_magic_test()
- #    complete_eqarea_test()
-  #   complete_eqarea_ell_test()
-     #complete_fishqq_test()
-#     complete_foldtest_magic_test()
-#     complete_foldtest_test()
-#     complete_histplot_test()
- #    complete_irmaq_magic_test()
-#     complete_lnp_magic_test()
- #    complete_lowrie_test()
-#     complete_lowrie_magic_test()
-#     complete_plot_cdf_test()
- #    complete_plotdi_a_test()
-#     complete_plotxy_test()
-  #   complete_qqplot_test()
-   #  complete_quick_hyst_test()
+     complete_ani_depthplot_test()
+     complete_basemap_magic_test()
+     complete_biplot_magic_test()
+     complete_chi_magic_test()
+     complete_common_mean_test()
+     complete_core_depthplot_test()
+     complete_dayplot_magic_test()
+     complete_dmag_magic_test()
+     complete_eqarea_test()
+     complete_eqarea_ell_test()
+     complete_fishqq_test()
+     complete_foldtest_magic_test()
+     complete_foldtest_test()
+     complete_histplot_test()
+     complete_irmaq_magic_test()
+     complete_lnp_magic_test()
+     complete_lowrie_test()
+     complete_lowrie_magic_test()
+     complete_plot_cdf_test()
+     complete_plotdi_a_test()
+     complete_plotxy_test()
+     complete_qqplot_test()
+     complete_quick_hyst_test()
 #     complete_revtest_test() # NOT DONE
  #    complete_revtest_magic_test() # NOT DONE
-#     complete_site_edit_magic_test()
- #    complete_strip_magic_test()
-#     complete_s_hext_test()
-#     complete_thellier_magic_test()
-#     complete_vgpmap_magic_test()
-#     complete_zeq_magic_test()
-#     complete_agm_magic_test()
-#complete_upload_magic_test()
+     complete_site_edit_magic_test()
+     complete_strip_magic_test()
+     complete_s_hext_test()
+     complete_thellier_magic_test()
+     complete_vgpmap_magic_test()
+     complete_zeq_magic_test()
+     complete_agm_magic_test()
+     complete_upload_magic_test()
   #   pass
 
 if __name__ == '__main__':
      pass
-#     complete_working_test()
+   #  complete_working_test()
 
 
 
