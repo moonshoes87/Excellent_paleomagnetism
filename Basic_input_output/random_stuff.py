@@ -95,6 +95,56 @@ def complete_fishrot_test():
 # run each four times -- twice with default options, twice with Lisa example options
 
 
+
+def complete_tk03_test():
+    obj1 = env.run('tk03.py')
+    out1 = str(obj1.stdout).split()
+    obj2 = env.run('tk03.py')
+    out2 = str(obj2.stdout).split()
+    print out1
+    print " ---- "
+    print out2
+    if out1 == out2:
+        raise(NameError, "tk03.py produced non-random output")
+    if len(out1) != len(out2):
+        raise(NameError, "lengths should have been the same")
+    print "tk03 produced random distributions with default options"
+    obj3 = env.run('tk03.py', '-lat', '30', '-N', '50')
+    out3 = str(obj3.stdout).split()
+    obj4 = env.run('tk03.py', '-lat', '30', '-N', '50')
+    out4 = str(obj4.stdout).split()
+    if out3 == out4:
+        raise(NameError, "tk03.py produced non-random output")
+    if len(out3) != len(out4):
+        raise(NameError, "lengths should have been the same")
+    print "tk03 produced random distributions with -lat 30, -N 50"
+
+# could this be better???
+
+def complete_uniform_test():
+    obj1 = env.run("uniform.py")
+    out1 = str(obj1.stdout).split()
+    obj2 = env.run("uniform.py")
+    out2 = str(obj2.stdout).split()
+    if out1 == out2:
+        raise(NameError, "uniform.py produced non-random output")
+    if len(out1) != len(out2):
+        raise(NameError, "uniform.py produced the wrong amount of output")
+    print "uniform.py ran correctly with default options"
+    obj3 = env.run("uniform.py", '-N', '50')
+    out3 = str(obj3.stdout).split()
+    obj4 = env.run("uniform.py","-N", "50")
+    out4 = str(obj4.stdout).split()
+    if out3 == out4:
+        raise(NameError, "uniform.py produced non-random output")
+    if len(out3) != len(out4):
+        print len(out3), len(out4)
+        raise(NameError, "uniform.py produced the wrong amount of output")
+    print "uniform.py ran correctly with -N 50"
+
+
+
+
 def complete_gaussian_test():
     print "-"
     print "Testing gaussian.py"
@@ -145,12 +195,16 @@ def run_tests():
     complete_gaussian_test()
     complete_fishrot_test()
     complete_fisher_test()
+    complete_tk03_test()
+    complete_uniform_test()
 
-run_tests()
+if __name__ == "__main__":
+    run_tests()
 
 
 
 # add in:
 # tk03.py
 # uniform.py
+
 # unittests not really possible

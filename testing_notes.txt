@@ -267,8 +267,8 @@ complete list of tested programs:
     complete_thellier_magic_test()
     thellier_magic_redo.py    
     thellier_GUI.py -- not sure about testing this.  NOT DONE
-    tk03.py -- RANDOM-ish. in random_stuff.py NOT DONE
-    uniform.py -- AS ABOVE, NOT DONE
+    tk03.py -- DONE, but not excellent
+    uniform.py -- as above, DONE
     update_measurements.py -- NO CLEAR WAY TO TEST
     upload_magic.py    
     complete_vdm_b_test()
