@@ -193,7 +193,7 @@ def complete_gaussian_test():
     # -n is how many lines of output it makes, so I can test that. len(o) should equal the number that follows -n
     
 
-def run_tests():
+def complete_working_test():
     complete_gaussian_test()
     complete_fishrot_test()
     complete_fisher_test()
@@ -201,7 +201,7 @@ def run_tests():
     complete_uniform_test()
 
 if __name__ == "__main__":
-    run_tests()
+    complete_working_test()
 
 
 

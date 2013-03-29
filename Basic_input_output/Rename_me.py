@@ -303,13 +303,25 @@ def complete_di_eq_test(): # basic list type
      di_eq_wrong = "wrong"
      di_eq = Test_instance('di_eq.py', di_eq_infile, di_eq_outfile, di_eq_reference, di_eq_wrong, None, False)
      di_eq.list_sequence()
-#     di_eq_unittest = Bad_test(di_eq)
- #    di_eq_unittest.test_list_output_for_error()
-
 
 
 # the rest of the UCs
 #     def __init__(self, name, infile, outfile, ref_out, wrong_out, stdin, WD, *args):
+
+def complete_azdip_magic_test(): # irregular, because the outfile is signaled with -Fsa, not -F.  sequence is in longhand
+     # non-WD
+     azdip_magic_infile = 'azdip_magic_example.dat'
+     azdip_magic_reference = 'azdip_magic_output_correct.out'
+     azdip_magic_wrong = 'azdip_magic_output_incorrect.out'
+     azdip_magic_outfile = 'azdip_magic_output.out' # file_prefix +
+     azdip_magic = Test_instance('azdip_magic.py', azdip_magic_infile, None, azdip_magic_reference, azdip_magic_wrong, False, None, '-Fsa', azdip_magic_outfile, '-mcd', 'FS-FD:SO-POM', '-loc', "Northern Iceland")
+     azdip_magic.run_program()
+     azdip_magic.check_file_output(azdip_magic_outfile, azdip_magic.ref_out)
+     azdip_magic.unittest_file()
+
+
+
+
 # this one is a weird amalgam, because of two -f inputs.  but it works.  
 def complete_combine_magic_test(): # irregular type
     output_file = 'combine_magic_output_new.out'
@@ -339,6 +351,34 @@ def complete_cont_rot_test(): # Irregular type -- running specially because it h
     cont_rot.test_help()
     cont_rot_unittest = Bad_test(cont_rot)
     cont_rot_unittest.test_short_output_for_error()
+
+
+def complete_download_magic_test(): # irregular
+     subprocess.call(['rm', '-rf', 'Location_1/'])
+     subprocess.call(['rm', 'er_locations.txt', 'magic_measurements.txt', 'pmag_samples.txt', 'er_samples.txt', 'magic_methods.txt', 'pmag_sites.txt', 'er_ages.txt', 'er_sites.txt', 'pmag_criteria.txt', 'pmag_specimens.txt', 'er_citations.txt', 'er_specimens.txt', 'pmag_results.txt'])  # deleting all files first, just in case they were missed the time before, as they would in the case of an error.  
+     download_magic_infile = 'download_magic_example.dat'
+     download_magic_reference = download_magic_ref
+     download_magic_wrong = 'download_magic_correct_output.out'
+     download_magic = Test_instance('download_magic.py', download_magic_infile, None, download_magic_reference, download_magic_wrong, 'y', True)
+     output = str(download_magic.run_program()).split()
+     print output
+     clean_out = []
+     for thing in output: # removing long path names from output, so it can be run on any machine
+          if directory in thing:
+               pass
+          else:
+               clean_out.append(thing)
+     print clean_out
+     download_magic.check_list_output(clean_out, download_magic_reference)
+     subprocess.call(['rm', '-rf', 'Location_1/'])
+     subprocess.call(['rm', 'er_locations.txt', 'magic_measurements.txt', 'pmag_samples.txt', 'er_samples.txt', 'magic_methods.txt', 'pmag_sites.txt', 'er_ages.txt', 'er_sites.txt', 'pmag_criteria.txt', 'pmag_specimens.txt', 'er_citations.txt', 'er_specimens.txt', 'pmag_results.txt'])
+     print "all created files removed"
+
+download_magic_ref = ['working', 'on:', "'er_locations'", 'er_locations', 'data', 'put', 'in', 'working', 'on:', "'er_sites'", 'er_sites', 'data', 'put', 'in', 'working', 'on:', "'er_samples'", 'er_samples', 'data', 'put', 'in', 'working', 'on:', "'er_specimens'", 'er_specimens', 'data', 'put', 'in', 'working', 'on:', "'er_ages'", 'er_ages', 'data', 'put', 'in', 'working', 'on:', "'er_citations'", 'er_citations', 'data', 'put', 'in', 'working', 'on:', "'magic_measurements'", 'magic_measurements', 'data', 'put', 'in', 'working', 'on:', "'pmag_specimens'", 'pmag_specimens', 'data', 'put', 'in', 'working', 'on:', "'pmag_samples'", 'pmag_samples', 'data', 'put', 'in', 'working', 'on:', "'pmag_sites'", 'pmag_sites', 'data', 'put', 'in', 'working', 'on:', "'pmag_results'", 'pmag_results', 'data', 'put', 'in', 'working', 'on:', "'pmag_criteria'", 'pmag_criteria', 'data', 'put', 'in', 'working', 'on:', "'magic_methods'", 'magic_methods', 'data', 'put', 'in', 'location_1:', 'Snake', 'River', 'unpacking:', '1', 'read', 'in', '1', 'stored', 'in', 'unpacking:', '27', 'read', 'in', '27', 'stored', 'in', 'unpacking:', '271', 'read', 'in', '271', 'stored', 'in', 'unpacking:', '177', 'read', 'in', '177', 'stored', 'in', 'unpacking:', '20', 'read', 'in', '20', 'stored', 'in', 'unpacking:', '17', 'read', 'in', 'unpacking:', '3072', 'read', 'in', '3072', 'stored', 'in', 'unpacking:', '225', 'read', 'in', '225', 'stored', 'in', 'unpacking:', '166', 'read', 'in', '166', 'stored', 'in', 'unpacking:', '30', 'read', 'in', '30', 'stored', 'in', 'unpacking:', '24', 'read', 'in', '24', 'stored', 'in', 'unpacking:', '7', 'read', 'in', 'unpacking:', '32', 'read', 'in']
+
+
+
+
 
 def complete_pt_rot_test(): # Irregular type.  has both an -ff and an -f option.  testing both here. 
      pt_rot = Test_instance('pt_rot.py', 'pt_rot_example.dat', 'pt_rot_results_new.out', 'pt_rot_results_correct.out', 'pt_rot_results_incorrect.out', None, True)
@@ -1123,9 +1163,11 @@ def complete_working_test():
      complete_chartmaker_test()
      complete_di_eq_test()
      # the UCs
+     complete_azdip_magic_test()
      complete_combine_magic_test()
      complete_cont_rot_test()
      complete_customize_criteria_test()
+     complete_download_magic_test()
      complete_dipole_pinc_test()
      complete_dipole_plat_test()
      complete_grab_magic_key_test()
@@ -1204,6 +1246,7 @@ def complete_working_test():
 if __name__ == '__main__':
      pass
 #     complete_working_test()
-
+# PT.clean_house()
+# PT.remove_new_outfiles()
 
 

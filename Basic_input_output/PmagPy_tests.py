@@ -142,15 +142,11 @@ def lowercase_all(a_list):
     return new_list
         
 
-def remove_new_outfile(): # this will not work as is.  see stackoverflow on subprocess and wildcards
-    subprocess.call(['rm', '*ello.out'], shell=True)
-
-def other_remove_outfile(): # nope
-    obj = env.run('rm', '*ello.out')
-
-remove_new_outfile()
-other_remove_outfile()
-
+def remove_new_outfiles(): 
+    """
+    gets rid of all freshly created outfiles.
+    """
+    subprocess.call('rm ' + directory + '/*_new.out', shell=True)
 
 
 def find_a_program(name):
@@ -187,5 +183,5 @@ def find_a_program(name):
 if __name__ == "__main__":
     print "Please type the name of the program test you wish to find"
     print "You may enter either: program.py, or: program. No quotation marks, case does not matter"
-    search_item = str(raw_input("what program are you looking for?   "))
-    find_a_program(search_item)
+ #   search_item = str(raw_input("what program are you looking for?   "))
+#    find_a_program(search_item)

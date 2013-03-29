@@ -194,6 +194,7 @@ complete list of tested programs:
     complete_aniso_magic_test()	
     complete_apwp_test()
     complete_atrm_magic_test()
+    azdip_magic.py
     complete_b_vdm_test()
     bootams.py
     complete_cart_dir_test()
@@ -293,7 +294,9 @@ complete list of tested programs:
 other, to do:
        make a script that will replace all the inaccurate path names, so it can be run on a different machine.  this includes that some stdout includes -- some_file was saved in this_directory
        make output nicer, easier, put it into a file
-       possible: make is so that only freshly generated output files are labeled *.out, so that you can tidily wipe them all at the end. possibly this is not necessary, as the program ought to overwrite each time.  update: maybe complicated.  see: http://stackoverflow.com/questions/9997048/python-subprocess-wildcard-usage
+       use these at the end of the test:
+       	   # PT.clean_house()
+       	   # PT.remove_new_outfiles() 
        somewhere there is a test that is outputting to None... you should figure out what this is!  Ha ha ha.  Jesus H.  Looks like it is incfish.py.  fix this, Lori!! -- DONE
        integrate the dipole tests -- DONE
        figure out the "random" tests (mostly in random_stuff.py) -- DONE
@@ -305,7 +308,7 @@ other, to do:
        change over so that file_prefix and directory are set only in PmagPy_tests.py.  also, alias it as PT.  DONE
        consider try/except in the run everything so that the tests keep running even if you get an error 
        remove Plotting.py
-       maybe make a script for generating new, correct, and reference files (say if Lisa "knows" a program is working but she has changed some details of the output)
+       maybe make a script for generating new, correct, and wrong files (say if Lisa "knows" a program is working but she has changed some details of the output)
 
        I will have to put the remove pmagpy thing into Rename_me.py. urgh. 
 
