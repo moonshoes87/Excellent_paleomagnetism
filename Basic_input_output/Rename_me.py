@@ -68,6 +68,7 @@ class Test_instance(object):
          # this function simply runs the command line program with whatever its options
          # it takes the arguments "stdout", "plot", or  "file", and respectively returns the standard output for the program, the plots created, or the file created/updated
      def run_program(self, output_type="stdout"): # 
+          PT.clean_house() # the prevents programs from interfering with each other.... 
           if self.WD:
                print "WD program about to run:"
                print(self.name, '-WD', directory, '-f', self.infile, '-F', self.outfile, self.arg_0, self.arg_1, self.arg_2, self.arg_3, self.arg_4, self.arg_5, 'stdin='+str(self.stdin))
@@ -76,6 +77,9 @@ class Test_instance(object):
                print "Non-WD program about to run:"
                print self.name, '-f', self.infile, '-F', self.outfile, self.arg_0, self.arg_1, self.arg_2, self.arg_3, self.arg_4, self.arg_5,  'stdin=' + str(self.stdin)
                obj = env.run(self.name, '-f', self.infile, '-F', self.outfile, self.arg_0, self.arg_1, self.arg_2, self.arg_3, self.arg_4, self.arg_5, stdin=self.stdin)
+          if "not a valid" in str(obj.stdout):
+               print obj.stdout
+               raise NameError(str(self.name) + " encountered an invalid file")
           if output_type == "plot":
                print "output is plot"
                if obj.files_created == {}:
@@ -291,15 +295,7 @@ def complete_di_eq_test(): # basic list type
      print "Testing di_eq.py"
      di_eq_infile = 'di_eq_example.dat'
      di_eq_outfile = None
-     di_eq_reference = ['-0.239410', '-0.893491', '0.436413', '0.712161', '0.063844', '0.760300', '0.321447', '0.686216', '0.322720',\
- '0.670562', '0.407412', '0.540654', '0.580156', '0.340376', '0.105351', '0.657728', '0.247173', '0.599687', '0.182349', '0.615600',\
- '0.174815', '0.601717', '0.282746', '0.545472', '0.264863', '0.538273', '0.235758', '0.534536', '0.290665', '0.505482', '0.260629',\
- '0.511513', '0.232090', '0.516423', '0.244448', '0.505666', '0.277927', '0.464381', '0.250510', '0.477152', '0.291770', '0.440816',\
- '0.108769', '0.516148', '0.196706', '0.482014', '0.349390', '0.381292', '0.168407', '0.475566', '0.206286', '0.446444', '0.175701',\
- '0.450649', '0.301104', '0.378539', '0.204955', '0.423970', '0.199755', '0.422584', '0.346920', '0.308010', '0.119030', '0.441144',\
- '0.239848', '0.376486', '0.269528', '0.342510', '0.085451', '0.423789', '0.192224', '0.387233', '0.172608', '0.395084', '0.272008',\
- '0.320741', '0.393981', '0.117451', '-0.017726', '0.406002', '0.154273', '0.367000', '0.213903', '0.335760', '0.103221', '0.372202'\
-, '0.231833', '0.283245', '0.072160', '0.351538', '0.007802', '0.319236', '0.152583', '0.265350', '0.248133', '0.136412']
+     di_eq_reference = ['-0.239410', '-0.893491', '0.436413', '0.712161', '0.063844', '0.760300', '0.321447', '0.686216', '0.322720', '0.670562', '0.407412', '0.540654', '0.580156', '0.340376', '0.105351', '0.657728', '0.247173', '0.599687', '0.182349', '0.615600', '0.174815', '0.601717', '0.282746', '0.545472', '0.264863', '0.538273', '0.235758', '0.534536', '0.290665', '0.505482', '0.260629', '0.511513', '0.232090', '0.516423', '0.244448', '0.505666', '0.277927', '0.464381', '0.250510', '0.477152', '0.291770', '0.440816', '0.108769', '0.516148', '0.196706', '0.482014', '0.349390', '0.381292', '0.168407', '0.475566', '0.206286', '0.446444', '0.175701', '0.450649', '0.301104', '0.378539', '0.204955', '0.423970', '0.199755', '0.422584', '0.346920', '0.308010', '0.119030', '0.441144', '0.239848', '0.376486', '0.269528', '0.342510', '0.085451', '0.423789', '0.192224', '0.387233', '0.172608', '0.395084', '0.272008', '0.320741', '0.393981', '0.117451', '-0.017726', '0.406002', '0.154273', '0.367000', '0.213903', '0.335760', '0.103221', '0.372202', '0.231833', '0.283245', '0.072160', '0.351538', '0.007802', '0.319236', '0.152583', '0.265350', '0.248133', '0.136412']
      di_eq_wrong = "wrong"
      di_eq = Test_instance('di_eq.py', di_eq_infile, di_eq_outfile, di_eq_reference, di_eq_wrong, None, False)
      di_eq.list_sequence()
@@ -318,8 +314,6 @@ def complete_azdip_magic_test(): # irregular, because the outfile is signaled wi
      azdip_magic.run_program()
      azdip_magic.check_file_output(azdip_magic_outfile, azdip_magic.ref_out)
      azdip_magic.unittest_file()
-
-
 
 
 # this one is a weird amalgam, because of two -f inputs.  but it works.  
@@ -377,9 +371,6 @@ def complete_download_magic_test(): # irregular
 download_magic_ref = ['working', 'on:', "'er_locations'", 'er_locations', 'data', 'put', 'in', 'working', 'on:', "'er_sites'", 'er_sites', 'data', 'put', 'in', 'working', 'on:', "'er_samples'", 'er_samples', 'data', 'put', 'in', 'working', 'on:', "'er_specimens'", 'er_specimens', 'data', 'put', 'in', 'working', 'on:', "'er_ages'", 'er_ages', 'data', 'put', 'in', 'working', 'on:', "'er_citations'", 'er_citations', 'data', 'put', 'in', 'working', 'on:', "'magic_measurements'", 'magic_measurements', 'data', 'put', 'in', 'working', 'on:', "'pmag_specimens'", 'pmag_specimens', 'data', 'put', 'in', 'working', 'on:', "'pmag_samples'", 'pmag_samples', 'data', 'put', 'in', 'working', 'on:', "'pmag_sites'", 'pmag_sites', 'data', 'put', 'in', 'working', 'on:', "'pmag_results'", 'pmag_results', 'data', 'put', 'in', 'working', 'on:', "'pmag_criteria'", 'pmag_criteria', 'data', 'put', 'in', 'working', 'on:', "'magic_methods'", 'magic_methods', 'data', 'put', 'in', 'location_1:', 'Snake', 'River', 'unpacking:', '1', 'read', 'in', '1', 'stored', 'in', 'unpacking:', '27', 'read', 'in', '27', 'stored', 'in', 'unpacking:', '271', 'read', 'in', '271', 'stored', 'in', 'unpacking:', '177', 'read', 'in', '177', 'stored', 'in', 'unpacking:', '20', 'read', 'in', '20', 'stored', 'in', 'unpacking:', '17', 'read', 'in', 'unpacking:', '3072', 'read', 'in', '3072', 'stored', 'in', 'unpacking:', '225', 'read', 'in', '225', 'stored', 'in', 'unpacking:', '166', 'read', 'in', '166', 'stored', 'in', 'unpacking:', '30', 'read', 'in', '30', 'stored', 'in', 'unpacking:', '24', 'read', 'in', '24', 'stored', 'in', 'unpacking:', '7', 'read', 'in', 'unpacking:', '32', 'read', 'in']
 
 
-
-
-
 def complete_pt_rot_test(): # Irregular type.  has both an -ff and an -f option.  testing both here. 
      pt_rot = Test_instance('pt_rot.py', 'pt_rot_example.dat', 'pt_rot_results_new.out', 'pt_rot_results_correct.out', 'pt_rot_results_incorrect.out', None, True)
      pt_rot.file_in_file_out_sequence()
@@ -396,10 +387,6 @@ def complete_pt_rot_test(): # Irregular type.  has both an -ff and an -f option.
      pt_rot_extra_unittest = Bad_test(pt_rot_extra)
      pt_rot_extra_unittest.test_file_for_error()
 
-
-     
-
-
 def complete_customize_criteria_test():  # BIO type
     customize_criteria_infile = 'customize_criteria_example.dat'
     customize_criteria_output = 'customize_criteria_outfile.out'
@@ -407,8 +394,6 @@ def complete_customize_criteria_test():  # BIO type
     customize_criteria_wrong = "customize_criteria_output_incorrect.out"
     customize_criteria = Test_instance('customize_criteria.py', customize_criteria_infile, customize_criteria_output, customize_criteria_reference, customize_criteria_wrong, '1', False)
     customize_criteria.file_in_file_out_sequence(interactive=True)
-#    customize_criteria_unittest = Bad_test(customize_criteria)
- #   customize_criteria_unittest.test_file_for_error()
 
 
 def complete_dipole_pinc_test(): # list type
@@ -428,7 +413,6 @@ def complete_dipole_plat_test(): # list type
      dipole_plat.list_sequence()
 
 
-
 grab_magic_key_reference_list = ['42.60264', '42.60264', '42.60352', '42.60104', '42.73656', '42.8418', '42.8657', '42.92031', '42.56857', '42.49964', '42.49962', '42.50001', '42.52872', '42.45559', '42.48923', '42.46186', '42.69156', '42.65289', '43.30504', '43.36817', '43.42133', '43.8859', '43.84273', '43.53289', '43.57494', '44.15663', '44.18629']
 
 def complete_grab_magic_key_test(): # List type
@@ -441,7 +425,6 @@ def complete_grab_magic_key_test(): # List type
     grab_magic_key.list_sequence()
     print "Sucessfully finished complete_grab_magic_key_test"
 
-
 def complete_incfish_test(): # BIO type
     incfish_infile = 'incfish_example_inc.dat'
     incfish_outfile = 'incfish_results_new.out'
@@ -449,12 +432,6 @@ def complete_incfish_test(): # BIO type
     incfish_wrong = 'incfish_results_incorrect.out'
     incfish = Test_instance('incfish.py', incfish_infile, incfish_outfile, incfish_reference, incfish_wrong, None, False)
     incfish.file_in_file_out_sequence()
-#    incfish_unittest = Bad_test(incfish)
- #   incfish_unittest.test_file_for_error()
-    # no interactive                                                                                                                 
-
-
-
 
 def complete_magic_select_test(): # BIO type.. but it doesn't work yet!  Lisa must add in a WD option.  
     magic_select_infile = 'magic_select_example.txt'
@@ -576,10 +553,6 @@ def complete_watsonsF_test(): # list/stdout type
      watsonsF = Test_instance('watsonsF.py', watsonsF_infile, watsonsF_outfile, watsonsF_reference, watsonsF_wrong, None, False, '-f2', watsonsF_infile2)
      watsonsF.list_sequence()
 
-
-
-
-
 # BIO ones
 
 def complete_apwp_test():
@@ -656,7 +629,7 @@ def complete_k15_s_test():
     k15_s.file_in_file_out_sequence()
 
 def complete_mk_redo_test():
-    mk_redo = Test_instance('mk_redo.py', 'pmag_specimens.txt', 'mk_redo_results_new.out', 'mk_redo_results_correct.out', 'mk_redo_results_incorrect.out', None, True)
+    mk_redo = Test_instance('mk_redo.py', 'mk_redo_example.txt', 'mk_redo_results_new.out', 'mk_redo_results_correct.out', 'mk_redo_results_incorrect.out', None, True)
     mk_redo.file_in_file_out_sequence()
 
 def complete_s_eigs_test():
@@ -689,7 +662,6 @@ def complete_vector_mean_test():
      vector_mean.file_in_file_out_sequence()
      obj = env.run('vector_mean.py', '-f', file_prefix + infile)
      print obj.stdout
-
 
 
 # end of BIO section : ) 
@@ -737,7 +709,7 @@ def complete_chi_magic_test():
      chi_magic = Test_instance('chi_magic.py', chi_magic_infile, chi_magic_outfile, chi_magic_reference, chi_magic_wrong, 'a', False)
      chi_magic.plot_program_sequence(stdout=False)
 
-
+#complete_chi_magic_test()
 
 def complete_common_mean_test(): # Irregular type: a little fanciness after the standard stuff
      common_mean_infile = 'common_mean_ex_file1.dat'
@@ -806,17 +778,20 @@ def complete_eqarea_ell_test():
      eqarea_ell = Test_instance('eqarea_ell.py', eqarea_ell_infile, eqarea_ell_outfile, eqarea_ell_reference, eqarea_ell_wrong, 'q', False, '-ell', 'B')
      eqarea_ell.plot_program_sequence(stdout=True)
 
-
-
 def complete_fishqq_test(): # irregular type, because it produces a useful outfile as well as a plot
      fishqq_infile = 'fishqq_example.dat'
      fishqq_outfile = 'fishqq_results_new.out'
      fishqq_reference = "{'exp1.svg': <FoundFile ./new-test-output:exp1.svg>, 'unf1.svg': <FoundFile ./new-test-output:unf1.svg>}"
+     # not sure why the order switched....
+     new_fishqq_reference = "{'unf1.svg': <FoundFile ./new-test-output:unf1.svg>, 'exp1.svg': <FoundFile ./new-test-output:exp1.svg>}"  # sometimes this one is correct, sometimes the other.  huh.
      fishqq_file_reference = 'fishqq_results_correct.out'
      fishqq_wrong = "wrong"
      fishqq = Test_instance('fishqq.py', fishqq_infile, fishqq_outfile, fishqq_reference, fishqq_wrong, 'a', False)
      fishqq.plot_program_sequence(stdout=False)
      fishqq.check_file_output(fishqq.outfile, fishqq_file_reference)
+
+complete_fishqq_test()
+
 
 
 def complete_foldtest_magic_test(): # Irregular: has potential for bootstrapping.  I'm just not sure if I should simply test the file out instead
@@ -828,6 +803,7 @@ def complete_foldtest_magic_test(): # Irregular: has potential for bootstrapping
      foldtest_magic = Test_instance('foldtest_magic.py', foldtest_magic_infile, foldtest_magic_outfile, foldtest_magic_reference, foldtest_magic_wrong, 'a', True,  '-fsa', foldtest_magic_fsa, '-n', '100')
      foldtest_magic.plot_program_sequence(stdout=False)
 
+complete_foldtest_magic_test()
 
 def complete_foldtest_test(): # irregular?  may be boostrap-y
     # doesn't produce stdout :(                                                                                 
@@ -860,6 +836,7 @@ def complete_irmaq_magic_test():
 
 
 def complete_lnp_magic_test(): # irregular type.  it had to be written the long way, because it won't run with -F.  
+     PT.clean_house() # because it doesn't have run_program()
      print"Testing lnp_magic.py"
      lnp_magic_infile = 'lnp_magic_pmag_specimens.txt'
      lnp_magic_outfile = None
@@ -871,7 +848,6 @@ def complete_lnp_magic_test(): # irregular type.  it had to be written the long 
      lnp_magic.test_help()
      lnp_magic.check_list_output(result, lnp_magic.ref_out)
      lnp_magic.unittest_list()
-
 
 
 def complete_lowrie_test():
@@ -906,7 +882,6 @@ def complete_plot_cdf_test():
      plot_cdf.plot_program_sequence(stdout=False)
 
 
-
 def complete_plotdi_a_test():
     print "Testing plotdi_a.py"
     plotdi_a_infile = "plotdi_a_example.dat"
@@ -915,7 +890,6 @@ def complete_plotdi_a_test():
     plotdi_a_wrong = ['1', 'one']
     plotdi_a = Test_instance('plotdi_a.py', plotdi_a_infile, plotdi_a_outfile, plotdi_a_reference, plotdi_a_wrong, 'a', False)
     plotdi_a.plot_program_sequence(stdout=False)
-
 
 def complete_plotxy_test():
      plotxy_infile = 'plotxy_example.dat'
@@ -980,12 +954,6 @@ def complete_revtest_magic_test():
      revtest_magic_wrong = "wrong"
      revtest_magic = Test_instance('revtest_magic.py', revtest_magic_infile, revtest_magic_outfile, revtest_magic_reference, revtest_magic_wrong, 'a', True)
      revtest_magic.plot_program_sequence(stdout=False)
-
-
-
-
-
-
 
 def complete_site_edit_magic_test():
     site_edit_magic_reference = """sr01
@@ -1057,7 +1025,6 @@ def complete_thellier_magic_test(): # Irregular, and imperfect.  fix??
     thellier_magic.list_sequence()
 
 
-
 def complete_vgpmap_magic_test():
     vgpmap_magic_infile = 'vgpmap_magic_pmag_results.txt'
     vgpmap_magic_outfile = None
@@ -1100,8 +1067,7 @@ def complete_zeq_magic_test(): # NOT SURE THIS IS ACTUALLY USEFUL.  Consider
     fsp = 'zeq_magic_specimens.txt'
     zeq_magic = Test_instance('zeq_magic.py', zeq_magic_infile, zeq_magic_outfile, zeq_magic_reference, zeq_magic_wrong, 'q', True, '-fsa', fsa, '-fsp', fsp, '-crd', 'g')
     zeq_magic.plot_program_sequence(stdout=True)
-# could do the below, but it takes forever and creates a TON of files                                                          
-#    extra_zeq_magic = Plot('zeq_magic.py', zeq_magic_infile, zeq_magic_reference, zeq_magic_wrong, None, True, '-fsa', fsa, '-fsp', fsp, '-sav')                                                          
+# could do the below, but it takes forever and creates a TON of files                                                       #    extra_zeq_magic = Plot('zeq_magic.py', zeq_magic_infile, zeq_magic_reference, zeq_magic_wrong, None, True, '-fsa', fsa, '-fsp', fsp, '-sav')                                                          
 
 
 def complete_zeq_magic_redo_test(): # BIO type
@@ -1114,10 +1080,6 @@ def complete_zeq_magic_redo_test(): # BIO type
      zeq_magic_redo = Test_instance('zeq_magic_redo.py', zeq_redo_infile, zeq_redo_outfile, zeq_redo_reference, zeq_redo_wrong, None, True, '-fre', fre, '-fsa', fsa)
      zeq_magic_redo.file_in_file_out_sequence()
 
-
-
-
-#"zeq_magic_redo.py -f zeq_magic_redo_measurements.txt -fre zeq_magic_redo -fsa zeq_magic_er_samples.txt -F zeq_magic_redo_results_new.out"
 
 
 # Measurement import stuff
@@ -1137,7 +1099,6 @@ def complete_agm_magic_test(): # a little irregular
      extra_agm.file_in_file_out_sequence()
 
 
-
 def complete_upload_magic_test(): # irregular.  must be tested in a different directory. 
      obj = env.run("upload_magic.py", cwd=directory + "/upload_magic") # cwd allows specifying a directory other than the one you are in
      reference = "upload_magic/correct_upload.txt"
@@ -1147,12 +1108,6 @@ def complete_upload_magic_test(): # irregular.  must be tested in a different di
      upload_magic.test_help()
      upload_magic.check_file_output(file_prefix + "upload_magic/upload.txt", upload_magic.ref_out)
      subprocess.call(['rm', 'upload_magic/upload.txt'])
-
-
-
-     
-
-# UNFINISHED
 
 
 
@@ -1218,6 +1173,7 @@ def complete_working_test():
      complete_dmag_magic_test()
      complete_eqarea_test()
      complete_eqarea_ell_test()
+# got up to here:
      complete_fishqq_test()
      complete_foldtest_magic_test()
      complete_foldtest_test()

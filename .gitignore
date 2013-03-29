@@ -71,3 +71,4 @@ test_angle.py
 ReadStations.py
 .DS_Store
 Basic_input_output/new-test-output/*
+Basic_input_output/*_new.out
