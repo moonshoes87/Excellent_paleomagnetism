@@ -790,10 +790,6 @@ def complete_fishqq_test(): # irregular type, because it produces a useful outfi
      fishqq.plot_program_sequence(stdout=False)
      fishqq.check_file_output(fishqq.outfile, fishqq_file_reference)
 
-complete_fishqq_test()
-
-
-
 def complete_foldtest_magic_test(): # Irregular: has potential for bootstrapping.  I'm just not sure if I should simply test the file out instead
      foldtest_magic_infile = 'foldtest_magic_example.txt'
      foldtest_magic_outfile = 'foldtest_magic_results_new.out'
@@ -802,8 +798,6 @@ def complete_foldtest_magic_test(): # Irregular: has potential for bootstrapping
      foldtest_magic_fsa = 'foldtest_magic_er_samples.txt'
      foldtest_magic = Test_instance('foldtest_magic.py', foldtest_magic_infile, foldtest_magic_outfile, foldtest_magic_reference, foldtest_magic_wrong, 'a', True,  '-fsa', foldtest_magic_fsa, '-n', '100')
      foldtest_magic.plot_program_sequence(stdout=False)
-
-complete_foldtest_magic_test()
 
 def complete_foldtest_test(): # irregular?  may be boostrap-y
     # doesn't produce stdout :(                                                                                 
@@ -1200,8 +1194,8 @@ def complete_working_test():
   #   pass
 
 if __name__ == '__main__':
-     pass
-#     complete_working_test()
+#     pass
+     complete_working_test()
 # PT.clean_house()
 # PT.remove_new_outfiles()
 

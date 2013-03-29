@@ -107,9 +107,9 @@ def file_parse_by_word_and_pmagpy_strip(a_file): # both parses file, AND strips 
 def clean_house():
     print "CLEANING HOUSE"
     print "-"
-    print "-"
-    print "-"
-    subprocess.call(['rm', '-rf',  'new-test-output/']) # add long path name???
+# copy this!!!
+#    subprocess.call('rm ' + directory + '/*_new.out', shell=True)
+    subprocess.call('rm ' + file_prefix + 'new-test-output/*', shell=True) # add long path name???
 
 def test_for_bad_file(output):
     output = str(output)
