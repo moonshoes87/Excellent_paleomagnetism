@@ -1028,6 +1028,7 @@ def complete_vgpmap_magic_test():
     vgpmap_magic.plot_program_sequence(stdout=False)
 #    obj = env.run('vgpmap_magic.py', '-WD', directory, '-f', vgpmap_magic_infile, '-crd', 'g', '-prj', 'ortho', '-eye', '60', '0', '-sym', 'ko', '10', '-fmt', 'png', stdin='a') 
 
+
 zeq_magic_reference = """sr01a1 0 out of  177
     looking up previous interpretations...
 g: 0      0.0  C  4.065e-05   324.1    66.0 
@@ -1062,6 +1063,9 @@ def complete_zeq_magic_test(): # NOT SURE THIS IS ACTUALLY USEFUL.  Consider
     zeq_magic = Test_instance('zeq_magic.py', zeq_magic_infile, zeq_magic_outfile, zeq_magic_reference, zeq_magic_wrong, 'q', True, '-fsa', fsa, '-fsp', fsp, '-crd', 'g')
     zeq_magic.plot_program_sequence(stdout=True)
 # could do the below, but it takes forever and creates a TON of files                                                       #    extra_zeq_magic = Plot('zeq_magic.py', zeq_magic_infile, zeq_magic_reference, zeq_magic_wrong, None, True, '-fsa', fsa, '-fsp', fsp, '-sav')                                                          
+
+
+
 
 
 def complete_zeq_magic_redo_test(): # BIO type
@@ -1167,7 +1171,6 @@ def complete_working_test():
      complete_dmag_magic_test()
      complete_eqarea_test()
      complete_eqarea_ell_test()
-# got up to here:
      complete_fishqq_test()
      complete_foldtest_magic_test()
      complete_foldtest_test()
@@ -1188,6 +1191,7 @@ def complete_working_test():
      complete_s_hext_test()
      complete_thellier_magic_test()
      complete_vgpmap_magic_test()
+# got up to here:
      complete_zeq_magic_test()
      complete_agm_magic_test()
      complete_upload_magic_test()

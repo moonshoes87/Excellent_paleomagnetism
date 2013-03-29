@@ -14,3 +14,13 @@ Some of the tests malfunction when other python programs are run simultaneously 
 
 
 It is possible to have problems because there are two versions of a saved document in new-test-output/.  There are some safeguards set in place to try to prevent this, but clearing that directory may be necessary at some point.  By default, the directory should self-clear when you begin a new session of testing. 
+
+if comparing to stdout, make sure to have the reference tight in quotes.  I.e.: thing = """stuff
+   and more stuff
+   this is fun"""
+NOT
+	stuff = """
+	stuff
+    and more stuff
+    this is fun
+"""
