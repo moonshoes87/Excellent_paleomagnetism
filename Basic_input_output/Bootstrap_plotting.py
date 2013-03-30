@@ -45,7 +45,7 @@ aniso_magic_reference = [(.3402, .34042), (29.5, 29.7), (14.4, 14.6), (30., 37.)
 def do_aniso_magic(times):
     print "Testing aniso_magic.py, running bootstrap: " + str(times) + " times"
     # WD
-    obj = env.run('aniso_magic.py', '-WD', directory, '-f', 'aniso_magic_dike_anisotropy.txt', '-F', 'aniso_magic_rmag_anisotropy.txt', '-nb', times, '-gtc', '110', '2', '-par', '-v', '-crd', 'g', '-P') #stdin='q')
+    obj = env.run('aniso_magic.py', '-WD', directory, '-f', 'aniso_magic_dike_anisotropy.txt', '-F', 'aniso_magic_rmag_anisotropy_new.out', '-nb', times, '-gtc', '110', '2', '-par', '-v', '-crd', 'g', '-P') #stdin='q')
     print obj.stdout
     PT.test_for_bad_file(obj.stdout)
     a_list = str(obj.stdout).split()

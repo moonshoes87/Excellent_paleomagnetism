@@ -65,6 +65,8 @@ class Test_instance(object):
          for num, arg in enumerate(self.args):
               pass
          
+
+
          # this function simply runs the command line program with whatever its options
          # it takes the arguments "stdout", "plot", or  "file", and respectively returns the standard output for the program, the plots created, or the file created/updated
      def run_program(self, output_type="stdout"): # 
@@ -248,7 +250,7 @@ class Other_Bad_test(unittest.TestCase):
 
 # BIO example
 def complete_angle_test(): # BIO type
-    angle = Test_instance('angle.py', 'angle.dat', 'angle_results_new.txt', 'angle_results_correct.txt', 'angle_results_incorrect.txt', None, False)
+    angle = Test_instance('angle.py', 'angle.dat', 'angle_results_new.out', 'angle_results_correct.txt', 'angle_results_incorrect.txt', None, False)
     angle.file_in_file_out_sequence(interactive=True)
 #    angle.unittest_file()
 
