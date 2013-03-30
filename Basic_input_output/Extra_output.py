@@ -351,9 +351,9 @@ def complete_thellier_magic_redo_test(): # quite irregular
     thellier_magic_redo_reference = None
     thellier_magic_redo = Ex_out('thellier_magic_redo.py', infile, out_tag1, out1, out_tag2, out2, correct_out1, correct_out2, wrong_out1, wrong_out2, None, True)
     obj = env.run("thellier_magic_redo.py", "-WD", directory, "-f", infile, in_tag1, in1, in_tag2, in2, in_tag3, in3, "-F", outfile, out_tag1, out1, out_tag2, out2, arg1, arg2)
-    print obj.stdout
-    print obj.files_updated
-    print obj.files_created
+    print "STDOUT: " + str(obj.stdout)
+    print "FILES UPDATED: " + str(obj.files_updated)
+    print "FILES CREATED: " + str(obj.files_created)
     thellier_magic_redo.standard_check_file_sequence()
     thellier_magic_redo.extra_output_unittest()
 
@@ -371,15 +371,22 @@ thing = [complete_aarm_magic_test, complete_atrm_magic_test, complete_hysteresis
 print "STARTING HERE"
 messed_up_programs = []
 
+problems_dictionary = {}
+
 def go_through():
     for i in thing:
         try:
             print "TRYING"
             print " - "
             i()
-        except:
+        except Exception as ex:
             messed_up_programs.append(i)
             print str(i) + " failed donut"
+            print "i, ex: ", i, ex
+            print type(ex)
+            print ex.args
+            x = str(ex)
+            problems_dictionary[i.__doc__] = x
     print "messed up programs", messed_up_programs
     message = []
     for i in messed_up_programs:
@@ -387,23 +394,25 @@ def go_through():
         message.append(i.__doc__)
         print "message", message
     print "THESE ONES ARE BROKEN ", message
+    print problems_dictionary
 
 def redo_broken_ones():
     for i in messed_up_programs:
         try:
             i()
         except:
-            question = raw_input("continue?")
-        if question == 'y' or question == 'yes':
-            print "continuing"
-        else:
-            break
+            print "error raised"
+#        if question == 'y' or question == 'yes':
+ #           print "continuing"
+  #      else:
+   #         break
 # I want a way to go through one at a time and get the messed up ones to show me their standard output.....  This might not be easy
     
-
+#complete_thellier_magic_redo_test()
 go_through()
-raw_input("finished go through.... redo broken ones?")
-redo_broken_ones()
+print "IT STARTS HERE!!!"
+#redo_broken_ones()
+
 
 
 

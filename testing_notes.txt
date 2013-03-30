@@ -302,6 +302,8 @@ other, to do:
        consider try/except in the run everything so that the tests keep running even if you get an error 
        maybe make a script for generating new, correct, and wrong files (say if Lisa "knows" a program is working but she has changed some details of the output)
        go through list below and check uppercase programs that may be missing
+       must put in a way to catch this type of error: no such file
+       find a way to just output the error...
 
 
        CIT_magic.py needs fixing

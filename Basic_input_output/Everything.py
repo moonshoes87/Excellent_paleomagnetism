@@ -6,7 +6,7 @@ import unittest
 import Rename_me
 import PmagPy_tests as PT
 import Bootstrap_plotting
-import Extra_output
+#import Extra_output
 import random_stuff
 
 #if __name__ == '__main__':
@@ -25,14 +25,14 @@ if 1 == 0:
 
 def multiply(n=0, n2=3.):
     if n == 0:
-        raise ValueError
+        raise ValueError("0 can't be used")
     else:
         print n * n2
         return n * n2
 
 def divide(n=3., n2=2.):
     if n2 == 0:
-        raise ValueError
+        raise ValueError("0 can't be used")
     else:
         print n / n2
         return n / n2
@@ -49,8 +49,9 @@ functions = [multiply, divide, lower_case]
 for i in functions:
     try:
         i()
-    except:
-        print "AWESOMENESS!!!!"
+    except Exception as ex:
+        print i, ex
+#        print "AWESOMENESS!!!!"
 
 
 #print functions[1]
