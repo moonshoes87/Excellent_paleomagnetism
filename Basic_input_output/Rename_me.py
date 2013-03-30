@@ -668,6 +668,12 @@ def complete_vector_mean_test():
 
 # beginning of Plotting section
 
+ani_depthplot_infile = 'ani_depthplot_rmag_anisotropy.txt'
+ani_depthplot_outfile = None
+ani_depthplot_reference = "{'U1359A_ani-depthplot.svg': <FoundFile ./new-test-output:U1359A_ani-depthplot.svg>}"
+ani_depthplot_wrong = "No way"
+ani_depthplot_fsa = 'ani_depthplot_er_samples.txt'
+
 def complete_ani_depthplot_test():
      print "Testing ani_depthplot.py"
      ani_depthplot_infile = 'ani_depthplot_rmag_anisotropy.txt'
@@ -677,6 +683,18 @@ def complete_ani_depthplot_test():
      ani_depthplot_fsa = 'ani_depthplot_er_samples.txt'
      ani_depthplot = Test_instance('ani_depthplot.py', ani_depthplot_infile, ani_depthplot_outfile, ani_depthplot_reference, ani_depthplot_wrong, 'a', True, '-fsa', ani_depthplot_fsa)
      ani_depthplot.plot_program_sequence(stdout=False)
+   
+#complete_ani_depthplot_test()
+  
+def weird_ani_depthplot_test():
+     try:
+          complete_ani_depthplot_test()
+     except:
+          print "exception raised"
+          obj = env.run('ani_depthplot.py', '-WD', directory, '-f', ani_depthplot_infile, '-f', ani_depthplot_outfile, '-fsa', ani_depthplot_fsa, stdin = 'a')
+          print obj.stdout
+
+
 
 def complete_basemap_magic_test():
      basemap_magic_infile = 'basemap_example.txt'
@@ -721,11 +739,12 @@ def complete_common_mean_test(): # Irregular type: a little fanciness after the 
      common_mean.plot_program_sequence(stdout=False)
      # testing with -dir option
      common_mean_2 = Test_instance('common_mean.py', common_mean_infile, common_mean_outfile, common_mean_reference, common_mean_wrong, 'a', False, '-dir', '0', '9.9')
-     obj = env.run('common_mean.py', '-f', file_prefix + common_mean_infile, '-f2', common_mean_f2)
+     obj = env.run('common_mean.py', '-f', file_prefix + common_mean_infile, '-f2', common_mean_f2, stdin='a')
      if obj.files_updated:
           print "Successfully updated file"
      else:
           raise NameError("common_mean.py with -dir option did not update plots")
+
 
 def complete_core_depthplot_test():
      core_depthplot_infile = 'core_depthplot_example.dat'
@@ -1161,11 +1180,12 @@ def complete_working_test():
      complete_vector_mean_test()
      complete_zeq_magic_redo_test()
      #PLOTTING
-     complete_ani_depthplot_test()
+#     complete_ani_depthplot_test()
+     weird_ani_depthplot_test()
      complete_basemap_magic_test()
      complete_biplot_magic_test()
-#     complete_chi_magic_test()  # NOT WORKING!!!
-#     complete_common_mean_test() # NOT WORKING
+     complete_chi_magic_test()  # probs working
+     complete_common_mean_test() # same
      complete_core_depthplot_test()
      complete_dayplot_magic_test()
      complete_dmag_magic_test()
@@ -1191,16 +1211,15 @@ def complete_working_test():
      complete_s_hext_test()
      complete_thellier_magic_test()
      complete_vgpmap_magic_test()
-# got up to here:
      complete_zeq_magic_test()
      complete_agm_magic_test()
      complete_upload_magic_test()
-  #   pass
+
 
 if __name__ == '__main__':
 #     pass
      complete_working_test()
-# PT.clean_house()
-# PT.remove_new_outfiles()
+     PT.clean_house()
+     PT.remove_new_outfiles()
 
 

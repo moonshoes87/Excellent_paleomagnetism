@@ -292,26 +292,19 @@ complete list of tested programs:
 
 
 other, to do:
-       make a script that will replace all the inaccurate path names, so it can be run on a different machine.  this includes that some stdout includes -- some_file was saved in this_directory
+       make a script that will replace all the inaccurate path names, so it can be run on a different machine.  this includes that some stdout includes -- some_file was saved in this_directory.  could put it into the strip_pmagpy function
        make output nicer, easier, put it into a file
        use these at the end of the test:
        	   # PT.clean_house()
        	   # PT.remove_new_outfiles() 
-       somewhere there is a test that is outputting to None... you should figure out what this is!  Ha ha ha.  Jesus H.  Looks like it is incfish.py.  fix this, Lori!! -- DONE
-       integrate the dipole tests -- DONE
-       figure out the "random" tests (mostly in random_stuff.py) -- DONE
-       consider taking some of the functions out of the class Test_instance.  You can still leave them in the program, and still import that module into other places.... does this make more sense??  Not sure
        add to file_parse a way to tell if you have tried to parse a file that, say, doesn't exist, or other failure
        fix the weirdness with multiple errors being raised in Extra_out... and just the general confusing weirdness DONE
-       check chi_magic.py.  it is producing slightly different output
-       change over so that file_prefix and directory are set only in PmagPy_tests.py.  also, alias it as PT.  DONE
        consider try/except in the run everything so that the tests keep running even if you get an error 
-       remove Plotting.py
        maybe make a script for generating new, correct, and wrong files (say if Lisa "knows" a program is working but she has changed some details of the output)
        go through list below and check uppercase programs that may be missing
-       I will have to put the remove pmagpy thing into Rename_me.py. urgh. 
 
-       CIT_magic.py
+
+       CIT_magic.py needs fixing
        # er_sites.txt is supposed to be designatable on the command-line with -Fsp, but is not.  fix this.... 
 
 

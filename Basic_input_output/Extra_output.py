@@ -39,6 +39,7 @@ class Ex_out(Rename_me.Test_instance):
             self.arg1 = self.args[0]
 
     def run_program(self):
+        PT.clean_house()        
         if self.WD:
             print "about to run WD program"
             print (self.name, '-WD', directory, '-f', self.infile, self.tag1, self.outfile1, self.tag2, self.outfile2, self.arg1, 'stdin=' + str(self.stdin))
@@ -169,9 +170,10 @@ class Bad_test(unittest.TestCase):
         print "error expected"
 
 def complete_aarm_magic_test():
+    """testing aarm_magic.py"""
     print "Testing aarm_magic"
     infile = "aarm_measurements.txt"
-    aarm_Fa, aarm_Fr = 'aarm_magic_anisotropy.out', 'aarm_magic_results.out'
+    aarm_Fa, aarm_Fr = 'aarm_magic_anisotropy_new.out', 'aarm_magic_results_new.out'
     tag1, tag2 = "-Fa", "-Fr"
     aarm_Fa_reference, aarm_Fr_reference = 'aarm_magic_anisotropy_correct.out', 'aarm_magic_results_correct.out'
     aarm_Fa_wrong, aarm_Fr_wrong = 'aarm_magic_anisotropy_incorrect.out', 'aarm_magic_results_incorrect.out'
@@ -180,18 +182,20 @@ def complete_aarm_magic_test():
 #aarm_magic_test()
 
 def complete_atrm_magic_test():
-    atrm_infile = 'atrm_magic_example.dat'
-    atrm_Fa, atrm_Fr = "atrm_anisotropy.txt", "atrm_results.txt"
+    """testing atrm_magic.py"""
+    atrm_infile = 'atrm_magic_measurements.txt'
+    atrm_Fa, atrm_Fr = "atrm_anisotropy_new.out", "atrm_results_new.out"
     tag1, tag2 = '-Fa', '-Fr'
     atrm_Fa_reference, atrm_Fr_reference = "atrm_anisotropy_correct.txt", "atrm_results_correct.txt"
     atrm_Fa_wrong, atrm_Fr_wrong = "atrm_anisotropy_incorrect.txt", "atrm_results_incorrect.txt"
     atrm = Ex_out('atrm_magic.py', atrm_infile, tag1, atrm_Fa, tag2, atrm_Fr, atrm_Fa_reference, atrm_Fr_reference, atrm_Fa_wrong, atrm_Fr_wrong, None, True)
     print "Testing atrm_magic.py:"
     atrm.ex_out_sequence()
-#complete_atrm_magic_test()
-
+ #   obj = env.run('atrm_magic.py', '-WD', directory, '-f', atrm_infile, '-Fa', atrm_Fa, '-Fr', atrm_Fr)
+#    print obj.stdout
 
 def complete_CIT_magic_test():
+    """testing CIT_magic.py"""
     CIT_magic_infile = 'CIT_magic_example.sam'
     CIT_magic_outfile1 = None
     CIT_magic_outfile2 = None
@@ -199,41 +203,42 @@ def complete_CIT_magic_test():
 # er_sites.txt is supposed to be designatable on the command-line with -Fsp, but is not.  fix this....
 
 
-
-
 def complete_hysteresis_magic_test(): # irregular.  a file has to be renamed because it just comes out a default way, it is not specifiable on the command line
+    """test for hysteresis_magic.py"""
     tag1, tag2 = '-F', None
     outfile2 = None
     hysteresis_magic_infile = 'hysteresis_magic_example.dat'
-    hysteresis_F, hysteresis_F_reference, hysteresis_F_wrong = 'hysteresis_magic_rmag.txt',  'hysteresis_magic_rmag_correct.txt', 'hysteresis_magic_rmag_incorrect.txt'
+    hysteresis_F, hysteresis_F_reference, hysteresis_F_wrong = 'hysteresis_magic_rmag_new.out',  'hysteresis_magic_rmag_correct.txt', 'hysteresis_magic_rmag_incorrect.txt'
     hysteresis_remanence, hysteresis_remanence_reference, hysteresis_remanence_wrong = 'rmag_remanence.txt', 'hysteresis_magic_remanence_correct.txt', 'hysteresis_magic_remanence_incorrect.txt'
     hysteresis_magic_list = [(hysteresis_F, hysteresis_F_reference, hysteresis_F_wrong), (hysteresis_remanence, hysteresis_remanence_reference, hysteresis_remanence_wrong)]
     hysteresis_magic = Ex_out('hysteresis_magic.py', hysteresis_magic_infile, tag1, hysteresis_F, tag2, outfile2, hysteresis_F_reference, hysteresis_remanence_reference, hysteresis_F_wrong, hysteresis_remanence_wrong, 'q', True, '-P')
     print "Testing hysteresis_magic.py"
     hysteresis_magic.run_program()
-    subprocess.call(['mv', file_prefix + 'rmag_remanence.txt', file_prefix + 'hysteresis_magic_remanence.txt']) # renames file so it is easier to find
+    subprocess.call(['mv', file_prefix + 'rmag_remanence.txt', file_prefix + 'hysteresis_magic_remanence_new.out']) # renames file so it is easier to find
     print hysteresis_magic.outfile2
-    hysteresis_magic.outfile2 = "hysteresis_magic_remanence.txt"
+    hysteresis_magic.outfile2 = "hysteresis_magic_remanence_new.out"
     print hysteresis_magic.outfile2
     hysteresis_magic.ex_out_sequence() # this re runs hysteresis magic, but that is not a problem
     print hysteresis_magic.outfile2
     subprocess.call(['rm', file_prefix + 'rmag_remanence.txt']) # remove extra rmag_remanence that doesn't get renamed
 
+
 def complete_k15_magic_test(): # irregular -- has 4 output files!!!!
+    """test for k15_magic.py"""
     print "Testing k15_magic.py"
     k15_infile = 'k15_magic_example.dat'
     tag1 = "-Fsa"
     tag2 = "-Fa"
-    k15_Fsa, k15_Fsa_reference, k15_Fsa_wrong = 'k15_magic_er_samples.txt', 'k15_magic_er_samples_correct.txt', 'k15_magic_er_samples_incorrect.txt'
-    k15_Fa, k15_Fa_reference, k15_Fa_wrong = 'k15_magic_rmag_anisotropy.txt','k15_magic_rmag_anisotropy_correct.txt', 'k15_magic_rmag_anisotropy_incorrect.txt'
-    k15_F, k15_F_reference, k15_F_wrong = 'k15_magic_measurements.txt','k15_magic_measurements_correct.txt', 'k15_magic_measurements_incorrect.txt'
+    k15_Fsa, k15_Fsa_reference, k15_Fsa_wrong = 'k15_magic_er_samples_new.out', 'k15_magic_er_samples_correct.txt', 'k15_magic_er_samples_incorrect.txt'
+    k15_Fa, k15_Fa_reference, k15_Fa_wrong = 'k15_magic_rmag_anisotropy_new.out','k15_magic_rmag_anisotropy_correct.txt', 'k15_magic_rmag_anisotropy_incorrect.txt'
+    k15_F, k15_F_reference, k15_F_wrong = 'k15_magic_measurements_new.out','k15_magic_measurements_correct.txt', 'k15_magic_measurements_incorrect.txt'
 # this one is not specifiable on command line, so I rename it later.  the output is named rmag_results.txt no matter what.
-    k15_rmag, k15_rmag_reference, k15_rmag_wrong = 'k15_magic_rmag_results.txt', 'k15_magic_rmag_results_correct.txt', 'k15_magic_rmag_results_incorrect.txt'
+    k15_rmag, k15_rmag_reference, k15_rmag_wrong = 'k15_magic_rmag_results_new.out', 'k15_magic_rmag_results_correct.txt', 'k15_magic_rmag_results_incorrect.txt'
     k15_magic = Ex_out('k15_magic.py', k15_infile, tag1, k15_Fsa, tag2, k15_Fa, k15_Fsa_reference, k15_Fa_reference, k15_Fsa_wrong, k15_Fa_wrong, None, True)
     obj = env.run('k15_magic.py', '-WD', directory, '-f', k15_infile, '-Fsa', k15_Fsa, '-Fa', k15_Fa, '-F', k15_F)
     print obj.stdout
     # renames rmag_results.txt to k15_rmag_results.txt (for consistency)
-    obj = env.run('mv', file_prefix + 'rmag_results.txt', file_prefix + 'k15_magic_rmag_results.txt')
+    obj = env.run('mv', file_prefix + 'rmag_results.txt', file_prefix + 'k15_magic_rmag_results_new.out')
     k15_magic.standard_check_file_sequence()
     # extra, because of additional options
     k15_magic.check_file_output(k15_F, k15_F_reference, reference="correct")
@@ -256,16 +261,17 @@ def complete_k15_magic_test(): # irregular -- has 4 output files!!!!
 #    def test_file1_with_file2(self, file1, file2, ref):
  #       self.assertRaises(NameError, self.ex_out.check_file_output, file1, file2, reference=ref)
 def complete_kly4s_magic_test(): # irregular, with 3 output files
+    """test kly4s_magic.py"""
     print "Testing kly4s_magic.py"
     kly4s_infile = "kly4s_magic_example.dat"
     tag1, tag2 = '-F', '-Fa'
-    kly4s_F, kly4s_F_reference, kly4s_F_wrong = "kly4s_magic_measurements.txt", "kly4s_magic_measurements_correct.txt", "kly4s_magic_measurements_incorrect.txt"
-    kly4s_Fa, kly4s_Fa_reference, kly4s_Fa_wrong = "kly4s_rmag_anisotropy.txt", "kly4s_rmag_anisotropy_correct.txt", "kly4s_rmag_anisotropy_incorrect.txt"
-    kly4s_er, kly4s_er_reference, kly4s_er_wrong = "kly4s_er_specimens.txt", "kly4s_er_specimens_correct.txt", "kly4s_er_specimens_incorrect.txt"
+    kly4s_F, kly4s_F_reference, kly4s_F_wrong = "kly4s_magic_measurements_new.out", "kly4s_magic_measurements_correct.txt", "kly4s_magic_measurements_incorrect.txt"
+    kly4s_Fa, kly4s_Fa_reference, kly4s_Fa_wrong = "kly4s_rmag_anisotropy_new.out", "kly4s_rmag_anisotropy_correct.txt", "kly4s_rmag_anisotropy_incorrect.txt"
+    kly4s_er, kly4s_er_reference, kly4s_er_wrong = "kly4s_er_specimens_new.out", "kly4s_er_specimens_correct.txt", "kly4s_er_specimens_incorrect.txt"
     kly4s = Ex_out('kly4s_magic.py', kly4s_infile, tag1, kly4s_F, tag2, kly4s_Fa, kly4s_F_reference, kly4s_Fa_reference, kly4s_F_wrong, kly4s_Fa_wrong, None, True)
     obj = env.run('kly4s_magic.py', '-WD', directory, '-f', kly4s_infile, '-F', kly4s_F, '-Fa', kly4s_Fa)
     print obj.stdout
-    obj = env.run('mv', file_prefix + "er_specimens.txt", file_prefix + "kly4s_er_specimens.txt") # renames
+    obj = env.run('mv', file_prefix + "er_specimens.txt", file_prefix + "kly4s_er_specimens_new.out") # renames
     print "Renamed er_specimens.txt to kly4s_er_specimens.txt"
     kly4s.standard_check_file_sequence()
     # extra checks
@@ -280,6 +286,7 @@ def complete_kly4s_magic_test(): # irregular, with 3 output files
 #complete_kly4s_magic_test()
 
 def complete_pmag_results_extract_test():
+    """test pmag_results_extract.py"""
     print "Testing pmag_results_extract.py"
     pmag_intensities, pmag_intensities_reference, pmag_intensities_wrong = file_prefix + 'Intensities.txt', file_prefix + 'pmag_results_extract_Intensities_correct.txt', file_prefix + 'pmag_results_extract_Intensities_incorrect.txt'
     pmag_directions, pmag_directions_reference, pmag_directions_wrong = file_prefix + 'Directions.txt', file_prefix + 'pmag_results_extract_Directions_correct.txt', file_prefix + 'pmag_results_extract_Directions_incorrect.txt'
@@ -302,23 +309,25 @@ def complete_pmag_results_extract_test():
     pmag_unittest.test_file1_with_file2(pmag_sitenfo, pmag_sitenfo_wrong, "correct")
     subprocess.call(['rm', file_prefix + 'Intensities.txt', file_prefix + 'Directions.txt', file_prefix + 'SiteNfo.txt'])
 
-
-#    def __init__(self, name, infile, tag1, outfile1, tag2, outfile2, correctfile1, correctfile2, wrongfile1, wrongfile2, stdin, WD, *args):
 def complete_aarm_magic_test():
+    """test aarm_magic.py"""
     print "Testing aarm_magic"
     infile = "aarm_measurements.txt"
-    aarm_Fa, aarm_Fr = 'aarm_magic_anisotropy.out', 'aarm_magic_results.out'
+    aarm_Fa, aarm_Fr = 'aarm_magic_anisotropy_new.out', 'aarm_magic_results_new.out'
     tag1, tag2 = "-Fa", "-Fr"
     aarm_Fa_reference, aarm_Fr_reference = 'aarm_magic_anisotropy_correct.out', 'aarm_magic_results_correct.out'
     aarm_Fa_wrong, aarm_Fr_wrong = 'aarm_magic_anisotropy_incorrect.out', 'aarm_magic_results_incorrect.out'
     aarm_magic = Ex_out('aarm_magic.py', infile, tag1, aarm_Fa, tag2, aarm_Fr, aarm_Fa_reference, aarm_Fr_reference, aarm_Fa_wrong, aarm_Fr_wrong, None, True)
     aarm_magic.ex_out_sequence()
 
+#complete_aarm_magic_test()
+
 def complete_orientation_magic_test():
+    """test orientation_magic.py"""
     print "Testing orientation_magic.py"
     infile = "orientation_magic_example.txt"
     tag1, tag2 = "-Fsi", "-Fsa"
-    orient_Fsi, orient_Fsa = "orientation_magic_er_sites.out", "orientation_magic_er_samples.out"
+    orient_Fsi, orient_Fsa = "orientation_magic_er_sites_new.out", "orientation_magic_er_samples_new.out"
     orient_Fsi_reference, orient_Fsa_reference = "orientation_magic_er_sites_correct.out", "orientation_magic_er_samples_correct.out"
     orient_Fsi_wrong, orient_Fsa_wrong = "orientation_magic_er_sites_incorrect.out", "orientation_magic_er_samples_incorrect.out"
     orientation_magic = Ex_out('orientation_magic.py', infile, tag1, orient_Fsi, tag2, orient_Fsa, orient_Fsi_reference, orient_Fsa_reference, orient_Fsi_wrong, orient_Fsa_wrong, None, True)
@@ -327,14 +336,15 @@ def complete_orientation_magic_test():
 #complete_orientation_magic_test()    
 
 def complete_thellier_magic_redo_test(): # quite irregular
+    """test thellier_magic_redo.py"""
     # WD
     print "Testing thellier_magic_redo.py"
     infile = 'thellier_magic_redo_example.dat'
-    outfile = "thellier_magi_redo_specimens.txt"
+    outfile = "thellier_magic_redo_specimens_new.out"
     in_tag1, in_tag2, in_tag3 = '-fnl', '-fre', '-fan'
     in1, in2, in3 = "thellier_magic_redo_measurements.txt", "thellier_magic_redo2.txt", "thellier_magic_redo_rmag_anisotropy.txt"
     out_tag1, out_tag2 = "-Fnl", "Fac"
-    out1, out2 = "thellier_magic_redo_NLT_specimens.txt", "thellier_magic_redo_AC_specimens.txt"
+    out1, out2 = "thellier_magic_redo_NLT_specimens_new.out", "thellier_magic_redo_AC_specimens_new.out"
     correct_out1, correct_out2 = "thellier_magic_redo_NLT_specimens_correct.txt", "thellier_magic_redo_AC_specimens_correct.txt"
     wrong_out1, wrong_out2 = "thellier_magic_redo_NLT_specimens_incorrect.txt", "thellier_magic_redo_AC_specimens_incorrect.txt"
     arg1, arg2 = "-NLT", "-ANI"
@@ -347,18 +357,58 @@ def complete_thellier_magic_redo_test(): # quite irregular
     thellier_magic_redo.standard_check_file_sequence()
     thellier_magic_redo.extra_output_unittest()
 
-
-
-
-
-
-
+#complete_thellier_magic_test()
 ignore = """
 thellier_magic_redo.py -f thellier_magic_redo_example.dat  -fnl thellier_magic_redo_measurements.txt -fre thellier_magic_redo2.txt -fan thellier_magic_redo_rmag_anisotropy.txt  -F thellier_magic_redo_specimens.txt -Fnl thellier_magic_redo_NLT_specimens.txt  -Fac thellier_magic_redo_AC_specimens.txt -NLT -ANI
 """
 
 
+
+thing = [complete_aarm_magic_test, complete_atrm_magic_test, complete_hysteresis_magic_test, complete_k15_magic_test, complete_kly4s_magic_test, complete_pmag_results_extract_test, complete_orientation_magic_test, complete_thellier_magic_redo_test]
+
+
+
+print "STARTING HERE"
+messed_up_programs = []
+
+def go_through():
+    for i in thing:
+        try:
+            print "TRYING"
+            print " - "
+            i()
+        except:
+            messed_up_programs.append(i)
+            print str(i) + " failed donut"
+    print "messed up programs", messed_up_programs
+    message = []
+    for i in messed_up_programs:
+        print "this is i", i
+        message.append(i.__doc__)
+        print "message", message
+    print "THESE ONES ARE BROKEN ", message
+
+def redo_broken_ones():
+    for i in messed_up_programs:
+        try:
+            i()
+        except:
+            question = raw_input("continue?")
+        if question == 'y' or question == 'yes':
+            print "continuing"
+        else:
+            break
+# I want a way to go through one at a time and get the messed up ones to show me their standard output.....  This might not be easy
+    
+
+go_through()
+raw_input("finished go through.... redo broken ones?")
+redo_broken_ones()
+
+
+
 def complete_working_test():
+    PT.remove_new_outfiles()
     complete_aarm_magic_test()
     complete_atrm_magic_test()
     complete_hysteresis_magic_test()
@@ -374,8 +424,8 @@ def complete_working_test():
 
 
 if __name__ == "__main__":
-#    pass
-    complete_working_test()
+    pass
+#    complete_working_test()
 
 
 

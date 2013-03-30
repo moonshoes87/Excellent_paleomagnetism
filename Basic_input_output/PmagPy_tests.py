@@ -155,7 +155,6 @@ def find_a_program(name):
     full_name = "complete_" + name + "_test():"
     Rename = file_parse_by_word(file_prefix + "Rename_me.py")
     new_rename = lowercase_all(Rename)
-    print new_rename
     print "name: " + str(name)
     print "full name:" + str(full_name)
     if full_name in new_rename:
@@ -164,10 +163,10 @@ def find_a_program(name):
     new_extra_output = lowercase_all(Extra_output)
     if full_name in new_extra_output:
         print name + " occurs in Extra_output.py"
-    Plotting = file_parse_by_word(file_prefix + "Plotting.py")
-    new_plotting = lowercase_all(Plotting)
-    if full_name in new_plotting:
-        print name + " occurs in Plotting.py"
+#    Plotting = file_parse_by_word(file_prefix + "Plotting.py")
+ #   new_plotting = lowercase_all(Plotting)
+  #  if full_name in new_plotting:
+   #     print name + " occurs in Plotting.py"
     Bootstrap_plotting = file_parse_by_word(file_prefix + "Bootstrap_plotting.py")
     new_bootstrap_plotting = lowercase_all(Bootstrap_plotting)
     if full_name in new_bootstrap_plotting:
@@ -183,5 +182,5 @@ def find_a_program(name):
 if __name__ == "__main__":
     print "Please type the name of the program test you wish to find"
     print "You may enter either: program.py, or: program. No quotation marks, case does not matter"
- #   search_item = str(raw_input("what program are you looking for?   "))
-#    find_a_program(search_item)
+    search_item = str(raw_input("what program are you looking for?   "))
+    find_a_program(search_item)
