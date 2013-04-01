@@ -72,3 +72,9 @@ ReadStations.py
 .DS_Store
 Basic_input_output/new-test-output/*
 Basic_input_output/*_new.out
+Basic_input_output/all_output.txt
+Basic_input_output/clean_errors_log.txt
+Basic_input_output/clean_output_log.txt
+Basic_input_output/errors_log.txt
+Basic_input_output/long_errors_log.txt
+Basic_input_output/tester_output.out

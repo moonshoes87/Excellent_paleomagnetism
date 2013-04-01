@@ -49,9 +49,14 @@ class Ex_out(Rename_me.Test_instance):
             print "about to run non-WD program"
             print (self.name, '-f', self.infile, self.tag1, self.outfile1, self.tag2, self.outfile2, self.arg1, 'stdin=' + self.stdin)
             obj = env.run(self.name, '-f', self.infile, self.tag1, self.outfile1, self.tag2, self.outfile2, self.arg1, stdin= self.stdin)
-        print "stdout: " +str(obj.stdout)
-        print "created: " + str(obj.files_created)
-        print "updated: " + str(obj.files_updated)
+        if len(obj.stdout) < 1000:
+            print "stdout: " +str(obj.stdout)
+        else:
+            print "stdout: " + str(obj.stdout)[:500] 
+            print " .... "
+            print " " + str(obj.stdout)[-500:]
+        print "files created: " + str(obj.files_created)
+        print "files updated: " + str(obj.files_updated)
 
     def check_list_output(self, output_list, correct_output_list):
         print "checking list output"
@@ -119,24 +124,32 @@ class Ex_out(Rename_me.Test_instance):
         self.extra_output_unittest()
 
     def standard_check_file_sequence(self):
+        print "checking outfile1 against correctfile1"
         self.check_file_output(self.outfile1, self.correctfile1, reference="correct")
         print "-"
+        print "checking outfile2 against correctfile2"
         self.check_file_output(self.outfile2, self.correctfile2, reference="correct")
         print "-"
+        print "checking outfile1 against wrongfile1"
         self.check_file_output(self.outfile1, self.wrongfile1, reference="incorrect")
         print "-"
+        print "checking outfile 2 against wrongfile2"
         self.check_file_output(self.outfile2, self.wrongfile2, reference="incorrect")
         print "-"
    
     def extra_output_unittest(self):
         print "STARTING UNITTEST"
         unittest = Bad_test(self)
+        print "expecting error!"
         unittest.test_outfile1_with_wrongfile1()
         print "-"
+        print "expecting error!"
         unittest.test_outfile1_with_correctfile1()
         print "-"
+        print "expecting error!"
         unittest.test_outfile2_with_wrongfile2()
         print "-"
+        print "expecting error!"
         unittest.test_outfile2_with_correctfile2()
 
 class Bad_test(unittest.TestCase):
@@ -356,7 +369,8 @@ def complete_thellier_magic_redo_test(): # quite irregular
     thellier_magic_redo_reference = None
     thellier_magic_redo = Ex_out('thellier_magic_redo.py', infile, out_tag1, out1, out_tag2, out2, correct_out1, correct_out2, wrong_out1, wrong_out2, None, True)
     obj = env.run("thellier_magic_redo.py", "-WD", directory, "-f", infile, in_tag1, in1, in_tag2, in2, in_tag3, in3, "-F", outfile, out_tag1, out1, out_tag2, out2, arg1, arg2)
-    print "STDOUT: " + str(obj.stdout)
+    print "STDOUT: " + str(obj.stdout)[:700] + " .... " 
+    str(obj.stdout)[-700:]
     print "FILES UPDATED: " + str(obj.files_updated)
     print "FILES CREATED: " + str(obj.files_created)
     thellier_magic_redo.standard_check_file_sequence()
@@ -426,15 +440,30 @@ def redo_broken_ones(a_list):
         try:
             i()
         except Exception as ex:
-            print str(i.__doc__) + " raised error " + str(ex)
+            print str(i.__doc__) + " raised error: " + str(ex)
+            print "-----------"
+            print "-----------"
             #raise ex
+    
 
-
+def clean_output_file():
+    the_file = open('all_output.txt', 'rU')
+    info = the_file.readlines()
+    rhino = False
+    new_file = open('clean_errors_log.txt', 'w')
+    for l in info:
+        if "rhino" in l:
+            rhino = True
+        if rhino:
+            new_file.write(l)
+            
+    
 
 #
 
 new_list = go_through(Extra_output_tests)
 redo_broken_ones(new_list)
+clean_output_file()
 
 print "IT STARTS HERE!!!"
 #redo_broken_ones()

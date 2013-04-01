@@ -250,16 +250,17 @@ class Other_Bad_test(unittest.TestCase):
 
 # BIO example
 def complete_angle_test(): # BIO type
-    angle = Test_instance('angle.py', 'angle.dat', 'angle_results_new.out', 'angle_results_correct.txt', 'angle_results_incorrect.txt', None, False)
-    angle.file_in_file_out_sequence(interactive=True)
+     """test angle.py"""
+     angle = Test_instance('angle.py', 'angle.dat', 'angle_results_new.out', 'angle_results_correct.txt', 'angle_results_incorrect.txt', None, False)
+     angle.file_in_file_out_sequence(interactive=True)
 #    angle.unittest_file()
 
 
 # plotting.py example, with stdout
 def complete_zeq_test(): # Plotting w/stdout
-    # DONE                                                                                                                                                 
-    zeq_infile = 'zeq_example.dat'
-    zeq_reference_output = """0      0.0 9.283e-08   339.9    57.9 
+     """test zeq.py"""
+     zeq_infile = 'zeq_example.dat'
+     zeq_reference_output = """0      0.0 9.283e-08   339.9    57.9 
 1      2.5 7.582e-08   325.7    49.1 
 2      5.0 6.292e-08   321.3    45.9 
 3     10.0 5.209e-08   314.8    41.7 
@@ -273,15 +274,14 @@ def complete_zeq_test(): # Plotting w/stdout
 11     80.0 1.257e-08   297.0    25.6 
 12     90.0 5.030e-09   299.3    11.3 
  s[a]ve plot, [b]ounds for pca and calculate, change [h]orizontal projection angle, [q]uit:   """
-    zeq_wrong_output = "Hi there"
-    zeq_outfile = None
-    zeq = Test_instance('zeq.py', zeq_infile, zeq_outfile, zeq_reference_output, zeq_wrong_output, 'q', False, '-u', 'C')
-    zeq.plot_program_sequence(stdout=True)
- #   zeq.unittest_short_output()
-
+     zeq_wrong_output = "Hi there"
+     zeq_outfile = None
+     zeq = Test_instance('zeq.py', zeq_infile, zeq_outfile, zeq_reference_output, zeq_wrong_output, 'q', False, '-u', 'C')
+     zeq.plot_program_sequence(stdout=True)
 
 # plotting.py example, no stdout
 def complete_chartmaker_test():  # Plotting w/out stdout
+     """test chartmaker.py"""
      chartmaker_infile = None
      chartmaker_outfile = None
      chartmaker_reference = "{'chart.txt': <FoundFile ./new-test-output:chart.txt>}"
@@ -294,6 +294,7 @@ def complete_chartmaker_test():  # Plotting w/out stdout
 
 # UC example.  creates a list, tests that list
 def complete_di_eq_test(): # basic list type
+     """test di_eq.py"""
      print "Testing di_eq.py"
      di_eq_infile = 'di_eq_example.dat'
      di_eq_outfile = None
@@ -307,7 +308,8 @@ def complete_di_eq_test(): # basic list type
 #     def __init__(self, name, infile, outfile, ref_out, wrong_out, stdin, WD, *args):
 
 def complete_azdip_magic_test(): # irregular, because the outfile is signaled with -Fsa, not -F.  sequence is in longhand
-     # non-WD
+     """test azdip_magic.py"""
+     # non WD
      azdip_magic_infile = 'azdip_magic_example.dat'
      azdip_magic_reference = 'azdip_magic_output_correct.out'
      azdip_magic_wrong = 'azdip_magic_output_incorrect.out'
@@ -320,36 +322,39 @@ def complete_azdip_magic_test(): # irregular, because the outfile is signaled wi
 
 # this one is a weird amalgam, because of two -f inputs.  but it works.  
 def complete_combine_magic_test(): # irregular type
-    output_file = 'combine_magic_output_new.out'
-    reference_file =  'combine_magic_output_correct.out'
-    incorrect_output = 'combine_magic_output_incorrect.out'
-    input_1 = 'combine_magic_input_1.dat'
-    input_2 = 'combine_magic_input_2.dat'
+     """test combine_magic_test.py"""
+     output_file = 'combine_magic_output_new.out'
+     reference_file =  'combine_magic_output_correct.out'
+     incorrect_output = 'combine_magic_output_incorrect.out'
+     input_1 = 'combine_magic_input_1.dat'
+     input_2 = 'combine_magic_input_2.dat'
     # have to run it specially, because -f takes two arguments.  it doesn't fit with its class in this regard. 
-    obj = env.run('combine_magic.py', '-WD', directory, '-F', output_file, '-f', input_1, input_2)
-    combine_magic = Test_instance('combine_magic.py', None, output_file, reference_file, incorrect_output, None, True, '-f', input_1, input_2)
-    combine_magic.check_file_output(combine_magic.outfile, combine_magic.ref_out)
-    combine_magic.test_help()
-    combine_magic.unittest_file()
-#    combine_magic_unittest = Bad_test(combine_magic)
- #   combine_magic_unittest.test_file_for_error()
-    print "Successfully finished combine_magic_test"
+     obj = env.run('combine_magic.py', '-WD', directory, '-F', output_file, '-f', input_1, input_2)
+     combine_magic = Test_instance('combine_magic.py', None, output_file, reference_file, incorrect_output, None, True, '-f', input_1, input_2)
+     combine_magic.check_file_output(combine_magic.outfile, combine_magic.ref_out)
+     combine_magic.test_help()
+     combine_magic.unittest_file()
+     #    combine_magic_unittest = Bad_test(combine_magic)
+     #   combine_magic_unittest.test_file_for_error()
+     print "Successfully finished combine_magic_test"
 
 
 def complete_cont_rot_test(): # Irregular type -- running specially because it has so many command line options
-    obj = env.run('cont_rot.py', '-con', 'af:sam', '-prj', 'ortho', '-eye', '-20', '0', '-sym', 'k-', '1', '-age', '180', '-res', 'l\
+     """test cont_rot.py"""
+     obj = env.run('cont_rot.py', '-con', 'af:sam', '-prj', 'ortho', '-eye', '-20', '0', '-sym', 'k-', '1', '-age', '180', '-res', 'l\
 ', stdin='a')
-    output = str(obj.files_created) # output is the name of the plot that has been saved
-    reference_output = "{'Cont_rot.pdf': <FoundFile ./new-test-output:Cont_rot.pdf>}"
-    incorrect_output = "wrong"
-    cont_rot = Test_instance('cont_rot.py', None, output, reference_output, incorrect_output, 'a', False)
-    cont_rot.check_output(cont_rot.outfile, cont_rot.ref_out)
-    cont_rot.test_help()
-    cont_rot_unittest = Bad_test(cont_rot)
-    cont_rot_unittest.test_short_output_for_error()
+     output = str(obj.files_created) # output is the name of the plot that has been saved
+     reference_output = "{'Cont_rot.pdf': <FoundFile ./new-test-output:Cont_rot.pdf>}"
+     incorrect_output = "wrong"
+     cont_rot = Test_instance('cont_rot.py', None, output, reference_output, incorrect_output, 'a', False)
+     cont_rot.check_output(cont_rot.outfile, cont_rot.ref_out)
+     cont_rot.test_help()
+     cont_rot_unittest = Bad_test(cont_rot)
+     cont_rot_unittest.test_short_output_for_error()
 
 
 def complete_download_magic_test(): # irregular
+     """test download_magic.py"""
      subprocess.call(['rm', '-rf', 'Location_1/'])
      subprocess.call(['rm', 'er_locations.txt', 'magic_measurements.txt', 'pmag_samples.txt', 'er_samples.txt', 'magic_methods.txt', 'pmag_sites.txt', 'er_ages.txt', 'er_sites.txt', 'pmag_criteria.txt', 'pmag_specimens.txt', 'er_citations.txt', 'er_specimens.txt', 'pmag_results.txt'])  # deleting all files first, just in case they were missed the time before, as they would in the case of an error.  
      download_magic_infile = 'download_magic_example.dat'
@@ -374,6 +379,7 @@ download_magic_ref = ['working', 'on:', "'er_locations'", 'er_locations', 'data'
 
 
 def complete_pt_rot_test(): # Irregular type.  has both an -ff and an -f option.  testing both here. 
+     """test pt_rot.py"""
      pt_rot = Test_instance('pt_rot.py', 'pt_rot_example.dat', 'pt_rot_results_new.out', 'pt_rot_results_correct.out', 'pt_rot_results_incorrect.out', None, True)
      pt_rot.file_in_file_out_sequence()
      # then, testing the -ff option
@@ -390,15 +396,17 @@ def complete_pt_rot_test(): # Irregular type.  has both an -ff and an -f option.
      pt_rot_extra_unittest.test_file_for_error()
 
 def complete_customize_criteria_test():  # BIO type
-    customize_criteria_infile = 'customize_criteria_example.dat'
-    customize_criteria_output = 'customize_criteria_outfile.out'
-    customize_criteria_reference = "customize_criteria_output_correct.out"
-    customize_criteria_wrong = "customize_criteria_output_incorrect.out"
-    customize_criteria = Test_instance('customize_criteria.py', customize_criteria_infile, customize_criteria_output, customize_criteria_reference, customize_criteria_wrong, '1', False)
-    customize_criteria.file_in_file_out_sequence(interactive=True)
+     """test customize_criteria.py"""
+     customize_criteria_infile = 'customize_criteria_example.dat'
+     customize_criteria_output = 'customize_criteria_outfile.out'
+     customize_criteria_reference = "customize_criteria_output_correct.out"
+     customize_criteria_wrong = "customize_criteria_output_incorrect.out"
+     customize_criteria = Test_instance('customize_criteria.py', customize_criteria_infile, customize_criteria_output, customize_criteria_reference, customize_criteria_wrong, '1', False)
+     customize_criteria.file_in_file_out_sequence(interactive=True)
 
 
 def complete_dipole_pinc_test(): # list type
+     """test dipole_pinc.py"""
      dipole_pinc_infile = 'dipole_pinc_example.dat'
      dipole_pinc_outfile = None
      dipole_pinc_reference = ['33.0', '38.9', '54.5', '9.9']
@@ -407,6 +415,7 @@ def complete_dipole_pinc_test(): # list type
      dipole_pinc.list_sequence()
 
 def complete_dipole_plat_test(): # list type
+     """test dipole_plat.py"""
      dipole_plat_infile = 'dipole_plat_example.dat'
      dipole_plat_outfile = None
      dipole_plat_reference = ['9.2', '11.4', '19.3', '2.5']
@@ -418,35 +427,39 @@ def complete_dipole_plat_test(): # list type
 grab_magic_key_reference_list = ['42.60264', '42.60264', '42.60352', '42.60104', '42.73656', '42.8418', '42.8657', '42.92031', '42.56857', '42.49964', '42.49962', '42.50001', '42.52872', '42.45559', '42.48923', '42.46186', '42.69156', '42.65289', '43.30504', '43.36817', '43.42133', '43.8859', '43.84273', '43.53289', '43.57494', '44.15663', '44.18629']
 
 def complete_grab_magic_key_test(): # List type
-    print "Testing grab magic"
-    grab_magic_key_infile = 'grab_magic_key_er_sites.txt'
-    grab_magic_key_outfile = None
-    grab_magic_key_wrong = "wrong"
-    grab_magic_key_reference = grab_magic_key_reference_list
-    grab_magic_key = Test_instance('grab_magic_key.py', grab_magic_key_infile, grab_magic_key_outfile, grab_magic_key_reference, grab_magic_key_wrong, None, True, '-key', 'site_lat')
-    grab_magic_key.list_sequence()
-    print "Sucessfully finished complete_grab_magic_key_test"
+     """test grab_magic_key.py"""
+     print "Testing grab magic"
+     grab_magic_key_infile = 'grab_magic_key_er_sites.txt'
+     grab_magic_key_outfile = None
+     grab_magic_key_wrong = "wrong"
+     grab_magic_key_reference = grab_magic_key_reference_list
+     grab_magic_key = Test_instance('grab_magic_key.py', grab_magic_key_infile, grab_magic_key_outfile, grab_magic_key_reference, grab_magic_key_wrong, None, True, '-key', 'site_lat')
+     grab_magic_key.list_sequence()
+     print "Sucessfully finished complete_grab_magic_key_test"
 
 def complete_incfish_test(): # BIO type
-    incfish_infile = 'incfish_example_inc.dat'
-    incfish_outfile = 'incfish_results_new.out'
-    incfish_reference = 'incfish_results_correct.out'
-    incfish_wrong = 'incfish_results_incorrect.out'
-    incfish = Test_instance('incfish.py', incfish_infile, incfish_outfile, incfish_reference, incfish_wrong, None, False)
-    incfish.file_in_file_out_sequence()
+     """test incfish.py"""
+     incfish_infile = 'incfish_example_inc.dat'
+     incfish_outfile = 'incfish_results_new.out'
+     incfish_reference = 'incfish_results_correct.out'
+     incfish_wrong = 'incfish_results_incorrect.out'
+     incfish = Test_instance('incfish.py', incfish_infile, incfish_outfile, incfish_reference, incfish_wrong, None, False)
+     incfish.file_in_file_out_sequence()
 
 def complete_magic_select_test(): # BIO type.. but it doesn't work yet!  Lisa must add in a WD option.  
-    magic_select_infile = 'magic_select_example.txt'
-    magic_select_outfile = 'magic_select_results_new.out'
-    magic_select_reference = 'magic_select_results_correct.out'
-    magic_select_wrong = 'magic_select_results_incorrect.out'
-    magic_select = Test_instance('magic_select.py', magic_select_infile, magic_select_outfile, magic_select_reference, magic_select_wrong, None, True, '-key', 'magic_method_codes', 'LP-DIR-AF', 'has')
-    magic_select.file_in_file_out_sequence()
+     """test magic_select.py"""
+     magic_select_infile = 'magic_select_example.txt'
+     magic_select_outfile = 'magic_select_results_new.out'
+     magic_select_reference = 'magic_select_results_correct.out'
+     magic_select_wrong = 'magic_select_results_incorrect.out'
+     magic_select = Test_instance('magic_select.py', magic_select_infile, magic_select_outfile, magic_select_reference, magic_select_wrong, None, True, '-key', 'magic_method_codes', 'LP-DIR-AF', 'has')
+     magic_select.file_in_file_out_sequence()
     # add unittest when you get it together
 
 #complete_magic_select_test()
 
 def complete_nrm_specimens_magic_test(): # BIO type
+     """test nrm_specimens_magic.py"""
      print "Testing nrm_specimens_magic.py"
      fsa = file_prefix + 'nrm_specimens_magic_er_samples.txt'
      nrm_specimens_magic_infile = 'nrm_specimens_magic_measurements.txt'
@@ -458,6 +471,7 @@ def complete_nrm_specimens_magic_test(): # BIO type
      print "Successfully completed nrm_specimens_magic.py tests"
 
 def complete_sundec_test(): # list type
+     """test sundec.py"""
      sundec_infile = 'sundec_example.dat'
      sundec_outfile = None
      sundec_reference = ['154.2']
@@ -468,6 +482,7 @@ def complete_sundec_test(): # list type
      print "Successfully finished sundec.py tests"
 
 def complete_pca_test(): # list type
+     """test pca_example.py"""
      pca_infile = 'pca_example.dat'
      pca_outfile = None
      pca_reference = pca_correct_out
@@ -480,6 +495,7 @@ pca_correct_out = ['eba24a', 'DE-BFL', '0', '0.00', '339.9', '57.9', '9.2830e-05
 
 
 def complete_scalc_test(): # irregular, & list type
+     """test scalc.py"""
      scalc_infile = 'scalc_example.txt'
      scalc_outfile = None
      scalc_reference = ['99', '19.5', '90.0']
@@ -512,6 +528,7 @@ def complete_scalc_test(): # irregular, & list type
      scalc7.list_sequence()
 
 def complete_scalc_magic_test():
+     """test scalc_magic.py"""
      scalc_magic_infile = 'scalc_magic_example.txt'
      scalc_magic_outfile = None
      scalc_magic_reference = ['13', '17.8', '90.0']
@@ -524,8 +541,8 @@ def complete_scalc_magic_test():
      scalc_magic2.list_sequence()
 
 
-
 def complete_s_hext_test(): # list type
+     """test s_hext.py"""
      s_hext_infile = "s_hext_example.dat"
      s_hext_outfile = None
      s_hext_reference = s_hext_correct
@@ -533,11 +550,11 @@ def complete_s_hext_test(): # list type
      s_hext = Test_instance('s_hext.py', s_hext_infile, s_hext_outfile, s_hext_reference, s_hext_wrong, None, False)
      s_hext.list_sequence()
 
-
 s_hext_correct = ['F', '=', '2.56', 'F12', '=', '1.12', 'F23', '=', '2.16', 'N', '=', '8', 'sigma', '=', '0.000815076759', '0.33471', '265.8', '17.6', '40.3', '93.0', '72.2', '19.6', '356.5', '2.1', '0.33349', '93.0', '72.2', '31.4', '356.5', '2.1', '40.3', '265.8', '17.6', '0.33180', '356.5', '2.1', '19.6', '265.8', '17.6', '31.4', '93.0', '72.2']
 
 
 def complete_vgp_di_test(): # list type
+     """test vgp_di.py"""
      vgp_di_infile = 'vgp_di_example.dat'
      vgp_di_outfile = None
      vgp_di_reference = ['335.6', '62.9']
@@ -547,6 +564,7 @@ def complete_vgp_di_test(): # list type
 
 
 def complete_watsonsF_test(): # list/stdout type
+     """test_watsonsF.py"""
      watsonsF_infile = "watsonsF_example_file1.dat"
      watsonsF_infile2 = file_prefix + "watsonsF_example_file2.dat"
      watsonsF_outfile = None
@@ -558,32 +576,39 @@ def complete_watsonsF_test(): # list/stdout type
 # BIO ones
 
 def complete_apwp_test():
-    apwp = Test_instance('apwp.py', 'apwp_example.dat', 'apwp_results_new.out', 'apwp_results_correct.out', 'apwp_results_incorrect.out', None, False)
-    apwp.file_in_file_out_sequence(interactive=True)
-
+     """test apwp.py"""
+     apwp = Test_instance('apwp.py', 'apwp_example.dat', 'apwp_results_new.out', 'apwp_results_correct.out', 'apwp_results_incorrect.out', None, False)
+     apwp.file_in_file_out_sequence(interactive=True)
+     
 def complete_b_vdm_test():
-    b_vdm = Test_instance('b_vdm.py', 'b_vdm_example.dat', 'b_vdm_results_new.out', 'b_vdm_results_correct.out', 'b_vdm_results_incorrect.out', None, False)
-    b_vdm.file_in_file_out_sequence(interactive=True)
+     """test b_vdm.py"""
+     b_vdm = Test_instance('b_vdm.py', 'b_vdm_example.dat', 'b_vdm_results_new.out', 'b_vdm_results_correct.out', 'b_vdm_results_incorrect.out', None, False)
+     b_vdm.file_in_file_out_sequence(interactive=True)
 
 def complete_cart_dir_test():
-    cart_dir = Test_instance('cart_dir.py', 'cart_dir_example.dat', 'cart_dir_results_new.out', 'cart_dir_results_correct.out', 'cart_dir_results_incorrect.out', None, False)
-    cart_dir.file_in_file_out_sequence(interactive=True)
+     """test cart_dir.py"""
+     cart_dir = Test_instance('cart_dir.py', 'cart_dir_example.dat', 'cart_dir_results_new.out', 'cart_dir_results_correct.out', 'cart_dir_results_incorrect.out', None, False)
+     cart_dir.file_in_file_out_sequence(interactive=True)
     
 def complete_convert_samples_test():
-    convert_samples = Test_instance('convert_samples.py', 'convert_samples_example.dat', 'convert_samples_Northern_Iceland.txt', 'convert_samples_results_correct.out', 'convert_samples_results_incorrect.out', None, False)
-    convert_samples.file_in_file_out_sequence(interactive=True)
+     """test convert_samples.py"""
+     convert_samples = Test_instance('convert_samples.py', 'convert_samples_example.dat', 'convert_samples_Northern_Iceland.txt', 'convert_samples_results_correct.out', 'convert_samples_results_incorrect.out', None, False)
+     convert_samples.file_in_file_out_sequence(interactive=True)
 
 def complete_di_geo_test():
-    di_geo = Test_instance('di_geo.py', 'di_geo_example.dat', 'di_geo_results_new.out', 'di_geo_results_correct.out', 'di_geo_results_incorrect.out', None, False)
-    di_geo.file_in_file_out_sequence(interactive=True)
+     """test di_geo.py"""
+     di_geo = Test_instance('di_geo.py', 'di_geo_example.dat', 'di_geo_results_new.out', 'di_geo_results_correct.out', 'di_geo_results_incorrect.out', None, False)
+     di_geo.file_in_file_out_sequence(interactive=True)
 
 def complete_di_tilt_test():
-    di_tilt = Test_instance('di_tilt.py', 'di_tilt_example.dat', 'di_tilt_results_new.out', 'di_tilt_results_correct.out', 'di_tilt_results_incorrect.out', None, False)
-    di_tilt.file_in_file_out_sequence(interactive=True)
+     """test di_tilt.py"""
+     di_tilt = Test_instance('di_tilt.py', 'di_tilt_example.dat', 'di_tilt_results_new.out', 'di_tilt_results_correct.out', 'di_tilt_results_incorrect.out', None, False)
+     di_tilt.file_in_file_out_sequence(interactive=True)
 
 def complete_dir_cart_test():
-    dir_cart = Test_instance('dir_cart.py', 'dir_cart_example.dat', 'dir_cart_results_new.out', 'dir_cart_results_correct.out', 'dir_cart_results_incorrect.out', None, False)
-    dir_cart.file_in_file_out_sequence(interactive=True)
+     """test dir_cart.py"""
+     dir_cart = Test_instance('dir_cart.py', 'dir_cart_example.dat', 'dir_cart_results_new.out', 'dir_cart_results_correct.out', 'dir_cart_results_incorrect.out', None, False)
+     dir_cart.file_in_file_out_sequence(interactive=True)
 
 def complete_di_rot_test():
     di_rot = Test_instance('di_rot.py', 'di_rot_example.dat', 'di_rot_results_new.out', 'di_rot_results_correct.out', 'di_rot_results_incorrect.out', None, False)
