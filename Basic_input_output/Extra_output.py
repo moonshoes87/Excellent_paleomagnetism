@@ -182,7 +182,7 @@ def complete_aarm_magic_test():
 #aarm_magic_test()
 
 def complete_atrm_magic_test():
-    """testing atrm_magic.py"""
+    """test atrm_magic.py"""
     atrm_infile = 'atrm_magic_measurements.txt'
     atrm_Fa, atrm_Fr = "atrm_anisotropy_new.out", "atrm_results_new.out"
     tag1, tag2 = '-Fa', '-Fr'
@@ -195,7 +195,7 @@ def complete_atrm_magic_test():
 #    print obj.stdout
 
 def complete_CIT_magic_test():
-    """testing CIT_magic.py"""
+    """test CIT_magic.py"""
     CIT_magic_infile = 'CIT_magic_example.sam'
     CIT_magic_outfile1 = None
     CIT_magic_outfile2 = None
@@ -204,7 +204,7 @@ def complete_CIT_magic_test():
 
 
 def complete_hysteresis_magic_test(): # irregular.  a file has to be renamed because it just comes out a default way, it is not specifiable on the command line
-    """test for hysteresis_magic.py"""
+    """test hysteresis_magic.py"""
     tag1, tag2 = '-F', None
     outfile2 = None
     hysteresis_magic_infile = 'hysteresis_magic_example.dat'
@@ -224,7 +224,7 @@ def complete_hysteresis_magic_test(): # irregular.  a file has to be renamed bec
 
 
 def complete_k15_magic_test(): # irregular -- has 4 output files!!!!
-    """test for k15_magic.py"""
+    """test k15_magic.py"""
     print "Testing k15_magic.py"
     k15_infile = 'k15_magic_example.dat'
     tag1 = "-Fsa"
@@ -256,10 +256,7 @@ def complete_k15_magic_test(): # irregular -- has 4 output files!!!!
     k15_unittest.test_file1_with_file2(k15_rmag, k15_rmag_reference, "incorrect")
     k15_unittest.test_file1_with_file2(k15_rmag, k15_rmag_wrong, "correct")
 
-#complete_k15_magic_test()
 
-#    def test_file1_with_file2(self, file1, file2, ref):
- #       self.assertRaises(NameError, self.ex_out.check_file_output, file1, file2, reference=ref)
 def complete_kly4s_magic_test(): # irregular, with 3 output files
     """test kly4s_magic.py"""
     print "Testing kly4s_magic.py"
@@ -325,7 +322,7 @@ def complete_aarm_magic_test():
 def complete_orientation_magic_test():
     """test orientation_magic.py"""
     print "Testing orientation_magic.py"
-    infile = "orientation_magic_example.txt"
+    infile = "orientation_magic_exa.txt"
     tag1, tag2 = "-Fsi", "-Fsa"
     orient_Fsi, orient_Fsa = "orientation_magic_er_sites_new.out", "orientation_magic_er_samples_new.out"
     orient_Fsi_reference, orient_Fsa_reference = "orientation_magic_er_sites_correct.out", "orientation_magic_er_samples_correct.out"
@@ -337,7 +334,6 @@ def complete_orientation_magic_test():
 
 def complete_thellier_magic_redo_test(): # quite irregular
     """test thellier_magic_redo.py"""
-    # WD
     print "Testing thellier_magic_redo.py"
     infile = 'thellier_magic_redo_example.dat'
     outfile = "thellier_magic_redo_specimens_new.out"
@@ -364,34 +360,37 @@ thellier_magic_redo.py -f thellier_magic_redo_example.dat  -fnl thellier_magic_r
 
 
 
-thing = [complete_aarm_magic_test, complete_atrm_magic_test, complete_hysteresis_magic_test, complete_k15_magic_test, complete_kly4s_magic_test, complete_pmag_results_extract_test, complete_orientation_magic_test, complete_thellier_magic_redo_test]
-
-
+Extra_output_tests = [complete_aarm_magic_test, complete_atrm_magic_test, complete_hysteresis_magic_test, complete_k15_magic_test, complete_kly4s_magic_test, complete_pmag_results_extract_test, complete_orientation_magic_test, complete_thellier_magic_redo_test]
 
 print "STARTING HERE"
 messed_up_programs = []
-
 problems_dictionary = {}
 
-def go_through():
-    for i in thing:
+errors_log = open('errors_log.txt', 'w')
+
+def go_through(a_list):
+    for i in a_list:
+        errors_count = 0
         try:
             print "TRYING"
             print " - "
             i()
         except Exception as ex:
-            messed_up_programs.append(i)
+            errors_count += 1
+            messed_up_programs.append(i.__doc__)
             print str(i) + " failed donut"
             print "i, ex: ", i, ex
-            print type(ex)
-            print ex.args
+            print "type(ex)", type(ex)
+            print "ex.args", ex.args
             x = str(ex)
             problems_dictionary[i.__doc__] = x
+            errors_log.write(i.__doc__)
+            errors_log.write(" " + x + " . ")
     print "messed up programs", messed_up_programs
+    print "total errors found: " + str(errors_count)
     message = []
     for i in messed_up_programs:
-        print "this is i", i
-        message.append(i.__doc__)
+        message.append(i)
         print "message", message
     print "THESE ONES ARE BROKEN ", message
     print problems_dictionary
@@ -409,7 +408,7 @@ def redo_broken_ones():
 # I want a way to go through one at a time and get the messed up ones to show me their standard output.....  This might not be easy
     
 #complete_thellier_magic_redo_test()
-go_through()
+go_through(Extra_output_tests)
 print "IT STARTS HERE!!!"
 #redo_broken_ones()
 
