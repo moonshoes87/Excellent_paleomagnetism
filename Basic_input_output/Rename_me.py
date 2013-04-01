@@ -611,16 +611,19 @@ def complete_dir_cart_test():
      dir_cart.file_in_file_out_sequence(interactive=True)
 
 def complete_di_rot_test():
-    di_rot = Test_instance('di_rot.py', 'di_rot_example.dat', 'di_rot_results_new.out', 'di_rot_results_correct.out', 'di_rot_results_incorrect.out', None, False)
-    di_rot.file_in_file_out_sequence()
+     """test di_rot.py"""
+     di_rot = Test_instance('di_rot.py', 'di_rot_example.dat', 'di_rot_results_new.out', 'di_rot_results_correct.out', 'di_rot_results_incorrect.out', None, False)
+     di_rot.file_in_file_out_sequence()
 
 def complete_di_vgp_test():
-    di_vgp = Test_instance('di_vgp.py', 'di_vgp_example.dat', 'di_vgp_results_new.out', 'di_vgp_results_correct.out', 'di_vgp_results_incorrect.out', None, False)
-    di_vgp.file_in_file_out_sequence(interactive=True)
+     """test di_vgp.py"""
+     di_vgp = Test_instance('di_vgp.py', 'di_vgp_example.dat', 'di_vgp_results_new.out', 'di_vgp_results_correct.out', 'di_vgp_results_incorrect.out', None, False)
+     di_vgp.file_in_file_out_sequence(interactive=True)
 
 def complete_eigs_s_test():
-    eigs_s = Test_instance('eigs_s.py', 'eigs_s_example.dat', 'eigs_s_results_new.out', 'eigs_s_results_correct.out', 'eigs_s_results_incorrect.out', None, False)
-    eigs_s.file_in_file_out_sequence()
+     """test eigs_s.py"""
+     eigs_s = Test_instance('eigs_s.py', 'eigs_s_example.dat', 'eigs_s_results_new.out', 'eigs_s_results_correct.out', 'eigs_s_results_incorrect.out', None, False)
+     eigs_s.file_in_file_out_sequence()
 
 def complete_eq_di_test():
     eq_di = Test_instance('eq_di.py', 'eq_di_example.dat', 'eq_di_results_new.out', 'eq_di_results_correct.out', 'eq_di_results_incorrect.out', None, False)

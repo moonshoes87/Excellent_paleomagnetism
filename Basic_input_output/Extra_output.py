@@ -52,8 +52,7 @@ class Ex_out(Rename_me.Test_instance):
         if len(obj.stdout) < 1000:
             print "stdout: " +str(obj.stdout)
         else:
-            print "stdout: " + str(obj.stdout)[:500] 
-            print " .... "
+            print "STDOUT: " + str(obj.stdout)[:500] + " .... "
             print " " + str(obj.stdout)[-500:]
         print "files created: " + str(obj.files_created)
         print "files updated: " + str(obj.files_updated)
@@ -369,8 +368,9 @@ def complete_thellier_magic_redo_test(): # quite irregular
     thellier_magic_redo_reference = None
     thellier_magic_redo = Ex_out('thellier_magic_redo.py', infile, out_tag1, out1, out_tag2, out2, correct_out1, correct_out2, wrong_out1, wrong_out2, None, True)
     obj = env.run("thellier_magic_redo.py", "-WD", directory, "-f", infile, in_tag1, in1, in_tag2, in2, in_tag3, in3, "-F", outfile, out_tag1, out1, out_tag2, out2, arg1, arg2)
-    print "STDOUT: " + str(obj.stdout)[:700] + " .... " 
-    str(obj.stdout)[-700:]
+    print "STDOUT: " + str(obj.stdout)[:700] 
+    print " .... " 
+    print str(obj.stdout)[-700:]
     print "FILES UPDATED: " + str(obj.files_updated)
     print "FILES CREATED: " + str(obj.files_created)
     thellier_magic_redo.standard_check_file_sequence()
@@ -446,24 +446,8 @@ def redo_broken_ones(a_list):
             #raise ex
     
 
-def clean_output_file():
-    the_file = open('all_output.txt', 'rU')
-    info = the_file.readlines()
-    rhino = False
-    new_file = open('clean_errors_log.txt', 'w')
-    for l in info:
-        if "rhino" in l:
-            rhino = True
-        if rhino:
-            new_file.write(l)
-            
-    
-
-#
-
 new_list = go_through(Extra_output_tests)
 redo_broken_ones(new_list)
-clean_output_file()
 
 print "IT STARTS HERE!!!"
 #redo_broken_ones()
