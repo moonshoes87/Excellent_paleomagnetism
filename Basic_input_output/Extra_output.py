@@ -1,5 +1,6 @@
 #! /usr/bin/env python                                                                                                                
 import sys
+import traceback
 from scripttest import TestFileEnvironment
 env = TestFileEnvironment('./new-test-output')
 import unittest
@@ -39,7 +40,7 @@ class Ex_out(Rename_me.Test_instance):
             self.arg1 = self.args[0]
 
     def run_program(self):
-        PT.clean_house()        
+        #PT.clean_house()        
         if self.WD:
             print "about to run WD program"
             print (self.name, '-WD', directory, '-f', self.infile, self.tag1, self.outfile1, self.tag2, self.outfile2, self.arg1, 'stdin=' + str(self.stdin))
@@ -68,7 +69,7 @@ class Ex_out(Rename_me.Test_instance):
                 print "Output contained:    " + str(i)
                 print "but should have had: " + str(correct_output_list[num])
                 print "Error raised"
-                raise NameError("Wrong output")
+                raise NameError("Wrong output -- output list did not match correct_output_list" ) # can this message be more informative??
         if list_empty:
             print "ONE OR BOTH LISTS DID NOT HAVE CONTENT"
             raise NameError("Output list empty")
@@ -98,6 +99,8 @@ class Ex_out(Rename_me.Test_instance):
         parses each file word by word, then checks to see if the outfile matches the reference file.
         """
         print "testing: " + str(outfile) + " against reference file: " + str(reference_file)
+        if reference == "correct":
+            print "NOT expecting an error"
         if reference == "incorrect":
             print "expecting an error"
         out = PT.file_parse_by_word_and_pmagpy_strip(outfile)
@@ -111,6 +114,7 @@ class Ex_out(Rename_me.Test_instance):
 
     def ex_out_sequence(self):
         self.run_program()
+        print "ran program: " + str(self.name)
         self.standard_check_file_sequence()
         self.extra_output_unittest()
 
@@ -169,17 +173,22 @@ class Bad_test(unittest.TestCase):
         self.assertRaises(NameError, self.ex_out.check_file_output, file1, file2, reference=ref)
         print "error expected"
 
+
+
+print "lizard face"
+#  def __init__(self, name, infile, tag1, outfile1, tag2, outfile2, correctfile1, correctfile2, wrongfile1, wrongfile2, stdin, WD, *args):
 def complete_aarm_magic_test():
     """testing aarm_magic.py"""
     print "Testing aarm_magic"
     infile = "aarm_measurements.txt"
     aarm_Fa, aarm_Fr = 'aarm_magic_anisotropy_new.out', 'aarm_magic_results_new.out'
     tag1, tag2 = "-Fa", "-Fr"
-    aarm_Fa_reference, aarm_Fr_reference = 'aarm_magic_anisotropy_correct.out', 'aarm_magic_results_correct.out'
+    aarm_Fa_reference, aarm_Fr_reference = 'aarm_magic_anisotropy_incorrect.out', 'aarm_magic_results_correct.out' # should be correct
     aarm_Fa_wrong, aarm_Fr_wrong = 'aarm_magic_anisotropy_incorrect.out', 'aarm_magic_results_incorrect.out'
     aarm_magic = Ex_out('aarm_magic.py', infile, tag1, aarm_Fa, tag2, aarm_Fr, aarm_Fa_reference, aarm_Fr_reference, aarm_Fa_wrong, aarm_Fr_wrong, None, True)
     aarm_magic.ex_out_sequence()
-#aarm_magic_test()
+
+
 
 def complete_atrm_magic_test():
     """test atrm_magic.py"""
@@ -306,16 +315,16 @@ def complete_pmag_results_extract_test():
     pmag_unittest.test_file1_with_file2(pmag_sitenfo, pmag_sitenfo_wrong, "correct")
     subprocess.call(['rm', file_prefix + 'Intensities.txt', file_prefix + 'Directions.txt', file_prefix + 'SiteNfo.txt'])
 
-def complete_aarm_magic_test():
-    """test aarm_magic.py"""
-    print "Testing aarm_magic"
-    infile = "aarm_measurements.txt"
-    aarm_Fa, aarm_Fr = 'aarm_magic_anisotropy_new.out', 'aarm_magic_results_new.out'
-    tag1, tag2 = "-Fa", "-Fr"
-    aarm_Fa_reference, aarm_Fr_reference = 'aarm_magic_anisotropy_correct.out', 'aarm_magic_results_correct.out'
-    aarm_Fa_wrong, aarm_Fr_wrong = 'aarm_magic_anisotropy_incorrect.out', 'aarm_magic_results_incorrect.out'
-    aarm_magic = Ex_out('aarm_magic.py', infile, tag1, aarm_Fa, tag2, aarm_Fr, aarm_Fa_reference, aarm_Fr_reference, aarm_Fa_wrong, aarm_Fr_wrong, None, True)
-    aarm_magic.ex_out_sequence()
+#def complete_aarm_magic_test():
+ #   """test aarm_magic.py"""
+  #  print "Testing aarm_magic"
+#    infile = "aarm_measurements.txt"
+ #   aarm_Fa, aarm_Fr = 'aarm_magic_anisotropy_new.out', 'aarm_magic_results_new.out'
+  #  tag1, tag2 = "-Fa", "-Fr"
+#    aarm_Fa_reference, aarm_Fr_reference = 'aarm_magic_anisotropy_correct.out', 'aarm_magic_results_correct.out'
+ #   aarm_Fa_wrong, aarm_Fr_wrong = 'aarm_magic_anisotropy_incorrect.out', 'aarm_magic_results_incorrect.out'
+  #  aarm_magic = Ex_out('aarm_magic.py', infile, tag1, aarm_Fa, tag2, aarm_Fr, aarm_Fa_reference, aarm_Fr_reference, aarm_Fa_wrong, aarm_Fr_wrong, None, True)
+#    aarm_magic.ex_out_sequence()
 
 #complete_aarm_magic_test()
 
@@ -368,14 +377,22 @@ problems_dictionary = {}
 
 errors_log = open('errors_log.txt', 'w')
 
+
+
 def go_through(a_list):
+    PT.clean_house()
+    redo_me = []
+    errors_count = 0
     for i in a_list:
-        errors_count = 0
         try:
             print "TRYING"
             print " - "
             i()
+#        except IOError:
+# will catch just the file missing type errors
+ #           print "IOERROR UNICORN"
         except Exception as ex:
+            redo_me.append(i)
             errors_count += 1
             messed_up_programs.append(i.__doc__)
             print str(i) + " failed donut"
@@ -385,30 +402,40 @@ def go_through(a_list):
             x = str(ex)
             problems_dictionary[i.__doc__] = x
             errors_log.write(i.__doc__)
-            errors_log.write(" " + x + " . ")
+            errors_log.write(": " + x + ".  ")
+#            print "stack stuff"
+ #           traceback.print_stack()
+  #          exc_type, exc_value, exc_traceback = sys.exc_info()
+   #         print "*** print_tb:"
+    #        traceback.print_tb(exc_traceback, limit=1, file=sys.stdout)
+     #       print "end stack stuff"
     print "messed up programs", messed_up_programs
     print "total errors found: " + str(errors_count)
     message = []
     for i in messed_up_programs:
         message.append(i)
-        print "message", message
     print "THESE ONES ARE BROKEN ", message
-    print problems_dictionary
+    print "problems dictionary", problems_dictionary
+    print "redo me list", redo_me
+    return redo_me
 
-def redo_broken_ones():
-    for i in messed_up_programs:
+def redo_broken_ones(a_list):
+    print "rhino"
+    for i in a_list:
+        print i.__doc__
         try:
             i()
-        except:
-            print "error raised"
-#        if question == 'y' or question == 'yes':
- #           print "continuing"
-  #      else:
-   #         break
-# I want a way to go through one at a time and get the messed up ones to show me their standard output.....  This might not be easy
-    
-#complete_thellier_magic_redo_test()
-go_through(Extra_output_tests)
+        except Exception as ex:
+            print str(i.__doc__) + " raised error " + str(ex)
+            #raise ex
+
+
+
+#
+
+new_list = go_through(Extra_output_tests)
+redo_broken_ones(new_list)
+
 print "IT STARTS HERE!!!"
 #redo_broken_ones()
 
@@ -438,55 +465,3 @@ if __name__ == "__main__":
 
 
 
-#an interesting experiment that didn't quite work:
-"""
-# or, I could have it so that for each extra command line thing, it gets a dictionary: {tag: '-F', outfile: 'thing.out', correctfile: 'correct.txt', wrongfile: 'wrong.txt'}
-class Other_out():
-    def __init__(self, name, infile, stdin, WD, *args):
-        self.name = name
-        self.infile = infile
-        self.stdin = stdin
-        self.WD = WD
-        self.arg0, self.arg1, self.arg2, self.arg3, self.arg4, self.arg5, self.arg6, self.arg7, self.arg8, self.arg9 = None, None, None, None, None, None, None, None, None, None
-        self.arguments = [self.arg0, self.arg1, self.arg2, self.arg3, self.arg4, self.arg5, self.arg6, self.arg7, self.arg8, self.arg9]
-        self.args = args
-        
-#    arguments = [self.arg1, self.arg2, self.arg3, self.arg4, self.arg5, self.arg6, self.arg7, self.arg8, self.arg9, self.arg10]
-# probably useless...
-    def parse_args(self):
-        print "parsing args"
-        for num, arg in enumerate(self.args):
-            self.arguments[num] = arg
-        print self.arguments
-
-    def run_program(self):
-        tag0, tag1, tag2, tag3 = self.args[0]["tag"], self.args[1]["tag"], self.args[2]["tag"], self.args3["tag"]
-        outfile0, outfile1, outfile2, outfile3 = self.args[0]["outfile"], self.args[1]["outfile"], self.args[2]["outfile"], self.args[3]["outfile"]
-        if self.WD:
-            print (self.name, '-f', self.infile, tag0, outfile0, tag1, outfile1, tag2, outfile2, tag3, outfile3, 'stdin =' + str(self.stdin))
-        else:
-            print (self.name, '-f', self.infile, tag0, outfile0, tag1, outfile1, tag2, outfile2, tag3, outfile3, 'stdin =' + str(self.stdin))
- #            obj = env.run(self.name, '-f', self.infile, tag0, outfile0, tag1, outfile1, tag2, outfile2, tag3, outfile3, 'stdin' = self.stdin)
-
-def other_aarm_magic_test():
-    print " other testing aarm_magic"
-    infile = "aarm_measurements.txt"
-    aarm_Fa = {"tag": "-Fa", "outfile": 'aarm_magic_anisotropy.out', "correctfile": 'aarm_magic_anisotropy_correct.out', "wrongfile": 'aarm_magic_anisotropy_incorrect.out'}
-    aarm_Fr = {"tag": "-Fr", "outfile": 'aarm_magic_results.out', "correctfile": 'aarm_magic_results_correct.out', "wrongfile": 'aarm_magic_results_incorrect.out'}
-    aarm_magic = Other_out('aarm_magic.py', infile, None, True, aarm_Fa, aarm_Fr)
-    print aarm_magic.args[0]["tag"]
-    aarm_magic.run_program()
-    
-#other_aarm_magic_test()
-
-#    aarm_Fa, aarm_Fr = 'aarm_magic_anisotropy.out', 'aarm_magic_results.out'
- #   tag1, tag2 = "-Fa", "-Fr"
-  #  aarm_Fa_reference, aarm_Fr_reference = 'aarm_magic_anisotropy_correct.out', 'aarm_magic_results_correct.out'
-   # aarm_Fa_wrong, aarm_Fr_wrong = 'aarm_magic_anisotropy_incorrect.out', 'aarm_magic_results_incorrect.out'
-
-
-
-#>>> dict = {"one": 1, "two": 2}
-#>>> dict["one"]
-#1
-"""

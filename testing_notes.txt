@@ -304,6 +304,7 @@ other, to do:
        go through list below and check uppercase programs that may be missing
        must put in a way to catch this type of error: no such file
        find a way to just output the error...
+       fix aarm_magic test .... it is making it through the tests even though it is wrong!!
 
 
        CIT_magic.py needs fixing

@@ -59,3 +59,7 @@ for i in functions:
 #multiply(8, 3)
 #divide(1, 5)
 #lower_case("HELLO")
+
+
+def clean_output():
+    """
