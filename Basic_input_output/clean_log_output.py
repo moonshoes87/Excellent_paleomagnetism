@@ -10,9 +10,9 @@ import PmagPy_tests as PT
 import subprocess
 
 
-def clean_output_file():
-    the_file = open('all_output.txt', 'rU')
-    info = the_file.readlines()
+def clean_output_file(infile):
+    a_file = open(infile, 'rU')
+    info = a_file.readlines()
     rhino = False
     new_file = open('clean_output_log.txt', 'w')
     for l in info:
@@ -23,4 +23,5 @@ def clean_output_file():
     print " 'clean_output_log.txt' ready"
 
 if __name__ == "__main__":
-    clean_output_file()
+    file_in = raw_input("what file?")
+    clean_output_file(file_in)

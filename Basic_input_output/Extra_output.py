@@ -4,9 +4,10 @@ import traceback
 from scripttest import TestFileEnvironment
 env = TestFileEnvironment('./new-test-output')
 import unittest
+import subprocess
 import Rename_me
 import PmagPy_tests as PT
-import subprocess
+import clean_log_output
 
 
 file_prefix = PT.file_prefix
@@ -448,6 +449,7 @@ def redo_broken_ones(a_list):
 
 new_list = go_through(Extra_output_tests)
 redo_broken_ones(new_list)
+
 
 print "IT STARTS HERE!!!"
 #redo_broken_ones()
