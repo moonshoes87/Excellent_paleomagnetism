@@ -7,6 +7,7 @@ import subprocess
 import Basic_input_output
 import PmagPy_tests as PT
 import Complex_test
+#import Extra_output
 
 file_prefix = PT.file_prefix
 directory = PT.directory
@@ -1285,7 +1286,8 @@ listy = [complete_angle_test,complete_zeq_test, complete_chartmaker_test, comple
 
 
 if __name__ == '__main__':
-     pass
+#     pass
+     complete_foldtest_test()
 #     complete_working_test()
  #    PT.clean_house()
   #   PT.remove_new_outfiles()

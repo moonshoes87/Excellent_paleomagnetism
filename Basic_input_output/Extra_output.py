@@ -8,6 +8,7 @@ import subprocess
 import Rename_me
 import PmagPy_tests as PT
 import clean_log_output
+import error_logging as EL
 
 
 file_prefix = PT.file_prefix
@@ -328,18 +329,6 @@ def complete_pmag_results_extract_test():
     pmag_unittest.test_file1_with_file2(pmag_sitenfo, pmag_sitenfo_wrong, "correct")
     subprocess.call(['rm', file_prefix + 'Intensities.txt', file_prefix + 'Directions.txt', file_prefix + 'SiteNfo.txt'])
 
-#def complete_aarm_magic_test():
- #   """test aarm_magic.py"""
-  #  print "Testing aarm_magic"
-#    infile = "aarm_measurements.txt"
- #   aarm_Fa, aarm_Fr = 'aarm_magic_anisotropy_new.out', 'aarm_magic_results_new.out'
-  #  tag1, tag2 = "-Fa", "-Fr"
-#    aarm_Fa_reference, aarm_Fr_reference = 'aarm_magic_anisotropy_correct.out', 'aarm_magic_results_correct.out'
- #   aarm_Fa_wrong, aarm_Fr_wrong = 'aarm_magic_anisotropy_incorrect.out', 'aarm_magic_results_incorrect.out'
-  #  aarm_magic = Ex_out('aarm_magic.py', infile, tag1, aarm_Fa, tag2, aarm_Fr, aarm_Fa_reference, aarm_Fr_reference, aarm_Fa_wrong, aarm_Fr_wrong, None, True)
-#    aarm_magic.ex_out_sequence()
-
-#complete_aarm_magic_test()
 
 def complete_orientation_magic_test():
     """test orientation_magic.py"""
@@ -387,74 +376,20 @@ thellier_magic_redo.py -f thellier_magic_redo_example.dat  -fnl thellier_magic_r
 Extra_output_tests = [complete_aarm_magic_test, complete_atrm_magic_test, complete_hysteresis_magic_test, complete_k15_magic_test, complete_kly4s_magic_test, complete_pmag_results_extract_test, complete_orientation_magic_test, complete_thellier_magic_redo_test]
 
 print "STARTING HERE"
-messed_up_programs = []
-problems_dictionary = {}
+#problems_dictionary = {}
+ex_out_errors_log = open('errors_log_extra_output.txt', 'w')
 
-errors_log = open('errors_log.txt', 'w')
-
-
-
-def go_through(a_list):
-    PT.clean_house()
-    redo_me = []
-    errors_count = 0
-    for i in a_list:
-        try:
-            print "TRYING"
-            print " - "
-            i()
-#        except IOError:
-# will catch just the file missing type errors
- #           print "IOERROR UNICORN"
-        except Exception as ex:
-            redo_me.append(i)
-            errors_count += 1
-            messed_up_programs.append(i.__doc__)
-            print str(i) + " failed donut"
-            print "i, ex: ", i, ex
-            print "type(ex)", type(ex)
-            print "ex.args", ex.args
-            x = str(ex)
-            problems_dictionary[i.__doc__] = x
-            errors_log.write(i.__doc__)
-            errors_log.write(": " + x + ".  ")
-#            print "stack stuff"
- #           traceback.print_stack()
-  #          exc_type, exc_value, exc_traceback = sys.exc_info()
-   #         print "*** print_tb:"
-    #        traceback.print_tb(exc_traceback, limit=1, file=sys.stdout)
-     #       print "end stack stuff"
-    print "messed up programs", messed_up_programs
-    print "total errors found: " + str(errors_count)
-    message = []
-    for i in messed_up_programs:
-        message.append(i)
-    print "THESE ONES ARE BROKEN ", message
-    print "problems dictionary", problems_dictionary
-    print "redo me list", redo_me
-    return redo_me
-
-def redo_broken_ones(a_list):
-    print "rhino"
-    for i in a_list:
-        print i.__doc__
-        try:
-            i()
-        except Exception as ex:
-            print str(i.__doc__) + " raised error: " + str(ex)
-            print "-----------"
-            print "-----------"
-            #raise ex
     
+if __name__ == "__main__":
+    new_list = EL.go_through(Extra_output_tests, ex_out_errors_log)
+    EL.redo_broken_ones(new_list)
 
-new_list = go_through(Extra_output_tests)
-redo_broken_ones(new_list)
-
+# run as: python Extra_output.py > extra_out_all_output.txt
+# then command: python clean_output.py
+    # extra_out_all_output.txt
 
 print "IT STARTS HERE!!!"
 #redo_broken_ones()
-
-
 
 
 def complete_working_test():
@@ -469,12 +404,8 @@ def complete_working_test():
     complete_thellier_magic_redo_test()
     PT.clean_house()
 
-
-
-
-
-if __name__ == "__main__":
-    pass
+#if __name__ == "__main__":
+ #   pass
 #    complete_working_test()
 
 
