@@ -373,6 +373,8 @@ thellier_magic_redo.py -f thellier_magic_redo_example.dat  -fnl thellier_magic_r
 
 
 
+function_mapping = {"aarm_magic": complete_aarm_magic_test, "atrm_magic": complete_atrm_magic_test}
+
 Extra_output_tests = [complete_aarm_magic_test, complete_atrm_magic_test, complete_hysteresis_magic_test, complete_k15_magic_test, complete_kly4s_magic_test, complete_pmag_results_extract_test, complete_orientation_magic_test, complete_thellier_magic_redo_test]
 
 print "STARTING HERE"
@@ -381,15 +383,24 @@ ex_out_errors_log = open('errors_log_extra_output.txt', 'w')
 
     
 if __name__ == "__main__":
-    new_list = EL.go_through(Extra_output_tests, ex_out_errors_log)
-    EL.redo_broken_ones(new_list)
+    if "hiccup" in sys.argv: # this basically works.  modularize and move it.  also, add some way to strip/deal with variable string inputs.  or, just give a message that you have to get the input exactly correct. 
+        ind=sys.argv.index('hiccup')
+        run_program=sys.argv[ind+1]
+        print run_program
+        program = function_mapping[run_program]
+        print program
+        print type(program)
+        program()
+    else:
+        new_list = EL.go_through(Extra_output_tests, ex_out_errors_log) # (list of tests, file to log them in) this creates a list of which programs are messed up, along with their error message.  
+        EL.redo_broken_ones(new_list) # this goes through the messed up ones again and adds to the output
 
 # run as: python Extra_output.py > extra_out_all_output.txt
 # then command: python clean_output.py
     # extra_out_all_output.txt
 
-print "IT STARTS HERE!!!"
-#redo_broken_ones()
+
+# CONSIDER: 
 
 
 def complete_working_test():

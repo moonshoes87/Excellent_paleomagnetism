@@ -304,8 +304,8 @@ other, to do:
        go through list below and check uppercase programs that may be missing
        must put in a way to catch this type of error: no such file
        find a way to just output the error...
-       fix aarm_magic test .... it is making it through the tests even though it is wrong!!
-
+       options -- turn print statement into a write to file command.  
+       Extra_output doesn't work when Rename_me.py is impo
 
        CIT_magic.py needs fixing
        # er_sites.txt is supposed to be designatable on the command-line with -Fsp, but is not.  fix this.... 
