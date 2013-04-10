@@ -149,34 +149,91 @@ def remove_new_outfiles():
     subprocess.call('rm ' + directory + '/*_new.out', shell=True)
 
 
+def get_short_program_name(name):
+    # this doesn't work!  you would need regular expressions.  strip removes all combinations of the letters
+    print "get short name"
+    print name
+    n = name.strip()
+    print n
+    n -= ".py"
+    print n
+    n = n.strip("complete")
+    print n
+    n = n.strip("_test")
+    print n
+    return n
+
+def clean_program_name(name = None): 
+    """
+    removes extraneous stuff and gets to the command for running the test
+    """
+    if name == None:
+        n = raw_input("name?  ")
+    else:
+        n = name
+    print "name", name
+    print "n", n
+    n = str(n)
+    print n
+    n = n.lower()
+    print n
+    n = n.strip(" ")
+    print n
+    n = n.strip(".py")
+    print n
+    if "test" in n:
+        if "()" in n:
+            pass
+        else:
+            n += "()"
+    else:
+        n += "_test()"
+    if "complete" in n:
+        pass
+    else:
+        n = "complete_" + n
+    print "final: " + str(n)
+    return n
+
+#clean_program_name("complete_angle.py")
+#clean_program_name("angle")
+#clean_program_name("complete_angle_test()")
+#clean_program_name("angle_test")
+#clean_program_name("complete_angle")
+#clean_program_name("complete_Angle")
+#clean_program_name()
+
+
 def find_a_program(name):
-    name = name.lower()
-    name = name.strip(".py")
-    full_name = "complete_" + name + "_test():"
+    full_name = clean_program_name(name)
+ #   print "FULL NAME", full_name
     Rename = file_parse_by_word(file_prefix + "Rename_me.py")
     new_rename = lowercase_all(Rename)
     print "name: " + str(name)
     print "full name:" + str(full_name)
+    found = False
     if full_name in new_rename:
+        found = True
         print name + " occurs in Rename_me.py"
     Extra_output = file_parse_by_word(file_prefix + "Extra_output.py")
     new_extra_output = lowercase_all(Extra_output)
     if full_name in new_extra_output:
+        found = True
         print name + " occurs in Extra_output.py"
-#    Plotting = file_parse_by_word(file_prefix + "Plotting.py")
- #   new_plotting = lowercase_all(Plotting)
-  #  if full_name in new_plotting:
-   #     print name + " occurs in Plotting.py"
     Bootstrap_plotting = file_parse_by_word(file_prefix + "Bootstrap_plotting.py")
     new_bootstrap_plotting = lowercase_all(Bootstrap_plotting)
     if full_name in new_bootstrap_plotting:
+        found = True
         print name + " occurs in Bootstrap_plotting.py"
     Random_stuff = file_parse_by_word(file_prefix + "random_stuff.py")
     new_random_stuff = lowercase_all(Random_stuff)
     if full_name in new_random_stuff:
+        found = True
         print name + " occurs in random_stuff.py"
-    print "end"
-
+    if found:
+        print name + " was found"
+    else:
+        print name + " not found.  Make sure your spelling is good!"
 
 
 if __name__ == "__main__":

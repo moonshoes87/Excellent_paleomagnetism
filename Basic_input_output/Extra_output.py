@@ -189,7 +189,6 @@ class Bad_test(unittest.TestCase):
 
 
 
-print "lizard face"
 #  def __init__(self, name, infile, tag1, outfile1, tag2, outfile2, correctfile1, correctfile2, wrongfile1, wrongfile2, stdin, WD, *args):
 def complete_aarm_magic_test():
     """testing aarm_magic.py"""
@@ -373,24 +372,30 @@ thellier_magic_redo.py -f thellier_magic_redo_example.dat  -fnl thellier_magic_r
 
 
 
-function_mapping = {"aarm_magic": complete_aarm_magic_test, "atrm_magic": complete_atrm_magic_test}
+function_mapping = {"aarm_magic": complete_aarm_magic_test, "atrm_magic": complete_atrm_magic_test, "hysteresis_magic": complete_hysteresis_magic_test, "k15_magic": complete_k15_magic_test, "kly4s_magic": complete_kly4s_magic_test, "pmag_results_extract": complete_pmag_results_extract_test, "orientation_magic": complete_orientation_magic_test, "thellier_magic_redo": complete_thellier_magic_redo_test}
 
 Extra_output_tests = [complete_aarm_magic_test, complete_atrm_magic_test, complete_hysteresis_magic_test, complete_k15_magic_test, complete_kly4s_magic_test, complete_pmag_results_extract_test, complete_orientation_magic_test, complete_thellier_magic_redo_test]
 
-print "STARTING HERE"
+
 #problems_dictionary = {}
 ex_out_errors_log = open('errors_log_extra_output.txt', 'w')
 
     
 if __name__ == "__main__":
     if "hiccup" in sys.argv: # this basically works.  modularize and move it.  also, add some way to strip/deal with variable string inputs.  or, just give a message that you have to get the input exactly correct. 
-        ind=sys.argv.index('hiccup')
-        run_program=sys.argv[ind+1]
-        print run_program
-        program = function_mapping[run_program]
-        print program
-        print type(program)
-        program()
+        try:
+            ind=sys.argv.index('hiccup')
+            run_program=sys.argv[ind+1]
+            print run_program
+            if ".py" in run_program:
+                run_program = run_program[:-3]
+            program = function_mapping[run_program]
+            print program
+            print type(program)
+            program()
+        except Exception as ex:
+            print ex
+            print "Please try again.  Check spelling, etc.  Make sure to input the name of the program with no quotations or extra words: i.e.: angle, or: thellier_magic_redo"
     else:
         new_list = EL.go_through(Extra_output_tests, ex_out_errors_log) # (list of tests, file to log them in) this creates a list of which programs are messed up, along with their error message.  
         EL.redo_broken_ones(new_list) # this goes through the messed up ones again and adds to the output

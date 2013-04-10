@@ -292,6 +292,7 @@ complete list of tested programs:
 
 
 other, to do:
+       
        make a script that will replace all the inaccurate path names, so it can be run on a different machine.  this includes that some stdout includes -- some_file was saved in this_directory.  could put it into the strip_pmagpy function
        make output nicer, easier, put it into a file
        use these at the end of the test:
@@ -309,7 +310,6 @@ other, to do:
 
        CIT_magic.py needs fixing
        # er_sites.txt is supposed to be designatable on the command-line with -Fsp, but is not.  fix this.... 
-
 
        problem programs to return to:
        parse_measurements.py
