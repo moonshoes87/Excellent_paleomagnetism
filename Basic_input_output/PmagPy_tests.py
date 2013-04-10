@@ -235,6 +235,22 @@ def find_a_program(name):
     else:
         print name + " not found.  Make sure your spelling is good!"
 
+def run_individual_program(mapping): # takes as argument a mapping of function name to the actual function, then runs that function 
+    print "running individual program!"
+    try:
+        ind=sys.argv.index('hiccup')
+        run_program=sys.argv[ind+1]
+        print run_program
+        if ".py" in run_program:
+            run_program = run_program[:-3]
+        program = mapping[run_program]
+        print program
+        print type(program)
+        program()
+    except Exception as ex:
+        print ex
+        print "Please try again.  Check spelling, etc.  Make sure to input the name of the program with no quotations or extra words: i.e.: angle, or: thellier_magic_redo"
+
 
 if __name__ == "__main__":
     print "Please type the name of the program test you wish to find"

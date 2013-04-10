@@ -15,11 +15,16 @@ def clean_output_file(infile, outfile):
     rhino = False
     new_file = open(outfile, 'w')
     for l in info:
-        if "rhino" in l:
+        if "rhino" in l:  # 'rhino' is the marker for the relevant output
             rhino = True
         if rhino:
             new_file.write(l)
     print str(outfile) + " is  ready"
+
+# Extra output:
+# infile = extra_out_full_output.txt
+# outfile = extra_out_clean_output.txt
+# also (separately) created is: extra_out_errors_list.txt.  this one just has the short stuff
 
 
 if __name__ == "__main__": # so it can be done interactively on the command line, but doesn't have to be.  

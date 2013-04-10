@@ -1,0 +1,2 @@
+# run as: python Extra_output.py > extra_out_full_output.txt                                                                          
+# then command: python clean_output.py  
