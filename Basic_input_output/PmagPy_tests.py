@@ -238,7 +238,7 @@ def find_a_program(name):
 def run_individual_program(mapping): # takes as argument a mapping of function name to the actual function, then runs that function 
     print "running individual program!"
     try:
-        ind=sys.argv.index('hiccup')
+        ind=sys.argv.index('-r')
         run_program=sys.argv[ind+1]
         print run_program
         if ".py" in run_program:

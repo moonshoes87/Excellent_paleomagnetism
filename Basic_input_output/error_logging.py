@@ -56,7 +56,7 @@ def go_through(programs_list, errors_log): # args are: the list of programs to c
     print "redo me list", redo_me
     return redo_me
 
-
+ignore_these = """
 def different_go_through(programs_list):
     print programs_list
     for k, v in programs_list:
@@ -78,12 +78,10 @@ def new_go_through(programs_list, errors_log): # this is an attempt to just use 
             redo_me.append(v)
             errors_count += 1
             messed_up_programs.append(v.__doc__)
-            print str(i) + " failed donut"
-            print "i, ex: ", v, ex
+            print "v, ex: ", v, ex
             print "type(ex)", type(ex)
             print "ex.args", ex.args
             x = str(ex)
-#            problems_dictionary[i.__doc__] = x
             errors_log.write(v.__doc__)
             errors_log.write(": " + x + ".  ")
 #            print "stack stuff"
@@ -101,7 +99,7 @@ def new_go_through(programs_list, errors_log): # this is an attempt to just use 
 #    print "problems dictionary", problems_dictionary
     print "redo me list", redo_me
     return redo_me
-
+"""
 
 def redo_broken_ones(redo_list):
     print "rhino"

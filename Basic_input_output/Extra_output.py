@@ -382,15 +382,17 @@ ex_out_errors_list = open('extra_output_errors_list.txt', 'w')
 # an interactive option that runs just one program, as instructed
 # if no interactive tag is given, it will just run through
 if __name__ == "__main__": 
-    if "hiccup" in sys.argv: # 
+    if "-r" in sys.argv: # 
         PT.run_individual_program(ex_out_function_mapping)
     else:
         new_list = EL.go_through(Extra_output_tests, ex_out_errors_list) # (list of tests, file to log them in) this creates a list of which programs are messed up, along with their error message.  
         EL.redo_broken_ones(new_list) # this goes through the messed up ones again and adds to the output
-
+        subprocess.call(echo 'problem programs listed in rename_me_errors_list.txt, output for problem p\
+rograms written in "whatever", now run blah de blah to clean that output', shell=True)
 # run as: python Extra_output.py > extra_out_full_output.txt
 # then command: python clean_output.py
     # extra_out_all_output.txt
+# to run an individual program: python Extra_output.py hiccup 'program_to_run'
 
 
 
