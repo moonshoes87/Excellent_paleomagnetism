@@ -88,3 +88,7 @@ Basic_input_output/extra_output_errors_list.txt
 Basic_input_output/rename_me_clean_output.txt
 Basic_input_output/rename_me_errors_list.txt
 Basic_input_output/rename_me_full_output.txt
+Basic_input_output/bootstrap_all_output.txt
+Basic_input_output/random_all_output.txt
+Basic_input_output/random_clean_output.txt
+Basic_input_output/random_errors_list.txt

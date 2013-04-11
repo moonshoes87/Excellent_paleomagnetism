@@ -3,7 +3,9 @@
 from scripttest import TestFileEnvironment
 env = TestFileEnvironment('./new-test-output')
 import unittest
+import sys
 import PmagPy_tests as PT
+import error_logging as EL
 
 file_prefix = PT.file_prefix
 directory = PT.directory
@@ -14,7 +16,7 @@ def complete_fisher_test():
     """test fisher.py"""
     print "-"
     print "Testing fisher.py"
-    obj1 = env.run('fisher.py', '-k', '30', '-n', '10')
+    obj1 = env.run('fisher.py', '-k', '30', '-n', '15') # last number should be 10, not 15
 #    obj.stdout = '175, 119'
     output1 = obj1.stdout
     length1 = len(output1)
@@ -28,10 +30,12 @@ def complete_fisher_test():
     if length1 == 170 and length1 == length2:
         print "fisher.py produces the right amount of output"
     else:
+        print "raising error (wrong length output produced)"
         raise(NameError, "fisher.py is producing the wrong amount of output")
     if output1 != output2:
         print "fisher.py seems to be producing a random distribution"
     else:
+        print "raising error (identical, rather than random, output produced)"
         raise NameError("fisher.py produced identical output twice")
     obj3 = env.run('fisher.py')
     output3 = obj3.stdout
@@ -218,10 +222,11 @@ if __name__ == "__main__":
         EL.redo_broken_ones(new_list)
         print "finished with Random testing and re-testing"
 
+# run: python random_stuff.py > random_all_output.txt
+# then: python clean_log_output.py
+        # infile: random_all_output.txt
+        # outfile: random_clean_output.txt
 
 
-# add in:
-# tk03.py
-# uniform.py
 
 # unittests not really possible

@@ -35,8 +35,9 @@ def clean_all_output_logs():
     print "cleaning all output logs"
     clean_output_file('extra_out_full_output.txt', 'extra_out_clean_output.txt')
     clean_output_file('rename_me_full_output.txt', 'rename_me_clean_output.txt')
-    # add in one for random
-    # add in for whatever else there is 
+    clean_output_file('random_full_output.txt', 'random_clean_output.txt')
+    clean_output_file('bootstrap_full_output.txt', 'bootstrap_clean_output.txt')
+    # add in for whatever else there is ... that's all??
     print "finished cleaning all output logs"
     
 # make a command (here or somewhere else) that just goes through all the output files and cleans them up.  

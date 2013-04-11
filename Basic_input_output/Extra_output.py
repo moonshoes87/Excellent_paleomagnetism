@@ -393,10 +393,10 @@ if __name__ == "__main__":
 
 
 # run as: python Extra_output.py > extra_out_full_output.txt
-# then command: python clean_output.py
+# then command: python clean_log_output.py
     # extra_out_all_output.txt
     # extra_out_clean_output.txt
-# to run an individual program: python Extra_output.py hiccup 'program_to_run'
+# to run an individual program: python Extra_output.py -r 'program_to_run'
 
 
 

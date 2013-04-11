@@ -127,7 +127,7 @@ def do_watsonsV():
     """test watsonsV.py"""
     watsonsV_infile = file_prefix + "watsonsF_example_file1.dat"
     watsonsV_infile2 = file_prefix + "watsonsF_example_file2.dat"
-    obj = env.run("watsonsV.py", "-f", watsonsV_infile, "-f2", watsonsV_infile2, stdin='q')
+    obj = env.run("watsonsV.py", "-v", watsonsV_infile, "-f2", watsonsV_infile2, stdin='q') # messed up on purpose, for testing
     print obj.stdout
     a_list = str(obj.stdout).split()
     clean_list = remove_non_integers_from_output(a_list)
@@ -138,6 +138,7 @@ def do_watsonsV():
 watsonsV_reference = [(10., 11.),(6., 7.)]
 
 def complete_watsonsV_test():
+    """test watsonsV.py"""
     output1 = do_watsonsV()
     check_bootstrap(output1, watsonsV_reference)
     output2 = do_watsonsV()
@@ -252,6 +253,12 @@ if __name__ == "__main__":
         print "finished with Bootstrap testing and re-testing"
 
 #    unittest.main(module="Bootstrap_plotting")
+
+
+# run: python Bootstrap.py > bootstrap_all_output.txt
+# then: python clean_log_output.py
+        # infile: bootstrap_all_output.txt
+        # outfile: bootstrap_clean_output.txt
 
 
 # You can't run the bootstrap, plot things at the same time as other python programs.  Or else it gets all kinds of wacky
