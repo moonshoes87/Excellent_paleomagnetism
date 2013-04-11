@@ -31,7 +31,7 @@ def complete_fisher_test():
         print "fisher.py produces the right amount of output"
     else:
         print "raising error (wrong length output produced)"
-        raise(NameError, "fisher.py is producing the wrong amount of output")
+        raise NameError("fisher.py is producing the wrong amount of output")
     if output1 != output2:
         print "fisher.py seems to be producing a random distribution"
     else:
@@ -72,12 +72,12 @@ def complete_fishrot_test():
     if output1 != output2:
         print "Fishrot.py appears to be generating a random distribution"
     else:
-        raise(NameError, "Fishrot.py produced identical output twice")
+        raise NameError("Fishrot.py produced identical output twice")
     # but they should be the same length, because of the -n 5 arguments
     if len(output1) == len(output2):
         print "Fishrot.py is producing the correct amount of output"
     else:
-        raise(NameError, "Fishrot.py is producing the wrong amount of output")
+        raise NameError("Fishrot.py is producing the wrong amount of output")
     obj3 = env.run('fishrot.py')
     output3 = obj3.stdout
     length3 = len(output3)
@@ -89,11 +89,11 @@ def complete_fishrot_test():
     if output3 != output4:
         print "Fishrot.py distributions appear to be random"
     else:
-        raise(NameError, "Fishrot.py produced identical output twice in a row")
+        raise NameError("Fishrot.py produced identical output twice in a row")
     if length3 == length4:
         print "Fishrot.py appears to be producing the right amount of output"
     else:
-        raise(NameError, "Fishrot.py is not producing the right amount of output")
+        raise NameError("Fishrot.py is not producing the right amount of output")
 
     # this looks like a decent set up for these random distribution ones....
     # add in an option to test the -h, and -i options.
@@ -114,18 +114,18 @@ def complete_tk03_test():
     print " ---- "
     print out2
     if out1 == out2:
-        raise(NameError, "tk03.py produced non-random output")
+        raise NameError("tk03.py produced non-random output")
     if len(out1) != len(out2):
-        raise(NameError, "lengths should have been the same")
+        raise NameError("lengths should have been the same")
     print "tk03 produced random distributions with default options"
     obj3 = env.run('tk03.py', '-lat', '30', '-N', '50')
     out3 = str(obj3.stdout).split()
     obj4 = env.run('tk03.py', '-lat', '30', '-N', '50')
     out4 = str(obj4.stdout).split()
     if out3 == out4:
-        raise(NameError, "tk03.py produced non-random output")
+        raise NameError("tk03.py produced non-random output")
     if len(out3) != len(out4):
-        raise(NameError, "lengths should have been the same")
+        raise NameError("lengths should have been the same")
     print "tk03 produced random distributions with -lat 30, -N 50"
 
 # could this be better???
@@ -137,19 +137,19 @@ def complete_uniform_test():
     obj2 = env.run("uniform.py")
     out2 = str(obj2.stdout).split()
     if out1 == out2:
-        raise(NameError, "uniform.py produced non-random output")
+        raise NameError( "uniform.py produced non-random output")
     if len(out1) != len(out2):
-        raise(NameError, "uniform.py produced the wrong amount of output")
+        raise NameError( "uniform.py produced the wrong amount of output")
     print "uniform.py ran correctly with default options"
     obj3 = env.run("uniform.py", '-N', '50')
     out3 = str(obj3.stdout).split()
     obj4 = env.run("uniform.py","-N", "50")
     out4 = str(obj4.stdout).split()
     if out3 == out4:
-        raise(NameError, "uniform.py produced non-random output")
+        raise NameError( "uniform.py produced non-random output")
     if len(out3) != len(out4):
         print len(out3), len(out4)
-        raise(NameError, "uniform.py produced the wrong amount of output")
+        raise NameError( "uniform.py produced the wrong amount of output")
     print "uniform.py ran correctly with -N 50"
 
 
@@ -161,7 +161,7 @@ def complete_gaussian_test():
     print "Testing gaussian.py"
     obj1 = env.run('gaussian.py', '-s', '3', '-n', '100', '-m', '10.', '-F', 'guass.out')
     output1 = obj1.stdout
-    o1 = len(output1.split())
+    p1 = len(output1.split()) # should be o1, not p1
     print "output1: "+ str(output1)
     print("output 1 length: ", o1)
     print obj1.files_created
@@ -184,19 +184,19 @@ def complete_gaussian_test():
     if obj1.files_created:
         print "Gaussian.py created a file"
     else:
-        raise(NameError, "Gaussian.py failed to create a file with the '-F' flag")
+        raise NameError( "Gaussian.py failed to create a file with the '-F' flag")
     if obj2.files_created or obj3.files_created or obj4.files_created:
-        raise(NameError, "Gaussian.py created a file when the '-F' flag was not present")
+        raise NameError( "Gaussian.py created a file when the '-F' flag was not present")
     # checking to see that distribution is indeed random
     if output2 != output3:
         print "Distributions appear to be random"
     else:
-        raise(NameError, "Gaussian.py produced identical distributions")
+        raise NameError( "Gaussian.py produced identical distributions")
     # checking to see if gaussian.py is responding correctly to the requested amount of output
     if o1 == 0 and o2 == 95 and o3 == 95 and o4 == 4:
         print "Gaussian.py is giving the correct amount of output"
     else:
-        raise(NameError, "Gaussian.py is giving the wrong amount of output")
+        raise NameError("Gaussian.py is giving the wrong amount of output")
     # also add -h option (no -i)
     # another way to test the additional command line options?
     # -n is how many lines of output it makes, so I can test that. len(o) should equal the number that follows -n

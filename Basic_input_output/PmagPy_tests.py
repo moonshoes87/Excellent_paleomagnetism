@@ -247,9 +247,13 @@ def run_individual_program(mapping): # takes as argument a mapping of function n
         print program
         print type(program)
         program()
-    except Exception as ex:
-        print ex
+    except KeyError as er:
+        print er
         print "Please try again.  Check spelling, etc.  Make sure to input the name of the program with no quotations or extra words: i.e.: angle, or: thellier_magic_redo"
+#        break
+    except Exception as ex:
+        print "printing error:"
+        print ex
 
 
 if __name__ == "__main__":
