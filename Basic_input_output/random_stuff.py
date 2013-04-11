@@ -11,6 +11,7 @@ directory = PT.directory
 #class Random_stuff(Basic_input_output):
 
 def complete_fisher_test():
+    """test fisher.py"""
     print "-"
     print "Testing fisher.py"
     obj1 = env.run('fisher.py', '-k', '30', '-n', '10')
@@ -52,6 +53,7 @@ def complete_fisher_test():
         raise NameError("fisher.py produced identical output twice")
 
 def complete_fishrot_test():
+    """test fishrot.py"""
     print "_"
     print "Testing fishrot.py"
     obj1 = env.run('fishrot.py', '-n', '5', '-D', '23', '-I', '41', '-k', '50')
@@ -99,6 +101,7 @@ def complete_fishrot_test():
 
 
 def complete_tk03_test():
+    """test tk03.py"""
     obj1 = env.run('tk03.py')
     out1 = str(obj1.stdout).split()
     obj2 = env.run('tk03.py')
@@ -124,6 +127,7 @@ def complete_tk03_test():
 # could this be better???
 
 def complete_uniform_test():
+    """test uniform.py"""
     obj1 = env.run("uniform.py")
     out1 = str(obj1.stdout).split()
     obj2 = env.run("uniform.py")
@@ -148,6 +152,7 @@ def complete_uniform_test():
 
 
 def complete_gaussian_test():
+    """test gaussian.py"""
     print "-"
     print "Testing gaussian.py"
     obj1 = env.run('gaussian.py', '-s', '3', '-n', '100', '-m', '10.', '-F', 'guass.out')
@@ -191,7 +196,10 @@ def complete_gaussian_test():
     # also add -h option (no -i)
     # another way to test the additional command line options?
     # -n is how many lines of output it makes, so I can test that. len(o) should equal the number that follows -n
-    
+
+random_tests = [complete_gaussian_test, complete_fishrot_test, complete_fisher_test, complete_tk03_test, complete_uniform_test]
+random_function_mapping = {"gaussian": complete_gaussian_test, "fishrot": complete_fishrot_test, "fisher": complete_fisher_test, "tk03": complete_tk03_test, "uniform": complete_uniform_test}
+random_errors_list = open('random_errors_list.txt', 'w')
 
 def complete_working_test():
     complete_gaussian_test()
@@ -201,7 +209,14 @@ def complete_working_test():
     complete_uniform_test()
 
 if __name__ == "__main__":
-    complete_working_test()
+#    complete_working_test()
+    if "-r" in sys.argv:
+        PT.run_individual_program(random_function_mapping)
+    else:
+#        complete_working_test()                                                                           
+        new_list = EL.go_through(random_tests, random_errors_list)
+        EL.redo_broken_ones(new_list)
+        print "finished with Random testing and re-testing"
 
 
 

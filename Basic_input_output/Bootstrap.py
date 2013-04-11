@@ -5,8 +5,9 @@ from scripttest import TestFileEnvironment
 env = TestFileEnvironment('./new-test-output')
 import unittest
 import subprocess
-import Basic_input_output
 import PmagPy_tests as PT
+import error_logging as EL
+
 
 file_prefix = PT.file_prefix
 directory =  PT.directory
@@ -54,6 +55,7 @@ def do_aniso_magic(times):
     return clean_list
 
 def complete_aniso_magic_test():
+    """test aniso_magic.py"""
     output1 = do_aniso_magic(20000)
     check_bootstrap(output1, aniso_magic_reference)
     output2 =  do_aniso_magic(10000)
@@ -64,6 +66,7 @@ def complete_aniso_magic_test():
 scalc_reference = [(88.5, 89.5), (14.8, 15.8), (13.0, 14.0), (16.5, 17.5), (31.6, 32.6)] 
 
 def do_scalc():
+    print "testing scalc.py"
     obj = env.run('scalc.py', '-f', file_prefix + 'scalc_example.txt', '-v', '-b')
     a_list = str(obj.stdout).split()
     print a_list
@@ -71,13 +74,13 @@ def do_scalc():
     return clean_list
 
 def complete_scalc_test():
+    """test scalc.py"""
     output = do_scalc()
     print "output: " + str(output)
     check_bootstrap(output, scalc_reference)
 
 
 scalc_magic_reference = [(12.5, 13.5), (17.2, 18.2), (13., 14.), (21., 22.), (36.5, 37.5)]
-
 
 def do_scalc_magic():
     obj = env.run('scalc_magic.py', '-f', file_prefix + 'scalc_magic_example.txt', '-v', '-b')
@@ -89,6 +92,7 @@ def do_scalc_magic():
     return final_list
 
 def complete_scalc_magic_test():
+    """test scalc_magic.py"""
     output = do_scalc_magic()
     check_bootstrap(output, scalc_magic_reference)
 
@@ -99,15 +103,20 @@ bootams_reference=[(0.3350, 0.3351), (0.0002, 0.0003), (5.1, 5.5), (14.5, 14.9),
 
 
 def do_bootams(num):
+    print "doing bootams"
     bootams_infile = file_prefix + 'bootams_example.dat'
     obj = env.run('bootams.py', '-f', bootams_infile, '-nb', num)
+    print "finished running bootams.py"
     a_list = str(obj.stdout).split()
     clean_list = remove_non_integers_from_output(a_list)
     print clean_list
     return clean_list
 
 def complete_bootams_test():
-    output1 = do_bootams(500000)
+    """test bootams.py"""
+    print "testing bootams.py"
+    output1 = do_bootams(100000)
+    print "finished do_bootams()"
     check_bootstrap(output1, bootams_reference)
 # add in extras for real testing
 #    output2 = do_bootams(500000)
@@ -115,6 +124,7 @@ def complete_bootams_test():
 
 
 def do_watsonsV():
+    """test watsonsV.py"""
     watsonsV_infile = file_prefix + "watsonsF_example_file1.dat"
     watsonsV_infile2 = file_prefix + "watsonsF_example_file2.dat"
     obj = env.run("watsonsV.py", "-f", watsonsV_infile, "-f2", watsonsV_infile2, stdin='q')
@@ -132,10 +142,6 @@ def complete_watsonsV_test():
     check_bootstrap(output1, watsonsV_reference)
     output2 = do_watsonsV()
     check_bootstrap(output2, watsonsV_reference)
-
-
-
-
 
 
 #EI
@@ -156,7 +162,7 @@ def run_EI(num):
     return clean_out
 
 def complete_find_EI_test():
-    print "Testing find_EI.py"
+    """test find_EI.py"""
     output1 = run_EI(2000)
     print output1
     check_bootstrap(output1, find_EI_reference)
@@ -194,46 +200,59 @@ class Bad_bootams(unittest.TestCase):
         self.assertRaises(ValueError, check_bootstrap, bad_out, bootams_reference)
 
 
-
 def complete_eqarea_magic_test():
-#     print "Testing eqarea_magic.py"
-     eqarea_magic_infile = 'eqarea_magic_example.dat'
-     eqarea_reference = [(1.0, 1.0), (109., 112.), (204., 207.), (7.6, 7.9), (.9, 1.1), (28.5, 29.5), (7.5, 9.5), (3., 3.5), (5.5, 6.5), (59., 60.), (1.9, 2.1), (247., 250.), (149., 152.), (4., 4.6), (.9, 1.1), (26., 27.), (14.5, 16.5), (7.5, 8.5), (184.5, 186.5), (-59.5, -58.)]
-     obj = env.run('eqarea_magic.py', '-WD', directory, '-f', eqarea_magic_infile, '-obj', 'loc', '-crd', 'g', '-ell', 'Be', stdin='q')
-     result = obj.stdout
-     result_list = str(result).split()
-     a_list = []
-     add_me = False
-     for i in result_list: # this goes through the output and isolates the relevant numbers for testing
+    """test eqarea_magic.py"""
+    eqarea_magic_infile = 'eqarea_magic_example.dat'
+    eqarea_reference = [(1.0, 1.0), (109., 112.), (204., 207.), (7.6, 7.9), (.9, 1.1), (28.5, 29.5), (7.5, 9.5), (3., 3.5), (5.5, 6.5), (59., 60.), (1.9, 2.1), (247., 250.), (149., 152.), (4., 4.6), (.9, 1.1), (26., 27.), (14.5, 16.5), (7.5, 8.5), (184.5, 186.5), (-59.5, -58.)]
+    obj = env.run('eqarea_magic.py', '-WD', directory, '-f', eqarea_magic_infile, '-obj', 'loc', '-crd', 'g', '-ell', 'Be', stdin='q')
+    result = obj.stdout
+    result_list = str(result).split()
+    a_list = []
+    add_me = False
+    for i in result_list: # this goes through the output and isolates the relevant numbers for testing
   #       print i
-         if str(i) == 'mode':
-             add_me = True
-         if str(i) == 'S[a]ve':
-             add_me = False
-         if add_me == True:
-             a_list.append(i)
-     stripped_list = remove_non_integers_from_output(a_list)
-     print stripped_list
-     print len(stripped_list)
-     print eqarea_reference
-     print len(eqarea_reference)
-     check_bootstrap(stripped_list, eqarea_reference)
+        if str(i) == 'mode':
+            add_me = True
+        if str(i) == 'S[a]ve':
+            add_me = False
+        if add_me == True:
+            a_list.append(i)
+    stripped_list = remove_non_integers_from_output(a_list)
+    print stripped_list
+    print len(stripped_list)
+    print eqarea_reference
+    print len(eqarea_reference)
+    check_bootstrap(stripped_list, eqarea_reference)
 
+
+Bootstrap_tests = [complete_aniso_magic_test, complete_find_EI_test, complete_bootams_test, complete_eqarea_magic_test, complete_scalc_test, complete_scalc_magic_test, complete_watsonsV_test]
+
+Bootstrap_function_mapping = {"aniso_magic": complete_aniso_magic_test, "find_EI": complete_find_EI_test, "bootams": complete_bootams_test, "eqarea": complete_eqarea_magic_test, "scalc": complete_scalc_test, "scalc_magic": complete_scalc_magic_test, "watsonsV": complete_watsonsV_test}
+
+bootstrap_errors_list = open('bootstrap_errors_list.txt', 'w')
 
 def complete_working_test():
     complete_aniso_magic_test()        
-#    complete_find_EI_test()
+    complete_find_EI_test()
     complete_bootams_test()
     complete_eqarea_magic_test()
     complete_scalc_test()
     complete_scalc_magic_test()
     complete_watsonsV_test()
 
+
 if __name__ == "__main__":
-#    pass
-    complete_working_test()
+    if "-r" in sys.argv:
+        print "Bootstrapping! Be patient"
+        PT.run_individual_program(Bootstrap_function_mapping)
+    else:
+#        complete_working_test()
+        new_list = EL.go_through(Bootstrap_tests, bootstrap_errors_list)
+        EL.redo_broken_ones(new_list)
+        print "finished with Bootstrap testing and re-testing"
+
 #    unittest.main(module="Bootstrap_plotting")
 
 
-
 # You can't run the bootstrap, plot things at the same time as other python programs.  Or else it gets all kinds of wacky
+
