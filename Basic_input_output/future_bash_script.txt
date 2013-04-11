@@ -1,2 +1,9 @@
 # run as: python Extra_output.py > extra_out_full_output.txt                                                                          
-# then command: python clean_output.py  
+# python Rename_me.py > rename_me_full_output.txt
+
+
+
+
+
+
+last thing: python clean_log_output.py -all  # this will clean all the logs!!

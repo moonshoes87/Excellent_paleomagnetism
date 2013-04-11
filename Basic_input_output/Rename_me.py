@@ -1294,7 +1294,7 @@ if __name__ == '__main__':
      else:
           new_list = EL.go_through(rename_me_tests, rename_me_errors_list)
           EL.redo_broken_ones(new_list)
-          subprocess.call(echo 'problem programs listed in rename_me_errors_list.txt, output for problem programs written in "whatever", now run blah de blah to clean that output', shell=True)
+
      
 # run as: python Rename_me.py > rename_me_full_output.txt
 # then: python clean_output.py

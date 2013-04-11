@@ -375,7 +375,9 @@ thellier_magic_redo.py -f thellier_magic_redo_example.dat  -fnl thellier_magic_r
 
 ex_out_function_mapping = {"aarm_magic": complete_aarm_magic_test, "atrm_magic": complete_atrm_magic_test, "hysteresis_magic": complete_hysteresis_magic_test, "k15_magic": complete_k15_magic_test, "kly4s_magic": complete_kly4s_magic_test, "pmag_results_extract": complete_pmag_results_extract_test, "orientation_magic": complete_orientation_magic_test, "thellier_magic_redo": complete_thellier_magic_redo_test}
 
-Extra_output_tests = [complete_aarm_magic_test, complete_atrm_magic_test, complete_hysteresis_magic_test, complete_k15_magic_test, complete_kly4s_magic_test, complete_pmag_results_extract_test, complete_orientation_magic_test, complete_thellier_magic_redo_test]
+Extra_output_tests = [complete_aarm_magic_test, complete_atrm_magic_test, complete_hysteresis_magic_test, complete_k15_magic_test, complete_kly4s_magic_test, complete_pmag_results_extract_test, complete_orientation_magic_test]# complete_thellier_magic_redo_test]
+
+# ADD LAST TEST BACK IN!!!!!!!!
 
 ex_out_errors_list = open('extra_output_errors_list.txt', 'w')
 
@@ -387,11 +389,13 @@ if __name__ == "__main__":
     else:
         new_list = EL.go_through(Extra_output_tests, ex_out_errors_list) # (list of tests, file to log them in) this creates a list of which programs are messed up, along with their error message.  
         EL.redo_broken_ones(new_list) # this goes through the messed up ones again and adds to the output
-        subprocess.call(echo 'problem programs listed in rename_me_errors_list.txt, output for problem p\
-rograms written in "whatever", now run blah de blah to clean that output', shell=True)
+        print "finished with Extra_output.py testing and re-testing"
+
+
 # run as: python Extra_output.py > extra_out_full_output.txt
 # then command: python clean_output.py
     # extra_out_all_output.txt
+    # extra_out_clean_output.txt
 # to run an individual program: python Extra_output.py hiccup 'program_to_run'
 
 

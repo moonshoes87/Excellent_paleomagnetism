@@ -32,12 +32,21 @@ def clean_output_file(infile, outfile):
 
 
 def clean_all_output_logs():
-    pass
+    print "cleaning all output logs"
+    clean_output_file('extra_out_full_output.txt', 'extra_out_clean_output.txt')
+    clean_output_file('rename_me_full_output.txt', 'rename_me_clean_output.txt')
+    # add in one for random
+    # add in for whatever else there is 
+    print "finished cleaning all output logs"
+    
 # make a command (here or somewhere else) that just goes through all the output files and cleans them up.  
 
 
 if __name__ == "__main__": # so it can be done interactively on the command line, but doesn't have to be.  
 # the issue is that you have to run it as a separate call then the initial log creating
-    file_in = raw_input("what file do you want to clean?  ")
-    file_out = raw_input("what do you want to call the cleaned file?  ")
-    clean_output_file(file_in, file_out)
+    if '-all' in sys.argv:
+        clean_all_output_logs()
+    else:
+        file_in = raw_input("what file do you want to clean?  ")
+        file_out = raw_input("what do you want to call the cleaned file?  ")
+        clean_output_file(file_in, file_out)
