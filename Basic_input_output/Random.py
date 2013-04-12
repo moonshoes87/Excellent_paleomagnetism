@@ -143,30 +143,36 @@ def complete_tk03_test():
 
 # could this be better???
 
+# left off here, keep cleaning up output
 def complete_uniform_test():
     """test uniform.py"""
+    print "running: uniform.py"
     obj1 = env.run("uniform.py")
     out1 = str(obj1.stdout).split()
+    print "output1: " + str(out1)
+    print "running: uniform.py"
     obj2 = env.run("uniform.py")
     out2 = str(obj2.stdout).split()
+    print "output2: " + str(out2)
     if out1 == out2:
         raise NameError( "uniform.py produced non-random output")
     if len(out1) != len(out2):
         raise NameError( "uniform.py produced the wrong amount of output")
     print "uniform.py ran correctly with default options"
+    print "running: ('uniform.py', '-N', '50')"
     obj3 = env.run("uniform.py", '-N', '50')
     out3 = str(obj3.stdout).split()
+    print "output3: " + str(out3)
+    print "running: ('uniform.py','-N', '50')"
     obj4 = env.run("uniform.py","-N", "50")
     out4 = str(obj4.stdout).split()
+    print "output4: " + str(out4)
     if out3 == out4:
         raise NameError( "uniform.py produced non-random output")
     if len(out3) != len(out4):
         print len(out3), len(out4)
         raise NameError( "uniform.py produced the wrong amount of output")
     print "uniform.py ran correctly with -N 50"
-
-
-
 
 def complete_gaussian_test():
     """test gaussian.py"""
@@ -218,7 +224,6 @@ def complete_gaussian_test():
         raise NameError("Gaussian.py is giving the wrong amount of output")
     # also add -h option (no -i)
     # another way to test the additional command line options?
-    # -n is how many lines of output it makes, so I can test that. len(o) should equal the number that follows -n
 
 random_tests = [complete_gaussian_test, complete_fishrot_test, complete_fisher_test, complete_tk03_test, complete_uniform_test]
 random_function_mapping = {"gaussian": complete_gaussian_test, "fishrot": complete_fishrot_test, "fisher": complete_fisher_test, "tk03": complete_tk03_test, "uniform": complete_uniform_test}

@@ -16,7 +16,7 @@ directory =  PT.directory
 print "STARTING HERE"
 
 def go_through(programs_list, errors_log): # args are: the list of programs to check, and the file to write errors to
-    errors_log.write(str(errors_log)[11:-28] + ":  ")  
+    errors_log.write(str(errors_log)[11:-28] + ':  ' + '\n')  
     PT.clean_house()
     redo_me = [] # will be a list of the functions to be redone
     errors_count = 0
