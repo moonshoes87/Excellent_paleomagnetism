@@ -220,16 +220,16 @@ def find_a_program(name):
     if full_name in new_extra_output:
         found = True
         print name + " occurs in Extra_output.py"
-    Bootstrap_plotting = file_parse_by_word(file_prefix + "Bootstrap_plotting.py")
-    new_bootstrap_plotting = lowercase_all(Bootstrap_plotting)
-    if full_name in new_bootstrap_plotting:
+    Bootstrap = file_parse_by_word(file_prefix + "Bootstrap.py")
+    new_bootstrap = lowercase_all(Bootstrap)
+    if full_name in new_bootstrap:
         found = True
-        print name + " occurs in Bootstrap_plotting.py"
-    Random_stuff = file_parse_by_word(file_prefix + "random_stuff.py")
-    new_random_stuff = lowercase_all(Random_stuff)
-    if full_name in new_random_stuff:
+        print name + " occurs in Bootstrap.py"
+    Random = file_parse_by_word(file_prefix + "Random.py")
+    new_random = lowercase_all(Random)
+    if full_name in new_random:
         found = True
-        print name + " occurs in random_stuff.py"
+        print name + " occurs in Random.py"
     if found:
         print name + " was found"
     else:

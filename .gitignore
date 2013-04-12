@@ -93,3 +93,8 @@ Basic_input_output/random_all_output.txt
 Basic_input_output/random_clean_output.txt
 Basic_input_output/random_errors_list.txt
 Basic_input_output/bootstrap_clean_output.txt
+Basic_input_output/bootstrap_full_output.txt
+Basic_input_output/extra_out_clean_output.txt
+Basic_input_output/I_Like_Coffee.txt
+Basic_input_output/hello.txt
+hello_world.sh

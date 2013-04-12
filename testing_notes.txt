@@ -306,7 +306,8 @@ other, to do:
        must put in a way to catch this type of error: no such file
        find a way to just output the error...
        options -- turn print statement into a write to file command.  
-       Extra_output doesn't work when Rename_me.py is impo
+       a bunch of files are being told to delete that apparently don't exist.  why??
+       Make sure you remember to add back in the tests you pulled out of Rename_me.py to make it go faster
 
        CIT_magic.py needs fixing
        # er_sites.txt is supposed to be designatable on the command-line with -Fsp, but is not.  fix this.... 
