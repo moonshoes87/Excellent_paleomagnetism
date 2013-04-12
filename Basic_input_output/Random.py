@@ -213,11 +213,11 @@ def complete_working_test():
     complete_uniform_test()
 
 if __name__ == "__main__":
-#    complete_working_test()
     if "-r" in sys.argv:
         PT.run_individual_program(random_function_mapping)
+    elif "-all" in sys.argv:
+        complete_working_test()
     else:
-#        complete_working_test()                                                                           
         new_list = EL.go_through(random_tests, random_errors_list)
         EL.redo_broken_ones(new_list)
         print "finished with Random testing and re-testing"

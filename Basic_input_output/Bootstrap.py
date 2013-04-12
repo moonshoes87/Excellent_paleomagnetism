@@ -246,8 +246,9 @@ if __name__ == "__main__":
     if "-r" in sys.argv:
         print "Bootstrapping! Be patient"
         PT.run_individual_program(Bootstrap_function_mapping)
+    elif "-all" in sys.argv:
+        complete_working_test()
     else:
-#        complete_working_test()
         new_list = EL.go_through(Bootstrap_tests, bootstrap_errors_list)
         EL.redo_broken_ones(new_list)
         print "finished with Bootstrap testing and re-testing"

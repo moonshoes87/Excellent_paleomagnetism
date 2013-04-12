@@ -16,8 +16,7 @@ directory =  PT.directory
 print "STARTING HERE"
 
 def go_through(programs_list, errors_log): # args are: the list of programs to check, and the file to write errors to
-    errors_log.write(str(errors_log))  # this isn't perfect, but it serves as a marker, so, fuck it
-    # is this a problem?  it doesn't show up for rename_me.py.  but it DOES show up when I do it individually
+    errors_log.write(str(errors_log)[11:-28] + ":  ")  
     PT.clean_house()
     redo_me = [] # will be a list of the functions to be redone
     errors_count = 0
@@ -42,8 +41,7 @@ def go_through(programs_list, errors_log): # args are: the list of programs to c
             print "LOGGING ERROR to errors log.  hot dog"
             errors_log.write(str(i.__doc__))
             errors_log.write(": " + x + ".  ")
-            errors_log.write("     piccadilly")
-            errors_log.write("       ")
+            errors_log.write('\n')
 #            print "stack stuff"  # traceback.print_stack() # exc_type, exc_value, exc_traceback = sys.exc_info()   # print "*** print_tb:"   #  traceback.print_tb(exc_traceback, limit=1, file=sys.stdout)  #       print "end stack stuff"
     print "messed up programs", messed_up_programs
     print "total errors found: " + str(errors_count)
@@ -53,6 +51,7 @@ def go_through(programs_list, errors_log): # args are: the list of programs to c
     print "THESE ONES ARE BROKEN ", message
 #    print "problems dictionary", problems_dictionary
     print "redo me list", redo_me
+    errors_log.write('\n')
     return redo_me
 
 ignore_these = """

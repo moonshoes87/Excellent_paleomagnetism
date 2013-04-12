@@ -1289,8 +1289,11 @@ rename_me_function_mapping = {"angle": complete_angle_test, "zeq": complete_zeq_
 rename_me_errors_list = open('rename_me_errors_list.txt', 'w')
 
 if __name__ == '__main__':
+#     PT.remove_new_outfiles() # try this... so that you can start clear each time
      if "-r" in sys.argv:
           PT.run_individual_program(rename_me_function_mapping)
+     elif "-all" in sys.argv:
+          complete_working_test()
      else:
           new_list = EL.go_through(rename_me_tests, rename_me_errors_list)
           EL.redo_broken_ones(new_list)
