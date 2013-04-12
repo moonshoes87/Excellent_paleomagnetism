@@ -1,9 +1,10 @@
 #! /bin/bash
 
 # making sure all files are created afresh
-rm *full_output.txt*
-rm *clean_output.txt*
-rm *errors_list.txt*
+rm *new.out*  # removes all output files from the last round of testing
+rm *full_output.txt*  # removes long files with stdout from tests
+rm *clean_output.txt* # removes shorter files with shortened stdout from tests
+rm *errors_list.txt* # removes files with a list of the problem programs
 
 python Bootstrap.py > bootstrap_full_output.txt
 echo "finished Bootstrap.py"

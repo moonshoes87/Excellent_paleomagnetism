@@ -81,7 +81,7 @@ class Test_instance(object):
                print self.name, '-f', self.infile, '-F', self.outfile, self.arg_0, self.arg_1, self.arg_2, self.arg_3, self.arg_4, self.arg_5,  'stdin=' + str(self.stdin)
                obj = env.run(self.name, '-f', self.infile, '-F', self.outfile, self.arg_0, self.arg_1, self.arg_2, self.arg_3, self.arg_4, self.arg_5, stdin=self.stdin)
           if "not a valid" in str(obj.stdout):
-               print obj.stdout
+               print "stdout:" + str(obj.stdout)
                raise NameError(str(self.name) + " encountered an invalid file")
           if output_type == "plot":
                print "output is plot"
@@ -93,11 +93,10 @@ class Test_instance(object):
                     print "new files created: ", obj.files_created
                     return obj.files_created
           elif output_type == "file":
-               print "output is file"
-               print self.outfile
+               print "output is file: " + str(self.outfile)
                return self.outfile
           elif output_type == "stdout":
-               print "output is stdout"
+               print "output is stdout: "
                print obj.stdout
                return obj.stdout
           else:
@@ -1209,7 +1208,7 @@ def complete_working_test():
      complete_dipole_plat_test()
      complete_grab_magic_key_test()
      complete_incfish_test()
-#     complete_magic_select_test() NEEDS -WD!!!!!
+     complete_magic_select_test() # NEEDS WD!!!!!!!!
      complete_nrm_specimens_magic_test()
      complete_sundec_test()
      complete_pca_test()

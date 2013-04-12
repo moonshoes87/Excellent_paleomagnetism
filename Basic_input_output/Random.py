@@ -16,12 +16,14 @@ def complete_fisher_test():
     """test fisher.py"""
     print "-"
     print "Testing fisher.py"
+    print "running: ('fisher.py', '-k', '30', '-n', '15')" # last number should be 10, not 15
     obj1 = env.run('fisher.py', '-k', '30', '-n', '15') # last number should be 10, not 15
 #    obj.stdout = '175, 119'
     output1 = obj1.stdout
     length1 = len(output1)
     print "output1: " + str(output1)
     print "length1: " + str(length1)
+    print "running:  ('fisher.py', '-k', '30', '-n', '10')"
     obj2 = env.run('fisher.py', '-k', '30', '-n', '10')
     output2 = obj2.stdout
     length2 = len(output2)
@@ -37,11 +39,13 @@ def complete_fisher_test():
     else:
         print "raising error (identical, rather than random, output produced)"
         raise NameError("fisher.py produced identical output twice")
+    print "running: fisher.py"
     obj3 = env.run('fisher.py')
     output3 = obj3.stdout
     length3 = len(output3)
     print "output3: " + str(output3)
     print "length3: " + str(length3)
+    print "running fisher.py"
     obj4 = env.run('fisher.py')
     output4 = obj4.stdout
     length4 = len(output4)
@@ -60,14 +64,16 @@ def complete_fishrot_test():
     """test fishrot.py"""
     print "_"
     print "Testing fishrot.py"
+    print "running: ('fishrot.py', '-n', '5', '-D', '23', '-I', '41', '-k', '50')"
     obj1 = env.run('fishrot.py', '-n', '5', '-D', '23', '-I', '41', '-k', '50')
     output1 = obj1.stdout
+    print "output1: " + str(output1)
+    print "Length output1: " + str(len(output1))
+    print "Running: ('fishrot.py', '-n', '5', '-D', '23', '-I', '41', '-k', '50')"
     obj2 = env.run('fishrot.py', '-n', '5', '-D', '23', '-I', '41', '-k', '50')
     output2 = obj2.stdout
-    print output1
-    print len(output1)
-    print output2
-    print len(output2)
+    print "output2: " + str(output2)
+    print "output2: " + str(len(output2))
     # they should be random, thus different
     if output1 != output2:
         print "Fishrot.py appears to be generating a random distribution"
@@ -78,10 +84,12 @@ def complete_fishrot_test():
         print "Fishrot.py is producing the correct amount of output"
     else:
         raise NameError("Fishrot.py is producing the wrong amount of output")
+    print "running fishrot.py"
     obj3 = env.run('fishrot.py')
     output3 = obj3.stdout
     length3 = len(output3)
     print "output3: " + str(output3) + " length3: " + str(length3)
+    print "running: fishrot.py"
     obj4 = env.run('fishrot.py')
     output4 = obj4.stdout
     length4 = len(output4)
@@ -106,22 +114,27 @@ def complete_fishrot_test():
 
 def complete_tk03_test():
     """test tk03.py"""
+    print "running tk03.py"
     obj1 = env.run('tk03.py')
     out1 = str(obj1.stdout).split()
+    print "output1: " + out1
+    print "running tk03.py"
     obj2 = env.run('tk03.py')
     out2 = str(obj2.stdout).split()
-    print out1
-    print " ---- "
-    print out2
+    print "output2: " + out2
     if out1 == out2:
         raise NameError("tk03.py produced non-random output")
     if len(out1) != len(out2):
         raise NameError("lengths should have been the same")
     print "tk03 produced random distributions with default options"
+    print "running ('tk03.py', '-lat', '30', '-N', '50')"
     obj3 = env.run('tk03.py', '-lat', '30', '-N', '50')
     out3 = str(obj3.stdout).split()
+    print "output3: " + out3
+    print "running ('tk03.py', '-lat', '30', '-N', '50')"
     obj4 = env.run('tk03.py', '-lat', '30', '-N', '50')
     out4 = str(obj4.stdout).split()
+    print "output4: " + out4
     if out3 == out4:
         raise NameError("tk03.py produced non-random output")
     if len(out3) != len(out4):
@@ -159,30 +172,36 @@ def complete_gaussian_test():
     """test gaussian.py"""
     print "-"
     print "Testing gaussian.py"
+    print "running: " + ' gaussian.py', '-s', '3', '-n', '100', '-m', '10.', '-F', 'guass.out'
     obj1 = env.run('gaussian.py', '-s', '3', '-n', '100', '-m', '10.', '-F', 'guass.out')
     output1 = obj1.stdout
     p1 = len(output1.split()) # should be o1, not p1
     print "output1: "+ str(output1)
     print("output 1 length: ", o1)
-    print obj1.files_created
+    print "output1 files_created: " + str(obj1.files_created)
+    print "running + ('gaussian.py', '-s', '3', '-n', '95', '-m', '10.')"
     obj2 = env.run('gaussian.py', '-s', '3', '-n', '95', '-m', '10.')
     output2 = obj2.stdout
     o2 = len(output2.split())
     print "output2: "+ str(output2)
     print "length of output 2: ", o2
-    print obj2.files_created
-    obj3 = env.run('gaussian.py', '-s', '3', '-n', '95', '-m', '10.',)
+    print "output2 files created: " + str(obj2.files_created)
+    print "running: 'gaussian.py', '-s', '3', '-n', '95', '-m', '10.'"
+    obj3 = env.run('gaussian.py', '-s', '3', '-n', '95', '-m', '10.')
     output3 = obj3.stdout
     o3 = len(output3.split())
     print "output3: " + str(output3)
     print "Output 3 length: ", o3
-    print obj3.files_created
+    print "output3 files_created: " + str(obj3.files_created)
+    print "running: 'gaussian.py', '-n', '4'"
     obj4 = env.run('gaussian.py', '-n', '4')
     output4 = obj4.stdout
     o4 = len(output4.split())
+    print "output4: " + str(output4)
+    print "output4 length:" + str(o4)
     # checking to see if files were created when they were supposed to, and not otherwise
     if obj1.files_created:
-        print "Gaussian.py created a file"
+        print "Gaussian.py correctly created a file"
     else:
         raise NameError( "Gaussian.py failed to create a file with the '-F' flag")
     if obj2.files_created or obj3.files_created or obj4.files_created:

@@ -10,7 +10,6 @@ import PmagPy_tests as PT
 import clean_log_output
 import error_logging as EL
 
-
 file_prefix = PT.file_prefix
 directory =  PT.directory
 
@@ -83,7 +82,7 @@ class Ex_out(Rename_me.Test_instance):
         print str(self.name) + " produced correct output"
 
     def check_list_output_expect_error(self, output_list, incorrect_output_list):
-        print "Testing list output (for error)"
+        print "Testing list output (expecting error)"
         diff_found = False
         for n, i in enumerate(output_list):
             if i != incorrect_output_list[n]:
@@ -141,16 +140,16 @@ class Ex_out(Rename_me.Test_instance):
     def extra_output_unittest(self):
         print "STARTING UNITTEST"
         unittest = Bad_test(self)
-        print "expecting error!"
+        print "unit-testing .... expecting error!"
         unittest.test_outfile1_with_wrongfile1()
         print "-"
-        print "expecting error!"
+        print "unit-testing .... expecting error!"
         unittest.test_outfile1_with_correctfile1()
         print "-"
-        print "expecting error!"
+        print "unit-testing... expecting error!"
         unittest.test_outfile2_with_wrongfile2()
         print "-"
-        print "expecting error!"
+        print "unit-testing.....expecting error!"
         unittest.test_outfile2_with_correctfile2()
 
 class Bad_test(unittest.TestCase):
@@ -186,7 +185,6 @@ class Bad_test(unittest.TestCase):
         print "running: test_file1_with_file2 using " + str(file1) + " and " + str(file2)
         self.assertRaises(NameError, self.ex_out.check_file_output, file1, file2, reference=ref)
         print "error expected"
-
 
 
 #  def __init__(self, name, infile, tag1, outfile1, tag2, outfile2, correctfile1, correctfile2, wrongfile1, wrongfile2, stdin, WD, *args):
