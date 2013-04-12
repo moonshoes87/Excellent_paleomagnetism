@@ -42,6 +42,16 @@ def go_through(programs_list, errors_log): # args are: the list of programs to c
             errors_log.write(str(i.__doc__))
             errors_log.write(": " + x + ".  ")
             errors_log.write('\n')
+            stuff = sys.exc_info()
+            print 0, stuff[0]
+            print 1, stuff[1]
+            print 2, stuff[2]
+            errors_log.write("Traceback below: " + "\n")
+            traceback.print_tb(stuff[2], None, errors_log)
+            errors_log.write('\n')
+#            print "tb", tb
+ #           errors_log.write(str(tb))
+#            traceback.print_stack(ex)
 #            print "stack stuff"  # traceback.print_stack() # exc_type, exc_value, exc_traceback = sys.exc_info()   # print "*** print_tb:"   #  traceback.print_tb(exc_traceback, limit=1, file=sys.stdout)  #       print "end stack stuff"
     print "messed up programs", messed_up_programs
     print "total errors found: " + str(errors_count)

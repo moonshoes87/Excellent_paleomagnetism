@@ -59,7 +59,7 @@ class Ex_out(Rename_me.Test_instance):
         print "files updated: " + str(obj.files_updated)
 
     def check_list_output(self, output_list, correct_output_list):
-        print "checking list output"
+        print "checking list output for " + str(self.name)
         print "output_list:         " + str(output_list)[:100] +  " ...]"
         print "correct_output_list: " + str(correct_output_list)[:100]  + " ...]"
         print "Comparing two lists"
@@ -82,7 +82,7 @@ class Ex_out(Rename_me.Test_instance):
         print str(self.name) + " produced correct output"
 
     def check_list_output_expect_error(self, output_list, incorrect_output_list):
-        print "Testing list output (expecting error)"
+        print "Testing list output (expecting error) for " + str(self.name)
         diff_found = False
         for n, i in enumerate(output_list):
             if i != incorrect_output_list[n]:
@@ -103,7 +103,7 @@ class Ex_out(Rename_me.Test_instance):
         """
         parses each file word by word, then checks to see if the outfile matches the reference file.
         """
-        print "testing: " + str(outfile) + " against reference file: " + str(reference_file)
+        print "testing " + str(self.name) +": " + str(outfile) + " against reference file: " + str(reference_file)
         if reference == "correct":
             print "NOT expecting an error"
         if reference == "incorrect":
@@ -158,36 +158,34 @@ class Bad_test(unittest.TestCase):
 
     def test_ex_out_for_error(self):
         self.assertRaises(NameError, self.ex_out.check_outputs, the_list="bad")
-        print "Error expected"
+        print "Error expected (unittest)"
         print "-"
 
     def test_outfile1_with_wrongfile1(self):
         print "running: test_outfile1_with_wrongfile1"
         self.assertRaises(NameError, self.ex_out.check_file_output, self.ex_out.outfile1, self.ex_out.wrongfile1, reference="correct")
-        print "error expected"
+        print "error expected (unittest)"
 
     def test_outfile1_with_correctfile1(self):
         print "running: test_outfile1_with_correctfile2"
         self.assertRaises(NameError, self.ex_out.check_file_output, self.ex_out.outfile1, self.ex_out.correctfile1, reference="incorrect")
-        print "error expected"
+        print "error expected (unittest)"
 
     def test_outfile2_with_wrongfile2(self):
         print "running: test_outfile2_with_wrongfile2()"
         self.assertRaises(NameError, self.ex_out.check_file_output, self.ex_out.outfile2, self.ex_out.wrongfile2, reference="correct")
-        print "error expected"
+        print "error expected (unittest)"
 
     def test_outfile2_with_correctfile2(self):
         print "running: test_outfile2_with_correctfile2()"
         self.assertRaises(NameError, self.ex_out.check_file_output, self.ex_out.outfile2, self.ex_out.correctfile2, reference="incorrect")
-        print "error expected"
+        print "error expected (unittest)"
 
     def test_file1_with_file2(self, file1, file2, ref):
         print "running: test_file1_with_file2 using " + str(file1) + " and " + str(file2)
         self.assertRaises(NameError, self.ex_out.check_file_output, file1, file2, reference=ref)
-        print "error expected"
+        print "error expected (unittest)"
 
-
-#  def __init__(self, name, infile, tag1, outfile1, tag2, outfile2, correctfile1, correctfile2, wrongfile1, wrongfile2, stdin, WD, *args):
 def complete_aarm_magic_test():
     """testing aarm_magic.py"""
     print "Testing aarm_magic"
@@ -203,22 +201,21 @@ def complete_aarm_magic_test():
 
 def complete_atrm_magic_test():
     """test atrm_magic.py"""
+    print "Testing atrm_magic.py:"
     atrm_infile = 'atrm_magic_measurements.txt'
     atrm_Fa, atrm_Fr = "atrm_anisotropy_new.out", "atrm_results_new.out"
     tag1, tag2 = '-Fa', '-Fr'
     atrm_Fa_reference, atrm_Fr_reference = "atrm_anisotropy_correct.txt", "atrm_results_correct.txt"
     atrm_Fa_wrong, atrm_Fr_wrong = "atrm_anisotropy_incorrect.txt", "atrm_results_incorrect.txt"
     atrm = Ex_out('atrm_magic.py', atrm_infile, tag1, atrm_Fa, tag2, atrm_Fr, atrm_Fa_reference, atrm_Fr_reference, atrm_Fa_wrong, atrm_Fr_wrong, None, True)
-    print "Testing atrm_magic.py:"
     atrm.ex_out_sequence()
- #   obj = env.run('atrm_magic.py', '-WD', directory, '-f', atrm_infile, '-Fa', atrm_Fa, '-Fr', atrm_Fr)
-#    print obj.stdout
 
-def complete_CIT_magic_test():
+
+def complete_CIT_magic_test():# NOT DONE
     """test CIT_magic.py"""
     CIT_magic_infile = 'CIT_magic_example.sam'
     CIT_magic_outfile1 = None
-    CIT_magic_outfile2 = None
+    CIT_magic_outfile2 = Non
 
 # er_sites.txt is supposed to be designatable on the command-line with -Fsp, but is not.  fix this....
 
