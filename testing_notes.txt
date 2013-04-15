@@ -202,7 +202,7 @@ complete list of tested programs:
     combine_magic.py
     common_mean.py
     cont_rot.py -- in Uncategorized_programs
-    convert_to_unix.py -- NOT TESTING
+    convert_to_unix.py 
     core_depthplot.py
     complete_convert_samples_test()
     curie.py -- LISA MUST FIX
@@ -298,23 +298,26 @@ other, to do:
 
        still on table:
        maybe make a script for generating new, correct, and wrong files (say if Lisa "knows" a program is working but she has changed some details of the output) # started this, but it may not be practical
+       check to see if there are any outfiles that are not called program_new.out.  If they don't follow the convention, they won't be deleted when they should.  
+       fix find_a_program (in PT) so it doesn't come up wtih arse_measurements with I run: PmagPy_tests and input 'parse_measurements'
        fix programs below
+       
 
        CIT_magic.py needs fixing
               # er_sites.txt is supposed to be designatable on the command-line with -Fsp, but is not.  fix this.... 
 
        problem programs to return to:
-       parse_measurements.py
 
 THELLIER_GUI.PY
-CONVERT2UNIX.PY
-CURIE.PY
+CONVERT2UNIX.PY # DONE!!!
+CURIE.PY # PUT VERSION on Dropbox for lisa to approve
 MAGIC.PY TUTORIAL
-MAKE_MAGIC_PLOTS.PY
+MAKE_MAGIC_PLOTS.PY # mostly done, keep working
 MEASUREMENT_IMPORT SCRIPTS (some of these are labeled other ways)
-PARSE_MEASUREMENTS.PY
+PARSE_MEASUREMENTS.PY # DONE
 PLOT_MAGIC_KEYS.PY
-PLOT_MAPPTS.PY
+PLOT_MAPPTS.PY NOT DONE -- I only have the free version, so it doesn't work	
+
 
 UPPERCASE TO RETURN TO
 
