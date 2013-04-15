@@ -243,6 +243,7 @@ def complete_working_test():
 
 
 if __name__ == "__main__":
+    PT.clean_house()
     if "-r" in sys.argv:
         print "Bootstrapping! Be patient"
         PT.run_individual_program(Bootstrap_function_mapping)

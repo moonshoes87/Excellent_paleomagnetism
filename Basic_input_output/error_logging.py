@@ -38,14 +38,13 @@ def go_through(programs_list, errors_log): # args are: the list of programs to c
             print "type(ex)", type(ex)
             print "ex.args", ex.args
             x = str(ex)
-            print "LOGGING ERROR to errors log.  hot dog"
             errors_log.write(str(i.__doc__))
             errors_log.write(": " + x + ".  ")
             errors_log.write('\n')
             stuff = sys.exc_info()
             print 0, stuff[0]
             print 1, stuff[1]
-            print 2, stuff[2]
+            print 2, stuff[2] # this is the traceback object, which I will print below
             errors_log.write("Traceback below: " + "\n")
             traceback.print_tb(stuff[2], None, errors_log)
             errors_log.write('\n')

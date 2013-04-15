@@ -67,11 +67,10 @@ class Test_instance(object):
               pass
          
 
-
          # this function simply runs the command line program with whatever its options
          # it takes the arguments "stdout", "plot", or  "file", and respectively returns the standard output for the program, the plots created, or the file created/updated
      def run_program(self, output_type="stdout"): # 
-          PT.clean_house() # the prevents programs from interfering with each other.... 
+          PT.clean_house() # the prevents programs from interfering with each other. they are run twice for unittesting
           if self.WD:
                print "WD program about to run:"
                print(self.name, '-WD', directory, '-f', self.infile, '-F', self.outfile, self.arg_0, self.arg_1, self.arg_2, self.arg_3, self.arg_4, self.arg_5, 'stdin='+str(self.stdin))
@@ -120,7 +119,7 @@ class Test_instance(object):
 
      # this function will iterate through a reference list and see if each item of output is correct 
      def check_list_output(self, output_list, correct_output_list):
-          print "checking list output"
+          print "checking output (in list form)"
           print "output_list:         " + str(output_list)
           print "correct_output_list: " + str(correct_output_list)
           print "Comparing two lists"
@@ -129,7 +128,6 @@ class Test_instance(object):
                list_empty = False
                if i == correct_output_list[num]:
                     print i, "   ",  correct_output_list[num]
-                   # print "correct"
                else:
                     print "Output contained:    " + str(i)  
                     print "but should have had: " + str(correct_output_list[num])
@@ -143,17 +141,15 @@ class Test_instance(object):
                
      def check_file_output(self, output_file, correct_file): # takes in two file names as arguments, parses their contents into list format, and then compares the first against the second
           print "checking file output, using: " + str(output_file) + " AND " + str(correct_file)
-#          parsed_output = PT.file_parse(output_file)
           parsed_output = PT.file_parse_by_word_and_pmagpy_strip(output_file)
           print parsed_output
-#          parsed_correct = PT.file_parse(correct_file)
           parsed_correct = PT.file_parse_by_word_and_pmagpy_strip(correct_file)
           print parsed_correct
           self.check_list_output(parsed_output, parsed_correct)
 
 
-               # this function just runs the help option, and makes sure the help message is of a reasonable length
-     def test_help(self):
+     
+     def test_help(self): #this function just runs the help option, and makes sure the help message is of a reasonable length
           print "testing help for " + str(self.name)
           obj = env.run(self.name, '-h')
           message = str(obj.stdout)
@@ -166,8 +162,9 @@ class Test_instance(object):
 
      # this function will call the interactive option
      def test_interactive(self):
-          print "testing interactive for " + str(self.name)
-          obj = env.run(self.name, '-i', stdin=self.stdin)#, stdin='3')                                                                                           print("stdout: "+ str(obj.stdout))
+          print "testing interactive option for " + str(self.name)
+          obj = env.run(self.name, '-i', stdin=self.stdin)#, stdin='3')                                        
+          print "stdout: "+ str(obj.stdout)
           if len(obj.stdout) > 10:
                print "Interactive mode works"
                print "-"
@@ -193,7 +190,7 @@ class Test_instance(object):
           self.check_output(result, self.ref_out)
           self.unittest_short_output() # possibly this is not the best way to do this.  possibly some should get listified.  but, fuck it. 
 
-# this sequence fully tests programs that produce stdout
+# this sequence fully tests programs that produce stdout.  puts them into list form to make it nicer
      def list_sequence(self):
           result = self.run_program(output_type = "stdout")
           print result
@@ -237,17 +234,6 @@ class Bad_test(unittest.TestCase):
          print "-"
 
 
-class Other_Bad_test(unittest.TestCase):
-    def __init__(self, test_obj):
-        self.test_obj = test_obj
-
-    def test_for_error(self):
-        print "Running unittest(s) for:  " + str(self.test_obj.name)
-        self.assertRaises(NameError, self.test_obj.check_output, self.test_obj.wrong_out, self.test_obj.ref_out)
-        print "Error expected"
-
-
-
 # BIO example
 def complete_angle_test(): # BIO type
      """test angle.py"""
@@ -288,8 +274,7 @@ def complete_chartmaker_test():  # Plotting w/out stdout
      chartmaker_wrong = "wrong"
      chartmaker = Test_instance('chartmaker.py', chartmaker_infile, chartmaker_outfile, chartmaker_reference, chartmaker_wrong, 'q', False)
      chartmaker.plot_program_sequence(stdout=False)
-#     chartmaker.unittest_short_output()
-
+     chartmaker.unittest_short_output()
 
 
 # UC example.  creates a list, tests that list
@@ -320,8 +305,7 @@ def complete_azdip_magic_test(): # irregular, because the outfile is signaled wi
      azdip_magic.unittest_file()
 
 
-# this one is a weird amalgam, because of two -f inputs.  but it works.  
-def complete_combine_magic_test(): # irregular type
+def complete_combine_magic_test(): # irregular type.  this one is a weird amalgam, because of two -f inputs.  but it works.  
      """test combine_magic_test.py"""
      output_file = 'combine_magic_output_new.out'
      reference_file =  'combine_magic_output_correct.out'
@@ -437,12 +421,12 @@ def complete_grab_magic_key_test(): # List type
      grab_magic_key.list_sequence()
      print "Sucessfully finished complete_grab_magic_key_test"
 
-def complete_incfish_test(): # BIO type
+def complete_incfish_test(): # BIO type # put in error 
      """test incfish.py"""
      incfish_infile = 'incfish_example_inc.dat'
      incfish_outfile = 'incfish_results_new.out'
      incfish_reference = 'incfish_results_correct.out'
-     incfish_wrong = 'incfish_results_incorrect.out'
+     incfish_wrong = 'incfish_results_incorrec.out'
      incfish = Test_instance('incfish.py', incfish_infile, incfish_outfile, incfish_reference, incfish_wrong, None, False)
      incfish.file_in_file_out_sequence()
 
@@ -1281,7 +1265,7 @@ def complete_working_test():
 
 
 #FIX ME FIX ME PUT ME BACK TO RIGHTS!!!!!!!!!!!!!!
-rename_me_tests = [complete_angle_test,complete_zeq_test, complete_chartmaker_test, complete_di_eq_test, complete_azdip_magic_test, complete_combine_magic_test, complete_cont_rot_test, complete_customize_criteria_test, complete_download_magic_test, complete_dipole_pinc_test, complete_dipole_plat_test, complete_grab_magic_key_test, complete_incfish_test, complete_magic_select_test, complete_nrm_specimens_magic_test, complete_sundec_test, complete_pca_test, complete_scalc_test]# complete_scalc_magic_test, complete_vgp_di_test, complete_watsonsF_test, complete_apwp_test, complete_b_vdm_test, complete_cart_dir_test, complete_convert_samples_test, complete_di_geo_test, complete_di_tilt_test, complete_dir_cart_test, complete_di_rot_test, complete_di_vgp_test, complete_eigs_s_test, complete_eq_di_test, complete_gobing_test, complete_gofish_test, complete_gokent_test, complete_goprinc_test, complete_igrf_test, complete_k15_s_test, complete_mk_redo_test, complete_pt_rot_test, complete_s_eigs_test, complete_s_geo_test, complete_s_tilt_test, complete_stats_test, complete_vdm_b_test, complete_vector_mean_test, complete_zeq_magic_redo_test, complete_ani_depthplot_test, weird_ani_depthplot_test, complete_basemap_magic_test, complete_biplot_magic_test, complete_chi_magic_test, complete_common_mean_test, complete_core_depthplot_test, complete_dayplot_magic_test, complete_dmag_magic_test, complete_eqarea_test, complete_eqarea_ell_test, complete_fishqq_test, complete_foldtest_magic_test, complete_foldtest_test, complete_histplot_test, complete_irmaq_magic_test, complete_lnp_magic_test, complete_lowrie_test, complete_lowrie_magic_test, complete_plot_cdf_test, complete_plotdi_a_test, complete_plotxy_test, complete_qqplot_test, complete_quick_hyst_test, complete_revtest_test, complete_revtest_magic_test, complete_site_edit_magic_test, complete_strip_magic_test, complete_s_hext_test, complete_thellier_magic_test, complete_vgpmap_magic_test, complete_zeq_magic_test, complete_agm_magic_test, complete_upload_magic_test]
+rename_me_tests = [complete_angle_test,complete_zeq_test, complete_chartmaker_test, complete_di_eq_test, complete_azdip_magic_test, complete_combine_magic_test, complete_cont_rot_test, complete_customize_criteria_test, complete_download_magic_test, complete_dipole_pinc_test, complete_dipole_plat_test, complete_grab_magic_key_test, complete_incfish_test, complete_magic_select_test, complete_nrm_specimens_magic_test, complete_sundec_test, complete_pca_test, complete_scalc_test, complete_scalc_magic_test, complete_vgp_di_test, complete_watsonsF_test, complete_apwp_test, complete_b_vdm_test, complete_cart_dir_test, complete_convert_samples_test, complete_di_geo_test, complete_di_tilt_test, complete_dir_cart_test, complete_di_rot_test, complete_di_vgp_test, complete_eigs_s_test, complete_eq_di_test, complete_gobing_test, complete_gofish_test, complete_gokent_test, complete_goprinc_test, complete_igrf_test, complete_k15_s_test, complete_mk_redo_test, complete_pt_rot_test, complete_s_eigs_test, complete_s_geo_test, complete_s_tilt_test, complete_stats_test, complete_vdm_b_test, complete_vector_mean_test, complete_zeq_magic_redo_test, complete_ani_depthplot_test, weird_ani_depthplot_test, complete_basemap_magic_test, complete_biplot_magic_test, complete_chi_magic_test, complete_common_mean_test, complete_core_depthplot_test, complete_dayplot_magic_test, complete_dmag_magic_test, complete_eqarea_test, complete_eqarea_ell_test, complete_fishqq_test, complete_foldtest_magic_test, complete_foldtest_test, complete_histplot_test, complete_irmaq_magic_test, complete_lnp_magic_test, complete_lowrie_test, complete_lowrie_magic_test, complete_plot_cdf_test, complete_plotdi_a_test, complete_plotxy_test, complete_qqplot_test, complete_quick_hyst_test, complete_revtest_test, complete_revtest_magic_test, complete_site_edit_magic_test, complete_strip_magic_test, complete_s_hext_test, complete_thellier_magic_test, complete_vgpmap_magic_test, complete_zeq_magic_test, complete_agm_magic_test, complete_upload_magic_test]
 
 rename_me_function_mapping = {"angle": complete_angle_test, "zeq": complete_zeq_test, "chartmaker": complete_chartmaker_test, "di_eq": complete_di_eq_test, "azdip_magic": complete_azdip_magic_test, "combine_magic": complete_combine_magic_test, "cont_rot": complete_cont_rot_test, "customize_criteria": complete_customize_criteria_test, "download_magic": complete_download_magic_test, "dipole_pinc": complete_dipole_pinc_test, "dipole_plat": complete_dipole_plat_test, "grab_magic_key": complete_grab_magic_key_test, "incfish": complete_incfish_test, "magic_select": complete_magic_select_test, "nrm_specimens": complete_nrm_specimens_magic_test, "sundec": complete_sundec_test, "pca": complete_pca_test, "scalc": complete_scalc_test, "scalc_magic": complete_scalc_magic_test, "vgp_di": complete_vgp_di_test, "watsonsF": complete_watsonsF_test, "apwp": complete_apwp_test, "b_vdm": complete_b_vdm_test, "cart_dir": complete_cart_dir_test, "convert_samples": complete_convert_samples_test, "di_geo": complete_di_geo_test, "di_tilt": complete_di_tilt_test, "dir_cart": complete_dir_cart_test, "di_rot": complete_di_rot_test, "di_vgp": complete_di_vgp_test, "eigs_s": complete_eigs_s_test, "eq_di": complete_eq_di_test, "gobing": complete_gobing_test, "gofish": complete_gofish_test, "gokent": complete_gokent_test, "goprinc": complete_goprinc_test, "igrf": complete_igrf_test, "k15_s": complete_k15_s_test, "mk_redo": complete_mk_redo_test, "pt_rot": complete_pt_rot_test, "s_eigs": complete_s_eigs_test, "s_geo": complete_s_geo_test, "s_tilt": complete_s_tilt_test, "stats": complete_stats_test, "vdm_b": complete_vdm_b_test, "vector_mean": complete_vector_mean_test, "zeq_magic": complete_zeq_magic_redo_test, "ani_depthplot": complete_ani_depthplot_test, "weird_ani_depthplot": weird_ani_depthplot_test, "basemap_magic": complete_basemap_magic_test, "biplot_magic": complete_biplot_magic_test, "chi_magic": complete_chi_magic_test, "common_mean": complete_common_mean_test, "core_depthplot": complete_core_depthplot_test, "dayplot_magic": complete_dayplot_magic_test, "dmag_magic": complete_dmag_magic_test, "eqarea": complete_eqarea_test, "eqarea_ell": complete_eqarea_ell_test, "fishqq": complete_fishqq_test, "foldtest_magic": complete_foldtest_magic_test, "foldtest": complete_foldtest_test, "histplot": complete_histplot_test, "irmaq_magic": complete_irmaq_magic_test, "lnp_magic": complete_lnp_magic_test, "lowrie": complete_lowrie_test, "lowrie_magic": complete_lowrie_magic_test, "plot_cdf": complete_plot_cdf_test, "plotdi_a": complete_plotdi_a_test, "plotxy": complete_plotxy_test, "qqplot": complete_qqplot_test, "quick_hyst": complete_quick_hyst_test, "revtest": complete_revtest_test, "revtest_magic": complete_revtest_magic_test, "site_edit_magic": complete_site_edit_magic_test, "strip_magic": complete_strip_magic_test, "s_hext": complete_s_hext_test, "thellier_magic": complete_thellier_magic_test, "vgpmap_magic": complete_vgpmap_magic_test, "zeq_magic": complete_zeq_magic_test, "agm_magic": complete_agm_magic_test, "upload_magic": complete_upload_magic_test}
 

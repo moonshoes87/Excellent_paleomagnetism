@@ -398,7 +398,6 @@ if __name__ == "__main__":
 
 
 def complete_working_test():
-    PT.remove_new_outfiles()
     complete_aarm_magic_test()
     complete_atrm_magic_test()
     complete_hysteresis_magic_test()
@@ -407,7 +406,7 @@ def complete_working_test():
     complete_pmag_results_extract_test()
     complete_orientation_magic_test()
     complete_thellier_magic_redo_test()
-    PT.clean_house()
+
 
 #if __name__ == "__main__":
  #   pass
