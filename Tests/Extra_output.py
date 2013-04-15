@@ -335,7 +335,17 @@ def complete_orientation_magic_test():
     orientation_magic = Ex_out('orientation_magic.py', infile, tag1, orient_Fsi, tag2, orient_Fsa, orient_Fsi_reference, orient_Fsa_reference, orient_Fsi_wrong, orient_Fsa_wrong, None, True)
     orientation_magic.ex_out_sequence()
                     
-#complete_orientation_magic_test()    
+def complete_parse_measurements_test():# finish testing/setting me up
+    """test parse_measurements_test()"""
+    print "Testing parse_measurements.py"
+    infile = "parse_measurements_example.dat"
+    tag1, tag2 = "-Fsp", "-Fin"
+    parse_Fsp, parse_Fin = "parse_measurements_er_specimens_new.out", "parse_measurements_magic_instruments_new.out"
+    parse_Fsp_reference, parse_Fin_reference = "parse_measurements_er_specimens_correct.out", "parse_measurements_magic_instruments_correct.out"
+    parse_Fsp_wrong, parse_Fin_wrong = "parse_measurements_er_specimens_incorrect.out", "parse_measurements_magic_instruments_incorrect.out"
+    parse_measurements = Ex_out('parse_measurements.py', infile, tag1, parse_Fsp, tag2, parse_Fin, parse_Fsp_reference, parse_Fin_reference, parse_Fsp_wrong, parse_Fin_wrong, None, True)
+    parse_measurements.ex_out_sequence()
+    
 
 def complete_thellier_magic_redo_test(): # quite irregular
     """test thellier_magic_redo.py"""
@@ -365,10 +375,21 @@ ignore = """
 thellier_magic_redo.py -f thellier_magic_redo_example.dat  -fnl thellier_magic_redo_measurements.txt -fre thellier_magic_redo2.txt -fan thellier_magic_redo_rmag_anisotropy.txt  -F thellier_magic_redo_specimens.txt -Fnl thellier_magic_redo_NLT_specimens.txt  -Fac thellier_magic_redo_AC_specimens.txt -NLT -ANI
 """
 
-
 # listings and such that make this whole business work
+    
+def complete_working_test():
+    complete_aarm_magic_test()
+    complete_atrm_magic_test()
+    complete_hysteresis_magic_test()
+    complete_k15_magic_test()
+    complete_kly4s_magic_test()
+    complete_pmag_results_extract_test()
+    complete_orientation_magic_test()
+    complete_parse_measurements_test()
+    complete_thellier_magic_redo_test()
 
-Extra_output_tests = {"aarm_magic": complete_aarm_magic_test, "atrm_magic": complete_atrm_magic_test, "hysteresis_magic": complete_hysteresis_magic_test, "k15_magic": complete_k15_magic_test, "kly4s_magic": complete_kly4s_magic_test, "pmag_results_extract": complete_pmag_results_extract_test, "orientation_magic": complete_orientation_magic_test, "thellier_magic_redo": complete_thellier_magic_redo_test}
+
+Extra_output_tests = {"aarm_magic": complete_aarm_magic_test, "atrm_magic": complete_atrm_magic_test, "hysteresis_magic": complete_hysteresis_magic_test, "k15_magic": complete_k15_magic_test, "kly4s_magic": complete_kly4s_magic_test, "pmag_results_extract": complete_pmag_results_extract_test, "orientation_magic": complete_orientation_magic_test, "parse_measurements": complete_parse_measurements_test, "thellier_magic_redo": complete_thellier_magic_redo_test}
 
 ex_out_errors_list = open('extra_output_errors_list.txt', 'w')
 
@@ -393,15 +414,6 @@ if __name__ == "__main__":
 
 
 
-def complete_working_test():
-    complete_aarm_magic_test()
-    complete_atrm_magic_test()
-    complete_hysteresis_magic_test()
-    complete_k15_magic_test()
-    complete_kly4s_magic_test()
-    complete_pmag_results_extract_test()
-    complete_orientation_magic_test()
-    complete_thellier_magic_redo_test()
 
 
 #if __name__ == "__main__":
