@@ -1,60 +1,12 @@
 #! /usr/bin/env python                                                                                                                
-# don't necessarily need all of these
 import sys
 from scripttest import TestFileEnvironment
 env = TestFileEnvironment('./new-test-output')
 import unittest
 import subprocess
 
-file_prefix = '/Users/nebula/Python/Basic_input_output/'
-directory =  '/Users/nebula/Python/Basic_input_output'
-
-the_variable = "hello"
-
-def iterate_through(some_list):
-    print "Iterating through: " + str(some_list)
-    z = 0
-    for i in some_list:
-        thing = file_parse(some_list[z][0])
-        correct_thing = file_parse(some_list[z][1])
-        incorrect_thing = file_parse(some_list[z][2])
-        # for line in correct thing?? and loop it again
-        for n, line in enumerate(thing):
-            if line == correct_thing[n]:
-                pass
-            else:
-                print "output was: "
-                print line
-                print "output should have been: "
-                print correct_thing[n]
-                raise NameError
-        if thing != incorrect_thing:
-            pass
-        else:
-            print "Iterate_through() did not catch the difference between " + str(some_list[z][0]) + " and " + str(some_list[z][2])
-            print "Diff is: "
-            subprocess.call(['diff', some_list[z][0], some_list[z][2]])
-            raise NameError
-
-         
-        """        
-        print "Output was: " + str(thing)
-        print "-"
-        print "Output should have been: " + str(correct_thing)
-        print "-"
-        z +=1
-        if thing == correct_thing:
-            print "Output is as expected"
-        else:
-            print "Error raised"
-            raise NameError("No good")
-        if thing != incorrect_thing:
-            print "Output does not equal incorrect reference"
-        else:
-            print "Error raised"
-            raise NameError("You suck")
-        print str(z) + " iterations"
-        """
+file_prefix = '/Users/nebula/Python/Tests/'
+directory =  '/Users/nebula/Python/Tests'
 
 def file_parse(the_file):
     data = open(the_file, 'rU').readlines()
@@ -66,7 +18,6 @@ def file_parse(the_file):
         clean_file.append(new_line)
     return clean_file # returns a list.  each line is a list item
 
-
 def file_parse_by_word(the_file):
     data = open(the_file, 'rU').readlines()
     clean_data = []
@@ -75,7 +26,6 @@ def file_parse_by_word(the_file):
         clean_data += line
 #    clean_file = str(data)
     return clean_data # returns a list.  each word is an item
-
 
 def output_parse(the_output):
     data = str(the_output)
@@ -116,7 +66,6 @@ def test_for_bad_file(output):
     if "bad file" in output:
         raise NameError("Output said 'bad file'")
 
-
 def compare_two_lists(output, correct_output):
     print "Comparing two lists"
     for num, i in enumerate(output):
@@ -128,9 +77,6 @@ def compare_two_lists(output, correct_output):
             print "Error raised"
             raise ValueError("Wrong output")
 
-
-universal_variable = "sup"
-
 def lowercase_all(a_list):
     new_list = []
 #    print type(new_list)
@@ -140,14 +86,12 @@ def lowercase_all(a_list):
         n = str(i).lower()
         new_list.append(n)
     return new_list
-        
 
 def remove_new_outfiles(): 
     """
     gets rid of all freshly created outfiles.
     """
     subprocess.call('rm ' + directory + '/*_new.out', shell=True)
-
 
 def get_short_program_name(name):
     # this doesn't work!  you would need regular expressions.  strip removes all combinations of the letters
@@ -202,7 +146,6 @@ def clean_program_name(name = None):
 #clean_program_name("complete_angle")
 #clean_program_name("complete_Angle")
 #clean_program_name()
-
 
 def find_a_program(name):
     full_name = clean_program_name(name)

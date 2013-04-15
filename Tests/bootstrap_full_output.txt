@@ -1,0 +1,334 @@
+STARTING HERE
+CLEANING HOUSE
+-
+CLEANING HOUSE
+-
+TRYING
+ - 
+Testing aniso_magic.py, running bootstrap: 20000 times
+Doing bootstrap - be patient
+Boostrap Statistics: 
+ tau_i, V_i_D, V_i_I, V_i_zeta, V_i_zeta_D, V_i_zeta_I, V_i_eta, V_i_eta_D, V_i_eta_I
+0.34040287    29.6    14.5    34.5    171.2     67.1      6.7    296.0     13.5 
+0.33536589   166.3    70.5    24.4     26.8     13.2     10.7    293.9     12.1 
+0.32423124   296.2    12.8    10.8    179.0     63.6      5.0     31.6     22.7 
+Anisotropy results saved in  /Users/nebula/Python/Basic_input_output/aniso_magic_rmag_anisotropy_new.out
+ Good bye 
+
+['Doing', 'bootstrap', '-', 'be', 'patient', 'Boostrap', 'Statistics:', 'tau_i,', 'V_i_D,', 'V_i_I,', 'V_i_zeta,', 'V_i_zeta_D,', 'V_i_zeta_I,', 'V_i_eta,', 'V_i_eta_D,', 'V_i_eta_I', '0.34040287', '29.6', '14.5', '34.5', '171.2', '67.1', '6.7', '296.0', '13.5', '0.33536589', '166.3', '70.5', '24.4', '26.8', '13.2', '10.7', '293.9', '12.1', '0.32423124', '296.2', '12.8', '10.8', '179.0', '63.6', '5.0', '31.6', '22.7', 'Anisotropy', 'results', 'saved', 'in', '/Users/nebula/Python/Basic_input_output/aniso_magic_rmag_anisotropy_new.out', 'Good', 'bye']
+success
+success
+success
+success
+success
+success
+success
+success
+success
+success
+success
+success
+success
+success
+success
+success
+success
+success
+success
+success
+success
+success
+success
+success
+success
+success
+success
+End of check_bootstrap
+Testing aniso_magic.py, running bootstrap: 10000 times
+Doing bootstrap - be patient
+Boostrap Statistics: 
+ tau_i, V_i_D, V_i_I, V_i_zeta, V_i_zeta_D, V_i_zeta_I, V_i_eta, V_i_eta_D, V_i_eta_I
+0.34040287    29.6    14.5    35.5    171.8     67.0      6.8    296.0     13.4 
+0.33536589   166.3    70.5    24.8     27.5     13.0     10.8    294.6     12.3 
+0.32423124   296.2    12.8    10.9    179.3     63.4      5.0     31.6     22.9 
+Anisotropy results saved in  /Users/nebula/Python/Basic_input_output/aniso_magic_rmag_anisotropy_new.out
+ Good bye 
+
+['Doing', 'bootstrap', '-', 'be', 'patient', 'Boostrap', 'Statistics:', 'tau_i,', 'V_i_D,', 'V_i_I,', 'V_i_zeta,', 'V_i_zeta_D,', 'V_i_zeta_I,', 'V_i_eta,', 'V_i_eta_D,', 'V_i_eta_I', '0.34040287', '29.6', '14.5', '35.5', '171.8', '67.0', '6.8', '296.0', '13.4', '0.33536589', '166.3', '70.5', '24.8', '27.5', '13.0', '10.8', '294.6', '12.3', '0.32423124', '296.2', '12.8', '10.9', '179.3', '63.4', '5.0', '31.6', '22.9', 'Anisotropy', 'results', 'saved', 'in', '/Users/nebula/Python/Basic_input_output/aniso_magic_rmag_anisotropy_new.out', 'Good', 'bye']
+success
+success
+success
+success
+success
+success
+success
+success
+success
+success
+success
+success
+z was: 24.8, upper_bound was: 24.7, lower_bound was: 23.5
+error raised
+<function complete_aniso_magic_test at 0x4215f0> failed donut
+i, ex:  <function complete_aniso_magic_test at 0x4215f0> program produced incorrect output
+type(ex) <type 'exceptions.ValueError'>
+ex.args ('program produced incorrect output',)
+0 <type 'exceptions.ValueError'>
+1 program produced incorrect output
+2 <traceback object at 0x425120>
+TRYING
+ - 
+('find_EI.py', '-f', '/Users/nebula/Python/Basic_input_output/find_EI_example.dat', '-nb', 2000, "stdin='a'")
+full output = Bootstrapping.... be patient
+25  out of  2000
+50  out of  2000
+75  out of  2000
+100  out of  2000
+125  out of  2000
+150  out of  2000
+175  out of  2000
+200  out of  2000
+225  out of  2000
+250  out of  2000
+275  out of  2000
+300  out of  2000
+325  out of  2000
+350  out of  2000
+375  out of  2000
+400  out of  2000
+425  out of  2000
+450  out of  2000
+475  out of  2000
+500  out of  2000
+525  out of  2000
+550  out of  2000
+575  out of  2000
+600  out of  2000
+625  out of  2000
+650  out of  2000
+675  out of  2000
+700  out of  2000
+725  out of  2000
+750  out of  2000
+775  out of  2000
+800  out of  2000
+825  out of  2000
+850  out of  2000
+875  out of  2000
+900  out of  2000
+925  out of  2000
+950  out of  2000
+975  out of  2000
+1000  out of  2000
+1025  out of  2000
+1050  out of  2000
+1075  out of  2000
+1100  out of  2000
+1125  out of  2000
+1150  out of  2000
+1175  out of  2000
+1200  out of  2000
+1225  out of  2000
+1250  out of  2000
+1275  out of  2000
+1300  out of  2000
+1325  out of  2000
+1350  out of  2000
+1375  out of  2000
+1400  out of  2000
+1425  out of  2000
+1450  out of  2000
+1475  out of  2000
+1500  out of  2000
+1525  out of  2000
+1550  out of  2000
+1575  out of  2000
+1600  out of  2000
+1625  out of  2000
+1650  out of  2000
+1675  out of  2000
+1700  out of  2000
+1725  out of  2000
+1750  out of  2000
+1775  out of  2000
+1800  out of  2000
+1825  out of  2000
+1850  out of  2000
+1875  out of  2000
+1900  out of  2000
+1925  out of  2000
+1950  out of  2000
+1975  out of  2000
+2000  out of  2000
+Io Inc  I_lower, I_upper, Elon, E_lower, E_upper
+   38.9  =>     58.8 _    47.9 ^    67.1:  1.4679 _ 1.2850 ^ 1.7441
+S[a]ve plots - <return> to quit:  2  saved in  findEI_ei.svg
+3  saved in  findEI_cdf.svg
+1  saved in  findEI_eq.svg
+4  saved in  findEI_v2.svg
+
+files created: {'findEI_ei.svg': <FoundFile ./new-test-output:findEI_ei.svg>, 'findEI_v2.svg': <FoundFile ./new-test-output:findEI_v2.svg>, 'findEI_cdf.svg': <FoundFile ./new-test-output:findEI_cdf.svg>, 'findEI_eq.svg': <FoundFile ./new-test-output:findEI_eq.svg>}
+files updated: {}
+raw output = ['38.9', '=>', '58.8', '_', '47.9', '^', '67.1:', '1.4679', '_', '1.2850', '^', '1.7441']
+clean output = [38.9, 58.8, 47.9, 67.1, 1.4679, 1.285, 1.7441]
+Finish run_EI()
+[38.9, 58.8, 47.9, 67.1, 1.4679, 1.285, 1.7441]
+success
+success
+success
+success
+success
+success
+success
+End of check_bootstrap
+Finished find_EI test
+TRYING
+ - 
+testing bootams.py
+doing bootams
+finished running bootams.py
+[0.33505, 0.00021, 5.3, 14.7, 10.3, 260.9, 38.3, 13.5, 112.1, 47.3, 0.33334, 0.00021, 124.5, 61.7, 6.1, 225.2, 5.9, 17.2, 318.4, 28.6, 0.33161, 0.00014, 268.8, 23.6, 10.7, 358.7, 5.3, 12.5, 100.4, 65.5]
+finished do_bootams()
+success
+success
+success
+success
+success
+success
+success
+success
+success
+success
+success
+success
+success
+success
+success
+success
+success
+success
+success
+success
+success
+success
+success
+success
+success
+success
+success
+success
+success
+success
+End of check_bootstrap
+TRYING
+ - 
+[1.0, 110.2, 204.8, 7.7, 1.0, 29.0, 8.2, 3.3, 6.0, 59.6, 2.0, 248.9, 151.2, 4.3, 1.0, 26.7, 14.9, 8.0, 185.0, -58.8]
+20
+[(1.0, 1.0), (109.0, 112.0), (204.0, 207.0), (7.6, 7.9), (0.9, 1.1), (28.5, 29.5), (7.5, 9.5), (3.0, 3.5), (5.5, 6.5), (59.0, 60.0), (1.9, 2.1), (247.0, 250.0), (149.0, 152.0), (4.0, 4.6), (0.9, 1.1), (26.0, 27.0), (14.5, 16.5), (7.5, 8.5), (184.5, 186.5), (-59.5, -58.0)]
+20
+success
+success
+success
+success
+success
+success
+success
+success
+success
+success
+success
+success
+success
+success
+success
+success
+success
+success
+success
+success
+End of check_bootstrap
+TRYING
+ - 
+testing scalc.py
+['89', '15.2', '13.4', '16.8', '32.3']
+output: [89.0, 15.2, 13.4, 16.8, 32.3]
+success
+success
+success
+success
+success
+End of check_bootstrap
+TRYING
+ - 
+[0.0, 1000.0, 100.0, 1000.0, 200.0, 1000.0, 300.0, 1000.0, 400.0, 1000.0, 500.0, 1000.0, 600.0, 1000.0, 700.0, 1000.0, 800.0, 1000.0, 900.0, 1000.0, 13.0, 17.8, 13.7, 21.1, 37.0]
+[13.0, 17.8, 13.7, 21.1, 37.0]
+success
+success
+success
+success
+success
+End of check_bootstrap
+TRYING
+ - 
+Script result: watsonsV.py -v /Users/nebula/Python/Basic_input_output/watsonsF_example_file1.dat -f2 /Users/nebula/Python/Basic_input_output/watsonsF_example_file2.dat
+  return code: 1
+-- stderr: --------------------
+Traceback (most recent call last):
+  File "/Users/nebula/PmagPy/watsonsV.py", line 126, in <module>
+    main()
+  File "/Users/nebula/PmagPy/watsonsV.py", line 40, in main
+    f=open(file1,'rU')
+UnboundLocalError: local variable 'file1' referenced before assignment
+
+<function complete_watsonsV_test at 0x4217f0> failed donut
+i, ex:  <function complete_watsonsV_test at 0x4217f0> Script returned code: 1
+type(ex) <type 'exceptions.AssertionError'>
+ex.args ('Script returned code: 1',)
+0 <type 'exceptions.AssertionError'>
+1 Script returned code: 1
+2 <traceback object at 0x425af8>
+messed up programs ['test aniso_magic.py', 'test watsonsV.py']
+total errors found: 2
+THESE ONES ARE BROKEN  ['test aniso_magic.py', 'test watsonsV.py']
+redo me list [<function complete_aniso_magic_test at 0x4215f0>, <function complete_watsonsV_test at 0x4217f0>]
+rhino
+test aniso_magic.py
+Testing aniso_magic.py, running bootstrap: 20000 times
+desired coordinate system not available, using available:  s
+skipping plot - not enough data points
+Anisotropy results saved in  /Users/nebula/Python/Basic_input_output/aniso_magic_rmag_anisotropy_new.out
+ Good bye 
+
+['desired', 'coordinate', 'system', 'not', 'available,', 'using', 'available:', 's', 'skipping', 'plot', '-', 'not', 'enough', 'data', 'points', 'Anisotropy', 'results', 'saved', 'in', '/Users/nebula/Python/Basic_input_output/aniso_magic_rmag_anisotropy_new.out', 'Good', 'bye']
+End of check_bootstrap
+Testing aniso_magic.py, running bootstrap: 10000 times
+desired coordinate system not available, using available:  s
+skipping plot - not enough data points
+Anisotropy results saved in  /Users/nebula/Python/Basic_input_output/aniso_magic_rmag_anisotropy_new.out
+ Good bye 
+
+['desired', 'coordinate', 'system', 'not', 'available,', 'using', 'available:', 's', 'skipping', 'plot', '-', 'not', 'enough', 'data', 'points', 'Anisotropy', 'results', 'saved', 'in', '/Users/nebula/Python/Basic_input_output/aniso_magic_rmag_anisotropy_new.out', 'Good', 'bye']
+End of check_bootstrap
+Testing aniso_magic.py, running bootstrap: 10000 times
+desired coordinate system not available, using available:  s
+skipping plot - not enough data points
+Anisotropy results saved in  /Users/nebula/Python/Basic_input_output/aniso_magic_rmag_anisotropy_new.out
+ Good bye 
+
+['desired', 'coordinate', 'system', 'not', 'available,', 'using', 'available:', 's', 'skipping', 'plot', '-', 'not', 'enough', 'data', 'points', 'Anisotropy', 'results', 'saved', 'in', '/Users/nebula/Python/Basic_input_output/aniso_magic_rmag_anisotropy_new.out', 'Good', 'bye']
+End of check_bootstrap
+test watsonsV.py
+Script result: watsonsV.py -v /Users/nebula/Python/Basic_input_output/watsonsF_example_file1.dat -f2 /Users/nebula/Python/Basic_input_output/watsonsF_example_file2.dat
+  return code: 1
+-- stderr: --------------------
+Traceback (most recent call last):
+  File "/Users/nebula/PmagPy/watsonsV.py", line 126, in <module>
+    main()
+  File "/Users/nebula/PmagPy/watsonsV.py", line 40, in main
+    f=open(file1,'rU')
+UnboundLocalError: local variable 'file1' referenced before assignment
+
+test watsonsV.py raised error: Script returned code: 1
+-----------
+-----------
+finished with Bootstrap testing and re-testing

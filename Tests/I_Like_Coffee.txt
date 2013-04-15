@@ -1,0 +1,3 @@
+Hi there.  Donkeys are fun.
+
+<open file 'rename_me_errors_list.txt', mode 'w' at 0x43b020>test magic_select.py: [Errno 2] No such file or directory: 'magic_select_results_new.out'.       piccadilly       <open file 'random_errors_list.txt', mode 'w' at 0x438cd8>test gaussian.py: global name 'o1' is not defined.       piccadilly       test fisher.py: fisher.py is producing the wrong amount of output.       piccadilly       

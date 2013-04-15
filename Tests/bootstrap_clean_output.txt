@@ -1,0 +1,41 @@
+rhino
+test aniso_magic.py
+Testing aniso_magic.py, running bootstrap: 20000 times
+desired coordinate system not available, using available:  s
+skipping plot - not enough data points
+Anisotropy results saved in  /Users/nebula/Python/Basic_input_output/aniso_magic_rmag_anisotropy_new.out
+ Good bye 
+
+['desired', 'coordinate', 'system', 'not', 'available,', 'using', 'available:', 's', 'skipping', 'plot', '-', 'not', 'enough', 'data', 'points', 'Anisotropy', 'results', 'saved', 'in', '/Users/nebula/Python/Basic_input_output/aniso_magic_rmag_anisotropy_new.out', 'Good', 'bye']
+End of check_bootstrap
+Testing aniso_magic.py, running bootstrap: 10000 times
+desired coordinate system not available, using available:  s
+skipping plot - not enough data points
+Anisotropy results saved in  /Users/nebula/Python/Basic_input_output/aniso_magic_rmag_anisotropy_new.out
+ Good bye 
+
+['desired', 'coordinate', 'system', 'not', 'available,', 'using', 'available:', 's', 'skipping', 'plot', '-', 'not', 'enough', 'data', 'points', 'Anisotropy', 'results', 'saved', 'in', '/Users/nebula/Python/Basic_input_output/aniso_magic_rmag_anisotropy_new.out', 'Good', 'bye']
+End of check_bootstrap
+Testing aniso_magic.py, running bootstrap: 10000 times
+desired coordinate system not available, using available:  s
+skipping plot - not enough data points
+Anisotropy results saved in  /Users/nebula/Python/Basic_input_output/aniso_magic_rmag_anisotropy_new.out
+ Good bye 
+
+['desired', 'coordinate', 'system', 'not', 'available,', 'using', 'available:', 's', 'skipping', 'plot', '-', 'not', 'enough', 'data', 'points', 'Anisotropy', 'results', 'saved', 'in', '/Users/nebula/Python/Basic_input_output/aniso_magic_rmag_anisotropy_new.out', 'Good', 'bye']
+End of check_bootstrap
+test watsonsV.py
+Script result: watsonsV.py -v /Users/nebula/Python/Basic_input_output/watsonsF_example_file1.dat -f2 /Users/nebula/Python/Basic_input_output/watsonsF_example_file2.dat
+  return code: 1
+-- stderr: --------------------
+Traceback (most recent call last):
+  File "/Users/nebula/PmagPy/watsonsV.py", line 126, in <module>
+    main()
+  File "/Users/nebula/PmagPy/watsonsV.py", line 40, in main
+    f=open(file1,'rU')
+UnboundLocalError: local variable 'file1' referenced before assignment
+
+test watsonsV.py raised error: Script returned code: 1
+-----------
+-----------
+finished with Bootstrap testing and re-testing

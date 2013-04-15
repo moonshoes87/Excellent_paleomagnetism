@@ -1,0 +1,2157 @@
+STARTING HERE
+TRYING
+ - 
+Testing aarm_magic
+CLEANING HOUSE
+-
+about to run WD program
+('aarm_magic.py', '-WD', '/Users/nebula/Python/Basic_input_output', '-f', 'aarm_measurements.txt', '-Fa', 'aarm_magic_anisotropy_new.out', '-Fr', 'aarm_magic_results_new.out', None, 'stdin=None')
+stdout: specimen tensor elements stored in  /Users/nebula/Python/Basic_input_output/aarm_magic_anisotropy_new.out
+specimen statistics and eigenparameters stored in  /Users/nebula/Python/Basic_input_output/aarm_magic_results_new.out
+
+created: {}
+updated: {}
+testing: aarm_magic_anisotropy_new.out against reference file: aarm_magic_anisotropy_correct.out
+parsing file: aarm_magic_anisotropy_new.out
+file length = 223
+parsing file: aarm_magic_anisotropy_correct.out
+file length = 223
+checking list output
+output_list:         ['tab', 'rmag_anisotropy', 'anisotropy_F', 'anisotropy_F_crit', 'anisotropy_description', 'anisotrop ...]
+correct_output_list: ['tab', 'rmag_anisotropy', 'anisotropy_F', 'anisotropy_F_crit', 'anisotropy_description', 'anisotrop ...]
+Comparing two lists
+Lists were the same
+aarm_magic.py produced correct output
+-
+testing: aarm_magic_results_new.out against reference file: aarm_magic_results_correct.out
+parsing file: aarm_magic_results_new.out
+file length = 366
+parsing file: aarm_magic_results_correct.out
+file length = 366
+checking list output
+output_list:         ['tab', 'rmag_results', 'anisotropy_ftest', 'anisotropy_ftest12', 'anisotropy_ftest23', 'anisotropy_ ...]
+correct_output_list: ['tab', 'rmag_results', 'anisotropy_ftest', 'anisotropy_ftest12', 'anisotropy_ftest23', 'anisotropy_ ...]
+Comparing two lists
+Lists were the same
+aarm_magic.py produced correct output
+-
+testing: aarm_magic_anisotropy_new.out against reference file: aarm_magic_anisotropy_incorrect.out
+expecting an error
+parsing file: aarm_magic_anisotropy_new.out
+file length = 223
+parsing file: aarm_magic_anisotropy_incorrect.out
+file length = 223
+Testing list output (for error)
+output was:          10.0
+wrong reference was: 20.0
+Difference found
+-
+testing: aarm_magic_results_new.out against reference file: aarm_magic_results_incorrect.out
+expecting an error
+parsing file: aarm_magic_results_new.out
+file length = 366
+parsing file: aarm_magic_results_incorrect.out
+file length = 366
+Testing list output (for error)
+output was:          0.6
+wrong reference was: 1.6
+Difference found
+-
+STARTING UNITTEST
+running: test_outfile1_with_wrongfile1
+testing: aarm_magic_anisotropy_new.out against reference file: aarm_magic_anisotropy_incorrect.out
+parsing file: aarm_magic_anisotropy_new.out
+file length = 223
+parsing file: aarm_magic_anisotropy_incorrect.out
+file length = 223
+checking list output
+output_list:         ['tab', 'rmag_anisotropy', 'anisotropy_F', 'anisotropy_F_crit', 'anisotropy_description', 'anisotrop ...]
+correct_output_list: ['tab', 'rmag_anisotropy', 'anisotropy_F', 'anisotropy_F_crit', 'anisotropy_description', 'anisotrop ...]
+Comparing two lists
+Output contained:    10.0
+but should have had: 20.0
+Error raised
+error expected
+-
+running: test_outfile1_with_correctfile2
+testing: aarm_magic_anisotropy_new.out against reference file: aarm_magic_anisotropy_correct.out
+expecting an error
+parsing file: aarm_magic_anisotropy_new.out
+file length = 223
+parsing file: aarm_magic_anisotropy_correct.out
+file length = 223
+Testing list output (for error)
+No difference found
+error raised
+error expected
+-
+running: test_outfile2_with_wrongfile2()
+testing: aarm_magic_results_new.out against reference file: aarm_magic_results_incorrect.out
+parsing file: aarm_magic_results_new.out
+file length = 366
+parsing file: aarm_magic_results_incorrect.out
+file length = 366
+checking list output
+output_list:         ['tab', 'rmag_results', 'anisotropy_ftest', 'anisotropy_ftest12', 'anisotropy_ftest23', 'anisotropy_ ...]
+correct_output_list: ['tab', 'rmag_results', 'anisotropy_ftest', 'anisotropy_ftest12', 'anisotropy_ftest23', 'anisotropy_ ...]
+Comparing two lists
+Output contained:    0.6
+but should have had: 1.6
+Error raised
+error expected
+-
+running: test_outfile2_with_correctfile2()
+testing: aarm_magic_results_new.out against reference file: aarm_magic_results_correct.out
+expecting an error
+parsing file: aarm_magic_results_new.out
+file length = 366
+parsing file: aarm_magic_results_correct.out
+file length = 366
+Testing list output (for error)
+No difference found
+error raised
+error expected
+TRYING
+ - 
+Testing atrm_magic.py:
+CLEANING HOUSE
+-
+about to run WD program
+('atrm_magic.py', '-WD', '/Users/nebula/Python/Basic_input_output', '-f', 'atrm_magic_measurements.txt', '-Fa', 'atrm_anisotropy_new.out', '-Fr', 'atrm_results_new.out', None, 'stdin=None')
+stdout: specimen tensor elements stored in  /Users/nebula/Python/Basic_input_output/atrm_anisotropy_new.out
+specimen statistics and eigenparameters stored in  /Users/nebula/Python/Basic_input_output/atrm_results_new.out
+
+created: {}
+updated: {}
+testing: atrm_anisotropy_new.out against reference file: atrm_anisotropy_correct.txt
+parsing file: atrm_anisotropy_new.out
+file length = 716
+parsing file: atrm_anisotropy_correct.txt
+file length = 716
+checking list output
+output_list:         ['tab', 'rmag_anisotropy', 'anisotropy_F', 'anisotropy_F_crit', 'anisotropy_mean', 'anisotropy_n', ' ...]
+correct_output_list: ['tab', 'rmag_anisotropy', 'anisotropy_F', 'anisotropy_F_crit', 'anisotropy_mean', 'anisotropy_n', ' ...]
+Comparing two lists
+Lists were the same
+atrm_magic.py produced correct output
+-
+testing: atrm_results_new.out against reference file: atrm_results_correct.txt
+parsing file: atrm_results_new.out
+file length = 1424
+parsing file: atrm_results_correct.txt
+file length = 1424
+checking list output
+output_list:         ['tab', 'rmag_results', 'anisotropy_ftest', 'anisotropy_ftest12', 'anisotropy_ftest23', 'anisotropy_ ...]
+correct_output_list: ['tab', 'rmag_results', 'anisotropy_ftest', 'anisotropy_ftest12', 'anisotropy_ftest23', 'anisotropy_ ...]
+Comparing two lists
+Lists were the same
+atrm_magic.py produced correct output
+-
+testing: atrm_anisotropy_new.out against reference file: atrm_anisotropy_incorrect.txt
+expecting an error
+parsing file: atrm_anisotropy_new.out
+file length = 716
+parsing file: atrm_anisotropy_incorrect.txt
+file length = 716
+Testing list output (for error)
+output was:          0.007905
+wrong reference was: 0.001905
+Difference found
+-
+testing: atrm_results_new.out against reference file: atrm_results_incorrect.txt
+expecting an error
+parsing file: atrm_results_new.out
+file length = 1424
+parsing file: atrm_results_incorrect.txt
+file length = 1424
+Testing list output (for error)
+output was:          309.4
+wrong reference was: 39.4
+Difference found
+-
+STARTING UNITTEST
+running: test_outfile1_with_wrongfile1
+testing: atrm_anisotropy_new.out against reference file: atrm_anisotropy_incorrect.txt
+parsing file: atrm_anisotropy_new.out
+file length = 716
+parsing file: atrm_anisotropy_incorrect.txt
+file length = 716
+checking list output
+output_list:         ['tab', 'rmag_anisotropy', 'anisotropy_F', 'anisotropy_F_crit', 'anisotropy_mean', 'anisotropy_n', ' ...]
+correct_output_list: ['tab', 'rmag_anisotropy', 'anisotropy_F', 'anisotropy_F_crit', 'anisotropy_mean', 'anisotropy_n', ' ...]
+Comparing two lists
+Output contained:    0.007905
+but should have had: 0.001905
+Error raised
+error expected
+-
+running: test_outfile1_with_correctfile2
+testing: atrm_anisotropy_new.out against reference file: atrm_anisotropy_correct.txt
+expecting an error
+parsing file: atrm_anisotropy_new.out
+file length = 716
+parsing file: atrm_anisotropy_correct.txt
+file length = 716
+Testing list output (for error)
+No difference found
+error raised
+error expected
+-
+running: test_outfile2_with_wrongfile2()
+testing: atrm_results_new.out against reference file: atrm_results_incorrect.txt
+parsing file: atrm_results_new.out
+file length = 1424
+parsing file: atrm_results_incorrect.txt
+file length = 1424
+checking list output
+output_list:         ['tab', 'rmag_results', 'anisotropy_ftest', 'anisotropy_ftest12', 'anisotropy_ftest23', 'anisotropy_ ...]
+correct_output_list: ['tab', 'rmag_results', 'anisotropy_ftest', 'anisotropy_ftest12', 'anisotropy_ftest23', 'anisotropy_ ...]
+Comparing two lists
+Output contained:    309.4
+but should have had: 39.4
+Error raised
+error expected
+-
+running: test_outfile2_with_correctfile2()
+testing: atrm_results_new.out against reference file: atrm_results_correct.txt
+expecting an error
+parsing file: atrm_results_new.out
+file length = 1424
+parsing file: atrm_results_correct.txt
+file length = 1424
+Testing list output (for error)
+No difference found
+error raised
+error expected
+TRYING
+ - 
+Testing hysteresis_magic.py
+CLEANING HOUSE
+-
+about to run WD program
+('hysteresis_magic.py', '-WD', '/Users/nebula/Python/Basic_input_output', '-f', 'hysteresis_magic_example.dat', '-F', 'hysteresis_magic_rmag_new.out', None, None, '-P', 'stdin=q')
+stdout: hysteresis parameters saved in  /Users/nebula/Python/Basic_input_output/hysteresis_magic_rmag_new.out
+remanence parameters saved in  /Users/nebula/Python/Basic_input_output/rmag_remanence.txt
+
+created: {}
+updated: {}
+None
+hysteresis_magic_remanence_new.out
+CLEANING HOUSE
+-
+about to run WD program
+('hysteresis_magic.py', '-WD', '/Users/nebula/Python/Basic_input_output', '-f', 'hysteresis_magic_example.dat', '-F', 'hysteresis_magic_rmag_new.out', None, 'hysteresis_magic_remanence_new.out', '-P', 'stdin=q')
+stdout: hysteresis parameters saved in  /Users/nebula/Python/Basic_input_output/hysteresis_magic_rmag_new.out
+remanence parameters saved in  /Users/nebula/Python/Basic_input_output/rmag_remanence.txt
+
+created: {}
+updated: {}
+testing: hysteresis_magic_rmag_new.out against reference file: hysteresis_magic_rmag_correct.txt
+parsing file: hysteresis_magic_rmag_new.out
+file length = 101
+parsing file: hysteresis_magic_rmag_correct.txt
+file length = 101
+checking list output
+output_list:         ['tab', 'rmag_hysteresis', 'er_citation_names', 'er_sample_name', 'er_site_name', 'er_specimen_name' ...]
+correct_output_list: ['tab', 'rmag_hysteresis', 'er_citation_names', 'er_sample_name', 'er_site_name', 'er_specimen_name' ...]
+Comparing two lists
+Lists were the same
+hysteresis_magic.py produced correct output
+-
+testing: hysteresis_magic_remanence_new.out against reference file: hysteresis_magic_remanence_correct.txt
+parsing file: hysteresis_magic_remanence_new.out
+file length = 82
+parsing file: hysteresis_magic_remanence_correct.txt
+file length = 82
+checking list output
+output_list:         ['tab', 'rmag_remanence', 'er_citation_names', 'er_sample_name', 'er_site_name', 'er_specimen_name', ...]
+correct_output_list: ['tab', 'rmag_remanence', 'er_citation_names', 'er_sample_name', 'er_site_name', 'er_specimen_name', ...]
+Comparing two lists
+Lists were the same
+hysteresis_magic.py produced correct output
+-
+testing: hysteresis_magic_rmag_new.out against reference file: hysteresis_magic_rmag_incorrect.txt
+expecting an error
+parsing file: hysteresis_magic_rmag_new.out
+file length = 101
+parsing file: hysteresis_magic_rmag_incorrect.txt
+file length = 101
+Testing list output (for error)
+output was:          study
+wrong reference was: elephant
+Difference found
+-
+testing: hysteresis_magic_remanence_new.out against reference file: hysteresis_magic_remanence_incorrect.txt
+expecting an error
+parsing file: hysteresis_magic_remanence_new.out
+file length = 82
+parsing file: hysteresis_magic_remanence_incorrect.txt
+file length = 82
+Testing list output (for error)
+output was:          This
+wrong reference was: That
+Difference found
+-
+STARTING UNITTEST
+running: test_outfile1_with_wrongfile1
+testing: hysteresis_magic_rmag_new.out against reference file: hysteresis_magic_rmag_incorrect.txt
+parsing file: hysteresis_magic_rmag_new.out
+file length = 101
+parsing file: hysteresis_magic_rmag_incorrect.txt
+file length = 101
+checking list output
+output_list:         ['tab', 'rmag_hysteresis', 'er_citation_names', 'er_sample_name', 'er_site_name', 'er_specimen_name' ...]
+correct_output_list: ['tab', 'rmag_hysteresis', 'er_citation_names', 'er_sample_name', 'er_site_name', 'er_specimen_name' ...]
+Comparing two lists
+Output contained:    study
+but should have had: elephant
+Error raised
+error expected
+-
+running: test_outfile1_with_correctfile2
+testing: hysteresis_magic_rmag_new.out against reference file: hysteresis_magic_rmag_correct.txt
+expecting an error
+parsing file: hysteresis_magic_rmag_new.out
+file length = 101
+parsing file: hysteresis_magic_rmag_correct.txt
+file length = 101
+Testing list output (for error)
+No difference found
+error raised
+error expected
+-
+running: test_outfile2_with_wrongfile2()
+testing: hysteresis_magic_remanence_new.out against reference file: hysteresis_magic_remanence_incorrect.txt
+parsing file: hysteresis_magic_remanence_new.out
+file length = 82
+parsing file: hysteresis_magic_remanence_incorrect.txt
+file length = 82
+checking list output
+output_list:         ['tab', 'rmag_remanence', 'er_citation_names', 'er_sample_name', 'er_site_name', 'er_specimen_name', ...]
+correct_output_list: ['tab', 'rmag_remanence', 'er_citation_names', 'er_sample_name', 'er_site_name', 'er_specimen_name', ...]
+Comparing two lists
+Output contained:    This
+but should have had: That
+Error raised
+error expected
+-
+running: test_outfile2_with_correctfile2()
+testing: hysteresis_magic_remanence_new.out against reference file: hysteresis_magic_remanence_correct.txt
+expecting an error
+parsing file: hysteresis_magic_remanence_new.out
+file length = 82
+parsing file: hysteresis_magic_remanence_correct.txt
+file length = 82
+Testing list output (for error)
+No difference found
+error raised
+error expected
+hysteresis_magic_remanence_new.out
+TRYING
+ - 
+Testing k15_magic.py
+Data saved to:  /Users/nebula/Python/Basic_input_output/k15_magic_er_samples_new.out /Users/nebula/Python/Basic_input_output/k15_magic_rmag_anisotropy_new.out /Users/nebula/Python/Basic_input_output/rmag_results.txt /Users/nebula/Python/Basic_input_output/k15_magic_measurements_new.out
+
+testing: k15_magic_er_samples_new.out against reference file: k15_magic_er_samples_correct.txt
+parsing file: k15_magic_er_samples_new.out
+file length = 101
+parsing file: k15_magic_er_samples_correct.txt
+file length = 101
+checking list output
+output_list:         ['tab', 'er_samples', 'er_citation_names', 'er_location_name', 'er_sample_name', 'er_site_name', 'er ...]
+correct_output_list: ['tab', 'er_samples', 'er_citation_names', 'er_location_name', 'er_sample_name', 'er_site_name', 'er ...]
+Comparing two lists
+Lists were the same
+k15_magic.py produced correct output
+-
+testing: k15_magic_rmag_anisotropy_new.out against reference file: k15_magic_rmag_anisotropy_correct.txt
+parsing file: k15_magic_rmag_anisotropy_new.out
+file length = 502
+parsing file: k15_magic_rmag_anisotropy_correct.txt
+file length = 502
+checking list output
+output_list:         ['tab', 'rmag_anisotropy', 'anisotropy_mean', 'anisotropy_n', 'anisotropy_s1', 'anisotropy_s2', 'ani ...]
+correct_output_list: ['tab', 'rmag_anisotropy', 'anisotropy_mean', 'anisotropy_n', 'anisotropy_s1', 'anisotropy_s2', 'ani ...]
+Comparing two lists
+Lists were the same
+k15_magic.py produced correct output
+-
+testing: k15_magic_er_samples_new.out against reference file: k15_magic_er_samples_incorrect.txt
+expecting an error
+parsing file: k15_magic_er_samples_new.out
+file length = 101
+parsing file: k15_magic_er_samples_incorrect.txt
+file length = 101
+Testing list output (for error)
+output was:          This
+wrong reference was: That
+Difference found
+-
+testing: k15_magic_rmag_anisotropy_new.out against reference file: k15_magic_rmag_anisotropy_incorrect.txt
+expecting an error
+parsing file: k15_magic_rmag_anisotropy_new.out
+file length = 502
+parsing file: k15_magic_rmag_anisotropy_incorrect.txt
+file length = 502
+Testing list output (for error)
+output was:          0.0010716667
+wrong reference was: 0.998717657
+Difference found
+-
+testing: k15_magic_measurements_new.out against reference file: k15_magic_measurements_correct.txt
+parsing file: k15_magic_measurements_new.out
+file length = 1938
+parsing file: k15_magic_measurements_correct.txt
+file length = 1938
+checking list output
+output_list:         ['tab', 'magic_measurements', 'er_citation_names', 'er_location_name', 'er_sample_name', 'er_site_na ...]
+correct_output_list: ['tab', 'magic_measurements', 'er_citation_names', 'er_location_name', 'er_sample_name', 'er_site_na ...]
+Comparing two lists
+Lists were the same
+k15_magic.py produced correct output
+6...
+testing: k15_magic_measurements_new.out against reference file: k15_magic_measurements_incorrect.txt
+expecting an error
+parsing file: k15_magic_measurements_new.out
+file length = 1938
+parsing file: k15_magic_measurements_incorrect.txt
+file length = 1938
+Testing list output (for error)
+output was:          135.0
+wrong reference was: 199.0
+Difference found
+7...
+testing: k15_magic_rmag_results_new.out against reference file: k15_magic_rmag_results_correct.txt
+parsing file: k15_magic_rmag_results_new.out
+file length = 1124
+parsing file: k15_magic_rmag_results_correct.txt
+file length = 1124
+checking list output
+output_list:         ['tab', 'rmag_results', 'anisotropy_fest', 'anisotropy_ftest12', 'anisotropy_ftest23', 'anisotropy_t ...]
+correct_output_list: ['tab', 'rmag_results', 'anisotropy_fest', 'anisotropy_ftest12', 'anisotropy_ftest23', 'anisotropy_t ...]
+Comparing two lists
+Lists were the same
+k15_magic.py produced correct output
+8...
+testing: k15_magic_rmag_results_new.out against reference file: k15_magic_rmag_results_incorrect.txt
+expecting an error
+parsing file: k15_magic_rmag_results_new.out
+file length = 1124
+parsing file: k15_magic_rmag_results_incorrect.txt
+file length = 1124
+Testing list output (for error)
+output was:          282.4
+wrong reference was: 289.5
+Difference found
+STARTING UNITTEST
+running: test_outfile1_with_wrongfile1
+testing: k15_magic_er_samples_new.out against reference file: k15_magic_er_samples_incorrect.txt
+parsing file: k15_magic_er_samples_new.out
+file length = 101
+parsing file: k15_magic_er_samples_incorrect.txt
+file length = 101
+checking list output
+output_list:         ['tab', 'er_samples', 'er_citation_names', 'er_location_name', 'er_sample_name', 'er_site_name', 'er ...]
+correct_output_list: ['tab', 'er_samples', 'er_citation_names', 'er_location_name', 'er_sample_name', 'er_site_name', 'er ...]
+Comparing two lists
+Output contained:    This
+but should have had: That
+Error raised
+error expected
+-
+running: test_outfile1_with_correctfile2
+testing: k15_magic_er_samples_new.out against reference file: k15_magic_er_samples_correct.txt
+expecting an error
+parsing file: k15_magic_er_samples_new.out
+file length = 101
+parsing file: k15_magic_er_samples_correct.txt
+file length = 101
+Testing list output (for error)
+No difference found
+error raised
+error expected
+-
+running: test_outfile2_with_wrongfile2()
+testing: k15_magic_rmag_anisotropy_new.out against reference file: k15_magic_rmag_anisotropy_incorrect.txt
+parsing file: k15_magic_rmag_anisotropy_new.out
+file length = 502
+parsing file: k15_magic_rmag_anisotropy_incorrect.txt
+file length = 502
+checking list output
+output_list:         ['tab', 'rmag_anisotropy', 'anisotropy_mean', 'anisotropy_n', 'anisotropy_s1', 'anisotropy_s2', 'ani ...]
+correct_output_list: ['tab', 'rmag_anisotropy', 'anisotropy_mean', 'anisotropy_n', 'anisotropy_s1', 'anisotropy_s2', 'ani ...]
+Comparing two lists
+Output contained:    0.0010716667
+but should have had: 0.998717657
+Error raised
+error expected
+-
+running: test_outfile2_with_correctfile2()
+testing: k15_magic_rmag_anisotropy_new.out against reference file: k15_magic_rmag_anisotropy_correct.txt
+expecting an error
+parsing file: k15_magic_rmag_anisotropy_new.out
+file length = 502
+parsing file: k15_magic_rmag_anisotropy_correct.txt
+file length = 502
+Testing list output (for error)
+No difference found
+error raised
+error expected
+running: test_file1_with_file2 using k15_magic_measurements_new.out and k15_magic_measurements_correct.txt
+testing: k15_magic_measurements_new.out against reference file: k15_magic_measurements_correct.txt
+expecting an error
+parsing file: k15_magic_measurements_new.out
+file length = 1938
+parsing file: k15_magic_measurements_correct.txt
+file length = 1938
+Testing list output (for error)
+No difference found
+error raised
+error expected
+running: test_file1_with_file2 using k15_magic_measurements_new.out and k15_magic_measurements_incorrect.txt
+testing: k15_magic_measurements_new.out against reference file: k15_magic_measurements_incorrect.txt
+parsing file: k15_magic_measurements_new.out
+file length = 1938
+parsing file: k15_magic_measurements_incorrect.txt
+file length = 1938
+checking list output
+output_list:         ['tab', 'magic_measurements', 'er_citation_names', 'er_location_name', 'er_sample_name', 'er_site_na ...]
+correct_output_list: ['tab', 'magic_measurements', 'er_citation_names', 'er_location_name', 'er_sample_name', 'er_site_na ...]
+Comparing two lists
+Output contained:    135.0
+but should have had: 199.0
+Error raised
+error expected
+running: test_file1_with_file2 using k15_magic_rmag_results_new.out and k15_magic_rmag_results_correct.txt
+testing: k15_magic_rmag_results_new.out against reference file: k15_magic_rmag_results_correct.txt
+expecting an error
+parsing file: k15_magic_rmag_results_new.out
+file length = 1124
+parsing file: k15_magic_rmag_results_correct.txt
+file length = 1124
+Testing list output (for error)
+No difference found
+error raised
+error expected
+running: test_file1_with_file2 using k15_magic_rmag_results_new.out and k15_magic_rmag_results_incorrect.txt
+testing: k15_magic_rmag_results_new.out against reference file: k15_magic_rmag_results_incorrect.txt
+parsing file: k15_magic_rmag_results_new.out
+file length = 1124
+parsing file: k15_magic_rmag_results_incorrect.txt
+file length = 1124
+checking list output
+output_list:         ['tab', 'rmag_results', 'anisotropy_fest', 'anisotropy_ftest12', 'anisotropy_ftest23', 'anisotropy_t ...]
+correct_output_list: ['tab', 'rmag_results', 'anisotropy_fest', 'anisotropy_ftest12', 'anisotropy_ftest23', 'anisotropy_t ...]
+Comparing two lists
+Output contained:    282.4
+but should have had: 289.5
+Error raised
+error expected
+TRYING
+ - 
+Testing kly4s_magic.py
+anisotropy data saved in  /Users/nebula/Python/Basic_input_output/kly4s_rmag_anisotropy_new.out
+measurement data saved in  /Users/nebula/Python/Basic_input_output/kly4s_magic_measurements_new.out
+specimen information  saved in new  /Users/nebula/Python/Basic_input_output/er_specimens.txt
+
+Renamed er_specimens.txt to kly4s_er_specimens.txt
+testing: kly4s_magic_measurements_new.out against reference file: kly4s_magic_measurements_correct.txt
+parsing file: kly4s_magic_measurements_new.out
+file length = 487
+parsing file: kly4s_magic_measurements_correct.txt
+file length = 487
+checking list output
+output_list:         ['tab', 'magic_measurements', 'er_analyst_mail_names', 'er_citation_names', 'er_location_name', 'er_ ...]
+correct_output_list: ['tab', 'magic_measurements', 'er_analyst_mail_names', 'er_citation_names', 'er_location_name', 'er_ ...]
+Comparing two lists
+Lists were the same
+kly4s_magic.py produced correct output
+-
+testing: kly4s_rmag_anisotropy_new.out against reference file: kly4s_rmag_anisotropy_correct.txt
+parsing file: kly4s_rmag_anisotropy_new.out
+file length = 594
+parsing file: kly4s_rmag_anisotropy_correct.txt
+file length = 594
+checking list output
+output_list:         ['tab', 'rmag_anisotropy', 'anisotropy_n', 'anisotropy_s1', 'anisotropy_s2', 'anisotropy_s3', 'aniso ...]
+correct_output_list: ['tab', 'rmag_anisotropy', 'anisotropy_n', 'anisotropy_s1', 'anisotropy_s2', 'anisotropy_s3', 'aniso ...]
+Comparing two lists
+Lists were the same
+kly4s_magic.py produced correct output
+-
+testing: kly4s_magic_measurements_new.out against reference file: kly4s_magic_measurements_incorrect.txt
+expecting an error
+parsing file: kly4s_magic_measurements_new.out
+file length = 487
+parsing file: kly4s_magic_measurements_incorrect.txt
+file length = 487
+Testing list output (for error)
+output was:          318-U1359B-012H-1-W-68
+wrong reference was: 318-1359B-012H-1-W-68
+Difference found
+-
+testing: kly4s_rmag_anisotropy_new.out against reference file: kly4s_rmag_anisotropy_incorrect.txt
+expecting an error
+parsing file: kly4s_rmag_anisotropy_new.out
+file length = 594
+parsing file: kly4s_rmag_anisotropy_incorrect.txt
+file length = 594
+Testing list output (for error)
+output was:          0.3372498
+wrong reference was: 0.372498
+output was:          0.0001403
+wrong reference was: 0.0001404
+Difference found
+-
+testing: kly4s_er_specimens_new.out against reference file: kly4s_er_specimens_correct.txt
+parsing file: kly4s_er_specimens_new.out
+file length = 245
+parsing file: kly4s_er_specimens_correct.txt
+file length = 245
+checking list output
+output_list:         ['tab', 'er_specimens', 'er_analyst_mail_names', 'er_citation_names', 'er_location_name', 'er_sample ...]
+correct_output_list: ['tab', 'er_specimens', 'er_analyst_mail_names', 'er_citation_names', 'er_location_name', 'er_sample ...]
+Comparing two lists
+Lists were the same
+kly4s_magic.py produced correct output
+testing: kly4s_er_specimens_new.out against reference file: kly4s_er_specimens_incorrect.txt
+expecting an error
+parsing file: kly4s_er_specimens_new.out
+file length = 245
+parsing file: kly4s_er_specimens_incorrect.txt
+file length = 245
+Testing list output (for error)
+output was:          318-U1359B-013H-6-W-68
+wrong reference was: 318-U1359B-013H-0-P-68
+Difference found
+STARTING UNITTEST
+running: test_outfile1_with_wrongfile1
+testing: kly4s_magic_measurements_new.out against reference file: kly4s_magic_measurements_incorrect.txt
+parsing file: kly4s_magic_measurements_new.out
+file length = 487
+parsing file: kly4s_magic_measurements_incorrect.txt
+file length = 487
+checking list output
+output_list:         ['tab', 'magic_measurements', 'er_analyst_mail_names', 'er_citation_names', 'er_location_name', 'er_ ...]
+correct_output_list: ['tab', 'magic_measurements', 'er_analyst_mail_names', 'er_citation_names', 'er_location_name', 'er_ ...]
+Comparing two lists
+Output contained:    318-U1359B-012H-1-W-68
+but should have had: 318-1359B-012H-1-W-68
+Error raised
+error expected
+-
+running: test_outfile1_with_correctfile2
+testing: kly4s_magic_measurements_new.out against reference file: kly4s_magic_measurements_correct.txt
+expecting an error
+parsing file: kly4s_magic_measurements_new.out
+file length = 487
+parsing file: kly4s_magic_measurements_correct.txt
+file length = 487
+Testing list output (for error)
+No difference found
+error raised
+error expected
+-
+running: test_outfile2_with_wrongfile2()
+testing: kly4s_rmag_anisotropy_new.out against reference file: kly4s_rmag_anisotropy_incorrect.txt
+parsing file: kly4s_rmag_anisotropy_new.out
+file length = 594
+parsing file: kly4s_rmag_anisotropy_incorrect.txt
+file length = 594
+checking list output
+output_list:         ['tab', 'rmag_anisotropy', 'anisotropy_n', 'anisotropy_s1', 'anisotropy_s2', 'anisotropy_s3', 'aniso ...]
+correct_output_list: ['tab', 'rmag_anisotropy', 'anisotropy_n', 'anisotropy_s1', 'anisotropy_s2', 'anisotropy_s3', 'aniso ...]
+Comparing two lists
+Output contained:    0.3372498
+but should have had: 0.372498
+Error raised
+error expected
+-
+running: test_outfile2_with_correctfile2()
+testing: kly4s_rmag_anisotropy_new.out against reference file: kly4s_rmag_anisotropy_correct.txt
+expecting an error
+parsing file: kly4s_rmag_anisotropy_new.out
+file length = 594
+parsing file: kly4s_rmag_anisotropy_correct.txt
+file length = 594
+Testing list output (for error)
+No difference found
+error raised
+error expected
+running: test_file1_with_file2 using kly4s_er_specimens_new.out and kly4s_er_specimens_correct.txt
+testing: kly4s_er_specimens_new.out against reference file: kly4s_er_specimens_correct.txt
+expecting an error
+parsing file: kly4s_er_specimens_new.out
+file length = 245
+parsing file: kly4s_er_specimens_correct.txt
+file length = 245
+Testing list output (for error)
+No difference found
+error raised
+error expected
+running: test_file1_with_file2 using kly4s_er_specimens_new.out and kly4s_er_specimens_incorrect.txt
+testing: kly4s_er_specimens_new.out against reference file: kly4s_er_specimens_incorrect.txt
+parsing file: kly4s_er_specimens_new.out
+file length = 245
+parsing file: kly4s_er_specimens_incorrect.txt
+file length = 245
+checking list output
+output_list:         ['tab', 'er_specimens', 'er_analyst_mail_names', 'er_citation_names', 'er_location_name', 'er_sample ...]
+correct_output_list: ['tab', 'er_specimens', 'er_analyst_mail_names', 'er_citation_names', 'er_location_name', 'er_sample ...]
+Comparing two lists
+Output contained:    318-U1359B-013H-6-W-68
+but should have had: 318-U1359B-013H-0-P-68
+Error raised
+error expected
+TRYING
+ - 
+Testing pmag_results_extract.py
+data saved in:  /Users/nebula/Python/Basic_input_output/Directions.txt /Users/nebula/Python/Basic_input_output/Intensities.txt /Users/nebula/Python/Basic_input_output/SiteNfo.txt
+
+{}
+{}
+testing: /Users/nebula/Python/Basic_input_output/Intensities.txt against reference file: /Users/nebula/Python/Basic_input_output/pmag_results_extract_Intensities_correct.txt
+parsing file: /Users/nebula/Python/Basic_input_output/Intensities.txt
+file length = 12
+parsing file: /Users/nebula/Python/Basic_input_output/pmag_results_extract_Intensities_correct.txt
+file length = 12
+checking list output
+output_list:         ['Site', 'Specimens', 'Samples', 'N', 'B', '(uT)', 'sigma', 'sigma', 'perc', 'VADM', 'VADM', 'sigma' ...]
+correct_output_list: ['Site', 'Specimens', 'Samples', 'N', 'B', '(uT)', 'sigma', 'sigma', 'perc', 'VADM', 'VADM', 'sigma' ...]
+Comparing two lists
+Lists were the same
+pmag_results_extract.py produced correct output
+-
+testing: /Users/nebula/Python/Basic_input_output/Directions.txt against reference file: /Users/nebula/Python/Basic_input_output/pmag_results_extract_Directions_correct.txt
+parsing file: /Users/nebula/Python/Basic_input_output/Directions.txt
+file length = 286
+parsing file: /Users/nebula/Python/Basic_input_output/pmag_results_extract_Directions_correct.txt
+file length = 286
+checking list output
+output_list:         ['Site', 'Samples', 'Comp.', '%TC', 'Dec.', 'Inc.', 'Nl', 'Np', 'k', 'R', 'a95', 'PLat', 'PLong', 's ...]
+correct_output_list: ['Site', 'Samples', 'Comp.', '%TC', 'Dec.', 'Inc.', 'Nl', 'Np', 'k', 'R', 'a95', 'PLat', 'PLong', 's ...]
+Comparing two lists
+Lists were the same
+pmag_results_extract.py produced correct output
+-
+testing: /Users/nebula/Python/Basic_input_output/Intensities.txt against reference file: /Users/nebula/Python/Basic_input_output/pmag_results_extract_Intensities_incorrect.txt
+expecting an error
+parsing file: /Users/nebula/Python/Basic_input_output/Intensities.txt
+file length = 12
+parsing file: /Users/nebula/Python/Basic_input_output/pmag_results_extract_Intensities_incorrect.txt
+file length = 12
+Testing list output (for error)
+output was:          N
+wrong reference was: L
+Difference found
+-
+testing: /Users/nebula/Python/Basic_input_output/Directions.txt against reference file: /Users/nebula/Python/Basic_input_output/pmag_results_extract_Directions_incorrect.txt
+expecting an error
+parsing file: /Users/nebula/Python/Basic_input_output/Directions.txt
+file length = 286
+parsing file: /Users/nebula/Python/Basic_input_output/pmag_results_extract_Directions_incorrect.txt
+file length = 286
+Testing list output (for error)
+output was:          168.7
+wrong reference was: 168.2
+Difference found
+-
+testing: /Users/nebula/Python/Basic_input_output/SiteNfo.txt against reference file: /Users/nebula/Python/Basic_input_output/pmag_results_extract_SiteNfo_correct.txt
+parsing file: /Users/nebula/Python/Basic_input_output/SiteNfo.txt
+file length = 158
+parsing file: /Users/nebula/Python/Basic_input_output/pmag_results_extract_SiteNfo_correct.txt
+file length = 158
+checking list output
+output_list:         ['Site', 'Samples', 'Location', 'Lat.', '(N)', 'Long.', '(E)', 'Age', 'Age', 'sigma', 'Units', 'sr01 ...]
+correct_output_list: ['Site', 'Samples', 'Location', 'Lat.', '(N)', 'Long.', '(E)', 'Age', 'Age', 'sigma', 'Units', 'sr01 ...]
+Comparing two lists
+Lists were the same
+pmag_results_extract.py produced correct output
+testing: /Users/nebula/Python/Basic_input_output/SiteNfo.txt against reference file: /Users/nebula/Python/Basic_input_output/pmag_results_extract_SiteNfo_incorrect.txt
+expecting an error
+parsing file: /Users/nebula/Python/Basic_input_output/SiteNfo.txt
+file length = 158
+parsing file: /Users/nebula/Python/Basic_input_output/pmag_results_extract_SiteNfo_incorrect.txt
+file length = 158
+Testing list output (for error)
+output was:          43.8859
+wrong reference was: 43.9
+Difference found
+STARTING UNITTEST
+running: test_outfile1_with_wrongfile1
+testing: /Users/nebula/Python/Basic_input_output/Intensities.txt against reference file: /Users/nebula/Python/Basic_input_output/pmag_results_extract_Intensities_incorrect.txt
+parsing file: /Users/nebula/Python/Basic_input_output/Intensities.txt
+file length = 12
+parsing file: /Users/nebula/Python/Basic_input_output/pmag_results_extract_Intensities_incorrect.txt
+file length = 12
+checking list output
+output_list:         ['Site', 'Specimens', 'Samples', 'N', 'B', '(uT)', 'sigma', 'sigma', 'perc', 'VADM', 'VADM', 'sigma' ...]
+correct_output_list: ['Site', 'Specimens', 'Samples', 'L', 'B', '(uT)', 'sigma', 'sigma', 'perc', 'VADM', 'VADM', 'sigma' ...]
+Comparing two lists
+Output contained:    N
+but should have had: L
+Error raised
+error expected
+-
+running: test_outfile1_with_correctfile2
+testing: /Users/nebula/Python/Basic_input_output/Intensities.txt against reference file: /Users/nebula/Python/Basic_input_output/pmag_results_extract_Intensities_correct.txt
+expecting an error
+parsing file: /Users/nebula/Python/Basic_input_output/Intensities.txt
+file length = 12
+parsing file: /Users/nebula/Python/Basic_input_output/pmag_results_extract_Intensities_correct.txt
+file length = 12
+Testing list output (for error)
+No difference found
+error raised
+error expected
+-
+running: test_outfile2_with_wrongfile2()
+testing: /Users/nebula/Python/Basic_input_output/Directions.txt against reference file: /Users/nebula/Python/Basic_input_output/pmag_results_extract_Directions_incorrect.txt
+parsing file: /Users/nebula/Python/Basic_input_output/Directions.txt
+file length = 286
+parsing file: /Users/nebula/Python/Basic_input_output/pmag_results_extract_Directions_incorrect.txt
+file length = 286
+checking list output
+output_list:         ['Site', 'Samples', 'Comp.', '%TC', 'Dec.', 'Inc.', 'Nl', 'Np', 'k', 'R', 'a95', 'PLat', 'PLong', 's ...]
+correct_output_list: ['Site', 'Samples', 'Comp.', '%TC', 'Dec.', 'Inc.', 'Nl', 'Np', 'k', 'R', 'a95', 'PLat', 'PLong', 's ...]
+Comparing two lists
+Output contained:    168.7
+but should have had: 168.2
+Error raised
+error expected
+-
+running: test_outfile2_with_correctfile2()
+testing: /Users/nebula/Python/Basic_input_output/Directions.txt against reference file: /Users/nebula/Python/Basic_input_output/pmag_results_extract_Directions_correct.txt
+expecting an error
+parsing file: /Users/nebula/Python/Basic_input_output/Directions.txt
+file length = 286
+parsing file: /Users/nebula/Python/Basic_input_output/pmag_results_extract_Directions_correct.txt
+file length = 286
+Testing list output (for error)
+No difference found
+error raised
+error expected
+running: test_file1_with_file2 using /Users/nebula/Python/Basic_input_output/SiteNfo.txt and /Users/nebula/Python/Basic_input_output/pmag_results_extract_SiteNfo_correct.txt
+testing: /Users/nebula/Python/Basic_input_output/SiteNfo.txt against reference file: /Users/nebula/Python/Basic_input_output/pmag_results_extract_SiteNfo_correct.txt
+expecting an error
+parsing file: /Users/nebula/Python/Basic_input_output/SiteNfo.txt
+file length = 158
+parsing file: /Users/nebula/Python/Basic_input_output/pmag_results_extract_SiteNfo_correct.txt
+file length = 158
+Testing list output (for error)
+No difference found
+error raised
+error expected
+running: test_file1_with_file2 using /Users/nebula/Python/Basic_input_output/SiteNfo.txt and /Users/nebula/Python/Basic_input_output/pmag_results_extract_SiteNfo_incorrect.txt
+testing: /Users/nebula/Python/Basic_input_output/SiteNfo.txt against reference file: /Users/nebula/Python/Basic_input_output/pmag_results_extract_SiteNfo_incorrect.txt
+parsing file: /Users/nebula/Python/Basic_input_output/SiteNfo.txt
+file length = 158
+parsing file: /Users/nebula/Python/Basic_input_output/pmag_results_extract_SiteNfo_incorrect.txt
+file length = 158
+checking list output
+output_list:         ['Site', 'Samples', 'Location', 'Lat.', '(N)', 'Long.', '(E)', 'Age', 'Age', 'sigma', 'Units', 'sr01 ...]
+correct_output_list: ['Site', 'Samples', 'Location', 'Lat.', '(N)', 'Long.', '(E)', 'Age', 'Age', 'sigma', 'Units', 'sr01 ...]
+Comparing two lists
+Output contained:    43.8859
+but should have had: 43.9
+Error raised
+error expected
+TRYING
+ - 
+Testing orientation_magic.py
+CLEANING HOUSE
+-
+about to run WD program
+('orientation_magic.py', '-WD', '/Users/nebula/Python/Basic_input_output', '-f', 'orientation_magic_example.txt', '-Fsi', 'orientation_magic_er_sites_new.out', '-Fsa', 'orientation_magic_er_samples_new.out', None, 'stdin=None')
+stdout: saving data...
+Data saved in  /Users/nebula/Python/Basic_input_output/orientation_magic_er_samples_new.out  and  /Users/nebula/Python/Basic_input_output/orientation_magic_er_sites_new.out
+
+created: {}
+updated: {}
+testing: orientation_magic_er_sites_new.out against reference file: orientation_magic_er_sites_correct.out
+parsing file: orientation_magic_er_sites_new.out
+file length = 39
+parsing file: orientation_magic_er_sites_correct.out
+file length = 39
+checking list output
+output_list:         ['tab', 'er_sites', 'er_citation_names', 'er_location_name', 'er_site_name', 'site_class', 'site_def ...]
+correct_output_list: ['tab', 'er_sites', 'er_citation_names', 'er_location_name', 'er_site_name', 'site_class', 'site_def ...]
+Comparing two lists
+Lists were the same
+orientation_magic.py produced correct output
+-
+testing: orientation_magic_er_samples_new.out against reference file: orientation_magic_er_samples_correct.out
+parsing file: orientation_magic_er_samples_new.out
+file length = 534
+parsing file: orientation_magic_er_samples_correct.out
+file length = 534
+checking list output
+output_list:         ['tab', 'er_samples', 'cooling_rate_corr', 'cooling_rate_mcd', 'er_citation_names', 'er_location_nam ...]
+correct_output_list: ['tab', 'er_samples', 'cooling_rate_corr', 'cooling_rate_mcd', 'er_citation_names', 'er_location_nam ...]
+Comparing two lists
+Lists were the same
+orientation_magic.py produced correct output
+-
+testing: orientation_magic_er_sites_new.out against reference file: orientation_magic_er_sites_incorrect.out
+expecting an error
+parsing file: orientation_magic_er_sites_new.out
+file length = 39
+parsing file: orientation_magic_er_sites_incorrect.out
+file length = 39
+Testing list output (for error)
+output was:          -78.26133
+wrong reference was: -78.26883
+Difference found
+-
+testing: orientation_magic_er_samples_new.out against reference file: orientation_magic_er_samples_incorrect.out
+expecting an error
+parsing file: orientation_magic_er_samples_new.out
+file length = 534
+parsing file: orientation_magic_er_samples_incorrect.out
+file length = 534
+Testing list output (for error)
+output was:          Not
+wrong reference was: TOE
+Difference found
+-
+STARTING UNITTEST
+running: test_outfile1_with_wrongfile1
+testing: orientation_magic_er_sites_new.out against reference file: orientation_magic_er_sites_incorrect.out
+parsing file: orientation_magic_er_sites_new.out
+file length = 39
+parsing file: orientation_magic_er_sites_incorrect.out
+file length = 39
+checking list output
+output_list:         ['tab', 'er_sites', 'er_citation_names', 'er_location_name', 'er_site_name', 'site_class', 'site_def ...]
+correct_output_list: ['tab', 'er_sites', 'er_citation_names', 'er_location_name', 'er_site_name', 'site_class', 'site_def ...]
+Comparing two lists
+Output contained:    -78.26133
+but should have had: -78.26883
+Error raised
+error expected
+-
+running: test_outfile1_with_correctfile2
+testing: orientation_magic_er_sites_new.out against reference file: orientation_magic_er_sites_correct.out
+expecting an error
+parsing file: orientation_magic_er_sites_new.out
+file length = 39
+parsing file: orientation_magic_er_sites_correct.out
+file length = 39
+Testing list output (for error)
+No difference found
+error raised
+error expected
+-
+running: test_outfile2_with_wrongfile2()
+testing: orientation_magic_er_samples_new.out against reference file: orientation_magic_er_samples_incorrect.out
+parsing file: orientation_magic_er_samples_new.out
+file length = 534
+parsing file: orientation_magic_er_samples_incorrect.out
+file length = 534
+checking list output
+output_list:         ['tab', 'er_samples', 'cooling_rate_corr', 'cooling_rate_mcd', 'er_citation_names', 'er_location_nam ...]
+correct_output_list: ['tab', 'er_samples', 'cooling_rate_corr', 'cooling_rate_mcd', 'er_citation_names', 'er_location_nam ...]
+Comparing two lists
+Output contained:    Not
+but should have had: TOE
+Error raised
+error expected
+-
+running: test_outfile2_with_correctfile2()
+testing: orientation_magic_er_samples_new.out against reference file: orientation_magic_er_samples_correct.out
+expecting an error
+parsing file: orientation_magic_er_samples_new.out
+file length = 534
+parsing file: orientation_magic_er_samples_correct.out
+file length = 534
+Testing list output (for error)
+No difference found
+error raised
+error expected
+TRYING
+ - 
+Testing thellier_magic_redo.py
+STDOUT: Processing  112  specimens - please wait 
+Optimization terminated successfully.
+         Current function value: 0.000000
+         Iterations: 68
+         Function evaluations: 140
+Optimization terminated successfully.
+         Current function value: 0.000000
+         Iterations: 48
+         Function evaluations: 118
+s1p1-01  Banc=  85.5544088616
+WARNING: NO FTEST ON ANISOTROPY PERFORMED BECAUSE OF MISSING SIGMA - DOING CORRECTION ANYWAY
+Optimization terminated successfully.
+         Current function value: 0.000000
+         Iterations: 66
+         Function evaluations: 144
+Optimization terminated successfully.
+         Current function value: 0.000000
+         Iterations: 49
+         Function evaluations: 117
+s1p1-02  Banc=  88.2692101008
+WARNING: NO FTEST ON ANISOTROPY PERFORMED BECAUSE OF MISSING SIGMA - DOING CORRECTION ANYWAY
+Optimization terminated successfully.
+         Current function value: 0.000000
+         Iterations: 61
+         Function evaluations: 135
+Optimization terminated successfully.
+         Current function value: 0.000000
+         Iterations: 50
+         Function evaluations: 115
+s1p1-03  Banc=  74.269831603
+WARNING: NO FTEST ON ANISOTROPY PERFORMED BECAUSE OF MISSING SIGMA - DOING CORRECTION ANYWAY
+Optimization terminated successfully.
+         Current function value: 0.000000
+         Iterations: 59
+         Function evaluations: 131
+Optimization terminated successfully.
+         Current function value: 0.000000
+         Iterations: 54
+         Function evaluations: 122
+s1s100-01  Banc=  118.00820883
+WARNING: NO FTEST ON ANISOTROPY PERFORMED BECAUSE OF MISSING SIGMA - DOING CORRECTION ANYWAY
+Optimization terminated successfully.
+         Current function value: 0.000000
+         Iterations: 62
+         Function evaluations: 137
+Optimization terminated successfully.
+         Current function value: 0.000000
+         Iterations: 48
+         Function evaluations: 108
+s1s100-02  Banc=  115.611466974
+WARNING: NO FTEST ON ANISOTROPY PERFORMED BECAUSE OF MISSING SIGMA - DOING CORRECTION ANYWAY
+Optimization terminated successfully.
+         Current function value: 0.000000
+         Iterations: 66
+         Function evaluations: 136
+Optimization terminated successfully.
+         Current function value: 0.000000
+         Iterations: 52
+         Function evaluations: 125
+s1s100-03  Banc=  80.8194143077
+WARNING: NO FTEST ON ANISOTROPY PERFORMED BECAUSE OF MISSING SIGMA - DOING CORRECTION ANYWAY
+Optimization terminated successfully.
+         Current function value: 0.000000
+         Iterations: 64
+         Function evaluations: 140
+Optimization terminated successfully.
+         Current function value: 0.000000
+         Iterations: 46
+         Function evaluations: 112
+WARNING: Fmin did not converge second time
+[  2.46529366e-07   1.37012394e+04] [  2.46535067e-07   1.37006002e+04] 0.001
+s1s100-04  Banc=  104.510821214
+WARNING: NO FTEST ON ANISOTROPY PERFORMED BECAUSE OF MISSING SIGMA - DOING CORRECTION ANYWAY
+Optimization terminated successfully.
+         Current function value: 0.000000
+         Iterations: 65
+         Function evaluations: 139
+Optimization terminated successfully.
+         Current function value: 0.000000
+         Iterations: 52
+         Function evaluations: 126
+WARNING: Fmin did not converge second time
+[  1.32908395e-07   1.37169814e+04] [  1.32908187e-07   1.37170247e+04] 0.001
+s1s110-01  Banc=  67.8168403654
+WARNING: NO FTEST ON ANISOTROPY PERFORMED BECAUSE OF MISSING SIGMA - DOING CORRECTION ANYWAY
+Optimization terminated successfully.
+         Current function value: 0.000000
+         Iterations: 62
+         Function evaluations: 141
+Optimization terminated successfully.
+         Current function value: 0.000000
+         Iterations: 46
+         Function evaluations: 108
+s1s110-02  Banc=  66.7639421194
+WARNING: NO FTEST ON ANISOTROPY PERFORMED BECAUSE OF MISSING SIGMA - DOING CORRECTION ANYWAY
+Optimization terminated successfully.
+         Current function value: 0.000000
+         Iterations: 60
+         Function evaluations: 124
+Optimization terminated successfully.
+         Current function value: 0.000000
+         Iterations: 46
+         Function evaluations: 113
+s1s110-03  Banc=  70.6503430821
+WARNING: NO FTEST ON ANISOTROPY PERFORMED BECAUSE OF MISSING SIGMA - DOING CORRECTION ANYWAY
+Optimization terminated successfully.
+         Current function value: 0.000000
+         Iterations: 64
+         Function evaluations: 138
+Optimization terminated successfully.
+         Current function value: 0.000000
+         Iterations: 44
+         Function evaluations: 111
+s1s110-04  Banc=  80.6804192618
+WARNING: NO FTEST ON ANISOTROPY PERFORMED BECAUSE OF MISSING SIGMA - DOING CORRECTION ANYWAY
+Optimization terminated successfully.
+         Current function value: 0.000000
+         Iterations: 69
+         Function evaluations: 152
+Optimization terminated successfully.
+         Current function value: 0.000000
+         Iterations: 51
+         Function evaluations: 119
+s1s119-01  Banc=  63.0319732706
+WARNING: NO FTEST ON ANISOTROPY PERFORMED BECAUSE OF MISSING SIGMA - DOING CORRECTION ANYWAY
+Optimization terminated successfully.
+         Current function value: 0.000000
+         Iterations: 67
+         Function evaluations: 144
+Optimization terminated successfully.
+         Current function value: 0.000000
+         Iterations: 45
+         Function evaluations: 114
+s1s119-02  Banc=  62.6584824061
+WARNING: NO FTEST ON ANISOTROPY PERFORMED BECAUSE OF MISSING SIGMA - DOING CORRECTION ANYWAY
+Optimization terminated successfully.
+         Current function value: 0.000000
+         Iterations: 63
+         Function evaluations: 139
+Optimization terminated successfully.
+         Current function value: 0.000000
+         Iterations: 48
+         Function evaluations: 112
+s1s119-03  Banc=  65.9828586482
+WARNING: NO FTEST ON ANISOTROPY PERFORMED BECAUSE OF MISSING SIGMA - DOING CORRECTION ANYWAY
+Optimization terminated successfully.
+         Current function value: 0.000000
+         Iterations: 63
+         Function evaluations: 140
+Optimization terminated successfully.
+         Current function value: 0.000000
+         Iterations: 47
+         Function evaluations: 116
+s1s119-04  Banc=  57.3464925765
+WARNING: NO FTEST ON ANISOTROPY PERFORMED BECAUSE OF MISSING SIGMA - DOING CORRECTION ANYWAY
+Optimization terminated successfully.
+         Current function value: 0.000001
+         Iterations: 54
+         Function evaluations: 126
+Optimization terminated successfully.
+         Current function value: 0.000001
+         Iterations: 45
+         Function evaluations: 112
+WARNING: Fmin did not converge second time
+[  1.36478692e-06   1.51082058e+04] [  1.36474560e-06   1.51091680e+04] 0.001
+s1s12-01  Banc=  70.0347718647
+WARNING: NO FTEST ON ANISOTROPY PERFORMED BECAUSE OF MISSING SIGMA - DOING CORRECTION ANYWAY
+Optimization terminated successfully.
+         Current function value: 0.000000
+         Iterations: 65
+         Function evaluations: 142
+Optimization terminated successfully.
+         Current function value: 0.000000
+         Iterations: 48
+         Function evaluations: 116
+s1s12-02  Banc=  62.9496153622
+WARNING: NO FTEST ON ANISOTROPY PERFORMED BECAUSE OF MISSING SIGMA - DOING CORRECTION ANYWAY
+Optimization terminated successfully.
+         Current function value: 0.000000
+         Iterations: 54
+         Function evaluations: 125
+Optimization terminated successfully.
+         Current function value: 0.000000
+         Iterations: 45
+         Function evaluations: 114
+s1s12-03  Banc=  64.5444313691
+WARNING: NO FTEST ON ANISOTROPY PERFORMED BECAUSE OF MISSING SIGMA - DOING CORRECTION ANYWAY
+Optimization terminated successfully.
+         Current function value: 0.000000
+         Iterations: 62
+         Function evaluations: 135
+Optimization terminated successfully.
+         Current function value: 0.000000
+         Iterations: 53
+         Function evaluations: 126
+s1s12-04  Banc=  63.5779331947
+WARNING: NO FTEST ON ANISOTROPY PERFORMED BECAUSE OF MISSING SIGMA - DOING CORRECTION ANYWAY
+Optimization terminated successfully.
+         Current function value: 0.000000
+         Iterations: 62
+         Function evaluations: 143
+Optimization terminated successfully.
+         Current function value: 0.000000
+         Iterations: 44
+         Function evaluations: 108
+s1s12-05  Banc=  62.9658676615
+WARNING: NO FTEST ON ANISOTROPY PERFORMED BECAUSE OF MISSING SIGMA - DOING CORRECTION ANYWAY
+Optimization terminated successfully.
+         Current function value: 0.000000
+         Iterations: 63
+         Function evaluations: 143
+Optimization terminated successfully.
+         Current function value: 0.000000
+         Iterations: 47
+         Function evaluations: 115
+s1s124-01  Banc=  60.687967586
+WARNING: NO FTEST ON ANISOTROPY PERFORMED BECAUSE OF MISSING SIGMA - DOING CORRECTION ANYWAY
+Optimization terminated successfully.
+         Current function value: 0.000000
+         Iterations: 61
+         Function evaluations: 138
+Optimization terminated successfully.
+         Current function value: 0.000000
+         Iterations: 43
+         Function evaluations: 107
+s1s124-02  Banc=  70.1340962811
+WARNING: NO FTEST ON ANISOTROPY PERFORMED BECAUSE OF MISSING SIGMA - DOING CORRECTION ANYWAY
+Optimization terminated successfully.
+         Current function value: 0.000000
+         Iterations: 68
+         Function evaluations: 143
+Optimization terminated successfully.
+         Current function value: 0.000000
+         Iterations: 46
+         Function evaluations: 112
+s1s124-03  Banc=  88.6259805854
+WARNING: NO FTEST ON ANISOTROPY PERFORMED BECAUSE OF MISSING SIGMA - DOING CORRECTION ANYWAY
+Optimization terminated successfully.
+         Current function value: 0.000000
+         Iterations: 55
+         Function evaluations: 131
+Optimization terminated successfully.
+         Current function value: 0.000000
+         Iterations: 48
+         Function evaluations: 115
+s1s124-04  Banc=  68.5269708919
+WARNING: NO FTEST ON ANISOTROPY PERFORMED BECAUSE OF MISSING SIGMA - DOING CORRECTION ANYWAY
+Optimization terminated successfully.
+         Current function value: 0.000000
+         Iterations: 69
+         Function evaluations: 147
+Optimization terminated successfully.
+         Current function value: 0.000000
+         Iterations: 46
+         Function evaluations: 111
+WARNING: Fmin did not converge second time
+[  4.18143316e-07   1.36515876e+04] [  4.18148683e-07   1.36512358e+04] 0.001
+s1s14-05  Banc=  56.1455944135
+WARNING: NO FTEST ON ANISOTROPY PERFORMED BECAUSE OF MISSING SIGMA - DOING CORRECTION ANYWAY
+Optimization terminated successfully.
+         Current function value: 0.000000
+         Iterations: 62
+         Function evaluations: 135
+Optimization terminated successfully.
+         Current function value: 0.000000
+         Iterations: 44
+         Function evaluations: 108
+s1s14-06  Banc=  57.5212009183
+WARNING: NO FTEST ON ANISOTROPY PERFORMED BECAUSE OF MISSING SIGMA - DOING CORRECTION ANYWAY
+Optimization terminated successfully.
+         Current function value: 0.000000
+         Iterations: 65
+         Function evaluations: 146
+Optimization terminated successfully.
+         Current function value: 0.000000
+         Iterations: 48
+         Function evaluations: 122
+s1s14-07  Banc=  53.7139356602
+WARNING: NO FTEST ON ANISOTROPY PERFORMED BECAUSE OF MISSING SIGMA - DOING CORRECTION ANYWAY
+Optimization terminated successfully.
+         Current function value: 0.000000
+         Iterations: 64
+         Function evaluations: 140
+Optimization terminated successfully.
+         Current function value: 0.000000
+         Iterations: 51
+         Function evaluations: 114
+s1s14-08  Banc=  57.3980258354
+WARNING: NO FTEST ON ANISOTROPY PERFORMED BECAUSE OF MISSING SIGMA - DOING CORRECTION ANYWAY
+Optimization terminated successfully.
+         Current function value: 0.000000
+         Iterations: 68
+         Function evaluations: 147
+Optimization terminated successfully.
+         Current function value: 0.000000
+         Iterations: 52
+         Function evaluations: 122
+WARNING: Fmin did not converge second time
+[  4.81675014e-07   1.43535361e+04] [  4.81674923e-07   1.43535414e+04] 0.001
+s1s16-01  Banc=  69.6841826061
+WARNING: NO FTEST ON ANISOTROPY PERFORMED BECAUSE OF MISSING SIGMA - DOING CORRECTION ANYWAY
+Optimization terminated successfully.
+         Current function value: 0.000001
+         Iterations: 60
+         Function evaluations: 134
+Optimization terminated successfully.
+         Current function value: 0.000001
+         Iterations: 51
+         Function evaluations: 116
+s1s16-02  Banc=  67.0724340515
+WARNING: NO FTEST ON ANISOTROPY PERFORMED BECAUSE OF MISSING SIGMA - DOING CORRECTION ANYWAY
+Optimization terminated successfully.
+         Current function value: 0.000000
+         Iterations: 62
+         Function evaluations: 138
+Optimization terminated successfully.
+         Current function value: 0.000000
+         Iterations: 46
+         Function evaluations: 114
+s1s16-03  Banc=  69.7084984904
+WARNING: NO FTEST ON ANISOTROPY PERFORMED BECAUSE OF MISSING SIGMA - DOING CORRECTION ANYWAY
+Optimization terminated successfully.
+         Current function value: 0.000000
+         Iterations: 62
+         Function evaluations: 133
+Optimization terminated successfully.
+         Current function value: 0.000000
+         Iterations: 47
+         Function evaluations: 116
+s1s16-04  Banc=  59.3276718547
+WARNING: NO FTEST ON ANISOTROPY PERFORMED BECAUSE OF MISSING SIGMA - DOING CORRECTION ANYWAY
+Optimization terminated successfully.
+         Current function value: 0.000000
+         Iterations: 64
+         Function evaluations: 137
+Optimization terminated successfully.
+         Current function value: 0.000000
+         Iterations: 51
+         Function evaluations: 121
+s1s16-05  Banc=  59.0472228276
+WARNING: NO FTEST ON ANISOTROPY PERFORMED BECAUSE OF MISSING SIGMA - DOING CORRECTION ANYWAY
+Optimization terminated successfully.
+         Current function value: 0.000000
+         Iterations: 62
+         Function evaluations: 139
+Optimization terminated successfully.
+         Current function value: 0.000000
+         Iterations: 53
+         Function evaluations: 124
+WARNING: Fmin did not converge second time
+[  8.95967484e-07   1.47457115e+04] [  8.95967405e-07   1.47457141e+04] 0.001
+s1s20-01  Banc=  66.9257745284
+WARNING: NO FTEST ON ANISOTROPY PERFORMED BECAUSE OF MISSING SIGMA - DOING CORRECTION ANYWAY
+Optimization terminated successfully.
+         Current function value: 0.000000
+         Iterations: 61
+         Function evaluations: 136
+Optimization terminated successfully.
+         Current function value: 0.000000
+         Iterations: 47
+         Function evaluations: 118
+s1s20-02  Banc=  76.6233966741
+WARNING: NO FTEST ON ANISOTROPY PERFORMED BECAUSE OF MISSING SIGMA - DOING CORRECTION ANYWAY
+Optimization terminated successfully.
+         Current function value: 0.000000
+         Iterations: 67
+         Function evaluations: 138
+Optimization terminated successfully.
+         Current function value: 0.000000
+         Iterations: 44
+         Function evaluations: 108
+s1s20-04  Banc=  68.2777504415
+WARNING: NO FTEST ON ANISOTROPY PERFORMED BECAUSE OF MISSING SIGMA - DOING CORRECTION ANYWAY
+Optimization terminated successfully.
+         Current function value: 0.000000
+         Iterations: 65
+         Function evaluations: 136
+Optimization terminated successfully.
+         Current function value: 0.000000
+         Iterations: 47
+         Function evaluations: 118
+WARNING: Fmin did not converge second time
+[  4.58926793e-07   1.35836996e+04] [  4.58891445e-07   1.35857884e+04] 0.001
+s1s20-05  Banc=  73.8561505778
+WARNING: NO FTEST ON ANISOTROPY PERFORMED BECAUSE OF MISSING SIGMA - DOING CORRECTION ANYWAY
+Optimization terminated successfully.
+         Current function value: 0.000000
+         Iterations: 61
+         Function evaluations: 139
+Optimization terminated successfully.
+         Current function value: 0.000000
+         Iterations: 51
+         Function evaluations: 119
+WARNING: Fmin did not converge second time
+[  5.45872183e-07   1.48808748e+04] [  5.45876692e-07   1.48806212e+04] 0.001
+ERROR:  TRMinv: (1-x)==0.
+WARNING: NO FTEST ON ANISOTROPY PERFORMED BECAUSE OF MISSING SIGMA - DOING CORRECTION ANYWAY
+Optimization terminated successfully.
+         Current function value: 0.000000
+         Iterations: 62
+         Function evaluations: 143
+Optimization terminated successfully.
+         Current function value: 0.000000
+         Iterations: 46
+         Function evaluations: 115
+s1s24-02  Banc=  63.1546464191
+WARNING: NO FTEST ON ANISOTROPY PERFORMED BECAUSE OF MISSING SIGMA - DOING CORRECTION ANYWAY
+Optimization terminated successfully.
+         Current function value: 0.000000
+         Iterations: 56
+         Function evaluations: 134
+Optimization terminated successfully.
+         Current function value: 0.000000
+         Iterations: 50
+         Function evaluations: 118
+s1s24-03  Banc=  80.0523640178
+WARNING: NO FTEST ON ANISOTROPY PERFORMED BECAUSE OF MISSING SIGMA - DOING CORRECTION ANYWAY
+Optimization terminated successfully.
+         Current function value: 0.000000
+         Iterations: 61
+         Function evaluations: 132
+Optimization terminated successfully.
+         Current function value: 0.000000
+         Iterations: 46
+         Function evaluations: 115
+s1s24-04  Banc=  91.4380719977
+WARNING: NO FTEST ON ANISOTROPY PERFORMED BECAUSE OF MISSING SIGMA - DOING CORRECTION ANYWAY
+Optimization terminated successfully.
+         Current function value: 0.000000
+         Iterations: 70
+         Function evaluations: 150
+Optimization terminated successfully.
+         Current function value: 0.000000
+         Iterations: 44
+         Function evaluations: 105
+s1s24-05  Banc=  42.9379853453
+WARNING: NO FTEST ON ANISOTROPY PERFORMED BECAUSE OF MISSING SIGMA - DOING CORRECTION ANYWAY
+Optimization terminated successfully.
+         Current function value: 0.000000
+         Iterations: 66
+         Function evaluations: 138
+Optimization terminated successfully.
+         Current function value: 0.000000
+         Iterations: 45
+         Function evaluations: 109
+WARNING: Fmin did not converge second time
+[  3.71268854e-07   1.38925280e+04] [  3.71268027e-07   1.38925916e+04] 0.001
+s1s37-05  Banc=  75.5768719914
+WARNING: NO FTEST ON ANISOTROPY PERFORMED BECAUSE OF MISSING SIGMA - DOING CORRECTION ANYWAY
+Optimization terminated successfully.
+         Current function value: 0.000000
+         Iterations: 58
+         Function evaluations: 134
+Optimization terminated successfully.
+         Current function value: 0.000000
+         Iterations: 45
+         Function evaluations: 107
+WARNING: Fmin did not converge second time
+[  6.56489569e-07   1.39621084e+04] [  6.56517789e-07   1.39608685e+04] 0.001
+s1s42-01  Banc=  83.4977315821
+WARNING: NO FTEST ON ANISOTROPY PERFORMED BECAUSE OF MISSING SIGMA - DOING CORRECTION ANYWAY
+Optimization terminated successfully.
+         Current function value: 0.000000
+         Iterations: 62
+         Function evaluations: 141
+Optimization terminated successfully.
+         Current function value: 0.000000
+         Iterations: 53
+         Function evaluations: 124
+s1s42-02  Banc=  59.815228011
+WARNING: NO FTEST ON ANISOTROPY PERFORMED BECAUSE OF MISSING SIGMA - DOING CORRECTION ANYWAY
+Optimization terminated successfully.
+         Current function value: 0.000000
+         Iterations: 62
+         Function evaluations: 139
+Optimization terminated successfully.
+         Current function value: 0.000000
+         Iterations: 41
+         Function evaluations: 106
+s1s42-05  Banc=  78.5157773133
+WARNING: NO FTEST ON ANISOTROPY PERFORMED BECAUSE OF MISSING SIGMA - DOING CORRECTION ANYWAY
+Optimization terminated successfully.
+         Current function value: 0.000000
+         Iterations: 66
+         Function evaluations: 141
+Optimization terminated successfully.
+         Current function value: 0.000000
+         Iterations: 51
+         Function evaluations: 114
+s1s44-01  Banc=  93.6955229021
+WARNING: NO FTEST ON ANISOTROPY PERFORMED BECAUSE OF MISSING SIGMA - DOING CORRECTION ANYWAY
+Optimization terminated successfully.
+         Current function value: 0.000000
+         Iterations: 57
+         Function evaluations: 130
+Optimization terminated successfully.
+         Current function value: 0.000000
+         Iterations: 47
+         Function evaluations: 118
+s1s44-02  Banc=  91.2567936532
+WARNING: NO FTEST ON ANISOTROPY PERFORMED BECAUSE OF MISSING SIGMA - DOING CORRECTION ANYWAY
+Optimization terminated successfully.
+         Current function value: 0.000000
+         Iterations: 64
+         Function evaluations: 139
+Optimization terminated successfully.
+         Current function value: 0.000000
+         Iterations: 47
+         Function evaluations: 113
+s1s44-03  Banc=  99.928395903
+WARNING: NO FTEST ON ANISOTROPY PERFORMED BECAUSE OF MISSING SIGMA - DOING CORRECTION ANYWAY
+Optimization terminated successfully.
+         Current function value: 0.000000
+         Iterations: 60
+         Function evaluations: 136
+Optimization terminated successfully.
+         Current function value: 0.000000
+         Iterations: 47
+         Function evaluations: 117
+s1s44-04  Banc=  84.2236645836
+WARNING: NO FTEST ON ANISOTROPY PERFORMED BECAUSE OF MISSING SIGMA - DOING CORRECTION ANYWAY
+Optimization terminated successfully.
+         Current function value: 0.000000
+         Iterations: 62
+         Function evaluations: 137
+Optimization terminated successfully.
+         Current function value: 0.000000
+         Iterations: 48
+         Function evaluations: 115
+s1s44-06  Banc=  81.4000884584
+WARNING: NO FTEST ON ANISOTROPY PERFORMED BECAUSE OF MISSING SIGMA - DOING CORRECTION ANYWAY
+Optimization terminated successfully.
+         Current function value: 0.000000
+         Iterations: 58
+         Function evaluations: 126
+Optimization terminated successfully.
+         Current function value: 0.000000
+         Iterations: 48
+         Function evaluations: 120
+s1s47-01  Banc=  97.1273696641
+WARNING: NO FTEST ON ANISOTROPY PERFORMED BECAUSE OF MISSING SIGMA - DOING CORRECTION ANYWAY
+Optimization terminated successfully.
+         Current function value: 0.000000
+         Iterations: 66
+         Function evaluations: 148
+Optimization terminated successfully.
+         Current function value: 0.000000
+         Iterations: 45
+         Function evaluations: 111
+WARNING: Fmin did not converge second time
+[  1.06782798e-06   1.48652406e+04] [  1.06782417e-06   1.48653499e+04] 0.001
+s1s47-02  Banc=  77.0833338588
+WARNING: NO FTEST ON ANISOTROPY PERFORMED BECAUSE OF MISSING SIGMA - DOING CORRECTION ANYWAY
+Optimization terminated successfully.
+         Current function value: 0.000000
+         Iterations: 61
+         Function evaluations: 134
+Optimization terminated successfully.
+         Current function value: 0.000000
+         Iterations: 50
+         Function evaluations: 117
+WARNING: Fmin did not converge second time
+[  4.27829221e-07   1.49540043e+04] [  4.27829197e-07   1.49540060e+04] 0.001
+s1s47-03  Banc=  70.4066126479
+WARNING: NO FTEST ON ANISOTROPY PERFORMED BECAUSE OF MISSING SIGMA - DOING CORRECTION ANYWAY
+Optimization terminated successfully.
+         Current function value: 0.000001
+         Iterations: 64
+         Function evaluations: 137
+Optimization terminated successfully.
+         Current function value: 0.000001
+         Iterations: 49
+         Function evaluations: 114
+s1s47-04  Banc=  69.3627994037
+WARNING: NO FTEST ON ANISOTROPY PERFORMED BECAUSE OF MISSING SIGMA - DOING CORRECTION ANYWAY
+Optimization terminated successfully.
+         Current function value: 0.000000
+         Iterations: 58
+         Function evaluations: 130
+Optimization terminated successfully.
+         Current function value: 0.000000
+         Iterations: 50
+         Function evaluations: 118
+s1s47-05  Banc=  68.7080064857
+WARNING: NO FTEST ON ANISOTROPY PERFORMED BECAUSE OF MISSING SIGMA - DOING CORRECTION ANYWAY
+Optimization terminated successfully.
+         Current function value: 0.000000
+         Iterations: 67
+         Function evaluations: 140
+Optimization terminated successfully.
+         Current function value: 0.000000
+         Iterations: 47
+         Function evaluations: 114
+s1s47-06  Banc=  59.2551811854
+WARNING: NO FTEST ON ANISOTROPY PERFORMED BECAUSE OF MISSING SIGMA - DOING CORRECTION ANYWAY
+Optimization terminated successfully.
+         Current function value: 0.000000
+         Iterations: 60
+         Function evaluations: 135
+Optimization terminated successfully.
+         Current function value: 0.000000
+         Iterations: 46
+         Function evaluations: 112
+s1s47-07  Banc=  65.9639754685
+WARNING: NO FTEST ON ANISOTROPY PERFORMED BECAUSE OF MISSING SIGMA - DOING CORRECTION ANYWAY
+Optimization terminated successfully.
+         Current function value: 0.000000
+         Iterations: 62
+         Function evaluations: 138
+Optimization terminated successfully.
+         Current function value: 0.000000
+         Iterations: 45
+         Function evaluations: 112
+s1s48-01  Banc=  59.4770419317
+WARNING: NO FTEST ON ANISOTROPY PERFORMED BECAUSE OF MISSING SIGMA - DOING CORRECTION ANYWAY
+Optimization terminated successfully.
+         Current function value: 0.000000
+         Iterations: 60
+         Function evaluations: 138
+Optimization terminated successfully.
+         Current function value: 0.000000
+         Iterations: 47
+         Function evaluations: 113
+s1s48-05  Banc=  55.5768134635
+WARNING: NO FTEST ON ANISOTROPY PERFORMED BECAUSE OF MISSING SIGMA - DOING CORRECTION ANYWAY
+Optimization terminated successfully.
+         Current function value: 0.000000
+         Iterations: 63
+         Function evaluations: 141
+Optimization terminated successfully.
+         Current function value: 0.000000
+         Iterations: 47
+         Function evaluations: 112
+s1s48-3a  Banc=  68.14090146
+WARNING: NO FTEST ON ANISOTROPY PERFORMED BECAUSE OF MISSING SIGMA - DOING CORRECTION ANYWAY
+Optimization terminated successfully.
+         Current function value: 0.000000
+         Iterations: 64
+         Function evaluations: 135
+Optimization terminated successfully.
+         Current function value: 0.000000
+         Iterations: 48
+         Function evaluations: 117
+s1s48-4a  Banc=  69.6516723601
+WARNING: NO FTEST ON ANISOTROPY PERFORMED BECAUSE OF MISSING SIGMA - DOING CORRECTION ANYWAY
+Optimization terminated successfully.
+         Current function value: 0.000000
+         Iterations: 62
+         Function evaluations: 137
+Optimization terminated successfully.
+         Current function value: 0.000000
+         Iterations: 53
+         Function evaluations: 125
+WARNING: Fmin did not converge second time
+[  1.79163699e-07   1.46707354e+04] [  1.79163435e-07   1.46707793e+04] 0.001
+s1s53-01  Banc=  63.8618625701
+WARNING: NO FTEST ON ANISOTROPY PERFORMED BECAUSE OF MISSING SIGMA - DOING CORRECTION ANYWAY
+Optimization terminated successfully.
+         Current function value: 0.000000
+         Iterations: 67
+         Function evaluations: 141
+Optimization terminated successfully.
+         Current function value: 0.000000
+         Iterations: 52
+         Function evaluations: 119
+WARNING: Fmin did not converge second time
+[  8.73727211e-07   1.45914798e+04] [  8.73732186e-07   1.45913125e+04] 0.001
+s1s53-02  Banc=  64.7965127233
+WARNING: NO FTEST ON ANISOTROPY PERFORMED BECAUSE OF MISSING SIGMA - DOING CORRECTION ANYWAY
+Optimization terminated successfully.
+         Current function value: 0.000000
+         Iterations: 63
+         Function evaluations: 136
+Optimization terminated successfully.
+         Current function value: 0.000000
+         Iterations: 46
+         Function evaluations: 115
+s1s53-04  Banc=  67.7455426207
+WARNING: NO FTEST ON ANISOTROPY PERFORMED BECAUSE OF MISSING SIGMA - DOING CORRECTION ANYWAY
+Optimization terminated successfully.
+         Current function value: 0.000000
+         Iterations: 59
+         Function evaluations: 131
+Optimization terminated successfully.
+         Current function value: 0.000000
+         Iterations: 50
+         Function evaluations: 117
+s1s53-05  Banc=  67.5887253071
+WARNING: NO FTEST ON ANISOTROPY PERFORMED BECAUSE OF MISSING SIGMA - DOING CORRECTION ANYWAY
+Optimization terminated successfully.
+         Current function value: 0.000000
+         Iterations: 60
+         Function evaluations: 132
+Optimization terminated successfully.
+         Current function value: 0.000000
+         Iterations: 43
+         Function evaluations: 105
+s1s53-06  Banc=  64.6716053917
+WARNING: NO FTEST ON ANISOTROPY PERFORMED BECAUSE OF MISSING SIGMA - DOING CORRECTION ANYWAY
+Optimization terminated successfully.
+         Current function value: 0.000000
+         Iterations: 62
+         Function evaluations: 133
+Optimization terminated successfully.
+         Current function value: 0.000000
+         Iterations: 44
+         Function evaluations: 110
+s1s54-01  Banc=  81.2834263368
+WARNING: NO FTEST ON ANISOTROPY PERFORMED BECAUSE OF MISSING SIGMA - DOING CORRECTION ANYWAY
+Optimization terminated successfully.
+         Current function value: 0.000000
+         Iterations: 61
+         Function evaluations: 137
+Optimization terminated successfully.
+         Current function value: 0.000000
+         Iterations: 49
+         Function evaluations: 116
+s1s54-03  Banc=  79.6123038784
+WARNING: NO FTEST ON ANISOTROPY PERFORMED BECAUSE OF MISSING SIGMA - DOING CORRECTION ANYWAY
+Optimization terminated successfully.
+         Current function value: 0.000000
+         Iterations: 59
+         Function evaluations: 128
+Optimization terminated successfully.
+         Current function value: 0.000000
+         Iterations: 51
+         Function evaluations: 124
+s1s54-04  Banc=  58.9340529528
+WARNING: NO FTEST ON ANISOTROPY PERFORMED BECAUSE OF MISSING SIGMA - DOING CORRECTION ANYWAY
+Optimization terminated successfully.
+         Current function value: 0.000000
+         Iterations: 61
+         Function evaluations: 129
+Optimization terminated successfully.
+         Current function value: 0.000000
+         Iterations: 45
+         Function evaluations: 110
+s1s6-01  Banc=  82.5948485112
+WARNING: NO FTEST ON ANISOTROPY PERFORMED BECAUSE OF MISSING SIGMA - DOING CORRECTION ANYWAY
+Optimization terminated successfully.
+         Current function value: 0.000000
+         Iterations: 63
+         Function evaluations: 130
+Optimization terminated successfully.
+         Current function value: 0.000000
+         Iterations: 49
+         Function evaluations: 115
+s1s6-02  Banc=  64.9025109597
+WARNING: NO FTEST ON ANISOTROPY PERFORMED BECAUSE OF MISSING SIGMA - DOING CORRECTION ANYWAY
+Optimization terminated successfully.
+         Current function value: 0.000000
+         Iterations: 62
+         Function evaluations: 134
+Optimization terminated successfully.
+         Current function value: 0.000000
+         Iterations: 47
+         Function evaluations: 118
+WARNING: Fmin did not converge second time
+[  5.26486015e-07   1.44707590e+04] [  5.26485958e-07   1.44707621e+04] 0.001
+s1s6-03  Banc=  64.1260222511
+WARNING: NO FTEST ON ANISOTROPY PERFORMED BECAUSE OF MISSING SIGMA - DOING CORRECTION ANYWAY
+Optimization terminated successfully.
+         Current function value: 0.000000
+         Iterations: 59
+         Function evaluations: 135
+Optimization terminated successfully.
+         Current function value: 0.000000
+         Iterations: 46
+         Function evaluations: 111
+s1s6-04  Banc=  64.6925223716
+WARNING: NO FTEST ON ANISOTROPY PERFORMED BECAUSE OF MISSING SIGMA - DOING CORRECTION ANYWAY
+Optimization terminated successfully.
+         Current function value: 0.000000
+         Iterations: 63
+         Function evaluations: 139
+Optimization terminated successfully.
+         Current function value: 0.000000
+         Iterations: 51
+         Function evaluations: 119
+s1s6-05  Banc=  63.9987485781
+WARNING: NO FTEST ON ANISOTROPY PERFORMED BECAUSE OF MISSING SIGMA - DOING CORRECTION ANYWAY
+Optimization terminated successfully.
+         Current function value: 0.000000
+         Iterations: 60
+         Function evaluations: 133
+Optimization terminated successfully.
+         Current function value: 0.000000
+         Iterations: 46
+         Function evaluations: 114
+s1s61-05  Banc=  71.9166155283
+WARNING: NO FTEST ON ANISOTROPY PERFORMED BECAUSE OF MISSING SIGMA - DOING CORRECTION ANYWAY
+Optimization terminated successfully.
+         Current function value: 0.000000
+         Iterations: 65
+         Function evaluations: 141
+Optimization terminated successfully.
+         Current function value: 0.000000
+         Iterations: 44
+         Function evaluations: 112
+s1s66-04  Banc=  84.3784975095
+WARNING: NO FTEST ON ANISOTROPY PERFORMED BECAUSE OF MISSING SIGMA - DOING CORRECTION ANYWAY
+Optimization terminated successfully.
+         Current function value: 0.000000
+         Iterations: 63
+         Function evaluations: 136
+Optimization terminated successfully.
+         Current function value: 0.000000
+         Iterations: 49
+         Function evaluations: 113
+s1s66-05  Banc=  90.3278541163
+WARNING: NO FTEST ON ANISOTROPY PERFORMED BECAUSE OF MISSING SIGMA - DOING CORRECTION ANYWAY
+Optimization terminated successfully.
+         Current function value: 0.000000
+         Iterations: 64
+         Function evaluations: 135
+Optimization terminated successfully.
+         Current function value: 0.000000
+         Iterations: 47
+         Function evaluations: 108
+s1s71-01  Banc=  70.3021245865
+WARNING: NO FTEST ON ANISOTROPY PERFORMED BECAUSE OF MISSING SIGMA - DOING CORRECTION ANYWAY
+Optimization terminated successfully.
+         Current function value: 0.000000
+         Iterations: 65
+         Function evaluations: 142
+Optimization terminated successfully.
+         Current function value: 0.000000
+         Iterations: 49
+         Function evaluations: 114
+s1s71-02  Banc=  60.3006152221
+WARNING: NO FTEST ON ANISOTROPY PERFORMED BECAUSE OF MISSING SIGMA - DOING CORRECTION ANYWAY
+Optimization terminated successfully.
+         Current function value: 0.000000
+         Iterations: 62
+         Function evaluations: 136
+Optimization terminated successfully.
+         Current function value: 0.000000
+         Iterations: 46
+         Function evaluations: 110
+s1s71-03  Banc=  63.6095197285
+WARNING: NO FTEST ON ANISOTROPY PERFORMED BECAUSE OF MISSING SIGMA - DOING CORRECTION ANYWAY
+Optimization terminated successfully.
+         Current function value: 0.000000
+         Iterations: 60
+         Function evaluations: 127
+Optimization terminated successfully.
+         Current function value: 0.000000
+         Iterations: 48
+         Function evaluations: 115
+s1s71-04  Banc=  68.7307352755
+WARNING: NO FTEST ON ANISOTROPY PERFORMED BECAUSE OF MISSING SIGMA - DOING CORRECTION ANYWAY
+Optimization terminated successfully.
+         Current function value: 0.000000
+         Iterations: 65
+         Function evaluations: 142
+Optimization terminated successfully.
+         Current function value: 0.000000
+         Iterations: 46
+         Function evaluations: 108
+s1s72-01  Banc=  57.6708784452
+WARNING: NO FTEST ON ANISOTROPY PERFORMED BECAUSE OF MISSING SIGMA - DOING CORRECTION ANYWAY
+Optimization terminated successfully.
+         Current function value: 0.000000
+         Iterations: 66
+         Function evaluations: 146
+Optimization terminated successfully.
+         Current function value: 0.000000
+         Iterations: 48
+         Function evaluations: 115
+s1s72-02  Banc=  62.2790185173
+WARNING: NO FTEST ON ANISOTROPY PERFORMED BECAUSE OF MISSING SIGMA - DOING CORRECTION ANYWAY
+Optimization terminated successfully.
+         Current function value: 0.000000
+         Iterations: 61
+         Function evaluations: 128
+Optimization terminated successfully.
+         Current function value: 0.000000
+         Iterations: 46
+         Function evaluations: 111
+s1s72-03  Banc=  72.0528247785
+WARNING: NO FTEST ON ANISOTROPY PERFORMED BECAUSE OF MISSING SIGMA - DOING CORRECTION ANYWAY
+Optimization terminated successfully.
+         Current function value: 0.000000
+         Iterations: 59
+         Function evaluations: 129
+Optimization terminated successfully.
+         Current function value: 0.000000
+         Iterations: 44
+         Function evaluations: 110
+s1s72-04  Banc=  57.8393812494
+WARNING: NO FTEST ON ANISOTROPY PERFORMED BECAUSE OF MISSING SIGMA - DOING CORRECTION ANYWAY
+Optimization terminated successfully.
+         Current function value: 0.000000
+         Iterations: 60
+         Function evaluations: 133
+Optimization terminated successfully.
+         Current function value: 0.000000
+         Iterations: 50
+         Function evaluations: 117
+s1s81-01  Banc=  66.6205577668
+WARNING: NO FTEST ON ANISOTROPY PERFORMED BECAUSE OF MISSING SIGMA - DOING CORRECTION ANYWAY
+Optimization terminated successfully.
+         Current function value: 0.000000
+         Iterations: 57
+         Function evaluations: 130
+Optimization terminated successfully.
+         Current function value: 0.000000
+         Iterations: 43
+         Function evaluations: 110
+s1s81-02  Banc=  63.9693772758
+WARNING: NO FTEST ON ANISOTROPY PERFORMED BECAUSE OF MISSING SIGMA - DOING CORRECTION ANYWAY
+Optimization terminated successfully.
+         Current function value: 0.000000
+         Iterations: 68
+         Function evaluations: 148
+Optimization terminated successfully.
+         Current function value: 0.000000
+         Iterations: 43
+         Function evaluations: 103
+s1s81-03  Banc=  63.8853521838
+WARNING: NO FTEST ON ANISOTROPY PERFORMED BECAUSE OF MISSING SIGMA - DOING CORRECTION ANYWAY
+Optimization terminated successfully.
+         Current function value: 0.000000
+         Iterations: 68
+         Function evaluations: 143
+Optimization terminated successfully.
+         Current function value: 0.000000
+         Iterations: 46
+         Function evaluations: 113
+s1s81-04  Banc=  67.3172501642
+WARNING: NO FTEST ON ANISOTROPY PERFORMED BECAUSE OF MISSING SIGMA - DOING CORRECTION ANYWAY
+Optimization terminated successfully.
+         Current function value: 0.000000
+         Iterations: 65
+         Function evaluations: 138
+Optimization terminated successfully.
+         Current function value: 0.000000
+         Iterations: 53
+         Function evaluations: 118
+s1s84-01  Banc=  306.059627504
+WARNING: NO FTEST ON ANISOTROPY PERFORMED BECAUSE OF MISSING SIGMA - DOING CORRECTION ANYWAY
+Optimization terminated successfully.
+         Current function value: 0.000000
+         Iterations: 58
+         Function evaluations: 130
+Optimization terminated successfully.
+         Current function value: 0.000000
+         Iterations: 43
+         Function evaluations: 105
+s1s84-02  Banc=  87.2951764741
+WARNING: NO FTEST ON ANISOTROPY PERFORMED BECAUSE OF MISSING SIGMA - DOING CORRECTION ANYWAY
+Optimization terminated successfully.
+         Current function value: 0.000000
+         Iterations: 62
+         Function evaluations: 135
+Optimization terminated successfully.
+         Current function value: 0.000000
+         Iterations: 50
+         Function evaluations: 116
+s1s84-03  Banc=  69.5493076636
+WARNING: NO FTEST ON ANISOTROPY PERFORMED BECAUSE OF MISSING SIGMA - DOING CORRECTION ANYWAY
+Optimization terminated successfully.
+         Current function value: 0.000000
+         Iterations: 67
+         Function evaluations: 144
+Optimization terminated successfully.
+         Current function value: 0.000000
+         Iterations: 49
+         Function evaluations: 114
+WARNING: Fmin did not converge second time
+[  8.67965847e-07   1.45949219e+04] [  8.67969552e-07   1.45947854e+04] 0.001
+s1s84-04  Banc=  83.4846644948
+WARNING: NO FTEST ON ANISOTROPY PERFORMED BECAUSE OF MISSING SIGMA - DOING CORRECTION ANYWAY
+Optimization terminated successfully.
+         Current function value: 0.000000
+         Iterations: 62
+         Function evaluations: 135
+Optimization terminated successfully.
+         Current function value: 0.000000
+         Iterations: 48
+         Function evaluations: 116
+s1s84-05  Banc=  67.8081749263
+WARNING: NO FTEST ON ANISOTROPY PERFORMED BECAUSE OF MISSING SIGMA - DOING CORRECTION ANYWAY
+Optimization terminated successfully.
+         Current function value: 0.000000
+         Iterations: 68
+         Function evaluations: 146
+Optimization terminated successfully.
+         Current function value: 0.000000
+         Iterations: 49
+         Function evaluations: 116
+s1s84-06  Banc=  83.6745131337
+WARNING: NO FTEST ON ANISOTROPY PERFORMED BECAUSE OF MISSING SIGMA - DOING CORRECTION ANYWAY
+Optimization terminated successfully.
+         Current function value: 0.000000
+         Iterations: 61
+         Function evaluations: 130
+Optimization terminated successfully.
+         Current function value: 0.000000
+         Iterations: 46
+         Function evaluations: 113
+s1s9-01  Banc=  52.7163136021
+WARNING: NO FTEST ON ANISOTROPY PERFORMED BECAUSE OF MISSING SIGMA - DOING CORRECTION ANYWAY
+Optimization terminated successfully.
+         Current function value: 0.000000
+         Iterations: 66
+         Function evaluations: 139
+Optimization terminated successfully.
+         Current function value: 0.000000
+         Iterations: 51
+         Function evaluations: 117
+s1s9-02  Banc=  58.6252771018
+WARNING: NO FTEST ON ANISOTROPY PERFORMED BECAUSE OF MISSING SIGMA - DOING CORRECTION ANYWAY
+Optimization terminated successfully.
+         Current function value: 0.000000
+         Iterations: 59
+         Function evaluations: 132
+Optimization terminated successfully.
+         Current function value: 0.000000
+         Iterations: 46
+         Function evaluations: 112
+s1s9-03  Banc=  75.5748130977
+WARNING: NO FTEST ON ANISOTROPY PERFORMED BECAUSE OF MISSING SIGMA - DOING CORRECTION ANYWAY
+Optimization terminated successfully.
+         Current function value: 0.000000
+         Iterations: 61
+         Function evaluations: 138
+Optimization terminated successfully.
+         Current function value: 0.000000
+         Iterations: 45
+         Function evaluations: 111
+s1s94-04  Banc=  63.3113770154
+WARNING: NO FTEST ON ANISOTROPY PERFORMED BECAUSE OF MISSING SIGMA - DOING CORRECTION ANYWAY
+Optimization terminated successfully.
+         Current function value: 0.000000
+         Iterations: 65
+         Function evaluations: 144
+Optimization terminated successfully.
+         Current function value: 0.000000
+         Iterations: 47
+         Function evaluations: 111
+s1s94-5a  Banc=  66.8302377663
+WARNING: NO FTEST ON ANISOTROPY PERFORMED BECAUSE OF MISSING SIGMA - DOING CORRECTION ANYWAY
+Optimization terminated successfully.
+         Current function value: 0.000000
+         Iterations: 62
+         Function evaluations: 132
+Optimization terminated successfully.
+         Current function value: 0.000000
+         Iterations: 45
+         Function evaluations: 106
+s2s0-06  Banc=  94.7475324646
+WARNING: NO FTEST ON ANISOTROPY PERFORMED BECAUSE OF MISSING SIGMA - DOING CORRECTION ANYWAY
+Optimization terminated successfully.
+         Current function value: 0.000000
+         Iterations: 66
+         Function evaluations: 142
+Optimization terminated successfully.
+         Current function value: 0.000000
+         Iterations: 45
+         Function evaluations: 109
+s2s0-08  Banc=  101.577679363
+WARNING: NO FTEST ON ANISOTROPY PERFORMED BECAUSE OF MISSING SIGMA - DOING CORRECTION ANYWAY
+Optimization terminated successfully.
+         Current function value: 0.000000
+         Iterations: 66
+         Function evaluations: 140
+Optimization terminated successfully.
+         Current function value: 0.000000
+         Iterations: 49
+         Function evaluations: 114
+s2s0-09  Banc=  56.0899953666
+WARNING: NO FTEST ON ANISOTROPY PERFORMED BECAUSE OF MISSING SIGMA - DOING CORRECTION ANYWAY
+Optimization terminated successfully.
+         Current function value: 0.000000
+         Iterations: 66
+         Function evaluations: 144
+Optimization terminated successfully.
+         Current function value: 0.000000
+         Iterations: 47
+         Function evaluations: 116
+s2s7-01  Banc=  103.417595894
+WARNING: NO FTEST ON ANISOTROPY PERFORMED BECAUSE OF MISSING SIGMA - DOING CORRECTION ANYWAY
+Optimization terminated successfully.
+         Current function value: 0.000000
+         Iterations: 61
+         Function evaluations: 136
+Optimization terminated successfully.
+         Current function value: 0.000000
+         Iterations: 50
+         Function evaluations: 118
+WARNING: Fmin did not converge second time
+[  3.27320674e-08   1.40847120e+04] [  3.27320234e-08   1.40847485e+04] 0.001
+s2s7-03  Banc=  99.5739005129
+WARNING: NO FTEST ON ANISOTROPY PERFORMED BECAUSE OF MISSING SIGMA - DOING CORRECTION ANYWAY
+Optimization terminated successfully.
+         Current function value: 0.000000
+         Iterations: 64
+         Function evaluations: 138
+Optimization terminated successfully.
+         Current function value: 0.000000
+         Iterations: 46
+         Function evaluations: 107
+s2s7-13  Banc=  68.2237680165
+WARNING: NO FTEST ON ANISOTROPY PERFORMED BECAUSE OF MISSING SIGMA - DOING CORRECTION ANYWAY
+Optimization terminated successfully.
+         Current function value: 0.000000
+         Iterations: 60
+         Function evaluations: 134
+Optimization terminated successfully.
+         Current function value: 0.000000
+         Iterations: 46
+         Function evaluations: 113
+s2s8-01  Banc=  88.2693102064
+WARNING: NO FTEST ON ANISOTROPY PERFORMED BECAUSE OF MISSING SIGMA - DOING CORRECTION ANYWAY
+Optimization terminated successfully.
+         Current function value: 0.000000
+         Iterations: 60
+         Function evaluations: 130
+Optimization terminated successfully.
+         Current function value: 0.000000
+         Iterations: 51
+         Function evaluations: 119
+ERROR:  TRMinv: (1-x)==0.
+WARNING: NO FTEST ON ANISOTROPY PERFORMED BECAUSE OF MISSING SIGMA - DOING CORRECTION ANYWAY
+Optimization terminated successfully.
+         Current function value: 0.000000
+         Iterations: 61
+         Function evaluations: 133
+Optimization terminated successfully.
+         Current function value: 0.000000
+         Iterations: 42
+         Function evaluations: 102
+s2s8-05  Banc=  121.143011832
+WARNING: NO FTEST ON ANISOTROPY PERFORMED BECAUSE OF MISSING SIGMA - DOING CORRECTION ANYWAY
+Optimization terminated successfully.
+         Current function value: 0.000000
+         Iterations: 61
+         Function evaluations: 133
+Optimization terminated successfully.
+         Current function value: 0.000000
+         Iterations: 52
+         Function evaluations: 124
+WARNING: Fmin did not converge second time
+[  1.19976142e-07   1.32770176e+04] [  1.19976042e-07   1.32770391e+04] 0.001
+ERROR:  TRMinv: (1-x)==0.
+WARNING: NO FTEST ON ANISOTROPY PERFORMED BECAUSE OF MISSING SIGMA - DOING CORRECTION ANYWAY
+Optimization terminated successfully.
+         Current function value: 0.000000
+         Iterations: 65
+         Function evaluations: 147
+Optimization terminated successfully.
+         Current function value: 0.000000
+         Iterations: 48
+         Function evaluations: 112
+s2s8-07  Banc=  180.082563667
+WARNING: NO FTEST ON ANISOTROPY PERFORMED BECAUSE OF MISSING SIGMA - DOING CORRECTION ANYWAY
+uncorrected thellier data saved in:  /Users/nebula/Python/Basic_input_output/thellier_magic_redo_specimens_new.out
+anisotropy corrected data saved in:  /Users/nebula/Python/Basic_input_output/AC_specimens.txt
+non-linear TRM corrected data saved in:  /Users/nebula/Python/Basic_input_output/thellier_magic_redo_NLT_specimens_new.out
+
+FILES UPDATED: {}
+FILES CREATED: {}
+testing: thellier_magic_redo_NLT_specimens_new.out against reference file: thellier_magic_redo_NLT_specimens_correct.txt
+parsing file: thellier_magic_redo_NLT_specimens_new.out
+file length = 4623
+parsing file: thellier_magic_redo_NLT_specimens_correct.txt
+file length = 4623
+checking list output
+output_list:         ['tab', 'pmag_specimens', 'direction_type', 'er_analyst_mail_names', 'er_citation_names', 'er_expedi ...]
+correct_output_list: ['tab', 'pmag_specimens', 'direction_type', 'er_analyst_mail_names', 'er_citation_names', 'er_expedi ...]
+Comparing two lists
+Lists were the same
+thellier_magic_redo.py produced correct output
+-
+testing: thellier_magic_redo_AC_specimens_new.out against reference file: thellier_magic_redo_AC_specimens_correct.txt
+parsing file: thellier_magic_redo_AC_specimens_new.out
+<function complete_thellier_magic_redo_test at 0x608630> failed donut
+<function complete_thellier_magic_redo_test at 0x608630> [Errno 2] No such file or directory: 'thellier_magic_redo_AC_specimens_new.out'
+messed up programs [<function complete_thellier_magic_redo_test at 0x608630>]
+this is i <function complete_thellier_magic_redo_test at 0x608630>
+message ['test thellier_magic_redo.py']
+THESE ONES ARE BROKEN  ['test thellier_magic_redo.py']
+IT STARTS HERE!!!

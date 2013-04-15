@@ -1,0 +1,101 @@
+'extra_output_errors_list:  
+testing aarm_magic.py: [Errno 2] No such file or directory: 'aarm_magic_anisotropy_new.out'.  
+Traceback below: 
+  File "/Users/nebula/Python/Tests/error_logging.py", line 28, in go_through
+    i()
+  File "Extra_output.py", line 198, in complete_aarm_magic_test
+    aarm_magic.ex_out_sequence()
+  File "Extra_output.py", line 123, in ex_out_sequence
+    self.standard_check_file_sequence()
+  File "Extra_output.py", line 128, in standard_check_file_sequence
+    self.check_file_output(self.outfile1, self.correctfile1, reference="correct")
+  File "Extra_output.py", line 111, in check_file_output
+    out = PT.file_parse_by_word_and_pmagpy_strip(outfile)
+  File "/Users/nebula/Python/Tests/PmagPy_tests.py", line 97, in file_parse_by_word_and_pmagpy_strip
+    data = file_parse_by_word(a_file)
+  File "/Users/nebula/Python/Tests/PmagPy_tests.py", line 71, in file_parse_by_word
+    data = open(the_file, 'rU').readlines()
+
+test atrm_magic.py: [Errno 2] No such file or directory: 'atrm_anisotropy_new.out'.  
+Traceback below: 
+  File "/Users/nebula/Python/Tests/error_logging.py", line 28, in go_through
+    i()
+  File "Extra_output.py", line 211, in complete_atrm_magic_test
+    atrm.ex_out_sequence()
+  File "Extra_output.py", line 123, in ex_out_sequence
+    self.standard_check_file_sequence()
+  File "Extra_output.py", line 128, in standard_check_file_sequence
+    self.check_file_output(self.outfile1, self.correctfile1, reference="correct")
+  File "Extra_output.py", line 111, in check_file_output
+    out = PT.file_parse_by_word_and_pmagpy_strip(outfile)
+  File "/Users/nebula/Python/Tests/PmagPy_tests.py", line 97, in file_parse_by_word_and_pmagpy_strip
+    data = file_parse_by_word(a_file)
+  File "/Users/nebula/Python/Tests/PmagPy_tests.py", line 71, in file_parse_by_word
+    data = open(the_file, 'rU').readlines()
+
+test hysteresis_magic.py: [Errno 2] No such file or directory: 'hysteresis_magic_rmag_new.out'.  
+Traceback below: 
+  File "/Users/nebula/Python/Tests/error_logging.py", line 28, in go_through
+    i()
+  File "Extra_output.py", line 238, in complete_hysteresis_magic_test
+    hysteresis_magic.ex_out_sequence() # this re runs hysteresis magic, but that is not a problem
+  File "Extra_output.py", line 123, in ex_out_sequence
+    self.standard_check_file_sequence()
+  File "Extra_output.py", line 128, in standard_check_file_sequence
+    self.check_file_output(self.outfile1, self.correctfile1, reference="correct")
+  File "Extra_output.py", line 111, in check_file_output
+    out = PT.file_parse_by_word_and_pmagpy_strip(outfile)
+  File "/Users/nebula/Python/Tests/PmagPy_tests.py", line 97, in file_parse_by_word_and_pmagpy_strip
+    data = file_parse_by_word(a_file)
+  File "/Users/nebula/Python/Tests/PmagPy_tests.py", line 71, in file_parse_by_word
+    data = open(the_file, 'rU').readlines()
+
+test k15_magic.py: Script returned code: 1.  
+Traceback below: 
+  File "/Users/nebula/Python/Tests/error_logging.py", line 28, in go_through
+    i()
+  File "Extra_output.py", line 255, in complete_k15_magic_test
+    obj = env.run('k15_magic.py', '-WD', directory, '-f', k15_infile, '-Fsa', k15_Fsa, '-Fa', k15_Fa, '-F', k15_F)
+  File "/Library/Frameworks/Python.framework/Versions/7.3/lib/python2.7/site-packages/ScriptTest-1.2-py2.7.egg/scripttest/__init__.py", line 255, in run
+    result.assert_no_error(quiet)
+  File "/Library/Frameworks/Python.framework/Versions/7.3/lib/python2.7/site-packages/ScriptTest-1.2-py2.7.egg/scripttest/__init__.py", line 402, in assert_no_error
+    "Script returned code: %s" % self.returncode)
+
+test kly4s_magic.py: Script returned code: 1.  
+Traceback below: 
+  File "/Users/nebula/Python/Tests/error_logging.py", line 28, in go_through
+    i()
+  File "Extra_output.py", line 288, in complete_kly4s_magic_test
+    obj = env.run('mv', file_prefix + "er_specimens.txt", file_prefix + "kly4s_er_specimens_new.out") # renames
+  File "/Library/Frameworks/Python.framework/Versions/7.3/lib/python2.7/site-packages/ScriptTest-1.2-py2.7.egg/scripttest/__init__.py", line 255, in run
+    result.assert_no_error(quiet)
+  File "/Library/Frameworks/Python.framework/Versions/7.3/lib/python2.7/site-packages/ScriptTest-1.2-py2.7.egg/scripttest/__init__.py", line 402, in assert_no_error
+    "Script returned code: %s" % self.returncode)
+
+test pmag_results_extract.py: Script returned code: 1.  
+Traceback below: 
+  File "/Users/nebula/Python/Tests/error_logging.py", line 28, in go_through
+    i()
+  File "Extra_output.py", line 311, in complete_pmag_results_extract_test
+    obj = env.run('pmag_results_extract.py', '-WD', directory, '-f', 'pmag_results_extract.dat')
+  File "/Library/Frameworks/Python.framework/Versions/7.3/lib/python2.7/site-packages/ScriptTest-1.2-py2.7.egg/scripttest/__init__.py", line 255, in run
+    result.assert_no_error(quiet)
+  File "/Library/Frameworks/Python.framework/Versions/7.3/lib/python2.7/site-packages/ScriptTest-1.2-py2.7.egg/scripttest/__init__.py", line 402, in assert_no_error
+    "Script returned code: %s" % self.returncode)
+
+test orientation_magic.py: Script returned code: 1.  
+Traceback below: 
+  File "/Users/nebula/Python/Tests/error_logging.py", line 28, in go_through
+    i()
+  File "Extra_output.py", line 336, in complete_orientation_magic_test
+    orientation_magic.ex_out_sequence()
+  File "Extra_output.py", line 121, in ex_out_sequence
+    self.run_program()
+  File "Extra_output.py", line 48, in run_program
+    obj = env.run(self.name, '-WD', directory, '-f', self.infile, self.tag1, self.outfile1, self.tag2, self.outfile2, self.arg1, stdin=self.stdin)
+  File "/Library/Frameworks/Python.framework/Versions/7.3/lib/python2.7/site-packages/ScriptTest-1.2-py2.7.egg/scripttest/__init__.py", line 255, in run
+    result.assert_no_error(quiet)
+  File "/Library/Frameworks/Python.framework/Versions/7.3/lib/python2.7/site-packages/ScriptTest-1.2-py2.7.egg/scripttest/__init__.py", line 402, in assert_no_error
+    "Script returned code: %s" % self.returncode)
+
+
