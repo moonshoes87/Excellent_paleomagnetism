@@ -289,17 +289,16 @@ complete list of tested programs:
     zeq_magic_redo.py
 
 
-
-
 other, to do:
        check through the output you generate, see how helpful it is.  try to channel Lisa!
        go back to programs you need to fix (listed in uppercase below)
-       make a script that will replace all the inaccurate path names, so it can be run on a different machine.  this includes that some stdout includes -- some_file was saved in this_directory.  could put it into the strip_pmagpy function
-       maybe make a script for generating new, correct, and wrong files (say if Lisa "knows" a program is working but she has changed some details of the output) # started this, but it may not be practical
-       a bunch of files are being told to delete that apparently don't exist.  why??
-       Make sure you remember to add back in the tests you pulled out of Rename_me.py to make it go faster
-       add a bunch of cleaner output to random.py
+       make a script that will replace all the inaccurate path names, so it can be run on a different machine.  this includes that some stdout includes -- some_file was saved in this_directory.  could put it into the strip_pmagpy function # can't really find these, but if the problem comes up, you have a great template for fixing it.... just add in to the pmagpy strip function # DONE (for now)
 
+       a bunch of files are being told to delete that apparently don't exist.  why??  # not a problem.  this happens as a backup deletion of stuff that should be deleted at the end of the previous test.  this happens just in case the previous test wasn't fully completed.  DONE
+
+       still on table:
+       maybe make a script for generating new, correct, and wrong files (say if Lisa "knows" a program is working but she has changed some details of the output) # started this, but it may not be practical
+       fix programs below
 
        CIT_magic.py needs fixing
               # er_sites.txt is supposed to be designatable on the command-line with -Fsp, but is not.  fix this.... 
@@ -307,7 +306,15 @@ other, to do:
        problem programs to return to:
        parse_measurements.py
 
-
+THELLIER_GUI.PY
+CONVERT2UNIX.PY
+CURIE.PY
+MAGIC.PY TUTORIAL
+MAKE_MAGIC_PLOTS.PY
+MEASUREMENT_IMPORT SCRIPTS (some of these are labeled other ways)
+PARSE_MEASUREMENTS.PY
+PLOT_MAGIC_KEYS.PY
+PLOT_MAPPTS.PY
 
 UPPERCASE TO RETURN TO
 

@@ -47,3 +47,20 @@ for i in final:
     print i
 print total
 
+
+
+def complete_gaussian_test():
+    pass
+def complete_fishrot_test():
+    pass
+def complete_fisher_test():
+    pass
+def complete_tk03_test():
+    pass
+def complete_uniform_test():
+    pass
+
+dictionary = {"gaussian": complete_gaussian_test, "fishrot": complete_fishrot_test, "fisher": complete_fisher_test, "tk03": complete_tk03_test, "uniform": complete_uniform_test}
+
+for k,v in dictionary.items():
+    print k, v

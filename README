@@ -18,6 +18,7 @@ Run the programs with the command:
 ./future_bash_script
 This will run everything, and will output four different things: *_all_output.txt for each of the 4 programs.  *_clean_output.txt for all 4 programs -- these logs will contain only output from the problem programs.  *_errors_log.txt -- which list the program, the error that caused it to fail, and the traceback.  all_errors.txt will contain a concatenated list of all the programs and their problems.  
 
+
 To run all the programs in one category:
    python Bootstrap.py
 

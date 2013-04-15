@@ -924,6 +924,7 @@ S[a]ve figure? [q]uit, <return> to continue"""
 
 def complete_plot_cdf_test():
      """test plot_cdf.py"""
+     PT.clean_house() # just added this in
      print"Testing plot_cdf.py"
      infile =  "plot_cdf_example.dat"
      outfile = None
@@ -1272,7 +1273,6 @@ rename_me_function_mapping = {"angle": complete_angle_test, "zeq": complete_zeq_
 rename_me_errors_list = open('rename_me_errors_list.txt', 'w')
 
 if __name__ == '__main__':
-#     PT.remove_new_outfiles() # try this... so that you can start clear each time
      if "-r" in sys.argv:
           PT.run_individual_program(rename_me_function_mapping)
      elif "-all" in sys.argv:

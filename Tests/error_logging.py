@@ -5,9 +5,7 @@ from scripttest import TestFileEnvironment
 env = TestFileEnvironment('./new-test-output')
 import unittest
 import subprocess
-#import Rename_me
 import PmagPy_tests as PT
-#import clean_log_output
 
 
 file_prefix = PT.file_prefix
@@ -16,24 +14,21 @@ directory =  PT.directory
 print "STARTING HERE"
 
 def go_through(programs_list, errors_log): # args are: the list of programs to check, and the file to write errors to
-    errors_log.write(str(errors_log)[11:-28] + ':  ' + '\n')  
+    errors_log.write(str(errors_log)[12:-28] + ':  ' + '\n')  
     PT.clean_house()
     redo_me = [] # will be a list of the functions to be redone
     errors_count = 0
-    messed_up_programs = [] # will be a list doc strings of the programs that have pr
+    messed_up_programs = [] # will be a list doc strings of the programs that have problems
     for i in programs_list:
         try:
             print "TRYING"
             print " - "
             i()
-#        except IOError:
-# will catch just the file missing type errors
- #           print "IOERROR UNICORN"
         except Exception as ex:
             redo_me.append(i)
             errors_count += 1
             messed_up_programs.append(i.__doc__)
-            print str(i) + " failed donut"
+            print str(i.__doc__) + " failed"
             print "i, ex: ", i, ex
             print "type(ex)", type(ex)
             print "ex.args", ex.args
@@ -58,12 +53,11 @@ def go_through(programs_list, errors_log): # args are: the list of programs to c
     for i in messed_up_programs:
         message.append(i)
     print "THESE ONES ARE BROKEN ", message
-#    print "problems dictionary", problems_dictionary
     print "redo me list", redo_me
+    errors_log.write("programs with errors: " + str(messed_up_programs) + "\n") # added this in, see if it works well
     errors_log.write('\n')
     return redo_me
 
-ignore_these = """
 def different_go_through(programs_list):
     print programs_list
     for k, v in programs_list:
@@ -75,8 +69,8 @@ def new_go_through(programs_list, errors_log): # this is an attempt to just use 
     PT.clean_house()
     redo_me = [] # will be a list of the functions to be redone
     errors_count = 0
-    messed_up_programs = [] # will be a list doc strings of the programs that have pr
-    for k, v in programs_list:
+    messed_up_programs = [] # will be a list doc strings of the programs that have problems
+    for k, v in programs_list.items():
         try:
             print "TRYING"
             print " - "
@@ -106,7 +100,6 @@ def new_go_through(programs_list, errors_log): # this is an attempt to just use 
 #    print "problems dictionary", problems_dictionary
     print "redo me list", redo_me
     return redo_me
-"""
 
 def redo_broken_ones(redo_list):
     print "rhino"
@@ -119,7 +112,6 @@ def redo_broken_ones(redo_list):
             print "-----------"
             print "-----------"
             #raise ex
-
 
     
 if __name__ == "__main__":
