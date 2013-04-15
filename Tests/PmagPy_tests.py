@@ -92,7 +92,7 @@ def remove_new_outfiles():
     """
     subprocess.call('rm ' + directory + '/*_new.out', shell=True)
 
-def get_short_program_name(name):
+ignore_me = """def get_short_program_name(name):
     # this doesn't work!  you would need regular expressions.  strip removes all combinations of the letters
     print "get short name"
     print name
@@ -105,6 +105,7 @@ def get_short_program_name(name):
     n = n.strip("_test")
     print n
     return n
+"""
 
 def clean_program_name(name = None): 
     """
@@ -122,7 +123,8 @@ def clean_program_name(name = None):
     print n
     n = n.strip(" ")
     print n
-    n = n.strip(".py")
+    if ".py" in n:
+        n = n[:-3]
     print n
     if "test" in n:
         if "()" in n:
