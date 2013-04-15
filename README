@@ -1,3 +1,8 @@
+Documentation for modules used:
+http://docs.python.org/2/library/traceback.html -- used for getting error tracebacks
+http://docs.python.org/2/library/subprocess.html#subprocess.Popen -- subprocess is used for running command line operations 
+http://docs.python.org/2/library/unittest.html -- used for the unittests
+http://pythonpaste.org/scripttest/ -- used for the bulk of the testing
 
 Setup:
 
