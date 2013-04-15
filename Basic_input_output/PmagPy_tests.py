@@ -257,7 +257,6 @@ def run_individual_program(mapping): # takes as argument a mapping of function n
 
 
 if __name__ == "__main__":
-    file_parse_by_word('hiyo.txt')
     print "Please type the name of the program test you wish to find"
     print "You may enter either: program.py, or: program. No quotation marks, case does not matter"
     search_item = str(raw_input("what program are you looking for?   "))

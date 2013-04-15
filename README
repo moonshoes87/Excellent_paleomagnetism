@@ -1,17 +1,39 @@
 
 Setup:
 
-The directory/file_prefix is set in PmagPy_tests.py.  This must be re-set to correctly represent the directory you are using for the testing.  
+The directory/file_prefix is set in PmagPy_tests.py.  This must be re-set to correctly represent the directory in which you are running the tests. 
+
+Organization:
+The tests are divided up into four categories.  
+1. Bootstrap.
+   These programs produce bootstrapped values, which are tested to make sure they fall within an expected range.
+2. Random.
+   These programs generate "random" sets of numbers.  These are tested to be the correct length, and ensure that they aren't producing the same output twice.
+3. Extra_output.
+   These programs produce two or more output files.
+4. Everything else
+   These programs produce either standard output, file output, or plots.  They are
 
 Run the programs with the command:   
+./future_bash_script
+This will run everything, and will output four different things: *_all_output.txt for each of the 4 programs.  *_clean_output.txt for all 4 programs -- these logs will contain only output from the problem programs.  *_errors_log.txt -- which list the program, the error that caused it to fail, and the traceback.  all_errors.txt will contain a concatenated list of all the programs and their problems.  
+
+To run all the programs in one category:
+   python Bootstrap.py
+
+To run an individual program:
+   python Bootstrap.py -r bootams.py
+
+To find a program:
+   run: python PmagPy_tests.py
+   you will be prompted for the name of the program you want to find, and it will tell you where that program is tested.
+   
 
 Troubleshooting:
 
 If something is not working, often the WD option is set incorrectly.  If a program has the -WD option, it will run incorrectly with long file names (scripttest does not recognize relative path names). Likewise, if a program does not have the -WD option, it will run incorrectly with short file names.  
 
 Some of the tests malfunction when other python programs are run simultaneously (notably the ones in Bootstrap_plotting.py).  It is ideal to run the tests when the computer is not otherwise in use.  (The error message that conflicting Python programs causes is usually something like: "Files not saved, file format unsupported".  The file format actually is supported, the computer just has its wires crossed.
-
-
 
 It is possible to have problems because there are two versions of a saved document in new-test-output/.  There are some safeguards set in place to try to prevent this, but clearing that directory may be necessary at some point.  By default, the directory should self-clear when you begin a new session of testing. 
 

@@ -7,8 +7,8 @@ file_prefix = PT.file_prefix
 
 def parse_files():
     rename = PT.file_parse_by_word(file_prefix + 'Rename_me.py')
-    random = PT.file_parse_by_word(file_prefix + 'random_stuff.py')
-    bootstrap = PT.file_parse_by_word(file_prefix + 'Bootstrap_plotting.py')
+    random = PT.file_parse_by_word(file_prefix + 'Random.py')
+    bootstrap = PT.file_parse_by_word(file_prefix + 'Bootstrap.py')
     ex_out = PT.file_parse_by_word(file_prefix + 'Extra_output.py')
     return rename + random + bootstrap + ex_out
 
@@ -41,6 +41,9 @@ clean_list = trim_list(the_list)
 print clean_list
 final = remove_duplicates(clean_list)
 final.sort()
+total = 0
 for i in final:
+    total += 1
     print i
+print total
 
