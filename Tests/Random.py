@@ -225,8 +225,7 @@ def complete_gaussian_test():
     # also add -h option (no -i)
     # another way to test the additional command line options?
 
-random_tests = [complete_gaussian_test, complete_fishrot_test, complete_fisher_test, complete_tk03_test, complete_uniform_test]
-random_function_mapping = {"gaussian": complete_gaussian_test, "fishrot": complete_fishrot_test, "fisher": complete_fisher_test, "tk03": complete_tk03_test, "uniform": complete_uniform_test}
+random_tests = {"gaussian": complete_gaussian_test, "fishrot": complete_fishrot_test, "fisher": complete_fisher_test, "tk03": complete_tk03_test, "uniform": complete_uniform_test}
 random_errors_list = open('random_errors_list.txt', 'w')
 
 def complete_working_test():
@@ -238,10 +237,11 @@ def complete_working_test():
 
 if __name__ == "__main__":
     if "-r" in sys.argv:
-        PT.run_individual_program(random_function_mapping)
+        PT.run_individual_program(random_tests)
     elif "-all" in sys.argv:
         complete_working_test()
     else:
+#        new_list = EL.go_through(random_tests, random_errors_list)
         new_list = EL.go_through(random_tests, random_errors_list)
         EL.redo_broken_ones(new_list)
         print "finished with Random testing and re-testing"

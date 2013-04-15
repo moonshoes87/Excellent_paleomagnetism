@@ -226,9 +226,7 @@ def complete_eqarea_magic_test():
     check_bootstrap(stripped_list, eqarea_reference)
 
 
-Bootstrap_tests = [complete_aniso_magic_test, complete_find_EI_test, complete_bootams_test, complete_eqarea_magic_test, complete_scalc_test, complete_scalc_magic_test, complete_watsonsV_test]
-
-Bootstrap_function_mapping = {"aniso_magic": complete_aniso_magic_test, "find_EI": complete_find_EI_test, "bootams": complete_bootams_test, "eqarea": complete_eqarea_magic_test, "scalc": complete_scalc_test, "scalc_magic": complete_scalc_magic_test, "watsonsV": complete_watsonsV_test}
+Bootstrap_tests = {"aniso_magic": complete_aniso_magic_test, "find_EI": complete_find_EI_test, "bootams": complete_bootams_test, "eqarea": complete_eqarea_magic_test, "scalc": complete_scalc_test, "scalc_magic": complete_scalc_magic_test, "watsonsV": complete_watsonsV_test}
 
 bootstrap_errors_list = open('bootstrap_errors_list.txt', 'w')
 
@@ -246,7 +244,7 @@ if __name__ == "__main__":
     PT.clean_house()
     if "-r" in sys.argv:
         print "Bootstrapping! Be patient"
-        PT.run_individual_program(Bootstrap_function_mapping)
+        PT.run_individual_program(Bootstrap_tests)
     elif "-all" in sys.argv:
         complete_working_test()
     else:

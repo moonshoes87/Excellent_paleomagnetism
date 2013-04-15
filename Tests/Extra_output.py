@@ -368,11 +368,7 @@ thellier_magic_redo.py -f thellier_magic_redo_example.dat  -fnl thellier_magic_r
 
 # listings and such that make this whole business work
 
-ex_out_function_mapping = {"aarm_magic": complete_aarm_magic_test, "atrm_magic": complete_atrm_magic_test, "hysteresis_magic": complete_hysteresis_magic_test, "k15_magic": complete_k15_magic_test, "kly4s_magic": complete_kly4s_magic_test, "pmag_results_extract": complete_pmag_results_extract_test, "orientation_magic": complete_orientation_magic_test, "thellier_magic_redo": complete_thellier_magic_redo_test}
-
-Extra_output_tests = [complete_aarm_magic_test, complete_atrm_magic_test, complete_hysteresis_magic_test, complete_k15_magic_test, complete_kly4s_magic_test, complete_pmag_results_extract_test, complete_orientation_magic_test]# complete_thellier_magic_redo_test]
-
-# ADD LAST TEST BACK IN!!!!!!!!
+Extra_output_tests = {"aarm_magic": complete_aarm_magic_test, "atrm_magic": complete_atrm_magic_test, "hysteresis_magic": complete_hysteresis_magic_test, "k15_magic": complete_k15_magic_test, "kly4s_magic": complete_kly4s_magic_test, "pmag_results_extract": complete_pmag_results_extract_test, "orientation_magic": complete_orientation_magic_test, "thellier_magic_redo": complete_thellier_magic_redo_test}
 
 ex_out_errors_list = open('extra_output_errors_list.txt', 'w')
 
@@ -380,7 +376,7 @@ ex_out_errors_list = open('extra_output_errors_list.txt', 'w')
 # if no interactive tag is given, it will just run through
 if __name__ == "__main__": 
     if "-r" in sys.argv: # 
-        PT.run_individual_program(ex_out_function_mapping)
+        PT.run_individual_program(Extra_output_tests)
     elif "-all" in sys.argv:
         complete_working_test()
     else:
