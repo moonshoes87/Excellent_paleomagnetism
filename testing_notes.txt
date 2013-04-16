@@ -299,15 +299,16 @@ other, to do:
        still on table:
        tests missing:
 	     specimens_results_magic.py
-I'm trying to work on a test for specimens_results_magic.py.  From your examples. it looks like I need to do the download_magic example. then the site_edit_magic example, then I should be able to use specimens_results_magic.  However, I am getting stuck on site_edit_magic.  After I have downloaded zmab0083201tmp03.txt, and then try to use site_edit_magic, I get "bad pmag specimen_input file".  It looks like, by default, site_edit_magic is looking for zeq_specimens_s.txt, but download_magic does not produce one.  
+I'm trying to work on a test for specimens_results_magic.py.  From your examples. it looks like I need to do the download_magic example. then the site_edit_magic example, then I should be able to use specimens_results_magic.  However, I am getting stuck on site_edit_magic.  After I have downloaded zmab0083201tmp03.txt, and then try to use site_edit_magic, I get "bad pmag specimen_input file".  It looks like, by default, site_edit_magic is looking for zeq_specimens_s.txt, but download_magic does not produce one.  	(it looks like it requires -f pmag_specimens.txt instead.  But it is still kind of not fucked)
 
 Sorry if this is garbled.  I can re-explain if I've totally mangled it.
 
 Thanks!
 Lori
-	it looks like it requires -f pmag_specimens.txt instead.  But it is still kind of not fucked
+
 
 	     update_measurements.py
+		can't find a meaningful type test to do here.  you suggest using orientation_magic, but it doesn't generate a magic_measurements file which is what update_measurements looks for.  I'm not sure what needs to be in a magic_measurements file in order to have the proper effect and not get an error.  I'm sure this makes more senese when you're actually using the database, vs. just trying to test it... sorry if I'm missing the obvious. 
 	     Measurement_import
        maybe make a script for generating new, correct, and wrong files (say if Lisa "knows" a program is working but she has changed some details of the output) # started this, but it may not be practical
        check to see if there are any outfiles that are not called program_new.out.  If they don't follow the convention, they won't be deleted when they should.  
