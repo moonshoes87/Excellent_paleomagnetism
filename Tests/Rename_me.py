@@ -298,7 +298,7 @@ def complete_azdip_magic_test(): # irregular, because the outfile is signaled wi
      azdip_magic_infile = 'azdip_magic_example.dat'
      azdip_magic_reference = 'azdip_magic_output_correct.out'
      azdip_magic_wrong = 'azdip_magic_output_incorrect.out'
-     azdip_magic_outfile = 'azdip_magic_output.out' # file_prefix +
+     azdip_magic_outfile = 'azdip_magic_output_new.out' # file_prefix +
      azdip_magic = Test_instance('azdip_magic.py', azdip_magic_infile, None, azdip_magic_reference, azdip_magic_wrong, False, None, '-Fsa', azdip_magic_outfile, '-mcd', 'FS-FD:SO-POM', '-loc', "Northern Iceland")
      azdip_magic.run_program()
      azdip_magic.check_file_output(azdip_magic_outfile, azdip_magic.ref_out)
@@ -382,7 +382,7 @@ def complete_pt_rot_test(): # Irregular type.  has both an -ff and an -f option.
 def complete_customize_criteria_test():  # BIO type
      """test customize_criteria.py"""
      customize_criteria_infile = 'customize_criteria_example.dat'
-     customize_criteria_output = 'customize_criteria_outfile.out'
+     customize_criteria_output = 'customize_criteria_output_new.out'
      customize_criteria_reference = "customize_criteria_output_correct.out"
      customize_criteria_wrong = "customize_criteria_output_incorrect.out"
      customize_criteria = Test_instance('customize_criteria.py', customize_criteria_infile, customize_criteria_output, customize_criteria_reference, customize_criteria_wrong, '1', False)
@@ -576,7 +576,7 @@ def complete_cart_dir_test():
     
 def complete_convert_samples_test():
      """test convert_samples.py"""
-     convert_samples = Test_instance('convert_samples.py', 'convert_samples_example.dat', 'convert_samples_Northern_Iceland.txt', 'convert_samples_results_correct.out', 'convert_samples_results_incorrect.out', None, False)
+     convert_samples = Test_instance('convert_samples.py', 'convert_samples_example.dat', 'convert_samples_Northern_Iceland_new.out', 'convert_samples_results_correct.out', 'convert_samples_results_incorrect.out', None, False)
      convert_samples.file_in_file_out_sequence(interactive=True)
 
 def complete_di_geo_test():
@@ -1152,7 +1152,7 @@ def complete_zeq_magic_redo_test(): # BIO type
 def complete_agm_magic_test(): # a little irregular
      """test agm_magic.py"""
      agm_magic_infile = 'agm_magic_example.agm'
-     agm_magic_outfile = 'agm_magic_output.out'
+     agm_magic_outfile = 'agm_magic_output_new.out'
      agm_magic_reference = 'agm_magic_output_correct.out'
      agm_magic_wrong = 'agm_magic_output_incorrect.out'
      agm = Test_instance('agm_magic.py', agm_magic_infile, agm_magic_outfile, agm_magic_reference, agm_magic_wrong, None, True, '-spn', 'myspec', '--usr', "Lima Tango", '-u', 'cgs')
