@@ -297,11 +297,17 @@ other, to do:
        a bunch of files are being told to delete that apparently don't exist.  why??  # not a problem.  this happens as a backup deletion of stuff that should be deleted at the end of the previous test.  this happens just in case the previous test wasn't fully completed.  DONE
 
        still on table:
+       tests missing:
+       	     measurements_normalize.py
+	     s_magic.py
+	     specimens_results_magic.py
+	     update_measurements.py
+	     Measurement_import
        maybe make a script for generating new, correct, and wrong files (say if Lisa "knows" a program is working but she has changed some details of the output) # started this, but it may not be practical
        check to see if there are any outfiles that are not called program_new.out.  If they don't follow the convention, they won't be deleted when they should.  
        fix find_a_program (in PT) so it doesn't come up wtih arse_measurements with I run: PmagPy_tests and input 'parse_measurements' # DONE
-       use regular expressions to come up with a full list of the programs that should be involved
-#       http://docs.python.org/2/howto/regex.html#regex-howto
+      use regular expressions to come up with a full list of the programs that should be involved
+#       http://docs.python.org/2/howto/regex.html#regex-howto # probs DONE
 	put all the non python programs into a separate folder so all the data type files are tucked away
        fix programs below
        

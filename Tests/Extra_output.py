@@ -211,7 +211,7 @@ def complete_atrm_magic_test():
     atrm.ex_out_sequence()
 
 
-def complete_CIT_magic_test():# NOT DONE
+def complete_CIT_magic_test(): # NOT DONE
     """test CIT_magic.py"""
     CIT_magic_infile = 'CIT_magic_example.sam'
     CIT_magic_outfile1 = None
@@ -335,7 +335,7 @@ def complete_orientation_magic_test():
     orientation_magic = Ex_out('orientation_magic.py', infile, tag1, orient_Fsi, tag2, orient_Fsa, orient_Fsi_reference, orient_Fsa_reference, orient_Fsi_wrong, orient_Fsa_wrong, None, True)
     orientation_magic.ex_out_sequence()
                     
-def complete_parse_measurements_test():# finish testing/setting me up
+def complete_parse_measurements_test():  # finish testing/setting me up
     """test parse_measurements_test()"""
     print "Testing parse_measurements.py"
     infile = "parse_measurements_example.dat"

@@ -106,7 +106,7 @@ class Test_instance(object):
      def check_output(self, actual_out, reference_out):
           print "Checking stdout output"
           actual_out, reference_out = str(actual_out), str(reference_out)
-          if reference_out in actual_out:#the in syntax is because of weird extra spaces and characters at the end/start of stdout
+          if reference_out in actual_out: #the in syntax is because of weird extra spaces and characters at the end/start of stdout
                print str(self.name) + " output as expected"
                print "-"
           else:
@@ -243,7 +243,7 @@ def complete_angle_test(): # BIO type
 
 
 # plotting.py example, with stdout
-def complete_zeq_test(): # Plotting w/stdout
+def complete_zeq_test():   # Plotting w/stdout
      """test zeq.py"""
      zeq_infile = 'zeq_example.dat'
      zeq_reference_output = """0      0.0 9.283e-08   339.9    57.9 
@@ -954,7 +954,7 @@ def complete_plotxy_test():
      plotxy.plot_program_sequence(stdout=False)
 
 
-def complete_qqplot_test():# irregular type.  produces a lot of output, which is then parsed out.  
+def complete_qqplot_test():  # irregular type.  produces a lot of output, which is then parsed out.  
      """test qqplot.py"""
      qqplot_infile = "qqplot_example.dat"
      qqplot_outfile = None

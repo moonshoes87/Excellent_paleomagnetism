@@ -40,6 +40,7 @@ print the_list
 clean_list = trim_list(the_list)
 print clean_list
 final = remove_duplicates(clean_list)
+#final = clean_list
 final.sort()
 total = 0
 for i in final:
