@@ -298,7 +298,7 @@ other, to do:
 
        still on table:
        tests missing:
-       	     measurements_normalize.py
+       	     measurements_normalize.py # put in Rename_me, must test
 	     s_magic.py
 	     specimens_results_magic.py
 	     update_measurements.py
