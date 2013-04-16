@@ -1,6 +1,8 @@
 #! /bin/bash
 
 # making sure all files are created afresh
+rm old_all_errors_list.txt
+mv all_errors_list.txt old_all_errors_list.txt
 rm *new.out*  # removes all output files from the last round of testing
 rm *full_output.txt*  # removes long files with stdout from tests
 rm *clean_output.txt* # removes shorter files with shortened stdout from tests
