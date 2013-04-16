@@ -299,7 +299,10 @@ other, to do:
        still on table:
        maybe make a script for generating new, correct, and wrong files (say if Lisa "knows" a program is working but she has changed some details of the output) # started this, but it may not be practical
        check to see if there are any outfiles that are not called program_new.out.  If they don't follow the convention, they won't be deleted when they should.  
-       fix find_a_program (in PT) so it doesn't come up wtih arse_measurements with I run: PmagPy_tests and input 'parse_measurements'
+       fix find_a_program (in PT) so it doesn't come up wtih arse_measurements with I run: PmagPy_tests and input 'parse_measurements' # DONE
+       use regular expressions to come up with a full list of the programs that should be involved
+#       http://docs.python.org/2/howto/regex.html#regex-howto
+	put all the non python programs into a separate folder so all the data type files are tucked away
        fix programs below
        
 
@@ -308,8 +311,8 @@ other, to do:
 
        problem programs to return to:
 
-THELLIER_GUI.PY
-MAGIC.PY TUTORIAL
+THELLIER_GUI.PY # ASKING
+MAGIC.PY TUTORIAL # ASKING
 CONVERT2UNIX.PY # DONE!!!
 CURIE.PY # SENT to Lisa
 MAGIC_SELECT.PY # SENT to Lisa
