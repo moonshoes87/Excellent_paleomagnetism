@@ -1,22 +1,24 @@
 #! /bin/bash
 
 # making sure all files are created afresh
-rm old_all_errors_list.txt
-mv all_errors_list.txt old_all_errors_list.txt
+rm old_all_errors.txt  # why does this not work???
+mv all_errors_list.txt old_all_errors.txt
+ls *errors*
 rm *new.out*  # removes all output files from the last round of testing
 rm *full_output.txt*  # removes long files with stdout from tests
 rm *clean_output.txt* # removes shorter files with shortened stdout from tests
 rm *errors_list.txt* # removes files with a list of the problem programs
+ls *errors*
 
-python Bootstrap.py > bootstrap_full_output.txt
+#python Bootstrap.py > bootstrap_full_output.txt
 echo "finished Bootstrap.py"
-python Extra_output.py > extra_out_full_output.txt
+#python Extra_output.py > extra_out_full_output.txt
 echo "finished Extra_output.py"
 python Random.py > random_full_output.txt
 echo "finished Random.py"
-python Rename_me.py > rename_me_full_output.txt
+#python Rename_me.py > rename_me_full_output.txt
 echo "finished Rename_me"
-python clean_log_output.py -all
+#python clean_log_output.py -all
 echo "ran clean_log_output.py -all"
 
 #full test (with shortened rename_me), started at 10:55 a.m., done at 11:09 a.m.  Jeez
