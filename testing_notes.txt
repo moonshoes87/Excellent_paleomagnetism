@@ -309,13 +309,14 @@ other, to do:
        problem programs to return to:
 
 THELLIER_GUI.PY
-CONVERT2UNIX.PY # DONE!!!
-CURIE.PY # PUT VERSION on Dropbox for lisa to approve
 MAGIC.PY TUTORIAL
-MAKE_MAGIC_PLOTS.PY # mostly done, keep working
+CONVERT2UNIX.PY # DONE!!!
+CURIE.PY # SENT to Lisa
+MAGIC_SELECT.PY # SENT to Lisa
+MAKE_MAGIC_PLOTS.PY # DONE
 MEASUREMENT_IMPORT SCRIPTS (some of these are labeled other ways)
 PARSE_MEASUREMENTS.PY # DONE
-PLOT_MAGIC_KEYS.PY
+PLOT_MAGIC_KEYS.PY # SENT to Lisa to fix
 PLOT_MAPPTS.PY NOT DONE -- I only have the free version, so it doesn't work	
 
 
