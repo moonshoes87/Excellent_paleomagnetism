@@ -92,21 +92,6 @@ def remove_new_outfiles():
     """
     subprocess.call('rm ' + directory + '/*_new.out', shell=True)
 
-ignore_me = """def get_short_program_name(name):
-    # this doesn't work!  you would need regular expressions.  strip removes all combinations of the letters
-    print "get short name"
-    print name
-    n = name.strip()
-    print n
-    n -= ".py"
-    print n
-    n = n.strip("complete")
-    print n
-    n = n.strip("_test")
-    print n
-    return n
-"""
-
 def clean_program_name(name = None): 
     """
     removes extraneous stuff and gets to the command for running the test
