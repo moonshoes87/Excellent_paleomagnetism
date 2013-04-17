@@ -43,6 +43,8 @@ Some of the tests malfunction when other python programs are run simultaneously 
 
 It is possible to have problems because there are two versions of a saved document in new-test-output/.  There are some safeguards set in place to try to prevent this, but clearing that directory may be necessary at some point.  By default, the directory should self-clear when you begin a new session of testing. 
 
+When the entire test suite is run, it automatically wipes out all old output files (meaning files that match *_new.out -- this is a safeguard so that you don't get a leftover output file that masks a program's failure to run).  However, when you run a program individually -- i.e., python Extra_output.py -r s_magic -- that does not automatically wipe old output first.  Be aware of this.  
+
 if comparing to stdout, make sure to have the reference tight in quotes.  I.e.: thing = """stuff
    and more stuff
    this is fun"""
