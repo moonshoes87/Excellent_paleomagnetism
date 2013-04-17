@@ -211,13 +211,8 @@ def complete_atrm_magic_test():
     atrm.ex_out_sequence()
 
 
-def complete_CIT_magic_test(): # NOT DONE
-    """test CIT_magic.py"""
-    CIT_magic_infile = 'CIT_magic_example.sam'
-    CIT_magic_outfile1 = None
-    CIT_magic_outfile2 = Non
 
-# er_sites.txt is supposed to be designatable on the command-line with -Fsp, but is not.  fix this....
+
 
 
 def complete_hysteresis_magic_test(): # irregular.  a file has to be renamed because it just comes out a default way, it is not specifiable on the command line
@@ -375,6 +370,47 @@ ignore = """
 thellier_magic_redo.py -f thellier_magic_redo_example.dat  -fnl thellier_magic_redo_measurements.txt -fre thellier_magic_redo2.txt -fan thellier_magic_redo_rmag_anisotropy.txt  -F thellier_magic_redo_specimens.txt -Fnl thellier_magic_redo_NLT_specimens.txt  -Fac thellier_magic_redo_AC_specimens.txt -NLT -ANI
 """
 
+
+def complete_CIT_magic_test(): # irregular
+    """test CIT_magic.py"""
+    obj= env.run('CIT_magic.py', '-WD', directory, '-h')
+    print obj.stdout
+    infile = 'CIT_magic_example.sam'
+    other_infile = 'CIT_magic_er_specimens.txt'
+    tag1, out1, ref1, wrong1 = '-F', 'CIT_magic_measurements.out', 'CIT_magic_measurements_correct.out', 'CIT_magic_measurements_incorrect.out'
+    tag2, out2, ref2, wrong2 = '-Fsp', 'CIT_er_specimens.out', 'CIT_er_specimens_correct.out', 'CIT_er_specimens_incorrect.out'
+    tag3, out3, ref3, wrong3 = '-Fsi', 'CIT_er_sites.out', 'CIT_er_sites_correct.out', 'CIT_er_sites_incorrect.out'
+    tag4, out4, ref4, wrong4 = '-Fsa', 'CIT_er_samples.txt', 'CIT_er_samples_correct.out', 'CIT_er_samples_incorrect.out'
+    CIT_folder = file_prefix + 'CIT_magic/'
+    subprocess.call('rm CIT_magic/er_sites.txt CIT_magic/er_specimens.txt CIT_magic/er_samples.txt CIT_magic/magic_measurements.txt', shell=True)
+    CIT_magic = Ex_out('CIT_magic.py', infile, tag1, out1, tag2, out2, ref1, ref2, wrong1, wrong2, None, True, '-fsi', other_infile)
+    obj = env.run('CIT_magic.py', '-WD', directory + '/CIT_magic', '-f', infile, '-fsi', other_infile, tag1, out1, tag2, out2, tag3, out3, tag4, out4, cwd= directory + '/CIT_magic')
+    print obj.stdout
+    subprocess.call('mv CIT_magic/er_sites.txt CIT_magic/CIT_er_sites.out', shell=True)
+    # testing outfiles against correctfiles
+    CIT_magic.check_file_output(CIT_folder + out1, CIT_folder + ref1, reference="correct")
+    CIT_magic.check_file_output(CIT_folder + out2, CIT_folder + ref2, reference="correct")
+    CIT_magic.check_file_output(CIT_folder + out3, CIT_folder + ref3, reference="correct")
+    CIT_magic.check_file_output(CIT_folder + out4, CIT_folder + ref4, reference="correct")
+    # testing outfiles against wrongfiles
+    CIT_magic.check_file_output(CIT_folder + out1, CIT_folder + wrong1, reference="incorrect")
+    CIT_magic.check_file_output(CIT_folder + out2, CIT_folder + wrong2, reference="incorrect")
+    CIT_magic.check_file_output(CIT_folder + out3, CIT_folder + wrong3, reference="incorrect")
+    CIT_magic.check_file_output(CIT_folder + out4, CIT_folder + wrong4, reference="incorrect")
+    # unittests
+    CIT_unittest = Bad_test(CIT_magic)
+    CIT_unittest.test_file1_with_file2(CIT_folder + out1, CIT_folder + wrong1, "correct")
+    CIT_unittest.test_file1_with_file2(CIT_folder + out1, CIT_folder + ref1, "incorrect")
+    CIT_unittest.test_file1_with_file2(CIT_folder + out2, CIT_folder + wrong2, "correct")
+    CIT_unittest.test_file1_with_file2(CIT_folder + out2, CIT_folder + ref2, "incorrect")
+    CIT_unittest.test_file1_with_file2(CIT_folder + out3, CIT_folder + wrong3, "correct")
+    CIT_unittest.test_file1_with_file2(CIT_folder + out3, CIT_folder + ref3, "incorrect")
+    CIT_unittest.test_file1_with_file2(CIT_folder + out4, CIT_folder + wrong4, "correct")
+    CIT_unittest.test_file1_with_file2(CIT_folder + out4, CIT_folder + ref4, "incorrect")
+    print "CIT_magic works!"
+
+
+
 # listings and such that make this whole business work
     
 def complete_working_test():
@@ -387,9 +423,10 @@ def complete_working_test():
     complete_orientation_magic_test()
     complete_parse_measurements_test()
     complete_thellier_magic_redo_test()
+    complete_CIT_magic_test()
 
 
-Extra_output_tests = {"aarm_magic": complete_aarm_magic_test, "atrm_magic": complete_atrm_magic_test, "hysteresis_magic": complete_hysteresis_magic_test, "k15_magic": complete_k15_magic_test, "kly4s_magic": complete_kly4s_magic_test, "pmag_results_extract": complete_pmag_results_extract_test, "orientation_magic": complete_orientation_magic_test, "parse_measurements": complete_parse_measurements_test, "thellier_magic_redo": complete_thellier_magic_redo_test}
+Extra_output_tests = {"aarm_magic": complete_aarm_magic_test, "atrm_magic": complete_atrm_magic_test, "hysteresis_magic": complete_hysteresis_magic_test, "k15_magic": complete_k15_magic_test, "kly4s_magic": complete_kly4s_magic_test, "pmag_results_extract": complete_pmag_results_extract_test, "orientation_magic": complete_orientation_magic_test, "parse_measurements": complete_parse_measurements_test, "thellier_magic_redo": complete_thellier_magic_redo_test, "CIT_magic": complete_CIT_magic_test}
 
 ex_out_errors_list = open('extra_output_errors_list.txt', 'w')
 

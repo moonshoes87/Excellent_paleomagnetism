@@ -183,6 +183,7 @@ def run_individual_program(mapping): # takes as argument a mapping of function n
     except Exception as ex:
         print "printing error:"
         print ex
+        raise(ex)
 
 
 if __name__ == "__main__":
