@@ -436,13 +436,17 @@ def complete_IODP_csv_magic_test(): # irregular
     IODP_csv.check_file_output(out4, wrong4, "incorrect")
     print "finished"
 
-def complete_PMD_magic_test(): # irregular
+def complete_PMD_magic_test(): # regular, except that the new er_samples file won't be deleted
     infile = "PMD_example.pmd"
     tag1, out1, ref1, wrong1 = "-F", "PMD_out_new.out", "PMD_out_correct.out", "PMD_out_incorrect.out"
     tag2, out2, ref2, wrong2 = "-Fsa", "PMD_new_er_samples.txt", "PMD_er_samples_correct.out", "PMD_er_samples_incorrect.out"
-    PMD_magic = Ex_out('PMD_magic.py', infile, tag1, out1, tag2, out2, ref1, ref2, wrong1, wrong2, None, True)
-    PMD_magic.run_program()
+    PMD_magic = Ex_out('PMD_magic.py', infile, tag1, out1, tag2, out2, ref1, ref2, wrong1, wrong2, None, True, '-mcd', 'SO-MAG')
+    PMD_magic.ex_out_sequence()
+
     
+
+
+#    -loc "Summit Springs" -ncn 4-2 -spc 1 -mcd SO-MAG
 
 
 # listings and such that make this whole business work
@@ -462,7 +466,7 @@ def complete_working_test():
     complete_PMD_magic_test()
 
 
-Extra_output_tests = {"aarm_magic": complete_aarm_magic_test, "atrm_magic": complete_atrm_magic_test, "hysteresis_magic": complete_hysteresis_magic_test, "k15_magic": complete_k15_magic_test, "kly4s_magic": complete_kly4s_magic_test, "pmag_results_extract": complete_pmag_results_extract_test, "orientation_magic": complete_orientation_magic_test, "parse_measurements": complete_parse_measurements_test, "thellier_magic_redo": complete_thellier_magic_redo_test, "CIT_magic": complete_CIT_magic_test, "IODP_csv_magic": complete_IODP_csv_magic_test, "PMD_magic": complet_PMD_magic_test}
+Extra_output_tests = {"aarm_magic": complete_aarm_magic_test, "atrm_magic": complete_atrm_magic_test, "hysteresis_magic": complete_hysteresis_magic_test, "k15_magic": complete_k15_magic_test, "kly4s_magic": complete_kly4s_magic_test, "pmag_results_extract": complete_pmag_results_extract_test, "orientation_magic": complete_orientation_magic_test, "parse_measurements": complete_parse_measurements_test, "thellier_magic_redo": complete_thellier_magic_redo_test, "CIT_magic": complete_CIT_magic_test, "IODP_csv_magic": complete_IODP_csv_magic_test, "PMD_magic": complete_PMD_magic_test}
 
 ex_out_errors_list = open('extra_output_errors_list.txt', 'w')
 
