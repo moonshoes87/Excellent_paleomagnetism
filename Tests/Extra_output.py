@@ -39,16 +39,12 @@ class Ex_out(Rename_me.Test_instance):
     def parse_args(self):
         print "parsing args"
         if len(self.args) > 0:
-            print "greater than 0"
             self.arg1 = self.args[0]
             if len(self.args) > 1:
-                print "greater than 1"
                 self.arg2 = self.args[1]
                 if len(self.args) > 2:
-                    print "Greater than 2"
                     self.arg3 = self.args[2]
                     if len(self.args) > 3:
-                        print "greater than 3"
                         self.arg4 = self.args[3]
 
     def run_program(self):
@@ -421,18 +417,32 @@ def complete_CIT_magic_test(): # irregular
     print "CIT_magic works!"
 
 
-def complete_IODP_csv_magic_test():
+def complete_IODP_csv_magic_test(): # irregular
     """test IODP_csv.py"""
     infile = "IODP_csv_example.csv"
+#    infile = "SRM_318_U1359_B_A.csv"
     tag1, out1, ref1, wrong1 = "-F", "IODP_magic_measurements_new.out","IODP_magic_measurements_correct.out","IODP_magic_measurements_incorrect.out"
-    tag2, out2, ref2, wrong2 = "-Fsp", "IOPD_er_specimens_new.out", "IOPD_er_specimens_correct.out", "IOPD_er_specimens_incorrect.out" 
+    tag2, out2, ref2, wrong2 = "-Fsp", "IODP_er_specimens_new.out", "IODP_er_specimens_correct.out", "IODP_er_specimens_incorrect.out" 
     tag3, out3, ref3, wrong3 = "-Fsa", "IODP_er_samples_new.out", "IODP_er_samples_correct.out", "IODP_er_samples_incorrect.out"
     tag4, out4, ref4, wrong4 = "-Fsi", "IODP_er_sites_new.out", "IODP_er_sites_correct.out", "IODP_er_sites_incorrect.out"
     IODP_csv = Ex_out('IODP_csv_magic.py', infile, tag1, out1, tag2, out2, ref1, ref2, wrong1, wrong2, None, True, tag3, out3, tag4, out4)
-    IODP_csv.run_program()
+    obj = env.run('IODP_csv_magic.py', '-h')
+    print obj.stdout
+    IODP_csv.ex_out_sequence()
+    # checking the extra output files
+    IODP_csv.check_file_output(out3, ref3, "correct")
+    IODP_csv.check_file_output(out3, wrong3, "incorrect")
+    IODP_csv.check_file_output(out4, ref4, "correct")
+    IODP_csv.check_file_output(out4, wrong4, "incorrect")
+    print "finished"
 
-# below works
-#Tests nebula$ IODP_csv_magic.py -f IODP_csv_example.csv -F IODP_csv_magic_measurements_new.out -Fsp IODP_er_specimens_new.out -Fsa IODP_er_samples_new.out -Fsi IODP_er_sites_new.out
+def complete_PMD_magic_test(): # irregular
+    infile = "PMD_example.pmd"
+    tag1, out1, ref1, wrong1 = "-F", "PMD_out_new.out", "PMD_out_correct.out", "PMD_out_incorrect.out"
+    tag2, out2, ref2, wrong2 = "-Fsa", "PMD_new_er_samples.txt", "PMD_er_samples_correct.out", "PMD_er_samples_incorrect.out"
+    PMD_magic = Ex_out('PMD_magic.py', infile, tag1, out1, tag2, out2, ref1, ref2, wrong1, wrong2, None, True)
+    PMD_magic.run_program()
+    
 
 
 # listings and such that make this whole business work
@@ -449,9 +459,10 @@ def complete_working_test():
     complete_thellier_magic_redo_test()
     complete_CIT_magic_test()
     complete_IODP_csv_magic_test()
+    complete_PMD_magic_test()
 
 
-Extra_output_tests = {"aarm_magic": complete_aarm_magic_test, "atrm_magic": complete_atrm_magic_test, "hysteresis_magic": complete_hysteresis_magic_test, "k15_magic": complete_k15_magic_test, "kly4s_magic": complete_kly4s_magic_test, "pmag_results_extract": complete_pmag_results_extract_test, "orientation_magic": complete_orientation_magic_test, "parse_measurements": complete_parse_measurements_test, "thellier_magic_redo": complete_thellier_magic_redo_test, "CIT_magic": complete_CIT_magic_test, "IODP_csv_magic": complete_IODP_csv_magic_test}
+Extra_output_tests = {"aarm_magic": complete_aarm_magic_test, "atrm_magic": complete_atrm_magic_test, "hysteresis_magic": complete_hysteresis_magic_test, "k15_magic": complete_k15_magic_test, "kly4s_magic": complete_kly4s_magic_test, "pmag_results_extract": complete_pmag_results_extract_test, "orientation_magic": complete_orientation_magic_test, "parse_measurements": complete_parse_measurements_test, "thellier_magic_redo": complete_thellier_magic_redo_test, "CIT_magic": complete_CIT_magic_test, "IODP_csv_magic": complete_IODP_csv_magic_test, "PMD_magic": complet_PMD_magic_test}
 
 ex_out_errors_list = open('extra_output_errors_list.txt', 'w')
 
