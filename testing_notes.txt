@@ -316,6 +316,8 @@ Lori
       use regular expressions to come up with a full list of the programs that should be involved
 #       http://docs.python.org/2/howto/regex.html#regex-howto # probs DONE
 	put all the non python programs into a separate folder so all the data type files are tucked away
+	what about removing the _new.out files if running the thing alone, maybe repeatedly?
+	go through and check command line options you didn't use. the trouble is, the options are way to many to test all possible combinations..... maybe you could just obj = env.run(options!!!), not test the results.  still, this will be irritating.  basically, it will mean going through all the programs and running -h
        fix programs below
        
 
@@ -331,6 +333,7 @@ CURIE.PY # SENT to Lisa
 MAGIC_SELECT.PY # SENT to Lisa
 MAKE_MAGIC_PLOTS.PY # DONE
 MEASUREMENT_IMPORT SCRIPTS (some of these are labeled other ways)
+		   HUJI_magic.py 
 PARSE_MEASUREMENTS.PY # DONE
 PLOT_MAGIC_KEYS.PY # SENT to Lisa to fix
 PLOT_MAPPTS.PY NOT DONE -- I only have the free version, so it doesn't work	

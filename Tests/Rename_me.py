@@ -1246,7 +1246,7 @@ def complete_LDEO_magic_test():
 
 #LDEO_magic.py -f ldeo_magic_example.dat -LP AF -F ldeo_magic_measurements.txt -loc here
 
-def complete_sio_magic_test():
+def complete_sio_magic_test(): # regular-ish, but testing three different infiles.  last one is irregular -- too many command line args
      """test sio_magic.py"""
      infile = "sio_af_example.dat"
      outfile = "sio_af_measurements_new.out"

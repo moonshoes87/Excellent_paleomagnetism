@@ -33,7 +33,7 @@ class Ex_out(Rename_me.Test_instance):
         self.args = args
         if self.WD:
             self.infile, self.outfile1, self.outfile2, self.correctfile1, self.correctfile2, self.wrongfile1, self.wrongfile2 = infile, outfile1, outfile2, correctfile1, correctfile2, wrongfile1, wrongfile2 # without prefixes
-        self.arg1, self.arg2, self.arg3, self.arg4 = "none"
+        self.arg1, self.arg2, self.arg3, self.arg4 = None, None, None, None
         self.parse_args()
 
     def parse_args(self):
@@ -443,6 +443,21 @@ def complete_PMD_magic_test(): # regular, except that the new er_samples file wo
     PMD_magic = Ex_out('PMD_magic.py', infile, tag1, out1, tag2, out2, ref1, ref2, wrong1, wrong2, None, True, '-mcd', 'SO-MAG')
     PMD_magic.ex_out_sequence()
 
+
+# SUFAR4-asc_magic.py -f sufar4-asc_magic_example.txt -F sufar_magic_measurements_new.out -Fa sufar_rmag_anisotropy_new.out -Fr sufar_rmag_results_new.out 
+def complete_SUFAR4_asc_magic_test(): #
+    infile = "sufar4-asc_magic_example.txt"
+    tag1, out1, ref1, wrong1 = "-F", "sufar4_magic_measurements_new.out", "sufar4_magic_measurements_correct.out", "sufar4_magic_measurements_incorrect.out"
+    tag2, out2, ref2, wrong2 = "-Fa", "sufar4_rmag_anisotropy_new.out", "sufar4_rmag_anisotropy_correct.out", "sufar4_rmag_anisotropy_incorrect.out"
+#    tag4, out4, ref4, wrong4 = None # these don't work because the -Fs tag is broken.  
+    sufar4 = Ex_out('SUFAR4-asc_magic.py', infile, tag1, out1, tag2, out2, ref1, ref2, wrong1, wrong2, None, True, '-loc', 'U1356A', '-spc', '0', '-ncn', '5') 
+    sufar4.ex_out_sequence()
+    # then test the rest of the output files
+    sufar4.check_file_output('er_sites.txt', 'sufar4_er_sites_correct.out', "correct")
+    sufar4.check_file_output('er_samples.txt', 'sufar4_er_samples_correct.out', 'correct')
+    sufar4.check_file_output('er_specimens.txt', 'sufar4_er_specimens_correct.out', 'correct')
+    subprocess.call('rm er_sites.txt er_samples.txt er_specimens.txt', shell=True)
+    
     
 
 
@@ -464,9 +479,10 @@ def complete_working_test():
     complete_CIT_magic_test()
     complete_IODP_csv_magic_test()
     complete_PMD_magic_test()
+    complete_SUFAR4_asc_magic_test() #
 
 
-Extra_output_tests = {"aarm_magic": complete_aarm_magic_test, "atrm_magic": complete_atrm_magic_test, "hysteresis_magic": complete_hysteresis_magic_test, "k15_magic": complete_k15_magic_test, "kly4s_magic": complete_kly4s_magic_test, "pmag_results_extract": complete_pmag_results_extract_test, "orientation_magic": complete_orientation_magic_test, "parse_measurements": complete_parse_measurements_test, "thellier_magic_redo": complete_thellier_magic_redo_test, "CIT_magic": complete_CIT_magic_test, "IODP_csv_magic": complete_IODP_csv_magic_test, "PMD_magic": complete_PMD_magic_test}
+Extra_output_tests = {"aarm_magic": complete_aarm_magic_test, "atrm_magic": complete_atrm_magic_test, "hysteresis_magic": complete_hysteresis_magic_test, "k15_magic": complete_k15_magic_test, "kly4s_magic": complete_kly4s_magic_test, "pmag_results_extract": complete_pmag_results_extract_test, "orientation_magic": complete_orientation_magic_test, "parse_measurements": complete_parse_measurements_test, "thellier_magic_redo": complete_thellier_magic_redo_test, "CIT_magic": complete_CIT_magic_test, "IODP_csv_magic": complete_IODP_csv_magic_test, "PMD_magic": complete_PMD_magic_test, "SUFAR4-asc_magic": complete_SUFAR4_asc_magic_test}
 
 ex_out_errors_list = open('extra_output_errors_list.txt', 'w')
 
