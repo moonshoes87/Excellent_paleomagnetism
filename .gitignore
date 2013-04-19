@@ -102,3 +102,8 @@ Tests/all_errors_list.txt
 Tests/random_full_output.txt
 Tests/er_specimens.txt
 Tests/.#Bootstrap.py
+.#testing_notes.txt
+Tests/.#all_errors_list.txt
+Tests/final_list_of_programs_with_tests.txt
+Tests/list_of_programs_with_tests.txt
+Tests/old_all_errors.txt

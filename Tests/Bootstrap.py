@@ -127,7 +127,7 @@ def do_watsonsV():
     """test watsonsV.py"""
     watsonsV_infile = file_prefix + "watsonsF_example_file1.dat"
     watsonsV_infile2 = file_prefix + "watsonsF_example_file2.dat"
-    obj = env.run("watsonsV.py", "-v", watsonsV_infile, "-f2", watsonsV_infile2, stdin='q') # messed up on purpose, for testing
+    obj = env.run("watsonsV.py", "-f", watsonsV_infile, "-f2", watsonsV_infile2, stdin='q') 
     print obj.stdout
     a_list = str(obj.stdout).split()
     clean_list = remove_non_integers_from_output(a_list)
@@ -204,7 +204,7 @@ class Bad_bootams(unittest.TestCase):
 def complete_eqarea_magic_test():
     """test eqarea_magic.py"""
     eqarea_magic_infile = 'eqarea_magic_example.dat'
-    eqarea_reference = [(1.0, 1.0), (109., 112.), (204., 207.), (7.6, 7.9), (.9, 1.1), (28.5, 29.5), (7.5, 9.5), (3., 3.5), (5.5, 6.5), (59., 60.), (1.9, 2.1), (247., 250.), (149., 152.), (4., 4.6), (.9, 1.1), (26., 27.), (14.5, 16.5), (7.5, 8.5), (184.5, 186.5), (-59.5, -58.)]
+    eqarea_reference = [(1.0, 1.0), (109., 112.), (204., 207.), (7.6, 7.9), (.9, 1.1), (28.5, 29.5), (7.5, 9.5), (3., 3.5), (5.5, 6.5), (59., 60.), (1.9, 2.1), (247., 250.), (148., 153.), (4., 4.6), (.9, 1.1), (26., 27.), (14.5, 16.5), (7.5, 8.5), (184.5, 186.5), (-59.5, -58.)]
     obj = env.run('eqarea_magic.py', '-WD', directory, '-f', eqarea_magic_infile, '-obj', 'loc', '-crd', 'g', '-ell', 'Be', stdin='q')
     result = obj.stdout
     result_list = str(result).split()
@@ -247,6 +247,7 @@ if __name__ == "__main__":
         PT.run_individual_program(Bootstrap_tests)
     elif "-all" in sys.argv:
         complete_working_test()
+        print "remember to delete *_new.out files as needed"
     else:
         new_list = EL.go_through(Bootstrap_tests, bootstrap_errors_list)
         EL.redo_broken_ones(new_list)

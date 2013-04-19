@@ -290,39 +290,34 @@ complete list of tested programs:
 
 
 other, to do:
-       check through the output you generate, see how helpful it is.  try to channel Lisa!
-       go back to programs you need to fix (listed in uppercase below)
+       check through the output you generate, see how helpful it is.  try to channel Lisa! # DONE....?
+       go back to programs you need to fix (listed in uppercase below) DONE
        make a script that will replace all the inaccurate path names, so it can be run on a different machine.  this includes that some stdout includes -- some_file was saved in this_directory.  could put it into the strip_pmagpy function # can't really find these, but if the problem comes up, you have a great template for fixing it.... just add in to the pmagpy strip function # DONE (for now)
 
        a bunch of files are being told to delete that apparently don't exist.  why??  # not a problem.  this happens as a backup deletion of stuff that should be deleted at the end of the previous test.  this happens just in case the previous test wasn't fully completed.  DONE
 
-       still on table:
-       tests missing:
-	     specimens_results_magic.py
-I'm trying to work on a test for specimens_results_magic.py.  From your examples. it looks like I need to do the download_magic example. then the site_edit_magic example, then I should be able to use specimens_results_magic.  However, I am getting stuck on site_edit_magic.  After I have downloaded zmab0083201tmp03.txt, and then try to use site_edit_magic, I get "bad pmag specimen_input file".  It looks like, by default, site_edit_magic is looking for zeq_specimens_s.txt, but download_magic does not produce one.  	(it looks like it requires -f pmag_specimens.txt instead.  But it is still kind of not fucked)
 
-Sorry if this is garbled.  I can re-explain if I've totally mangled it.
-
-Thanks!
-Lori
-
-
-	     update_measurements.py
-		can't find a meaningful type test to do here.  you suggest using orientation_magic, but it doesn't generate a magic_measurements file which is what update_measurements looks for.  I'm not sure what needs to be in a magic_measurements file in order to have the proper effect and not get an error.  I'm sure this makes more senese when you're actually using the database, vs. just trying to test it... sorry if I'm missing the obvious. 
-	     Measurement_import
+       	     Measurement_import DONE
        maybe make a script for generating new, correct, and wrong files (say if Lisa "knows" a program is working but she has changed some details of the output) # started this, but it may not be practical
        check to see if there are any outfiles that are not called program_new.out.  If they don't follow the convention, they won't be deleted when they should.  
        fix find_a_program (in PT) so it doesn't come up wtih arse_measurements with I run: PmagPy_tests and input 'parse_measurements' # DONE
       use regular expressions to come up with a full list of the programs that should be involved
 #       http://docs.python.org/2/howto/regex.html#regex-howto # probs DONE
+
+       still on table:
+
 	put all the non python programs into a separate folder so all the data type files are tucked away
 	what about removing the _new.out files if running the thing alone, maybe repeatedly?
 	go through and check command line options you didn't use. the trouble is, the options are way to many to test all possible combinations..... maybe you could just obj = env.run(options!!!), not test the results.  still, this will be irritating.  basically, it will mean going through all the programs and running -h
-       fix programs below
+	use error listing to fix the broken problems
+	finish readme
+	go through line by line, and at least considering running full options on at least the programs that say "extra command line options".  you can also fix up any weird output.
+	   	   Rename_me.py
+		   Bootstrap.py
+		   Extra_output.py
+		   Random.py
        
 
-       CIT_magic.py needs fixing
-              # er_sites.txt is supposed to be designatable on the command-line with -Fsp, but is not.  fix this.... 
 
        problem programs to return to:
 
@@ -332,12 +327,15 @@ CONVERT2UNIX.PY # DONE!!!
 CURIE.PY # SENT to Lisa
 MAGIC_SELECT.PY # SENT to Lisa
 MAKE_MAGIC_PLOTS.PY # DONE
+CIT_magic.py needs fixing	# can't designate er_sites file on command line, but should be able
 MEASUREMENT_IMPORT SCRIPTS (some of these are labeled other ways)
 		   HUJI_magic.py 
 PARSE_MEASUREMENTS.PY # DONE
 PLOT_MAGIC_KEYS.PY # SENT to Lisa to fix
 PLOT_MAPPTS.PY NOT DONE -- I only have the free version, so it doesn't work	
-
+IODP_csv.py -- working test, but sent to Lisa to fix minor issue
+HUJI_magic.py NOT DONE -- sending to Lisa
+SUFAR4-asc_magic.py -- working test, but sending to Lisa to fix minor issue
 
 UPPERCASE TO RETURN TO
 measurements_normalize.py # 

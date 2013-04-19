@@ -52,7 +52,9 @@ def file_parse_by_word_and_pmagpy_strip(a_file): # both parses file, AND strips 
             pass
         else:
             end_data.append(d)
+    print "finished parsing file"
     return end_data
+
 
 def clean_house():
     print "CLEANING HOUSE"
@@ -166,6 +168,7 @@ def find_a_program(name):
 
 def run_individual_program(mapping): # takes as argument a mapping of function name to the actual function, then runs that function 
     print "running individual program!"
+    print "remember to delete the _new.out file(s) as needed, if debugging"
     try:
         ind=sys.argv.index('-r')
         run_program=sys.argv[ind+1]

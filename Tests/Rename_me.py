@@ -85,13 +85,16 @@ class Test_instance(object):
           if output_type == "plot":
                print "output is plot"
                if obj.files_created == {}:
+                    print "stdout:" + str(obj.stdout)[:500]
                     print "no files were created"
                     print "files updated: ", obj.files_updated
                     return obj.files_updated
                else:
+                    print "stdout:" + str(obj.stdout)[:500]
                     print "new files created: ", obj.files_created
                     return obj.files_created
           elif output_type == "file":
+               print "stdout:" + str(obj.stdout)[:500]
                print "output is file: " + str(self.outfile)
                return self.outfile
           elif output_type == "stdout":
@@ -120,8 +123,8 @@ class Test_instance(object):
      # this function will iterate through a reference list and see if each item of output is correct 
      def check_list_output(self, output_list, correct_output_list):
           print "checking output (in list form)"
-          print "output_list:         " + str(output_list)
-          print "correct_output_list: " + str(correct_output_list)
+          print "output_list:         " + str(output_list)[:200] + " ..."
+          print "correct_output_list: " + str(correct_output_list)[:200] + " ...."
           print "Comparing two lists"
           list_empty = True
           for num, i in enumerate(output_list):
@@ -142,9 +145,9 @@ class Test_instance(object):
      def check_file_output(self, output_file, correct_file): # takes in two file names as arguments, parses their contents into list format, and then compares the first against the second
           print "checking file output, using: " + str(output_file) + " AND " + str(correct_file)
           parsed_output = PT.file_parse_by_word_and_pmagpy_strip(output_file)
-          print parsed_output
+          print str(parsed_output)[:500] + " ..."
           parsed_correct = PT.file_parse_by_word_and_pmagpy_strip(correct_file)
-          print parsed_correct
+          print str(parsed_correct)[:500] + "..."
           self.check_list_output(parsed_output, parsed_correct)
 
 
@@ -298,9 +301,10 @@ def complete_azdip_magic_test(): # irregular, because the outfile is signaled wi
      azdip_magic_infile = 'azdip_magic_example.dat'
      azdip_magic_reference = 'azdip_magic_output_correct.out'
      azdip_magic_wrong = 'azdip_magic_output_incorrect.out'
-     azdip_magic_outfile = 'azdip_magic_output_new.out' # file_prefix +
+     azdip_magic_outfile = file_prefix + 'azdip_magic_output_new.out' # needs file prefix because it doesn't go into the azdip_magic object
      azdip_magic = Test_instance('azdip_magic.py', azdip_magic_infile, None, azdip_magic_reference, azdip_magic_wrong, False, None, '-Fsa', azdip_magic_outfile, '-mcd', 'FS-FD:SO-POM', '-loc', "Northern Iceland")
-     azdip_magic.run_program()
+     azdip_magic.run_program(output_type='file')
+     print azdip_magic_outfile
      azdip_magic.check_file_output(azdip_magic_outfile, azdip_magic.ref_out)
      azdip_magic.unittest_file()
 
@@ -421,12 +425,12 @@ def complete_grab_magic_key_test(): # List type
      grab_magic_key.list_sequence()
      print "Sucessfully finished complete_grab_magic_key_test"
 
-def complete_incfish_test(): # BIO type # put in error 
+def complete_incfish_test(): # BIO type 
      """test incfish.py"""
      incfish_infile = 'incfish_example_inc.dat'
      incfish_outfile = 'incfish_results_new.out'
      incfish_reference = 'incfish_results_correct.out'
-     incfish_wrong = 'incfish_results_incorrec.out'
+     incfish_wrong = 'incfish_results_incorrect.out'
      incfish = Test_instance('incfish.py', incfish_infile, incfish_outfile, incfish_reference, incfish_wrong, None, False)
      incfish.file_in_file_out_sequence()
 
@@ -436,8 +440,13 @@ def complete_magic_select_test(): # BIO type.. but it doesn't work yet!  Lisa mu
      magic_select_outfile = 'magic_select_results_new.out'
      magic_select_reference = 'magic_select_results_correct.out'
      magic_select_wrong = 'magic_select_results_incorrect.out'
-     magic_select = Test_instance('magic_select.py', magic_select_infile, magic_select_outfile, magic_select_reference, magic_select_wrong, None, True, '-key', 'magic_method_codes', 'LP-DIR-AF', 'has')
-     magic_select.file_in_file_out_sequence()
+     magic_select = Test_instance('magic_select.py', magic_select_infile, magic_select_outfile, magic_select_reference, magic_select_wrong, None, False, '-key', 'magic_method_codes', 'LP-DIR-AF', 'has')
+     print "fails because needs WD option..."
+     obj = env.run('magic_select.py', '-h')
+     magic_select.run_program()
+ #    obj = env.run('magic_select.py', '-f', magic_select_infile, '-key', 'magic_method_codes', 'DE-BFL', 'has', '-F', 'AF_specimens.txt')
+
+#     magic_select.file_in_file_out_sequence()
     # add unittest when you get it together
 
 #complete_magic_select_test()
@@ -574,10 +583,16 @@ def complete_cart_dir_test():
      cart_dir = Test_instance('cart_dir.py', 'cart_dir_example.dat', 'cart_dir_results_new.out', 'cart_dir_results_correct.out', 'cart_dir_results_incorrect.out', None, False)
      cart_dir.file_in_file_out_sequence(interactive=True)
     
-def complete_convert_samples_test():
+def complete_convert_samples_test(): # irregular.  "-F" option does not work correctly, so outfile must be assigned later. also, -OD option
      """test convert_samples.py"""
-     convert_samples = Test_instance('convert_samples.py', 'convert_samples_example.dat', 'convert_samples_Northern_Iceland_new.out', 'convert_samples_results_correct.out', 'convert_samples_results_incorrect.out', None, False)
-     convert_samples.file_in_file_out_sequence(interactive=True)
+     subprocess.call('rm orient_Northern_Iceland.txt', shell=True)
+     convert_samples = Test_instance('convert_samples.py', 'convert_samples_example.dat', "", 'convert_samples_results_correct.out', 'convert_samples_results_incorrect.out', None, True)
+     obj = env.run('convert_samples.py', '-f', 'convert_samples_example.dat', '-WD', directory, '-OD', directory)
+     print obj.stdout
+     convert_samples.test_help()
+     convert_samples.outfile = file_prefix + 'orient_Northern_Iceland.txt'
+     convert_samples.check_file_output(convert_samples.outfile, convert_samples.ref_out)
+     convert_samples.unittest_file()
 
 def complete_di_geo_test():
      """test di_geo.py"""
@@ -1258,7 +1273,7 @@ def complete_sio_magic_test(): # regular-ish, but testing three different infile
      sio_magic2.file_in_file_out_sequence()
      # last infile:
      sio_magic3 = Test_instance('sio_magic.py', 'sio_thellier_example.dat', 'sio_thellier_new.out', 'sio_thellier_correct.out', 'sio_thellier_incorrect.out', None, False)
-     obj = env.run('sio_magic.py', '-f', sio_magic3.infile, '-F', sio_magic3.outfile, "-LP", "T", "-spc", "1", "-loc", "Socorro", "-dc", "25", "0", "90")
+     obj = env.run('sio_magic.py', '-f', sio_magic3.infile, '-F', sio_magic3.outfile, "-LP", "T", "-spc", "1", "-loc", "Socorro", "-dcg", "25", "0", "90")
      sio_magic3.check_file_output(sio_magic3.outfile, sio_magic3.ref_out)
      sio_magic3.unittest_file()
 
@@ -1381,6 +1396,7 @@ if __name__ == '__main__':
           PT.run_individual_program(rename_me_tests)
      elif "-all" in sys.argv:
           complete_working_test()
+          print "remember to delete *_new.out files as needed"
      else:
           new_list = EL.go_through(rename_me_tests, rename_me_errors_list)
           EL.redo_broken_ones(new_list)

@@ -240,6 +240,7 @@ if __name__ == "__main__":
         PT.run_individual_program(random_tests)
     elif "-all" in sys.argv:
         complete_working_test()
+        print "remember to delete *_new.out files as needed"
     else:
 #        new_list = EL.go_through(random_tests, random_errors_list)
         new_list = EL.go_through(random_tests, random_errors_list)

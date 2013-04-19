@@ -493,6 +493,7 @@ if __name__ == "__main__":
         PT.run_individual_program(Extra_output_tests)
     elif "-all" in sys.argv:
         complete_working_test()
+        print "remember to delete *_new.out files as needed"
     else:
         new_list = EL.go_through(Extra_output_tests, ex_out_errors_list) # (list of tests, file to log them in) this creates a list of which programs are messed up, along with their error message.  
         EL.redo_broken_ones(new_list) # this goes through the messed up ones again and adds to the output
@@ -506,12 +507,6 @@ if __name__ == "__main__":
 # to run an individual program: python Extra_output.py -r 'program_to_run'
 
 
-
-
-
-#if __name__ == "__main__":
- #   pass
-#    complete_working_test()
 
 
 
