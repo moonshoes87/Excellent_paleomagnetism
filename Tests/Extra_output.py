@@ -16,9 +16,15 @@ directory =  PT.directory
 class Ex_out(Rename_me.Test_instance):
     def __init__(self, name, infile, tag1, outfile1, tag2, outfile2, correctfile1, correctfile2, wrongfile1, wrongfile2, stdin, WD, *args):
         self.name = name
-        self.infile = file_prefix + infile
+        if infile == None:
+            self.infile = None
+        else:
+            self.infile = file_prefix + infile
         self.tag1 = tag1
-        self.outfile1 = file_prefix + outfile1
+        if outfile1 == None:
+            self.outfile1 == None
+        else:
+            self.outfile1 = file_prefix + outfile1
         self.tag2 = tag2
         if outfile2 == None:
             self.outfile2 = None
@@ -458,7 +464,32 @@ def complete_SUFAR4_asc_magic_test(): #
     sufar4.check_file_output('er_specimens.txt', 'sufar4_er_specimens_correct.out', 'correct')
     subprocess.call('rm er_sites.txt er_samples.txt er_specimens.txt', shell=True)
     
-    
+def complete_specimens_results_magic_test(): # irregular
+    current_dir = directory + '/specimens_results_magic/' # all tests will be run here
+#    subprocess.call('rm pmag_results.txt pmag_samples.txt', cwd = current_dir, shell=True) # gets rid of old result files
+    subprocess.call('ls pmag*', cwd=current_dir, shell=True)
+#    print "running 'specimens_results_magic.py', '-h', cwd = directory + '/specimens_results_magic'"
+ #   obj = env.run('specimens_results_magic.py', '-h', cwd = directory + '/specimens_results_magic')
+#    print obj.stdout
+    obj = env.run('specimens_results_magic.py', '-age,' '0', '5', 'Ma', '-exc', '-lat', '-crd', 'g', cwd = current_dir)
+    print "giraffe!"
+    print obj.stdout
+    filler = "hello"
+    specimens_results = Ex_out('specimens_results_magic.py', None, filler, filler, filler, filler, filler, filler, filler, filler, None, True)
+#        self.check_file_output(self.outfile1, self.correctfile1, reference="correct")
+    out1, ref1, wrong1 = current_dir +  'pmag_sites.txt', current_dir + 'pmag_sites_correct.txt', current_dir + 'pmag_sites_incorrect.txt'
+    out2, ref2, wrong2 = current_dir + 'pmag_results.txt', current_dir + 'pmag_results_correct.txt', current_dir + 'pmag_results_incorrect.txt'
+    out3, ref3, wrong3 = current_dir + 'pmag_samples.txt', current_dir + 'pmag_samples_correct.txt', current_dir + 'pmag_samples_incorrect.txt'
+    specimens_results.check_file_output(out1, ref1, "correct")
+    specimens_results.check_file_output(out1, wrong1, "incorrect")
+    specimens_results.check_file_output(out2, ref2, "correct")
+    specimens_results.check_file_output(out2, wrong2, "incorrect")
+#    specimens_results.check_file_output(file1, file1, "incorrect")
+
+
+#    def __init__(self, name, infile, tag1, outfile1, tag2, outfile2, correctfile1, correctfile2, wrongfile1, wrongfile2, stdin, WD, *args):
+
+#specimens_results_magic.py -f magic_measurements.txt -fsp pmag_specimens.txt -fsm er_samples.txt -fsi er_sites.txt -fa er_ages.txt -age 0 5 Ma -exc -lat -crd g
 
 
 #    -loc "Summit Springs" -ncn 4-2 -spc 1 -mcd SO-MAG
@@ -480,9 +511,10 @@ def complete_working_test():
     complete_IODP_csv_magic_test()
     complete_PMD_magic_test()
     complete_SUFAR4_asc_magic_test() #
+    complete_specimens_results_magic_test()
 
 
-Extra_output_tests = {"aarm_magic": complete_aarm_magic_test, "atrm_magic": complete_atrm_magic_test, "hysteresis_magic": complete_hysteresis_magic_test, "k15_magic": complete_k15_magic_test, "kly4s_magic": complete_kly4s_magic_test, "pmag_results_extract": complete_pmag_results_extract_test, "orientation_magic": complete_orientation_magic_test, "parse_measurements": complete_parse_measurements_test, "thellier_magic_redo": complete_thellier_magic_redo_test, "CIT_magic": complete_CIT_magic_test, "IODP_csv_magic": complete_IODP_csv_magic_test, "PMD_magic": complete_PMD_magic_test, "SUFAR4-asc_magic": complete_SUFAR4_asc_magic_test}
+Extra_output_tests = {"aarm_magic": complete_aarm_magic_test, "atrm_magic": complete_atrm_magic_test, "hysteresis_magic": complete_hysteresis_magic_test, "k15_magic": complete_k15_magic_test, "kly4s_magic": complete_kly4s_magic_test, "pmag_results_extract": complete_pmag_results_extract_test, "orientation_magic": complete_orientation_magic_test, "parse_measurements": complete_parse_measurements_test, "thellier_magic_redo": complete_thellier_magic_redo_test, "CIT_magic": complete_CIT_magic_test, "IODP_csv_magic": complete_IODP_csv_magic_test, "PMD_magic": complete_PMD_magic_test, "SUFAR4-asc_magic": complete_SUFAR4_asc_magic_test, "specimens_results_magic": complete_specimens_results_magic_test}
 
 ex_out_errors_list = open('extra_output_errors_list.txt', 'w')
 

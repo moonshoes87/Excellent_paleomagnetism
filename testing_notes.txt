@@ -297,7 +297,7 @@ other, to do:
        a bunch of files are being told to delete that apparently don't exist.  why??  # not a problem.  this happens as a backup deletion of stuff that should be deleted at the end of the previous test.  this happens just in case the previous test wasn't fully completed.  DONE
 
 
-       	     Measurement_import DONE
+       Measurement_import DONE
        maybe make a script for generating new, correct, and wrong files (say if Lisa "knows" a program is working but she has changed some details of the output) # started this, but it may not be practical
        check to see if there are any outfiles that are not called program_new.out.  If they don't follow the convention, they won't be deleted when they should.  
        fix find_a_program (in PT) so it doesn't come up wtih arse_measurements with I run: PmagPy_tests and input 'parse_measurements' # DONE
@@ -307,7 +307,7 @@ other, to do:
        still on table:
 
 	put all the non python programs into a separate folder so all the data type files are tucked away
-	what about removing the _new.out files if running the thing alone, maybe repeatedly?
+	what about removing the _new.out files if running the thing alone, maybe repeatedly? # put in a note to the console to remind someone to to do that
 	go through and check command line options you didn't use. the trouble is, the options are way to many to test all possible combinations..... maybe you could just obj = env.run(options!!!), not test the results.  still, this will be irritating.  basically, it will mean going through all the programs and running -h
 	use error listing to fix the broken problems
 	finish readme
@@ -317,6 +317,13 @@ other, to do:
 		   Extra_output.py
 		   Random.py
        
+
+fix this in Cookbook: Two out of these three links don't work -- zeq_magic.py is the only one that actually does work.  
+
+`After you finish importing all the data, combine the individual files together with combine_magic.py and look at them with, for example, zeq_magic.py.
+(see also PMM_redo.py for importing interpretations made on these files using the UCSC (Jarboe) software).
+
+
 
 
        problem programs to return to:
