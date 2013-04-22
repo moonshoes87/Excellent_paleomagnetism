@@ -464,9 +464,9 @@ def complete_SUFAR4_asc_magic_test(): #
     sufar4.check_file_output('er_specimens.txt', 'sufar4_er_specimens_correct.out', 'correct')
     subprocess.call('rm er_sites.txt er_samples.txt er_specimens.txt', shell=True)
     
-def complete_specimens_results_magic_test(): # irregular
+def complete_specimens_results_magic_test(): # irregular.  not sure how good of a test it is....
     current_dir = directory + '/specimens_results_magic/' # all tests will be run here
-#    subprocess.call('rm pmag_results.txt pmag_samples.txt', cwd = current_dir, shell=True) # gets rid of old result files
+#    subprocess.call('rm pmag_results.txt ', cwd = current_dir, shell=True) # gets rid of old result files # can't delete pmag_specimens.txt
     subprocess.call('ls pmag*', cwd=current_dir, shell=True)
 #    print "running 'specimens_results_magic.py', '-h', cwd = directory + '/specimens_results_magic'"
     obj = env.run('specimens_results_magic.py', '-h', cwd = directory + '/specimens_results_magic')
@@ -483,7 +483,8 @@ def complete_specimens_results_magic_test(): # irregular
     specimens_results.check_file_output(out1, wrong1, "incorrect")
     specimens_results.check_file_output(out2, ref2, "correct")
     specimens_results.check_file_output(out2, wrong2, "incorrect")
-
+    specimens_results.check_file_output(out3, ref3, "correct")
+    specimens_results.check_file_output(out3, wrong3, "incorrect")
 
 #specimens_results_magic.py -f magic_measurements.txt -fsp pmag_specimens.txt -fsm er_samples.txt -fsi er_sites.txt -fa er_ages.txt -age 0 5 Ma -exc -lat -crd g
 
