@@ -228,7 +228,7 @@ class Bad_test(unittest.TestCase):
           """Each unittest belongs to a test object"""
           self.test_obj = test_obj
      def test_file_for_error(self):
-          """tests a file producing program"""
+          """unittests a file producing program"""
           print "Testing: " + str(self.test_obj.name) + " with incorrect file, expecting error"
         # means: run the check_file_output(self.wrong_out, self.ref_out)
           self.assertRaises(NameError, self.test_obj.check_file_output, self.test_obj.wrong_out, self.test_obj.ref_out)
@@ -921,6 +921,7 @@ def complete_lnp_magic_test(): # irregular type.  it had to be written the long 
      lnp_magic_reference = PT.file_parse_by_word(file_prefix + 'lnp_magic_output_correct.txt')
      lnp_magic_wrong = ['sv01', 'Site', 'lines', 'planes', 'kappa', 'a95', 'dec', 'I am not right']
      lnp_magic = Test_instance('lnp_magic.py', lnp_magic_infile, lnp_magic_outfile, lnp_magic_reference, lnp_magic_wrong, None, True, '-crd', 'g', '-P')
+     raise NameError("-F option doesn't work")
      lnp_magic.run_program()
      obj = env.run('lnp_magic.py', '-WD', directory, '-f', 'lnp_magic_pmag_specimens.txt', '-crd', 'g', '-P')
      result = str(obj.stdout).split()

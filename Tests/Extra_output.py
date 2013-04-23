@@ -15,6 +15,7 @@ directory =  PT.directory
 
 class Ex_out(Rename_me.Test_instance):
     def __init__(self, name, infile, tag1, outfile1, tag2, outfile2, correctfile1, correctfile2, wrongfile1, wrongfile2, stdin, WD, *args):
+        """Takes a program name, an input file, tags and info for two outfiles, standard input, True or False for WD, and up to 6 additional command line arguments """
         self.name = name
         if infile == None:
             self.infile = None
@@ -43,6 +44,7 @@ class Ex_out(Rename_me.Test_instance):
         self.parse_args()
 
     def parse_args(self):
+        """Parses out self.args to give the Ex_out object arg_1, arg_2, etc."""
         print "parsing args"
         if len(self.args) > 0:
             self.arg1 = self.args[0]
@@ -54,7 +56,7 @@ class Ex_out(Rename_me.Test_instance):
                         self.arg4 = self.args[3]
 
     def run_program(self):
-        #PT.clean_house()        
+        """Runs pmagpy program in a simulated command-line type environment."""
         if self.WD:
             print "about to run WD program"
             print (self.name, '-WD', directory, '-f', self.infile, self.tag1, self.outfile1, self.tag2, self.outfile2, self.arg1, self.arg2, self.arg3, self.arg4, 'stdin=' + str(self.stdin))
@@ -72,6 +74,7 @@ class Ex_out(Rename_me.Test_instance):
         print "files updated: " + str(obj.files_updated)
 
     def check_list_output(self, output_list, correct_output_list):
+        """Iterates through an output list and a reference output list, and checks if each item matches, with the expectation that the lists will be the same"""
         print "checking list output for " + str(self.name)
         print "output_list:         " + str(output_list)[:100] +  " ...]"
         print "correct_output_list: " + str(correct_output_list)[:100]  + " ...]"
@@ -87,7 +90,7 @@ class Ex_out(Rename_me.Test_instance):
                 print "Output contained:    " + str(i)
                 print "but should have had: " + str(correct_output_list[num])
                 print "Error raised"
-                raise NameError("Wrong output -- output list did not match correct_output_list" ) # can this message be more informative??
+                raise NameError("Wrong output -- output list did not match correct_output_list -- running " + str(self.name)) 
         if list_empty:
             print "ONE OR BOTH LISTS DID NOT HAVE CONTENT"
             raise NameError("Output list empty")
@@ -95,6 +98,7 @@ class Ex_out(Rename_me.Test_instance):
         print str(self.name) + " produced correct output"
 
     def check_list_output_expect_error(self, output_list, incorrect_output_list):
+        """Iterates through an output list and a reference output list, with the expectation that the reference list is incorrect"""
         print "Testing list output (expecting error) for " + str(self.name)
         diff_found = False
         for n, i in enumerate(output_list):
@@ -114,7 +118,7 @@ class Ex_out(Rename_me.Test_instance):
 
     def check_file_output(self, outfile, reference_file, reference="correct"):
         """
-        parses each file word by word, then checks to see if the outfile matches the reference file.
+        parses each file word by word, then checks to see if the outfile matches the reference file. if reference="correct", the function raises an error if the files do not match perfectly.  if reference="incorrect", the function raises an error if the files do match perfectly.
         """
         print "testing " + str(self.name) +": " + str(outfile) + " against reference file: " + str(reference_file)
         if reference == "correct":
@@ -131,12 +135,14 @@ class Ex_out(Rename_me.Test_instance):
             self.check_list_output(out, ref)
 
     def ex_out_sequence(self):
+        """This sequence fully tests a standard program that takes in a file and outputs two or more other file."""
         self.run_program()
         print "ran program: " + str(self.name)
         self.standard_check_file_sequence()
         self.extra_output_unittest()
 
     def standard_check_file_sequence(self):
+        """Checks outfiles 1 and 2 of an ex_out object against their correctfiles and their wrongfiles"""
         print "checking outfile1 against correctfile1"
         self.check_file_output(self.outfile1, self.correctfile1, reference="correct")
         print "-"
@@ -151,6 +157,7 @@ class Ex_out(Rename_me.Test_instance):
         print "-"
    
     def extra_output_unittest(self):
+        """Does unittests for a basic Extra_output object """
         print "STARTING UNITTEST"
         unittest = Bad_test(self)
         print "unit-testing .... expecting error!"
@@ -166,35 +173,37 @@ class Ex_out(Rename_me.Test_instance):
         unittest.test_outfile2_with_correctfile2()
 
 class Bad_test(unittest.TestCase):
+#     """These unittests are meant to ensure that my tests are catching errors when they are present.  They should raise an errorif the main tests fail to raise errors with incorrect data"""
     def __init__(self, ex_out_obj):
+        """Each unittest belongs to an ex_out object"""
         self.ex_out = ex_out_obj
 
-    def test_ex_out_for_error(self):
-        self.assertRaises(NameError, self.ex_out.check_outputs, the_list="bad")
-        print "Error expected (unittest)"
-        print "-"
-
     def test_outfile1_with_wrongfile1(self):
+        """Tests self.outfile1 against self.wrongfile"""
         print "running: test_outfile1_with_wrongfile1"
         self.assertRaises(NameError, self.ex_out.check_file_output, self.ex_out.outfile1, self.ex_out.wrongfile1, reference="correct")
         print "error expected (unittest)"
 
     def test_outfile1_with_correctfile1(self):
-        print "running: test_outfile1_with_correctfile2"
+        """Tests self.outfile1 against self.correctfile1"""
+        print "running: test_outfile1_with_correctfile1"
         self.assertRaises(NameError, self.ex_out.check_file_output, self.ex_out.outfile1, self.ex_out.correctfile1, reference="incorrect")
         print "error expected (unittest)"
 
     def test_outfile2_with_wrongfile2(self):
+        """Tests self.outfile2 against self.wrongfile2"""
         print "running: test_outfile2_with_wrongfile2()"
         self.assertRaises(NameError, self.ex_out.check_file_output, self.ex_out.outfile2, self.ex_out.wrongfile2, reference="correct")
         print "error expected (unittest)"
 
     def test_outfile2_with_correctfile2(self):
+        """Tests self.outfile2 with correctfile2"""
         print "running: test_outfile2_with_correctfile2()"
         self.assertRaises(NameError, self.ex_out.check_file_output, self.ex_out.outfile2, self.ex_out.correctfile2, reference="incorrect")
         print "error expected (unittest)"
 
     def test_file1_with_file2(self, file1, file2, ref):
+        """Test any file against any other file.  Last argument should be either "correct" or "incorrect", depending on which you expect"""
         print "running: test_file1_with_file2 using " + str(file1) + " and " + str(file2)
         self.assertRaises(NameError, self.ex_out.check_file_output, file1, file2, reference=ref)
         print "error expected (unittest)"
@@ -205,12 +214,10 @@ def complete_aarm_magic_test():
     infile = "aarm_measurements.txt"
     aarm_Fa, aarm_Fr = 'aarm_magic_anisotropy_new.out', 'aarm_magic_results_new.out'
     tag1, tag2 = "-Fa", "-Fr"
-    aarm_Fa_reference, aarm_Fr_reference = 'aarm_magic_anisotropy_correct.out', 'aarm_magic_results_correct.out' # should be correct
+    aarm_Fa_reference, aarm_Fr_reference = 'aarm_magic_anisotropy_correct.out', 'aarm_magic_results_correct.out' 
     aarm_Fa_wrong, aarm_Fr_wrong = 'aarm_magic_anisotropy_incorrect.out', 'aarm_magic_results_incorrect.out'
     aarm_magic = Ex_out('aarm_magic.py', infile, tag1, aarm_Fa, tag2, aarm_Fr, aarm_Fa_reference, aarm_Fr_reference, aarm_Fa_wrong, aarm_Fr_wrong, None, True)
     aarm_magic.ex_out_sequence()
-
-
 
 def complete_atrm_magic_test():
     """test atrm_magic.py"""
@@ -222,11 +229,6 @@ def complete_atrm_magic_test():
     atrm_Fa_wrong, atrm_Fr_wrong = "atrm_anisotropy_incorrect.txt", "atrm_results_incorrect.txt"
     atrm = Ex_out('atrm_magic.py', atrm_infile, tag1, atrm_Fa, tag2, atrm_Fr, atrm_Fa_reference, atrm_Fr_reference, atrm_Fa_wrong, atrm_Fr_wrong, None, True)
     atrm.ex_out_sequence()
-
-
-
-
-
 
 def complete_hysteresis_magic_test(): # irregular.  a file has to be renamed because it just comes out a default way, it is not specifiable on the command line
     """test hysteresis_magic.py"""
@@ -246,7 +248,6 @@ def complete_hysteresis_magic_test(): # irregular.  a file has to be renamed bec
     hysteresis_magic.ex_out_sequence() # this re runs hysteresis magic, but that is not a problem
     print hysteresis_magic.outfile2
     subprocess.call(['rm', file_prefix + 'rmag_remanence.txt']) # remove extra rmag_remanence that doesn't get renamed
-
 
 def complete_k15_magic_test(): # irregular -- has 4 output files!!!!
     """test k15_magic.py"""
@@ -281,7 +282,6 @@ def complete_k15_magic_test(): # irregular -- has 4 output files!!!!
     k15_unittest.test_file1_with_file2(k15_rmag, k15_rmag_reference, "incorrect")
     k15_unittest.test_file1_with_file2(k15_rmag, k15_rmag_wrong, "correct")
 
-
 def complete_kly4s_magic_test(): # irregular, with 3 output files
     """test kly4s_magic.py"""
     print "Testing kly4s_magic.py"
@@ -305,9 +305,7 @@ def complete_kly4s_magic_test(): # irregular, with 3 output files
     kly4s_unittest.test_file1_with_file2(kly4s_er, kly4s_er_reference, "incorrect")
     kly4s_unittest.test_file1_with_file2(kly4s_er, kly4s_er_wrong, "correct")
 
-#complete_kly4s_magic_test()
-
-def complete_pmag_results_extract_test():
+def complete_pmag_results_extract_test(): # irregular. outfiles not specifiable on command line
     """test pmag_results_extract.py"""
     print "Testing pmag_results_extract.py"
     pmag_intensities, pmag_intensities_reference, pmag_intensities_wrong = file_prefix + 'Intensities.txt', file_prefix + 'pmag_results_extract_Intensities_correct.txt', file_prefix + 'pmag_results_extract_Intensities_incorrect.txt'
@@ -330,7 +328,6 @@ def complete_pmag_results_extract_test():
     pmag_unittest.test_file1_with_file2(pmag_sitenfo, pmag_sitenfo_reference, "incorrect")
     pmag_unittest.test_file1_with_file2(pmag_sitenfo, pmag_sitenfo_wrong, "correct")
     subprocess.call(['rm', file_prefix + 'Intensities.txt', file_prefix + 'Directions.txt', file_prefix + 'SiteNfo.txt'])
-
 
 def complete_orientation_magic_test():
     """test orientation_magic.py"""
@@ -467,7 +464,7 @@ def complete_SUFAR4_asc_magic_test(): #
     
 def complete_specimens_results_magic_test(): # irregular.  not sure how good of a test it is....
     current_dir = directory + '/specimens_results_magic/' # all tests will be run here
-#    subprocess.call('rm pmag_results.txt ', cwd = current_dir, shell=True) # gets rid of old result files # can't delete pmag_specimens.txt
+# can't delete pmag_specimens.txt
     print "bubbles"
     subprocess.call('ls pmag*', cwd=current_dir, shell=True)
     subprocess.call('rm pmag_sites.txt pmag_results.txt', cwd= current_dir, shell=True)
@@ -509,16 +506,13 @@ def complete_working_test():
     complete_CIT_magic_test()
     complete_IODP_csv_magic_test()
     complete_PMD_magic_test()
-    complete_SUFAR4_asc_magic_test() #
+    complete_SUFAR4_asc_magic_test()
     complete_specimens_results_magic_test()
-
 
 Extra_output_tests = {"aarm_magic": complete_aarm_magic_test, "atrm_magic": complete_atrm_magic_test, "hysteresis_magic": complete_hysteresis_magic_test, "k15_magic": complete_k15_magic_test, "kly4s_magic": complete_kly4s_magic_test, "pmag_results_extract": complete_pmag_results_extract_test, "orientation_magic": complete_orientation_magic_test, "parse_measurements": complete_parse_measurements_test, "thellier_magic_redo": complete_thellier_magic_redo_test, "CIT_magic": complete_CIT_magic_test, "IODP_csv_magic": complete_IODP_csv_magic_test, "PMD_magic": complete_PMD_magic_test, "SUFAR4-asc_magic": complete_SUFAR4_asc_magic_test, "specimens_results_magic": complete_specimens_results_magic_test}
 
 ex_out_errors_list = open('extra_output_errors_list.txt', 'w')
 
-# an interactive option that runs just one program, as instructed
-# if no interactive tag is given, it will just run through
 if __name__ == "__main__": 
     if "-r" in sys.argv: # 
         PT.run_individual_program(Extra_output_tests)

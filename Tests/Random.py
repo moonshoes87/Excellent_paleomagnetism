@@ -10,15 +10,12 @@ import error_logging as EL
 file_prefix = PT.file_prefix
 directory = PT.directory
 
-#class Random_stuff(Basic_input_output):
-
 def complete_fisher_test():
     """test fisher.py"""
     print "-"
     print "Testing fisher.py"
-    print "running: ('fisher.py', '-k', '30', '-n', '10')" # last number should be 10, not 15
-    obj1 = env.run('fisher.py', '-k', '30', '-n', '10') # last number should be 10, not 15
-#    obj.stdout = '175, 119'
+    print "running: ('fisher.py', '-k', '30', '-n', '10')" 
+    obj1 = env.run('fisher.py', '-k', '30', '-n', '10') 
     output1 = obj1.stdout
     length1 = len(output1)
     print "output1: " + str(output1)
@@ -64,6 +61,8 @@ def complete_fishrot_test():
     """test fishrot.py"""
     print "_"
     print "Testing fishrot.py"
+    obj = env.run('fishrot.py', '-h')
+    print obj.stdout
     print "running: ('fishrot.py', '-n', '5', '-D', '23', '-I', '41', '-k', '50')"
     obj1 = env.run('fishrot.py', '-n', '5', '-D', '23', '-I', '41', '-k', '50')
     output1 = obj1.stdout
@@ -103,17 +102,10 @@ def complete_fishrot_test():
     else:
         raise NameError("Fishrot.py is not producing the right amount of output")
 
-    # this looks like a decent set up for these random distribution ones....
-    # add in an option to test the -h, and -i options.
-    # if the rest of the possible command line options all have default values, maybe I'll just test them once with defaults and once with Lisa's examples?
-
-
-# run each four times -- twice with default options, twice with Lisa example options
-
-
-
 def complete_tk03_test():
     """test tk03.py"""
+    obj = env.run('tk03.py', '-h')
+    print obj.stdout
     print "running tk03.py"
     obj1 = env.run('tk03.py')
     out1 = str(obj1.stdout).split()
@@ -141,11 +133,9 @@ def complete_tk03_test():
         raise NameError("lengths should have been the same")
     print "tk03 produced random distributions with -lat 30, -N 50"
 
-# could this be better???
-
-# left off here, keep cleaning up output
 def complete_uniform_test():
     """test uniform.py"""
+    obj = env.run('uniform.py', '-h')
     print "running: uniform.py"
     obj1 = env.run("uniform.py")
     out1 = str(obj1.stdout).split()
@@ -178,10 +168,12 @@ def complete_gaussian_test():
     """test gaussian.py"""
     print "-"
     print "Testing gaussian.py"
-    print "running: " + ' gaussian.py', '-s', '3', '-n', '100', '-m', '10.', '-F', 'guass.out'
-    obj1 = env.run('gaussian.py', '-s', '3', '-n', '100', '-m', '10.', '-F', 'guass.out')
+    obj = env.run('gaussian.py', '-h')
+    print obj.stdout
+    print "running: " + ' gaussian.py', '-s', '3', '-n', '100', '-m', '10.', '-F', 'gauss.out'
+    obj1 = env.run('gaussian.py', '-s', '3', '-n', '100', '-m', '10.', '-F', 'gauss.out')
     output1 = obj1.stdout
-    o1 = len(output1.split()) # should be o1, not p1
+    o1 = len(output1.split())
     print "output1: "+ str(output1)
     print("output 1 length: ", o1)
     print "output1 files_created: " + str(obj1.files_created)
@@ -222,8 +214,15 @@ def complete_gaussian_test():
         print "Gaussian.py is giving the correct amount of output"
     else:
         raise NameError("Gaussian.py is giving the wrong amount of output")
-    # also add -h option (no -i)
-    # another way to test the additional command line options?
+    # testing other command line arguments
+    print "running gaussian.py -m 20 -n 5 -s 3 -F " + file_prefix + "gaussian_output_new.out"
+#    objx = env.run('gaussian.py', '-m', '20', '-s', '3', '-F', file_prefix + 'gauss_out.out')
+    objx = env.run('gaussian.py', '-m', '20.', '-s', '3', '-n', '15', '-F', 'gaussian_output_new.out')
+    if objx.files_created:
+        print objx.files_created
+        print "Gaussian.py is working"
+    else:
+        raise NameError("Gaussian.py failed with extra command line options")
 
 random_tests = {"gaussian": complete_gaussian_test, "fishrot": complete_fishrot_test, "fisher": complete_fisher_test, "tk03": complete_tk03_test, "uniform": complete_uniform_test}
 random_errors_list = open('random_errors_list.txt', 'w')
