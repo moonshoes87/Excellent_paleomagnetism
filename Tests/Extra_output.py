@@ -205,7 +205,7 @@ def complete_aarm_magic_test():
     infile = "aarm_measurements.txt"
     aarm_Fa, aarm_Fr = 'aarm_magic_anisotropy_new.out', 'aarm_magic_results_new.out'
     tag1, tag2 = "-Fa", "-Fr"
-    aarm_Fa_reference, aarm_Fr_reference = 'aarm_magic_anisotropy_incorrect.out', 'aarm_magic_results_correct.out' # should be correct
+    aarm_Fa_reference, aarm_Fr_reference = 'aarm_magic_anisotropy_correct.out', 'aarm_magic_results_correct.out' # should be correct
     aarm_Fa_wrong, aarm_Fr_wrong = 'aarm_magic_anisotropy_incorrect.out', 'aarm_magic_results_incorrect.out'
     aarm_magic = Ex_out('aarm_magic.py', infile, tag1, aarm_Fa, tag2, aarm_Fr, aarm_Fa_reference, aarm_Fr_reference, aarm_Fa_wrong, aarm_Fr_wrong, None, True)
     aarm_magic.ex_out_sequence()
@@ -335,7 +335,7 @@ def complete_pmag_results_extract_test():
 def complete_orientation_magic_test():
     """test orientation_magic.py"""
     print "Testing orientation_magic.py"
-    infile = "orientation_magic_exa.txt"
+    infile = "orientation_magic_example.txt"
     tag1, tag2 = "-Fsi", "-Fsa"
     orient_Fsi, orient_Fsa = "orientation_magic_er_sites_new.out", "orientation_magic_er_samples_new.out"
     orient_Fsi_reference, orient_Fsa_reference = "orientation_magic_er_sites_correct.out", "orientation_magic_er_samples_correct.out"
@@ -362,13 +362,14 @@ def complete_thellier_magic_redo_test(): # quite irregular
     outfile = "thellier_magic_redo_specimens_new.out"
     in_tag1, in_tag2, in_tag3 = '-fnl', '-fre', '-fan'
     in1, in2, in3 = "thellier_magic_redo_measurements.txt", "thellier_magic_redo2.txt", "thellier_magic_redo_rmag_anisotropy.txt"
-    out_tag1, out_tag2 = "-Fnl", "Fac"
+    out_tag1, out_tag2 = "-Fnl", "-Fac"
     out1, out2 = "thellier_magic_redo_NLT_specimens_new.out", "thellier_magic_redo_AC_specimens_new.out"
     correct_out1, correct_out2 = "thellier_magic_redo_NLT_specimens_correct.txt", "thellier_magic_redo_AC_specimens_correct.txt"
     wrong_out1, wrong_out2 = "thellier_magic_redo_NLT_specimens_incorrect.txt", "thellier_magic_redo_AC_specimens_incorrect.txt"
     arg1, arg2 = "-NLT", "-ANI"
     thellier_magic_redo_reference = None
     thellier_magic_redo = Ex_out('thellier_magic_redo.py', infile, out_tag1, out1, out_tag2, out2, correct_out1, correct_out2, wrong_out1, wrong_out2, None, True)
+    print "About to run: thellier_magic_redo.py -WD " + directory + " -f " + infile + " " + in_tag1 + " " + in1 + " " + in_tag2 + " " + in2 + " " + in_tag3 + " " + in3 + " -F " + outfile + " " + out_tag1 + " " + out1 + " " + out_tag2 + " " + out2 + " " + arg1 + " " + arg2
     obj = env.run("thellier_magic_redo.py", "-WD", directory, "-f", infile, in_tag1, in1, in_tag2, in2, in_tag3, in3, "-F", outfile, out_tag1, out1, out_tag2, out2, arg1, arg2)
     print "STDOUT: " + str(obj.stdout)[:700] 
     print " .... " 
