@@ -121,7 +121,7 @@ def clean_program_name(name = None):
     if ".py" in n:
         n = n[:-3]
     print n
-    if "test" in n:
+    if "_test" in n:
         if "()" in n:
             pass
         else:

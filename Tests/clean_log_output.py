@@ -10,6 +10,7 @@ import PmagPy_tests as PT
 import subprocess
 
 def clean_output_file(infile, outfile):
+    """Takes an infile and an outfile as arguments.  It takes the relevant portion of the infile and writes it to the outfile """
     a_file = open(infile, 'rU')
     info = a_file.readlines()
     rhino = False
@@ -22,6 +23,7 @@ def clean_output_file(infile, outfile):
     print str(outfile) + " is  ready"
 
 def clean_all_output_logs():
+    """Cleans all four of the relevant output logs"""
     print "cleaning all output logs"
     clean_output_file('extra_out_full_output.txt', 'extra_out_clean_output.txt')
     clean_output_file('rename_me_full_output.txt', 'rename_me_clean_output.txt')
