@@ -8,12 +8,11 @@ import subprocess
 import PmagPy_tests as PT
 import error_logging as EL
 
-
 file_prefix = PT.file_prefix
 directory =  PT.directory
 
-
-def remove_non_integers_from_output(raw_output):
+def remove_non_numbers_from_output(raw_output):
+    """Takes in output and returns a list of only the floats"""
     clean_output = []
     for i in raw_output:
         if i[-1] == ":":
@@ -25,6 +24,7 @@ def remove_non_integers_from_output(raw_output):
     return clean_output
 
 def check_bootstrap(actual_output, reference_output):
+    """Checks an output list against a reference list of tuples with a high and a low acceptable value.  It raises an error if the actual output is not within the bounds of the reference list.  I.e., output is [1, 10], reference is [(.5, 1.5), (9, 11)]"""
     for num, z in enumerate(actual_output):
         lower_bound = reference_output[num][0]
         upper_bound = reference_output[num][1]
@@ -36,31 +36,26 @@ def check_bootstrap(actual_output, reference_output):
             raise ValueError("program produced incorrect output")
     print "End of check_bootstrap"
 
-
-ninety_thousand = ['0.34040287', '29.6', '14.5', '33.5', '171.0', '67.3', '6.6', '296.0', '13.5', '0.33536589', '166.3', '70.5', '24.1', '27.0', '13.3', '10.7', '294.1', '12.2', '0.32423124', '296.2', '12.8', '10.8', '179.2', '63.5', '4.9', '31.6', '22.9']
-
-aniso_magic_reference = [(.3402, .34042), (29.5, 29.7), (14.4, 14.6), (30., 37.), (170., 172.), (66., 69.), (6.3, 7.), (295.7,296.1), (13., 14.), (0.33535, .33537), (166.2, 166.4), (70.4, 70.6), (23.5, 24.7), (25., 28.), (12., 14.), (10.5, 11.2), (293.,
+aniso_magic_reference = [(.3402, .34042), (29.5, 29.7), (14.4, 14.6), (30., 37.), (169., 172.), (66., 69.), (6.3, 7.), (295.7,296.1), (13., 14.), (0.33535, .33537), (166.2, 166.4), (70.4, 70.6), (23.5, 24.7), (25., 28.), (12., 14.), (10.5, 11.2), (293.,
 295.), (11., 13.), (0.324231, .324232), (296.1, 296.3), (12.7, 12.9), (10.6, 11), (177, 181.), (62., 65.), (4.8, 5.1), (31.3, 31.9), (21., 24.)]
-
 
 def do_aniso_magic(times):
     print "Testing aniso_magic.py, running bootstrap: " + str(times) + " times"
-    # WD
     obj = env.run('aniso_magic.py', '-WD', directory, '-f', 'aniso_magic_dike_anisotropy.txt', '-F', 'aniso_magic_rmag_anisotropy_new.out', '-nb', times, '-gtc', '110', '2', '-par', '-v', '-crd', 'g', '-P') #stdin='q')
     print obj.stdout
     PT.test_for_bad_file(obj.stdout)
     a_list = str(obj.stdout).split()
     print a_list
-    clean_list = remove_non_integers_from_output(a_list)
+    clean_list = remove_non_numbers_from_output(a_list)
     return clean_list
 
 def complete_aniso_magic_test():
     """test aniso_magic.py"""
-    output1 = do_aniso_magic(20000)
+    output1 = do_aniso_magic(5000)# change 20000 for real test
     check_bootstrap(output1, aniso_magic_reference)
-    output2 =  do_aniso_magic(10000)
+    output2 =  do_aniso_magic(5000)# change 20000 for real test
     check_bootstrap(output2, aniso_magic_reference)
-    output3 = do_aniso_magic(10000)
+    output3 = do_aniso_magic(5000)# change 20000 for real test
     check_bootstrap(output3, aniso_magic_reference)
 
 scalc_reference = [(88.5, 89.5), (14.8, 15.8), (13.0, 14.0), (16.5, 17.5), (31.6, 32.6)] 
@@ -70,7 +65,7 @@ def do_scalc():
     obj = env.run('scalc.py', '-f', file_prefix + 'scalc_example.txt', '-v', '-b')
     a_list = str(obj.stdout).split()
     print a_list
-    clean_list = remove_non_integers_from_output(a_list)
+    clean_list = remove_non_numbers_from_output(a_list)
     return clean_list
 
 def complete_scalc_test():
@@ -79,13 +74,12 @@ def complete_scalc_test():
     print "output: " + str(output)
     check_bootstrap(output, scalc_reference)
 
-
 scalc_magic_reference = [(12.5, 13.5), (17.2, 18.2), (13., 14.), (21., 22.), (36.5, 37.5)]
 
 def do_scalc_magic():
     obj = env.run('scalc_magic.py', '-f', file_prefix + 'scalc_magic_example.txt', '-v', '-b')
     a_list = str(obj.stdout).split()
-    clean_list = remove_non_integers_from_output(a_list)
+    clean_list = remove_non_numbers_from_output(a_list)
     print clean_list
     final_list = clean_list[-5:] # removes the extraneous output, i.e. 100 out of 100, 200 out of 1000, etc.
     print final_list
@@ -96,11 +90,7 @@ def complete_scalc_magic_test():
     output = do_scalc_magic()
     check_bootstrap(output, scalc_magic_reference)
 
-
-test_50000=[0.33505, 0.00021, 5.3, 14.7, 10.3, 260.7, 38.8, 13.5, 111.8, 46.8, 0.33334, 0.0002, 124.5, 61.7, 6.0, 225.3, 5.9, 17.2, 318.6, 28.6, 0.33161, 0.00014, 268.8, 23.6, 10.7, 358.0, 3.9, 12.5, 96.7, 65.8]
-test_100000=[0.33505, 0.00021, 5.3, 14.7, 10.3, 260.7, 38.9, 13.6, 111.7, 46.8, 0.33334, 0.00021, 124.5, 61.7, 6.1, 225.3, 5.9, 17.2, 318.5, 28.6, 0.33161, 0.00014, 268.8, 23.6, 10.7, 358.2, 4.2, 12.5, 97.5, 65.8]
 bootams_reference=[(0.3350, 0.3351), (0.0002, 0.0003), (5.1, 5.5), (14.5, 14.9), (10.1, 10.5), (260.5, 261.5), (37.5, 39.1), (13.2, 13.9), (111.6, 112.4), (46., 48.), (.3333, .3334), (.00009, .0003), (124.5, 124.7), (61.5, 61.9), (5.8, 6.2), (225., 225.6), (5.6, 6.2), (17., 17.4), (318.3, 318.9), (28.3, 28.9), (.33150, .3317), (.0001, .0002), (268.5, 269.), (23.3, 23.9), (10.4, 11.), (357.6, 359.5), (3.6, 6.5), (12.2, 12.8), (95., 103.5), (65., 66.)]
-
 
 def do_bootams(num):
     print "doing bootams"
@@ -108,7 +98,7 @@ def do_bootams(num):
     obj = env.run('bootams.py', '-f', bootams_infile, '-nb', num)
     print "finished running bootams.py"
     a_list = str(obj.stdout).split()
-    clean_list = remove_non_integers_from_output(a_list)
+    clean_list = remove_non_numbers_from_output(a_list)
     print clean_list
     return clean_list
 
@@ -119,9 +109,8 @@ def complete_bootams_test():
     print "finished do_bootams()"
     check_bootstrap(output1, bootams_reference)
 # add in extras for real testing
-#    output2 = do_bootams(500000)
- #   check_bootstrap(output2, bootams_reference)
-
+    output2 = do_bootams(100000)
+    check_bootstrap(output2, bootams_reference)
 
 def do_watsonsV():
     """test watsonsV.py"""
@@ -130,7 +119,7 @@ def do_watsonsV():
     obj = env.run("watsonsV.py", "-f", watsonsV_infile, "-f2", watsonsV_infile2, stdin='q') 
     print obj.stdout
     a_list = str(obj.stdout).split()
-    clean_list = remove_non_integers_from_output(a_list)
+    clean_list = remove_non_numbers_from_output(a_list)
     final_list = clean_list[-2:]
     print final_list
     return final_list
@@ -138,107 +127,94 @@ def do_watsonsV():
 watsonsV_reference = [(10., 11.),(6., 7.)]
 
 def complete_watsonsV_test():
-    """test watsonsV.py"""
-    output1 = do_watsonsV()
-    check_bootstrap(output1, watsonsV_reference)
-    output2 = do_watsonsV()
-    check_bootstrap(output2, watsonsV_reference)
+     """test watsonsV.py"""
+     output1 = do_watsonsV()
+     check_bootstrap(output1, watsonsV_reference)
+     output2 = do_watsonsV()
+     check_bootstrap(output2, watsonsV_reference)
 
-
-#EI
 
 find_EI_reference = [(38.85, 39.0), (58.75, 58.9), (45., 50.), (65.5, 69.), (1.45, 1.5), (1.23, 1.35), (1.71, 2.2)]
 
 def run_EI(num):
-    print ('find_EI.py', '-f', file_prefix + 'find_EI_example.dat', '-nb', num, "stdin='a'")
-    obj = env.run('find_EI.py', '-f', file_prefix + 'find_EI_example.dat', '-nb', num, stdin='a')# '-fmt pdf/png/eps/svg , default is svg, but I seem to be getting a format error
-    print "full output = " +str(obj.stdout)
-    print "files created: " + str(obj.files_created)
-    print "files updated: " + str(obj.files_updated)
-    output = str(obj.stdout[-210:-143]).split()
-    print "raw output = " + str(output)
-    clean_out = remove_non_integers_from_output(output)
-    print "clean output = " + str(clean_out)
-    print "Finish run_EI()"
-    return clean_out
+     print ('find_EI.py', '-f', file_prefix + 'find_EI_example.dat', '-nb', num, "stdin='a'")
+     obj = env.run('find_EI.py', '-f', file_prefix + 'find_EI_example.dat', '-nb', num, stdin='a')
+     print "full output = " +str(obj.stdout)
+     print "files created: " + str(obj.files_created)
+     print "files updated: " + str(obj.files_updated)
+     output = str(obj.stdout[-210:-143]).split()
+     print "raw output = " + str(output)
+     clean_out = remove_non_numbers_from_output(output)
+     print "clean output = " + str(clean_out)
+     print "Finish run_EI()"
+     return clean_out
 
 def complete_find_EI_test():
-    """test find_EI.py"""
-    output1 = run_EI(2000)
-    print output1
-    check_bootstrap(output1, find_EI_reference)
-# extras, add in for real testing
-#    output2 = run_EI(1000)
- #   check_bootstrap(output2, find_EI_reference)
-#    output3 = run_EI(1000)
- #   check_bootstrap(output3, find_EI_reference)
-    print "Finished find_EI test"
+     """test find_EI.py"""
+     output1 = run_EI(1000)
+     print output1
+     check_bootstrap(output1, find_EI_reference)
+ # extras, add in for real testing
+     output2 = run_EI(1000)
+     check_bootstrap(output2, find_EI_reference)
+     output3 = run_EI(1000)
+     check_bootstrap(output3, find_EI_reference)
+     print "Finished find_EI test"
 
-ignore_me = """class Bad_bootstrap(unittest.TestCase):
-    def __init__(self, bootstrap_plotting_obj):
-        self.plotting_obj = bootstrap_plotting_obj
-
-    def test_for_error(self, bad_out):
-        print "TESTING FOR ERROR"
-        self.assertRaises(ValueError, check_bootstrap, bad_out, self.plotting_obj) # the problem here is specifying which function to run.  since in this
-"""
 class Bad_find_EI(unittest.TestCase):
-    def test_for_error(self):
-        print "TESTING FOR ERROR"
-        bad_out = run_EI(25)
-        self.assertRaises(ValueError, check_bootstrap, bad_out, find_EI_reference)
+     def test_for_error(self):
+         print "TESTING FOR ERROR"
+         bad_out = run_EI(25)
+         self.assertRaises(ValueError, check_bootstrap, bad_out, find_EI_reference)
 
 class Bad_aniso_magic(unittest.TestCase):
-    def test_for_error(self):
-        print "TESTING FOR ERROR"
-        bad_out = do_aniso_magic(100)
-        self.assertRaises(ValueError, check_bootstrap, bad_out, aniso_magic_reference)
+     def test_for_error(self):
+         print "TESTING FOR ERROR"
+         bad_out = do_aniso_magic(100)
+         self.assertRaises(ValueError, check_bootstrap, bad_out, aniso_magic_reference)
 
 class Bad_bootams(unittest.TestCase):
-    def test_for_error(self):
-        print "TESTING FOR ERROR"
-        bad_out = do_bootams(100)
-        self.assertRaises(ValueError, check_bootstrap, bad_out, bootams_reference)
-
+     def test_for_error(self):
+         print "TESTING FOR ERROR"
+         bad_out = do_bootams(100)
+         self.assertRaises(ValueError, check_bootstrap, bad_out, bootams_reference)
 
 def complete_eqarea_magic_test():
-    """test eqarea_magic.py"""
-    eqarea_magic_infile = 'eqarea_magic_example.dat'
-    eqarea_reference = [(1.0, 1.0), (109., 112.), (204., 207.), (7.6, 7.9), (.9, 1.1), (28.5, 29.5), (7.5, 9.5), (3., 3.5), (5.5, 6.5), (59., 60.), (1.9, 2.1), (247., 250.), (148., 153.), (4., 4.6), (.9, 1.1), (26., 27.), (14.5, 16.5), (7.5, 8.5), (184.5, 186.5), (-59.5, -58.)]
-    obj = env.run('eqarea_magic.py', '-WD', directory, '-f', eqarea_magic_infile, '-obj', 'loc', '-crd', 'g', '-ell', 'Be', stdin='q')
-    result = obj.stdout
-    result_list = str(result).split()
-    a_list = []
-    add_me = False
-    for i in result_list: # this goes through the output and isolates the relevant numbers for testing
-  #       print i
-        if str(i) == 'mode':
-            add_me = True
-        if str(i) == 'S[a]ve':
-            add_me = False
-        if add_me == True:
-            a_list.append(i)
-    stripped_list = remove_non_integers_from_output(a_list)
-    print stripped_list
-    print len(stripped_list)
-    print eqarea_reference
-    print len(eqarea_reference)
-    check_bootstrap(stripped_list, eqarea_reference)
-
+     """test eqarea_magic.py"""
+     eqarea_magic_infile = 'eqarea_magic_example.dat'
+     eqarea_reference = [(1.0, 1.0), (109., 112.), (204., 207.), (7.6, 7.9), (.9, 1.1), (28.5, 29.5), (7.5, 9.5), (3., 3.5), (5.5, 6.5), (59., 60.), (1.9, 2.1), (247., 250.), (148., 153.), (4., 4.6), (.9, 1.1), (26., 27.), (14.5, 16.5), (7.5, 8.5), (184.5, 186.5), (-59.5, -58.)]
+     obj = env.run('eqarea_magic.py', '-WD', directory, '-f', eqarea_magic_infile, '-obj', 'loc', '-crd', 'g', '-ell', 'Be', stdin='q')
+     result = obj.stdout
+     result_list = str(result).split()
+     a_list = []
+     add_me = False
+     for i in result_list: # this goes through the output and isolates the relevant numbers for testing
+   #       print i
+         if str(i) == 'mode':
+             add_me = True
+         if str(i) == 'S[a]ve':
+             add_me = False
+         if add_me == True:
+             a_list.append(i)
+     stripped_list = remove_non_numbers_from_output(a_list)
+     print stripped_list
+     print len(stripped_list)
+     print eqarea_reference
+     print len(eqarea_reference)
+     check_bootstrap(stripped_list, eqarea_reference)
 
 Bootstrap_tests = {"aniso_magic": complete_aniso_magic_test, "find_EI": complete_find_EI_test, "bootams": complete_bootams_test, "eqarea": complete_eqarea_magic_test, "scalc": complete_scalc_test, "scalc_magic": complete_scalc_magic_test, "watsonsV": complete_watsonsV_test}
 
 bootstrap_errors_list = open('bootstrap_errors_list.txt', 'w')
 
 def complete_working_test():
-    complete_aniso_magic_test()        
-    complete_find_EI_test()
-    complete_bootams_test()
-    complete_eqarea_magic_test()
-    complete_scalc_test()
-    complete_scalc_magic_test()
-    complete_watsonsV_test()
-
+     complete_aniso_magic_test()        
+     complete_find_EI_test()
+     complete_bootams_test()
+     complete_eqarea_magic_test()
+     complete_scalc_test()
+     complete_scalc_magic_test()
+     complete_watsonsV_test()
 
 if __name__ == "__main__":
     PT.clean_house()

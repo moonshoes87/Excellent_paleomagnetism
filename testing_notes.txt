@@ -323,7 +323,6 @@ fix this in Cookbook: Two out of these three links don't work -- zeq_magic.py is
 `After you finish importing all the data, combine the individual files together with combine_magic.py and look at them with, for example, zeq_magic.py.
 (see also PMM_redo.py for importing interpretations made on these files using the UCSC (Jarboe) software).
 
-problem with PmagPy_tests.py -- is not getting correct when I put in foldtest_magic -- fixed.
 
 why does "weird_ani_depthplot_test" exist???
 
