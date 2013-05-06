@@ -35,12 +35,14 @@ nosetests.xml
 .pydevproject
 
 
+
 # test output
 *new-test-output/*
 
 # random files
 *~
 *#
+old_stuff/*
 Tests/.#random_stuff.py
 Tests/.striprc
 Tests/CIT_magic_example.sam

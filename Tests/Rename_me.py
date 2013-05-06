@@ -745,6 +745,11 @@ def complete_ani_depthplot_test():
      ani_depthplot_fsa = 'ani_depthplot_er_samples.txt'
      ani_depthplot = Test_instance('ani_depthplot.py', ani_depthplot_infile, ani_depthplot_outfile, ani_depthplot_reference, ani_depthplot_wrong, 'a', True, '-fsa', ani_depthplot_fsa)
      ani_depthplot.plot_program_sequence(stdout=False)
+     # testing extra options
+     ani_depthplot = Test_instance('ani_depthplot.py', ani_depthplot_infile, ani_depthplot_outfile, ani_depthplot_reference, ani_depthplot_wrong, 'a', True, '-fsa', ani_depthplot_fsa, '-ds', 'mcd', '-sav')
+     ani_depthplot.run_program()
+     ani_depthplot = Test_instance('ani_depthplot.py', ani_depthplot_infile, ani_depthplot_outfile, ani_depthplot_reference, ani_depthplot_wrong, 'a', True, '-fsa', ani_depthplot_fsa, '-d', '1', '100')
+     ani_depthplot.run_program()
    
 def weird_ani_depthplot_test(): # irregular..? why is this here??
      print "weird test"

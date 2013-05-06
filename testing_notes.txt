@@ -1,191 +1,15 @@
 Testing maybe can be simple.  Obviously the thorough thing would be to really test every possible case, but it might be easier to just test that it returns the expected output
 
-
-Easy install for easy installing.  Won't fuck up your path.  (Python stuff)
-
->>> from scripttest import TestFileEnvironment
->>> env = TestFileEnvironment('./test-output')
->>> print(env.run('cat', stdin="hi"))
-Script result: cat
--- stdout: --------------------
-hi
->>> 
->>> print(env.run('cat', stdin="test_dipole_pinc.txt"))
-Script result: cat
--- stdout: --------------------
-test_dipole_pinc.txt
-
 Keyword arguments must follow positional arguments.  I.e. parrot(1000, type="spry") works, and parrot(1000, "spry") works, but parrot(volts=1000, "spry") doesn't
-
->>> print(env.run('dipole_pinc.py', '-i', stdin="3"))
-Script result: dipole_pinc.py -i
--- stdout: --------------------
-Paleolat for converting to inclination: <cntl-D> to quit     6.0
-Paleolat for converting to inclination: <cntl-D> to quit 
- Good-bye 
-
-
->>> object = env.run('dipole_pinc.py', '-i', stdin="70")
->>> object.stdout
-u'Paleolat for converting to inclination: <cntl-D> to quit    79.7\nPaleolat for converting to inclination: <cntl-D> to quit \n Good-bye \n\n'
->>> object.returncode
-0
->>> 
-
-
-
-options for Lisa:
-	test individual functions in pmag.py
-	bash script all of the top level stuff
-
-
-
-steps today:
-      email Lisa regarding some options
-      figure out how try except thing works, so as to see if it's possible to test the interactive stuff
-      work on angle.py
-      work on biplot.py
-      conside re-writing angle.py interactive section so it can take multiple arguments at once
-
-
-
-
-
 
 All of the path names need to be long, i.e.: /Users/nebula/Python/Testing_dipole/thing
 
-
-
 You can't import a module when you aren't in the directory where it lives.  (Not even a parent directory)
-
-    di_vgp.py needs to be fixed (by Lisa).  Then it can be a bio instance
-    files that essentially work as BIO instances, but don't have a proper -F option filename option.  It could easily be re-written. Or, possibly I should just read stdout and not file-a-fy it at all
-    	  eigs_s.py  DONE
-    	  eq_di.py  DONE
-	  fishqq.py  THIS ONE EITHER
-	  gobing.py  DONE
-	  gofish.py  DONE
-	  gokent.py  DONE
-	  goprinc.py  DONE
-	  incfish.py CHANGED  # PROBLEM THAT LISA NEEDS TO FIX
-	  s_eigs.py DONE
-	  s_geo.py DONE
-	  s_hext.py -- NOT sure if I want to fuck with it....
-	  s_tilt.py DONE
-	  stats.py DONE
-	  vector_mean.py CHANGED
-	  
-
-Dipole:
-	dipole_pinc.py
-	dipole_plat.py
-
-Weird problem.  do_unittest makes the Plotting stuff all run over again.  Maybe it's something about if __name__ == '__main__' ?  or just unittest.  maybe it doesn't know how to deal with the word test.
-BIO only runs once... but doesn't have a dounittest() method
-It doesn't happen in Uncategorized_programs either, which also doesn't have a do_unittest method.  This is weird.
-It looks like running do_unittest() does NOT create the ./new-test-output directory.  
-Ok.  It appears that do_unittest() goes back through the whole file again and run any loose commands it comes across.  So, if I don't have the complete_working_test() wrapped in this -- if __name__ == '__main__' -- then it runs complete_working_test again.  This is possibly because it has the word test in it, but probably not, since it also picked up on if statements that weren't wrapped in functions.
-Maybe there is a loose clean_house in there somewhere??
-Ok, removed one.
-It does seem that I have a problem, if I want to run all the programs in a row.  do_unittest kind of kills them.  huh.
-
-graph producing files that quit with a weird error:
-      ani_depthplot.py -- NO USEFUL STDOUT
-      aniso_magic.py ( also bootstrap-y)
-      find_EI.py  (bootstrap-y) IN PLOTTING
-      fishqq.py  -- NO USEFUL STDOUT
-      foldtest.py -- NO USEFUL STDOUT
-      histplot.py -- NO USEFUL STDOUT
-      irmaq_magic.py -- NO USEFUL STDOUT
-      lnp_magic.py -- IN PLOTTING
-      lowrie.py -- NO USEFUL STDOUT
-      lowrie_magic.py -- NO USEFUL STDOUT
-      plot_CDF.py -- NO USEFUL STDOUT
-      plot_magic_keys.py NOT SURE HOW TO DO THIS
-      plot_map_PTS.py -- CAN'T DO THIS ON ACCOUNT OF HAVING THE FREE VERSION
-      plotdi_a.py -- NO USEFUL STDOUT
-      qqplot.py __ WORKS JUST GREAT
-      quick_hyst.py -- NO USEFUL STDOUT
-      revtest.py  -- NO USEFUL STDOUT
-      revtest_magic.py -- basically same as above
-      site_edit_magic.py -- basically works
-      strip_magic.py -- NO USEFUL STDOUT 
-      thellier_magic.py -- BASICALLY WORKS
-      vgp_magic.py -- NO USEFUL STDOUT
-      zeq.py -- BASICALLY WORKS
-      zeq_magic.py -- BASICALLY WORKS
-      
-
-producing files that quit with a weird error:
-      ani_depthplot.py -- NO USEFUL STDOUT
-      fishqq.py  -- NO USEFUL STDOUT
-      foldtest.py -- NO USEFUL STDOUT
-      histplot.py -- NO USEFUL STDOUT
-      irmaq_magic.py -- NO USEFUL STDOUT
-      lowrie.py -- NO USEFUL STDOUT
-      lowrie_magic.py -- NO USEFUL STDOUT
-      plot_CDF.py -- NO USEFUL STDOUT
-      plotdi_a.py -- NO USEFUL STDOUT
-      quick_hyst.py -- NO USEFUL STDOUT
-      revtest.py  -- NO USEFUL STDOUT
-      revtest_magic.py -- basically same as above
-      strip_magic.py -- NO USEFUL STDOUT 
-      vgp_magic.py -- NO USEFUL STDOUT
-      
-      
-      
-
-complex:
-	MagIC tutorial
-	magic_select.py
-	make_magic_plots.py
-	measurement import scripts
-	orientation_magic.py
-	parse_measurements.py
-	plotXY.py
-	s_magic.py
-	specimens_results.py
-	thellier_GUI.py
-	thellier_magic_redo.py
-	update_measurements.py
-	upload_magic.py
-	zeq_magic_redo.py
-	
-Random (these ones are written up):
-	 fisher    fishrot_test()
-.py
-	 fishrot.py
-	 gaussian.py
-
-random stuff( these ones aren't yet):
-      tk03.py
-      uniform.py
-      
-
-ones that output into a bunch of files
-        -fsa  FILE: specify er_samples.txt file, default is er_samples.txt
-        -Fa FILE: specify anisotropy output file, default is arm_anisotropy.txt
-        -Fr FILE: specify results output file, default is aarm_results.txt
-	    aarm_magic.py
-
-programs that have the basic bio setup -- file in, file out -- but also have additional options
-	 igrf.py  # I did this one as a bio, but this is not strictly correct.  not sure.....
-	 pca.py # this one is a uc, now, and I'm fairly satisfied with it
-
-think I need to use args for the random extra command line options?
-
-Consider where to have the unittest.... the output is a little bit less nice, but the code is much more efficient, the way I've changed it to be. 
-
-For some reason, when I use this option: env.run(program, -f, file, >, other_file) I get no output, even though the command : program.py -f file > other_file works.  
 
 
 Lisa will want the output to be in a file, also you need to delete the extra test files. 
 
-
 complete list of tested programs:
-
-
-
 
     complete_aarm_magic_test()
     agm_magic.py
@@ -306,7 +130,7 @@ other, to do:
 
        still on table:
 
-	put all the non python programs into a separate folder so all the data type files are tucked away
+	put all the non python programs into a separate folder so all the data type files are tucked away # makes this too messy.  
 	what about removing the _new.out files if running the thing alone, maybe repeatedly? # put in a note to the console to remind someone to to do that
 	go through and check command line options you didn't use. the trouble is, the options are way to many to test all possible combinations..... maybe you could just obj = env.run(options!!!), not test the results.  still, this will be irritating.  basically, it will mean going through all the programs and running -h
 	use error listing to fix the broken problems

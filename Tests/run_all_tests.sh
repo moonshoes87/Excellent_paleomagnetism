@@ -1,7 +1,7 @@
 #! /bin/bash
 
 # making sure all files are created afresh
-rm old_all_errors.txt  # why does this not work???
+rm old_all_errors.txt  
 mv all_errors_list.txt old_all_errors.txt
 rm *new.out*  # removes all output files from the last round of testing
 rm *full_output.txt*  # removes long files with stdout from tests
@@ -18,9 +18,6 @@ python Rename_me.py > rename_me_full_output.txt
 echo "finished Rename_me"
 python clean_log_output.py -all
 echo "ran clean_log_output.py -all"
-
-full test (with shortened rename_me), started at 10:55 a.m., done at 11:09 a.m.  Jeez
-
 
 cat bootstrap_errors_list.txt rename_me_errors_list.txt random_errors_list.txt extra_output_errors_list.txt > all_errors_list.txt  
 
