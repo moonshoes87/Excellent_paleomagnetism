@@ -8,6 +8,8 @@ Setup:
 
 The directory/file_prefix is set in PmagPy_tests.py.  This must be re-set to correctly represent the directory in which you are running the tests. 
 
+With a few exceptions, the files for testing and the programs all live in the same directory.  This is best for ease of editing or creating new tests.  The few programs that are run outside of the main Tests/ directory, are: upload_magic.py, CIT_magic.py, specimens_results_magic.py.  Otherwise, it is simpler to keep everything together.  All documents are named with the convention that they start with the name of the program they are testing, i.e.: angle.dat, angle_results_new.out, angle_results_correct.txt, angle_results_incorrect.txt.  This is for ease of finding all the relevant documents at one time.  Also, the output file MUST be named *_results_new.out, so that it will be reliably trashed and re-created each time the test suite is run.  
+
 Organization:
 The tests are divided up into four categories.  
 1. Bootstrap.
@@ -20,12 +22,16 @@ The tests are divided up into four categories.
    These programs produce either standard output, file output, or plots.  They are
 
 Run the programs with the command:   
-./future_bash_script
+./run_all_tests.sh
 This will run everything, and will output four different things: *_all_output.txt for each of the 4 programs.  *_clean_output.txt for all 4 programs -- these logs will contain only output from the problem programs.  *_errors_log.txt -- which list the program, the error that caused it to fail, and the traceback.  all_errors.txt will contain a concatenated list of all the programs and their problems.  
 
+Here are examples of the syntax for running different groupings of programs:
 
-To run all the programs in one category:
+To run through all the programs in one module and create an *_errors_list.txt document:
    python Bootstrap.py
+
+To try to run all the programs in one module but raise exceptions as they are generated:
+   python Bootstrap.py -all
 
 To run an individual program:
    python Bootstrap.py -r bootams.py
@@ -39,18 +45,22 @@ Troubleshooting:
 
 If something is not working, often the WD option is set incorrectly.  If a program has the -WD option, it will run incorrectly with long file names (scripttest does not recognize relative path names). Likewise, if a program does not have the -WD option, it will run incorrectly with short file names.  
 
-Some of the tests malfunction when other python programs are run simultaneously (notably the ones in Bootstrap_plotting.py).  It is ideal to run the tests when the computer is not otherwise in use.  (The error message that conflicting Python programs causes is usually something like: "Files not saved, file format unsupported".  The file format actually is supported, the computer just has its wires crossed.
+Some of the tests malfunction when other python programs are run simultaneously (notably the ones in Bootstrap.py).  It is ideal to run the tests when the computer is not otherwise in use.  (The error message that conflicting Python programs causes is usually something like: "Files not saved, file format unsupported".  The file format actually is supported, the computer just has its wires crossed.)
 
-It is possible to have problems because there are two versions of a saved document in new-test-output/.  There are some safeguards set in place to try to prevent this, but clearing that directory may be necessary at some point.  By default, the directory should self-clear when you begin a new session of testing. 
+It is possible to have problems because there are two versions of a saved document in new-test-output/.  There are some safeguards set in place to try to prevent this, but clearing that directory may be necessary at some point.  By default, the directory should self-clear when you begin a new session of testing. Trouble usually only occurs when you run a plot-making program twice in one testing session.  In PmagPy_tests.py, there is a clean_house() function that deletes any plots that may have been created.
 
-When the entire test suite is run, it automatically wipes out all old output files (meaning files that match *_new.out -- this is a safeguard so that you don't get a leftover output file that masks a program's failure to run).  However, when you run a program individually -- i.e., python Extra_output.py -r s_magic -- that does not automatically wipe old output first.  Be aware of this.  
+When the entire test suite is run, it's been set to automatically wipe out all old output files (meaning files that match *_new.out -- this is a safeguard so that you don't get a leftover output file that masks a program's failure to run).  However, when you run a program individually -- i.e., python Extra_output.py -r s_magic -- that does not automatically wipe old output first.  Be aware of this.  
 
-if comparing to stdout, make sure to have the reference tight in quotes.  I.e.: thing = """stuff
+When you're using a string as reference, for comparing to short stdout, make sure to have the reference tight in quotes.  I.e.:this = """stuff
    and more stuff
    this is fun"""
 NOT
-	stuff = """
-	stuff
+that = """
+      	stuff
     and more stuff
     this is fun
 """
+
+As test_all_programs is running, you will see a lot of messages like this: 
+rm: /Users/nebula/Python/Tests/new-test-output/*: No such file or directory
+This is just a bit of built in redundancy, and not a problem at all.  It ensures that there are no conflicting files which will break all the tests.  

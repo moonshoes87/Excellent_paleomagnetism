@@ -230,6 +230,7 @@ def complete_atrm_magic_test():
     atrm = Ex_out('atrm_magic.py', atrm_infile, tag1, atrm_Fa, tag2, atrm_Fr, atrm_Fa_reference, atrm_Fr_reference, atrm_Fa_wrong, atrm_Fr_wrong, None, True)
     atrm.ex_out_sequence()
 
+
 def complete_hysteresis_magic_test(): # irregular.  a file has to be renamed because it just comes out a default way, it is not specifiable on the command line
     """test hysteresis_magic.py"""
     tag1, tag2 = '-F', None
