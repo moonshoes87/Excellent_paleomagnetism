@@ -334,9 +334,11 @@ def complete_combine_magic_test(): # irregular type.  this one is a weird amalga
 
 def complete_cont_rot_test(): # Irregular type -- running specially because it has so many command line options
      """test cont_rot.py"""
-     obj = env.run('cont_rot.py', '-con', 'af:sam', '-prj', 'ortho', '-eye', '-20', '0', '-sym', 'k-', '1', '-age', '180', '-res', 'l\
-', stdin='a')
+     print "running: cont_rot.py -con af:sam -prj ortho -eye -20 0 -sym k- 1 -age 180 -res l, stdin='a'"
+     obj = env.run('cont_rot.py', '-con', 'af:sam', '-prj', 'ortho', '-eye', '-20', '0', '-sym', 'k-', '1', '-age', '180', '-res', 'l', stdin='a')
      output = str(obj.files_created) # output is the name of the plot that has been saved
+     print "stdout = " + str(obj.stdout)
+     print "output: " + str(output)
      reference_output = "{'Cont_rot.pdf': <FoundFile ./new-test-output:Cont_rot.pdf>}"
      incorrect_output = "wrong"
      cont_rot = Test_instance('cont_rot.py', None, output, reference_output, incorrect_output, 'a', False)
