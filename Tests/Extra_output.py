@@ -385,6 +385,7 @@ thellier_magic_redo.py -f thellier_magic_redo_example.dat  -fnl thellier_magic_r
 
 def complete_CIT_magic_test(): # irregular
     """test CIT_magic.py"""
+    subprocess.call('rm CIT_magic/er_sites.txt CIT_magic/er_specimens.txt CIT_magic/er_samples.txt CIT_magic/magic_measurements.txt', shell=True) # removes all outfiles from previous test run
     obj= env.run('CIT_magic.py', '-WD', directory, '-h')
     print obj.stdout
     infile = 'CIT_magic_example.sam'
@@ -394,7 +395,6 @@ def complete_CIT_magic_test(): # irregular
     tag3, out3, ref3, wrong3 = '-Fsi', 'CIT_er_sites.out', 'CIT_er_sites_correct.out', 'CIT_er_sites_incorrect.out'
     tag4, out4, ref4, wrong4 = '-Fsa', 'CIT_er_samples.txt', 'CIT_er_samples_correct.out', 'CIT_er_samples_incorrect.out'
     CIT_folder = file_prefix + 'CIT_magic/'
-    subprocess.call('rm CIT_magic/er_sites.txt CIT_magic/er_specimens.txt CIT_magic/er_samples.txt CIT_magic/magic_measurements.txt', shell=True)
     CIT_magic = Ex_out('CIT_magic.py', infile, tag1, out1, tag2, out2, ref1, ref2, wrong1, wrong2, None, True, '-fsi', other_infile)
     obj = env.run('CIT_magic.py', '-WD', directory + '/CIT_magic', '-f', infile, '-fsi', other_infile, tag1, out1, tag2, out2, tag3, out3, tag4, out4, cwd= directory + '/CIT_magic')
     print obj.stdout
@@ -419,6 +419,7 @@ def complete_CIT_magic_test(): # irregular
     CIT_unittest.test_file1_with_file2(CIT_folder + out3, CIT_folder + ref3, "incorrect")
     CIT_unittest.test_file1_with_file2(CIT_folder + out4, CIT_folder + wrong4, "correct")
     CIT_unittest.test_file1_with_file2(CIT_folder + out4, CIT_folder + ref4, "incorrect")
+
     print "CIT_magic works!"
 
 

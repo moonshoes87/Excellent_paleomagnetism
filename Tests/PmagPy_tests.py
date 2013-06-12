@@ -42,6 +42,8 @@ def output_parse(the_output):
 def pmagpy_strip(a_list):
     """Takes a list and removes instances of 'pmagpy-version', i.e. -- pmagpy-2.194 -- so that changing versions don't break correctfiles"""
     print "stripping out instances of pmagpy"
+    if type(a_list) != list:
+        a_list = str(a_list).split()
     new_list = []
     for i in a_list:
         if "pmagpy" in i:
@@ -132,7 +134,7 @@ def clean_program_name(name = None):
         pass
     else:
         n = "complete_" + n
-    print "final: " + str(n)
+#    print "final: " + str(n)
     return n
 
 
@@ -150,33 +152,37 @@ def clean_program_name(name = None):
 
 def find_a_program(name):
     """Takes a program name as input and finds which if any of the modules contain a test for it"""
+    found_in = []
     full_name = clean_program_name(name)
  #   print "FULL NAME", full_name
     Rename = file_parse_by_word(file_prefix + "Rename_me.py")
     new_rename = lowercase_all(Rename)
-    print "name: " + str(name)
-    print "full name:" + str(full_name)
     found = False
     if full_name in new_rename:
         found = True
         print full_name + " occurs in Rename_me.py"
+        found_in.append("Rename_me.py")
     Extra_output = file_parse_by_word(file_prefix + "Extra_output.py")
     new_extra_output = lowercase_all(Extra_output)
     if full_name in new_extra_output:
         found = True
         print full_name + " occurs in Extra_output.py"
+        found_in.append("Extra_output.py")
     Bootstrap = file_parse_by_word(file_prefix + "Bootstrap.py")
     new_bootstrap = lowercase_all(Bootstrap)
     if full_name in new_bootstrap:
         found = True
         print full_name + " occurs in Bootstrap.py"
+        found_in.append("Bootstrap.py")
     Random = file_parse_by_word(file_prefix + "Random.py")
     new_random = lowercase_all(Random)
     if full_name in new_random:
         found = True
         print full_name + " occurs in Random.py"
+        found_in.append("Random.py")
     if found:
         print full_name + " was found"
+        print name + ".py is tested in: " + str(found_in)
     else:
         print name + " not found.  Make sure your spelling is good!"
 

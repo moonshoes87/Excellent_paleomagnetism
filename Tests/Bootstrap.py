@@ -33,11 +33,10 @@ def check_bootstrap(actual_output, reference_output):
         else:
             print "z was: " + str(z) + ", upper_bound was: " + str(upper_bound) + ", lower_bound was: " + str(lower_bound)
             print "error raised"
-            raise ValueError("program produced incorrect output")
+            raise ValueError("program produced incorrect output (" + str(z) + " should have been between " + str(upper_bound) + " and " + str(lower_bound) + ")"
     print "End of check_bootstrap"
 
-aniso_magic_reference = [(.3402, .34042), (29.5, 29.7), (14.4, 14.6), (30., 37.), (169., 172.), (66., 69.), (6.3, 7.), (295.7,296.1), (13., 14.), (0.33535, .33537), (166.2, 166.4), (70.4, 70.6), (23.5, 24.7), (25., 28.), (12., 14.), (10.5, 11.2), (292.,
-295.), (11., 13.), (0.324231, .324232), (296.1, 296.3), (12.7, 12.9), (10.6, 11), (177, 181.), (62., 65.), (4.8, 5.1), (31.3, 31.9), (21., 24.)]
+aniso_magic_reference = [(.3402, .34042), (29.5, 29.7), (14.4, 14.6), (30., 37.), (169., 173.), (66., 69.), (6.3, 7.), (295.7,296.1), (13., 14.), (0.33535, .33537), (166.2, 166.4), (70.4, 70.6), (23.5, 25.0), (25., 28.), (12., 14.), (10.5, 11.2), (292., 295.), (11., 13.), (0.324231, .324232), (296.1, 296.3), (12.7, 12.9), (10.6, 11), (177, 181.), (62., 65.), (4.8, 5.1), (31.3, 31.9), (21., 24.)]
 
 def do_aniso_magic(times):
     print "Testing aniso_magic.py, running bootstrap: " + str(times) + " times"
@@ -134,7 +133,7 @@ def complete_watsonsV_test():
      check_bootstrap(output2, watsonsV_reference)
 
 
-find_EI_reference = [(38.85, 39.0), (58.75, 58.9), (45., 50.), (65.5, 69.), (1.45, 1.5), (1.23, 1.35), (1.71, 2.2)]
+find_EI_reference = [(38.85, 39.0), (58.75, 58.9), (45., 50.), (65.5, 69.), (1.45, 1.5), (1.23, 1.35), (1.6, 2.2)]
 
 def run_EI(num):
      print ('find_EI.py', '-f', file_prefix + 'find_EI_example.dat', '-nb', num, "stdin='a'")

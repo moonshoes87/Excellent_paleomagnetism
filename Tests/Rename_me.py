@@ -338,7 +338,7 @@ def complete_cont_rot_test(): # Irregular type -- running specially because it h
      obj = env.run('cont_rot.py', '-con', 'af:sam', '-prj', 'ortho', '-eye', '-20', '0', '-sym', 'k-', '1', '-age', '180', '-res', 'l', stdin='a')
      output = str(obj.files_created) # output is the name of the plot that has been saved
      print "stdout = " + str(obj.stdout)
-     print "output: " + str(output)
+     print "output file(s): " + str(output)
      reference_output = "{'Cont_rot.pdf': <FoundFile ./new-test-output:Cont_rot.pdf>}"
      incorrect_output = "wrong"
      cont_rot = Test_instance('cont_rot.py', None, output, reference_output, incorrect_output, 'a', False)
@@ -754,6 +754,7 @@ def complete_ani_depthplot_test():
      ani_depthplot.run_program()
    
 def weird_ani_depthplot_test(): # irregular..? why is this here??
+     """weird ani_depthplot_test"""
      print "weird test"
      try:
           complete_ani_depthplot_test()
@@ -1155,12 +1156,14 @@ def complete_upload_magic_test(): # irregular.  must be tested in a different di
      subprocess.call(['rm', 'upload_magic/upload.txt'])
 
 def complete_make_magic_plots_test(): # irregular -- runs in a different directory, specified by cwd
+     """test make_magic_plots.py"""
      obj = env.run("make_magic_plots.py", cwd=directory + "/make_magic_plots_example")
      print obj.stdout
      correctfile = file_prefix + "make_magic_plots_output_correct.txt"
      results = PT.output_parse(obj.stdout)
-     reference = PT.file_parse_by_word(correctfile)
-     PT.compare_two_lists(results, reference)
+     results_clean = PT.pmagpy_strip(results)
+     reference = PT.file_parse_by_word_and_pmagpy_strip(correctfile)
+     PT.compare_two_lists(results_clean, reference)
      subprocess.call("rm " + directory + "/make_magic_plots_example/Location_1/*.png", shell=True)
 
 def complete_convert2unix_test(): # irregular
@@ -1228,7 +1231,7 @@ def complete_agm_magic_test(): # a little irregular
      agm = Test_instance('agm_magic.py', agm_magic_infile, agm_magic_outfile, agm_magic_reference, agm_magic_wrong, None, True, '-spn', 'myspec', '--usr', "Lima Tango", '-u', 'cgs')
      agm.file_in_file_out_sequence()
      extra_infile = 'agm_magic_example.irm'
-     extra_outfile = 'agm_magic_irm_output.out'
+     extra_outfile = 'agm_magic_irm_output_new.out'
      extra_reference = 'agm_magic_extra_output_correct.out'
      extra_wrong = 'agm_magic_extra_output_incorrect.out'
      extra_agm = Test_instance('agm_magic.py', extra_infile, extra_outfile, extra_reference, extra_wrong, None, True, '-spn', 'myspec', '--usr', "Lima Tango", '-bak')
@@ -1274,6 +1277,7 @@ def complete_TDT_magic_test():
      tdt_magic.file_in_file_out_sequence()
 
 def complete_HUJI_magic_test():
+     """test HUJI_magic.py"""
      infile = 'HUJI_magic_example.dat'
      outfile = 'HUJI_magic_new.out'
      reference = 'HUJI_magic_correct.out'

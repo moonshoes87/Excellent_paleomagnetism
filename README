@@ -8,7 +8,7 @@ Setup:
 
 The directory/file_prefix is set in PmagPy_tests.py.  This must be re-set to correctly represent the directory in which you are running the tests. 
 
-With a few exceptions, the files for testing and the programs all live in the same directory.  This is best for ease of editing or creating new tests.  The few programs that are run outside of the main Tests/ directory, are: upload_magic.py, CIT_magic.py, specimens_results_magic.py.  Otherwise, it is simpler to keep everything together.  All documents are named with the convention that they start with the name of the program they are testing, i.e.: angle.dat, angle_results_new.out, angle_results_correct.txt, angle_results_incorrect.txt.  This is for ease of finding all the relevant documents at one time.  Also, the output file MUST be named *_results_new.out, so that it will be reliably trashed and re-created each time the test suite is run.  
+With a few exceptions, the files for testing and the programs all live in the same directory.  This is best for ease of editing or creating new tests.  The few programs that are run outside of the main Tests/ directory, are: upload_magic.py, CIT_magic.py, specimens_results_magic.py.  Otherwise, it is simpler to keep everything together.  All documents are named with the convention that they start with the name of the program they are testing, i.e.: angle.dat, angle_results_new.out, angle_results_correct.txt, angle_results_incorrect.txt.  This is for ease of finding all the relevant documents at one time.  Also, the output file MUST be named *_results_new.out, so that it will be reliably trashed and re-created each time the test suite is run. 
 
 Organization:
 The tests are divided up into four categories.  
@@ -19,7 +19,7 @@ The tests are divided up into four categories.
 3. Extra_output.
    These programs produce two or more output files.
 4. Everything else
-   These programs produce either standard output, file output, or plots.  They are
+   These programs produce either standard output, file output, or plots.  They are tested against correct and incorrect output, to make sure that the programs are producing good output and the tests are picking up on bad output. 
 
 Run the programs with the command:   
 ./run_all_tests.sh
