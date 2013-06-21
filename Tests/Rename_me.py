@@ -1282,6 +1282,7 @@ def complete_HUJI_magic_test():
      outfile = 'HUJI_magic_new.out'
      reference = 'HUJI_magic_correct.out'
      wrong = 'HUJI_magic_incorrect.out'
+     raise NameError('initializing variables were removed')
      HUJI_magic = Test_instance('HUJI_magic.py', infile, outfile, reference, wrong, None, False, '-LP', 'AF')
      HUJI_magic.file_in_file_out_sequence()
 #HUJI_magic.py -f HUJI_magic_example.dat -LP AF -F HUJI_magic_new.out
